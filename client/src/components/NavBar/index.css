@@ -1,0 +1,26 @@
+.button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    font-size: 18px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.linkStyle {
+    color: white;
+    display: block;
+    font-size: 18px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.navContainer {
+    background-color: #181d27;
+    display: flex;
+    gap: 5px;
+    justify-content: space-around;
+    padding: 10px;
+}
