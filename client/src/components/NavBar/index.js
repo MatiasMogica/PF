@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
-import "./index.module.css"
+import "./index.css"
 
 export default function NavBar() {
 
@@ -14,7 +14,7 @@ export default function NavBar() {
         <div className={'navContainer'}>
             <button className={'button'} onClick={handleClick}>{"<== Go Back"}</button>
             <Link to="/videogames" className={'linkStyle'}>Home</Link>
-            <Link to="/videogames/add" className={'linkStyle'}>Create a Breed</Link> 
+            <Link to="/videogames/add" className={'linkStyle'}>Add a game</Link> 
         </div>
     )
 }
