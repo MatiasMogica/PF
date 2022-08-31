@@ -13,8 +13,8 @@ export default function NavBar() {
     return (
         <div className={'navContainer'}>
             <button className={'button'} onClick={handleClick}>{"<== Go Back"}</button>
-            <Link to="/videogames" className={'linkStyle'}>Home</Link>
-            <Link to="/videogames/add" className={'linkStyle'}>Add a game</Link> 
+            <Link to="/" className={'linkStyle'}>Home</Link>
+            <Link to="/videogame/add" className={'linkStyle'}>Add a game</Link> 
         </div>
     )
 }
