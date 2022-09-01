@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const Game = require('../models/Game.js')
+const {allGames,newGame}= require('./controllers')
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -10,21 +11,8 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 
-router.get('/', async (req, res) => {
-    const games = await Game.find()
-    console.log(games)
-    res.json(games)
-    
-})
+router.get('/games',allGames)
 
-router.post('/', async ( req, res) => {
-    const { newGame } = req.body;
-    const game = new Game({ 
-        newGame 
-    })
-    console.log(game)
-    await game.save();
-    res.json({status: 'game added'})
-})
+router.post('/games', newGame)
 
 module.exports = router;
