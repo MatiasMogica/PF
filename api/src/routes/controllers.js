@@ -23,7 +23,20 @@ const allGames= async(req, res, next) => {
     }
 
 }
+//----------------------------------------------------------------
+const detailGame=async(req,res,next)=>{
+    const {id}=req.params
+try{
+    const game=await Game.findById(id)
+   
+    game?res.status(200).json(game):res.status(404).json({message: "Game not found"})
 
+
+}
+catch(err){
+    next(err)}
+}
+//----------------------------------------------------------------
 const newGame=async ( req, res) => {
     const { newGame } = req.body;
     const game = new Game({ 
@@ -34,4 +47,4 @@ const newGame=async ( req, res) => {
     res.json({status: 'game added'})
 }
 
-module.exports={allGames,newGame}
+module.exports={allGames,newGame,detailGame}
