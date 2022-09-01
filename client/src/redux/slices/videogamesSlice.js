@@ -16,8 +16,12 @@ export const videogamesSlice = createSlice({
       state.details = action.payload;
     },
     filterVideogames: (state, action) => {
+      //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
       var filtrado = [...state.videogames];
 
+      //Ahora nuestro filtro va a chequear que opciones el usuario seleciono y solamente aquellos selecionados se van a aplicar.
+
+      //Para buscar por nombre (se pueden agregar que busque por alguna otra descripcion clave)
       if (action.payload.name) {
         filtrado = filtrado.filter((x) => {
           return x.name
@@ -26,6 +30,7 @@ export const videogamesSlice = createSlice({
         });
       }
 
+      //Esta parte es para organizar por fecha de lanzamiento, tanto si tenes una minima, como si tenes una mazima o como si tenes ambas.
       if (
         action.payload.released[0] === "tba" &&
         action.payload.released[1] === "tba"
@@ -60,6 +65,7 @@ export const videogamesSlice = createSlice({
         }
       }
 
+      //Para filtrar por genero (accion,aventura,etc)
       action.payload.genres.forEach((element) => {
         filtrado = filtrado.filter((x) => {
           let p = false;
@@ -72,6 +78,7 @@ export const videogamesSlice = createSlice({
         });
       });
 
+      //para filtrar por plataforma (pc,linux,etc)
       action.payload.plataforms.forEach((element) => {
         filtrado = filtrado.filter((x) => {
           let p = false;
@@ -84,6 +91,8 @@ export const videogamesSlice = createSlice({
         });
       });
 
+      //Si llegamos hasta aqui ya se aplicaron los filtros, por lo tanto no se van a remover mas items del array final, solamente ordenarlos
+      //Asi que vemos que tipo de orden el usuario seleciono y lo ordenamos como pide.
       switch (action.payload.order) {
         case "+Alphabet-":
           filtrado.sort((a, b) => {
@@ -127,6 +136,8 @@ export const videogamesSlice = createSlice({
           break;
       }
 
+      //Remplazamos esto en el nuevo estado, no es necesario usar return, tambien podria ser el callback de state que se le pasa a la funcion.
+      //pero ambos funcionan
       return { ...state, videogamesFiltrados: filtrado };
     },
   },
