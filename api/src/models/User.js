@@ -20,6 +20,18 @@ const userSchema = new Schema(
             type: Boolean,
             default: false
         },
+        purchasedGames: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Game'
+            }
+        ],
+        image: {
+            type: String
+        },
+        localStorageToken: {
+            type: String
+          },
         
     }
 )
