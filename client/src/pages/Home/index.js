@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVideogames } from "../../redux/actions/videogamesActions";
 import Spinner from "../../components/Spinner/index";
 import NavBar from "../../components/NavBar/index";
-import Filtro from "../../components/Filtro/Filtro";
 
 export default function Home() {
   let dispatch = useDispatch();
@@ -14,7 +13,6 @@ export default function Home() {
 
   return (
     <div>
-      <Filtro></Filtro>
       <NavBar />
       {videogames.length !== 0 ? (
         videogames.map((v, i) => {

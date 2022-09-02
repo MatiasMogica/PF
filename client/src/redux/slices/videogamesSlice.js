@@ -68,13 +68,7 @@ export const videogamesSlice = createSlice({
       //Para filtrar por genero (accion,aventura,etc)
       action.payload.genres.forEach((element) => {
         filtrado = filtrado.filter((x) => {
-          let p = false;
-          for (let i = 0; i < x.genres.length; i++) {
-            if (x.genres[i].name === element) {
-              p = true;
-            }
-          }
-          return p;
+          return x.genre === element;
         });
       });
 
@@ -83,13 +77,26 @@ export const videogamesSlice = createSlice({
         filtrado = filtrado.filter((x) => {
           let p = false;
           for (let i = 0; i < x.platforms.length; i++) {
-            if (x.platforms[i].platform.name === element) {
+            if (x.platforms[i] === element) {
               p = true;
             }
           }
           return p;
         });
       });
+
+      //para filtrar por precio min/max
+
+      if (action.payload.precio.min) {
+        filtrado = filtrado.filter((x) => {
+          return action.payload.precio.min <= x.price;
+        });
+      }
+      if (action.payload.precio.max) {
+        filtrado = filtrado.filter((x) => {
+          return action.payload.precio.max >= x.price;
+        });
+      }
 
       //Si llegamos hasta aqui ya se aplicaron los filtros, por lo tanto no se van a remover mas items del array final, solamente ordenarlos
       //Asi que vemos que tipo de orden el usuario seleciono y lo ordenamos como pide.
@@ -121,16 +128,22 @@ export const videogamesSlice = createSlice({
           });
           break;
         case "+Rating-":
-          filtrado.sort((a, b) => a.metacritic - b.metacritic);
+          filtrado.sort((a, b) => a.rating - b.rating);
           break;
         case "-Rating+":
-          filtrado.sort((a, b) => b.metacritic - a.metacritic);
+          filtrado.sort((a, b) => b.rating - a.rating);
           break;
         case "+RDate-":
           filtrado.sort((a, b) => new Date(b.released) - new Date(a.released));
           break;
         case "-RDate+":
           filtrado.sort((a, b) => new Date(a.released) - new Date(b.released));
+          break;
+        case "+Precio-":
+          filtrado.sort((a, b) => a.price - b.price);
+          break;
+        case "-Precio+":
+          filtrado.sort((a, b) => b.price - a.price);
           break;
         default:
           break;

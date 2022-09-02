@@ -14,17 +14,15 @@ function Filtro() {
   var generos = [];
   var plataforma = [];
   videogames.forEach((x) => {
-    x.genres.forEach((d) => {
-      if (!generos.includes(d.name)) {
-        generos.push(d.name);
-      }
-    });
+    if (!generos.includes(x.genre)) {
+      generos.push(x.genre);
+    }
   });
 
   videogames.forEach((x) => {
     x.platforms.forEach((d) => {
-      if (!plataforma.includes(d.platform.name)) {
-        plataforma.push(d.platform.name);
+      if (!plataforma.includes(d)) {
+        plataforma.push(d);
       }
     });
   });
@@ -34,6 +32,10 @@ function Filtro() {
   //Exceptuando el de order, que solamente es el tipo de ordenamiento que se le dara.
   const [filtro, setFiltro] = useState({
     name: "",
+    precio: {
+      min: null,
+      max: null,
+    },
     released: ["", ""],
     plataforms: [],
     genres: [],
@@ -98,6 +100,25 @@ function Filtro() {
     }
     setFiltro({ ...filtro, genres: newgenre });
   }
+
+  //
+  function handlePrecio(e) {
+    let p =
+      e.target.id === "precioMin"
+        ? { ...filtro.precio, min: e.target.value }
+        : e.target.id === "precioMax"
+        ? { ...filtro.precio, max: e.target.value }
+        : e.target.value === "sinmaximo"
+        ? { ...filtro.precio, max: null }
+        : { ...filtro.precio, min: null };
+
+    if (e.target.value === "sinmaximo")
+      document.getElementById("precioMax").value = 0;
+    if (e.target.value === "sinminimo")
+      document.getElementById("precioMin").value = 0;
+
+    setFiltro({ ...filtro, precio: p });
+  }
   //Las siguientes 3 funciones son para que el usuario cambie la variable que determina el orden de nuestro array filtrado
   //el primer click sera de mayor a menor, el segundo de menor a mayor, y asi rotando.
   function handleOrderAlphabet(e) {
@@ -121,14 +142,26 @@ function Filtro() {
       setFiltro({ ...filtro, order: "-RDate+" });
     }
   }
+  function handleOrderPrecio(e) {
+    if (filtro.order !== "+Precio-") {
+      setFiltro({ ...filtro, order: "+Precio-" });
+    } else {
+      setFiltro({ ...filtro, order: "-Precio+" });
+    }
+  }
 
   // Creo que el html es self-explanatory...
   return (
     <div id="filtrobox">
-      <div className="inputfiltro">
-        <p>Buscar por Palabra Clave</p>
+      <div>
+        <h4>Buscar por Palabra Clave</h4>
+
+        <label htmlFor="buscarfiltro">
+          Ingrese aqui palabras clave para buscar coinsidencias!{" "}
+        </label>
         <input
           type="text"
+          id="buscarfiltro"
           placeholder="Buscar"
           className="buscar"
           onChange={(e) => handleName(e)}
@@ -160,60 +193,76 @@ function Filtro() {
       </div>
 
       <div>
-        <div>
-          <h4>Genero</h4>
-          {generos.map((x) => {
-            return (
-              <div key={x}>
-                <input
-                  type="checkbox"
-                  id={x}
-                  name={x}
-                  value={x}
-                  onClick={(e) => handleGenres(e)}
-                ></input>
-                <label htmlFor={x}>{x}</label>
-              </div>
-            );
-          })}
-        </div>
+        <h4>Genero</h4>
+        {generos.map((x) => {
+          return (
+            <div key={x}>
+              <input
+                type="checkbox"
+                id={x}
+                name={x}
+                value={x}
+                onClick={(e) => handleGenres(e)}
+              ></input>
+              <label htmlFor={x}>{x}</label>
+            </div>
+          );
+        })}
+      </div>
+
+      <div>
+        <h4>Plataforma</h4>
+        {plataforma.map((x) => {
+          return (
+            <div key={x}>
+              <input
+                type="checkbox"
+                id={x}
+                name={x}
+                value={x}
+                onClick={(e) => handlePlataforms(e)}
+              ></input>
+              <label htmlFor={x}>{x}</label>
+            </div>
+          );
+        })}
       </div>
 
       <div>
         <div>
-          <h4>Plataforma</h4>
-          {plataforma.map((x) => {
-            return (
-              <div key={x}>
-                <input
-                  type="checkbox"
-                  id={x}
-                  name={x}
-                  value={x}
-                  onClick={(e) => handlePlataforms(e)}
-                ></input>
-                <label htmlFor={x}>{x}</label>
-              </div>
-            );
-          })}
+          <h4>Precio</h4>
+          <label htmlFor="precioMin">Precio Minimo</label>
+          <input
+            id="precioMin"
+            type="number"
+            onChange={(e) => handlePrecio(e)}
+          ></input>
+          <button onClick={(e) => handlePrecio(e)} value="sinminimo">
+            Sin Minimo?
+          </button>
+          <label htmlFor="precioMax">Precio Maximo</label>
+          <input
+            id="precioMax"
+            type="number"
+            onChange={(e) => handlePrecio(e)}
+          ></input>
+          <button onClick={(e) => handlePrecio(e)} value="sinmaximo">
+            Sin Maximo?
+          </button>
         </div>
       </div>
 
       <div>
         <h4>Ordenar Por:</h4>
-        <div>
-          <button onClick={(e) => handleOrderAlphabet(e)}>Alphabetico</button>
-        </div>
 
-        <div>
-          <button onClick={(e) => handleOrderRating(e)}>Rating</button>
-        </div>
+        <button onClick={(e) => handleOrderAlphabet(e)}>Alfabético</button>
 
-        <div>
-          <button onClick={(e) => handleOrderReleasedDate(e)}>
-            Fecha de Lanzamiento
-          </button>
-        </div>
+        <button onClick={(e) => handleOrderRating(e)}>Rating</button>
+
+        <button onClick={(e) => handleOrderReleasedDate(e)}>
+          Fecha de Lanzamiento
+        </button>
+        <button onClick={(e) => handleOrderPrecio(e)}>Precio</button>
       </div>
     </div>
   );
