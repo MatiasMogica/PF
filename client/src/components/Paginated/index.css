@@ -1,0 +1,104 @@
+.pagination_cointainer{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    padding: 7px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination{
+    cursor: pointer;
+    /* padding: 10px;
+    margin: 3px;
+    height: 20px;
+    width: 20px;
+    border: 1px white solid;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: inherit;
+    cursor: pointer; */
+    appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.currentPage{
+    cursor: pointer;
+    /* padding: 20px;
+    margin: 3px;
+    height: 20px;
+    width: 20px;
+    border: 1px black solid;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: inherit;
+    cursor: pointer; */
+    appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  background-color: #24292E;
+    color: white;
+}
+
+.currentPage:hover{
+    /* font-size: 55px;
+    font-size-adjust: 20px;
+    width: 50px;
+    height: 50px; */
+    background-color: #24292E;
+    color: white;
+    transition: all .90s;
+}
+.pagination:hover{
+    /* font-size: 55px;
+    font-size-adjust: 20px;
+    width: 50px;
+    height: 50px; */
+    background-color: #24292E;
+    color: white;
+}
