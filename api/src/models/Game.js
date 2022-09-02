@@ -6,14 +6,16 @@ const gameSchema = new Schema(
             type: String,
             required: true,
           },
-          image: {
+          background_image: {
             type: String,
             required: true,
           },
-          description: { 
-            type: String,
+          platforms: [
+            { 
+            type: Schema.Types.String,
             required: true
           },
+        ],
           released:{ 
             type: String
           },
@@ -24,6 +26,17 @@ const gameSchema = new Schema(
             type: Number,
             required: true,
           },
+          genre: {
+            type: String
+          },
+          deleted: {
+            type: Boolean,
+            default: false
+          }
+    }, 
+    {
+      timestamps: true,
+      versionKey: false
     }
 )
 

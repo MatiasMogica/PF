@@ -1,18 +1,15 @@
-const { Router } = require('express');
-const {allGames,newGame,detailGame}= require('./controllers')
+const express = require('express')
+const GameRouter = require('./game.routes.js')
 
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const router = express.Router()
 
+router.use('games', GameRouter)
+router.use('*/*', (req, res) => {
+    try {
+        res.status(404).send(`This page doesn't exists`)
+    } catch (error) {
+        res.status(404).send(`This page doesn't exists`)
+    }
+})
 
-const router = Router();
-
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-
-router.get('/games',allGames)
-router.get('/games/:id',detailGame)
-router.post('/games', newGame)
-
-module.exports = router;
+module.exports = router
