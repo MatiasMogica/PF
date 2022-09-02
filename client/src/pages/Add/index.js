@@ -1,10 +1,10 @@
 import NavBar from "../../components/NavBar";
-
+import NewProduct from "../../components/NewProduct/NewProduct";
 export default function Add() {
-    return (
-        <div>
-            <NavBar />
-            <h1>Add</h1>
-        </div>
-    )
+  return (
+    <div>
+      <NavBar />
+      <NewProduct />
+    </div>
+  );
 }
