@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 function NewProduct() {
+  //A continuacion genero 2 arrays, de generos y plataformas, asi cuando creamos un nuevo videojuego podemos ver que genero y que plataforma
+  //ya estan creados y nos ahorramos tener que volver a escribirlas.
   const videogames = useSelector((state) => state.videogames.videogames);
   var generos = [];
   var plataforma = [];
@@ -18,6 +20,8 @@ function NewProduct() {
       }
     });
   });
+
+  //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
     name: {
       value: "",
@@ -54,6 +58,8 @@ function NewProduct() {
       error: "No puede ser negativo",
     },
   });
+
+  //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
 
   function handleName(e) {
     if (e.target.value.length < 50 && e.target.value.length > 2) {
@@ -144,6 +150,7 @@ function NewProduct() {
     }
   }
 
+  //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
     console.log(newGame);
     return !newGame.name.error &&
@@ -161,12 +168,15 @@ function NewProduct() {
       </button>
     );
   }
+
+  //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
     //necesito la ruta para enviarle los datos a esa ruta
     // printear el error si fallo o si paso limpiar los datos y printiar que paso
   }
 
+  //Estas 4 funciones son para que el usuario cree o selecione la plataforma/genero
   function handlePlataforms(e) {
     if (e.target.value.length > 1) {
       setNewGame({
