@@ -6,17 +6,17 @@
     border: 2px rgba(68, 67, 67, 0.356);
     border-radius: 20px;
     margin: 2rem;
-    max-width: 200px;
-    min-width: 100px;
-    min-height: 100px ;
+    width: 250px;
+    min-height: 50px ;
 }
 
-.img_cointainer img{
-    max-width: 30rem;
-    max-height: 37rem;
+.img_container img{
+    width: 250px;
+    border-radius: 20px 20px 0 0;
 }
 .Platforms{
     margin: 5px;
+    color:white;
 }
 .Price{
     margin: 5px;

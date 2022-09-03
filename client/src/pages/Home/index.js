@@ -7,13 +7,14 @@ import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
 import { Link } from "react-router-dom";
+import './index.css'
 
 export default function Home() {
     let dispatch = useDispatch();
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [vgPerPage, setVgPerPage] = useState(10) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
+    const [vgPerPage, setVgPerPage] = useState(9) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
     const indexOfLastVg = currentPage * vgPerPage
     const indexOfFirstVg = indexOfLastVg - vgPerPage
     const currentVg = videogames.slice(indexOfFirstVg, indexOfLastVg)
@@ -27,9 +28,13 @@ export default function Home() {
         }, [dispatch]);
 
     return (
-        <div className="container_home">
+        <div className="home">
             <NavBar />
+            
+            <div className="container">
+            
             <Filtro />
+            
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
@@ -49,8 +54,8 @@ export default function Home() {
                     ) : (
                     <Spinner />
                 )}
-
-<Paginated
+            </div>
+            <Paginated
             vgPerPage = {vgPerPage}
             videogames = {videogames.length}
             paginated = {paginated}

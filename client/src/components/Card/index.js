@@ -8,7 +8,7 @@ export default function Card({ name, image, platforms,  genre, released, _id, ra
         <div className="Card">
         <div>
         <div>
-        <div className="img_cointainer">
+        <div className="img_container">
         <Link to={`/videogames/${_id}`}>
         <img src={image} alt={name} width='200px' height='250px'/>
         </Link>
