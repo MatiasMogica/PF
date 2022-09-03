@@ -34,12 +34,13 @@ export default function Home() {
             <div className="container">
             
             <Filtro />
-            
+            <div className="container_allCards">
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
-                            <div key={i}>
+                          
                                 <Card
+                                key={i}
                                 _id={v._id}
                                 name={v.name}
                                 image={v.background_image}
@@ -48,12 +49,13 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genre={v.genre} />
-                            </div>
+                            
                         );
                         })
                     ) : (
                     <Spinner />
                 )}
+                </div>
             </div>
             <Paginated
             vgPerPage = {vgPerPage}
