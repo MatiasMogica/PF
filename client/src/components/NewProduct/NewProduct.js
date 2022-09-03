@@ -109,7 +109,7 @@ function NewProduct() {
       });
     }
   }
-
+  
   async function handleImage(e) {
     const formData = new FormData();
 
@@ -308,7 +308,6 @@ function NewProduct() {
               <label htmlFor={`checkbox_${x}`}>{x}</label>
             </div>
           ))}
-
           <button
             onClick={() =>
               setNewGame({
@@ -437,6 +436,7 @@ function NewProduct() {
       </div>
 
       <label htmlFor="image">Background image</label>
+
       <input type="file" id="image" onChange={(e) => handleImage(e)}></input>
       {newGame.image.error ? <div>{newGame.image.error}</div> : null}
 
@@ -471,6 +471,7 @@ function NewProduct() {
       {buttonSubmit()}
 
       {newGame.creado ? <div> Created successfully!</div> : null}
+
     </form>
   );
 }
