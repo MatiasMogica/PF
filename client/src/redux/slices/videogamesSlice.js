@@ -15,6 +15,9 @@ export const videogamesSlice = createSlice({
     getVideogameById: (state, action) => {
       state.details = action.payload;
     },
+    clearVideogame: (state) => {
+        state.details = {}
+    },
     filterVideogames: (state, action) => {
       //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
       var filtrado = [...state.videogames];
@@ -156,6 +159,7 @@ export const videogamesSlice = createSlice({
   },
 });
 
-export const { getAllVideogames, getVideogameById, filterVideogames } =
+export const { getAllVideogames, getVideogameById, filterVideogames, clearVideogame } =
   videogamesSlice.actions;
+  
 export default videogamesSlice.reducer;

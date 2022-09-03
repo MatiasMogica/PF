@@ -1,10 +1,11 @@
 import { useHistory } from "react-router-dom";
 import {Link} from "react-router-dom";
+/* import { useDispatch, useSelector } from "react-redux"; */
 import "./index.css"
 
 export default function NavBar() {
-
     let history = useHistory();
+    /* let {amount} = useSelector((state) => state.cart) */
 
     function handleClick(){
         history.goBack()
