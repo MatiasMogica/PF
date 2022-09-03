@@ -7,29 +7,26 @@ export default function Card({ name, image, platforms,  genre, released, _id, ra
     return (
         <div className="Card">
         <div>
-        <div>
-        <div className="img_cointainer">
+        <div className="img_name" >
+        <div className="img_container">
         <Link to={`/videogames/${_id}`}>
-        <img src={image} alt={name} width='200px' height='250px'/>
+        <img src={image} alt={name} width='200px' height='220px'/>
         </Link>
         </div>
-            <h3>{name}</h3>
+            <h4>{name}</h4>
         </div>
-        <div>
-            <h4>Platforms: {platforms && platforms.join(', ')}</h4>
-        </div>
-        <div>
-            <h4>Genre: {genre}</h4>           
-        </div>
-        <div>
-            <h4>Rating: {rating}</h4>
-        </div> 
-        <div>
-            <h4>Price: {price}</h4>
-        </div>
-        <div>
-            <p>Released: {released}</p> 
-        </div>
+        <div className="description">
+            <h5>Platforms: {platforms && platforms.join(', ')}</h5>
+        
+            <h5>Genre: {genre}</h5>           
+
+            <h5>Rating: {rating}</h5>
+
+            <h5>Price: {price}</h5>
+
+            <h5>Released: {released}</h5> 
+            </div>
+
         </div>
     </div>)
 

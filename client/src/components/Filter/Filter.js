@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
+import './index.css'
 
 function Filtro() {
   //Declaro el dispatch para aplicar filtros.
@@ -152,32 +153,32 @@ function Filtro() {
 
   // Creo que el html es self-explanatory...
   return (
-    <div id="filtrobox">
+    <div id="filtrobox" className="filtroContainer">
       <div>
-        <h4>Buscar por Palabra Clave</h4>
+        <h4>Search by keyword</h4>
 
         <label htmlFor="buscarfiltro">
-          Ingrese aqui palabras clave para buscar coinsidencias!{" "}
+        Enter keywords here to search for matches!{" "}
         </label>
         <input
           type="text"
           id="buscarfiltro"
-          placeholder="Buscar"
+          placeholder="Search"
           className="buscar"
           onChange={(e) => handleName(e)}
         ></input>
       </div>
 
       <div>
-        <h4>Fecha de Lanzamiento</h4>
-        <label htmlFor="fecha_min">Desde</label>
+        <h4>Release date:</h4>
+        <label htmlFor="fecha_min">From: </label>
         <input
           type="date"
           id="fecha_min"
           name="trip-start"
           onChange={(e) => handleReleasedMin(e)}
         ></input>
-        <label htmlFor="fecha_max">Hasta</label>
+        <label htmlFor="fecha_max">To: </label>
         <input
           type="date"
           id="fecha_max"
@@ -185,15 +186,15 @@ function Filtro() {
           onChange={(e) => handleReleasedMax(e)}
         ></input>
         <button onClick={(e) => handleReleased(e)} value="tba">
-          Todavia no esta anunciado?
+         Hasn't been announced yet?
         </button>
         <button onClick={(e) => handleReleased(e)} value="">
-          Todos
+          All
         </button>
       </div>
 
       <div>
-        <h4>Genero</h4>
+        <h4>Genre</h4>
         {generos.map((x) => {
           return (
             <div key={x}>
@@ -211,7 +212,7 @@ function Filtro() {
       </div>
 
       <div>
-        <h4>Plataforma</h4>
+        <h4>Platform</h4>
         {plataforma.map((x) => {
           return (
             <div key={x}>
@@ -230,39 +231,39 @@ function Filtro() {
 
       <div>
         <div>
-          <h4>Precio</h4>
-          <label htmlFor="precioMin">Precio Minimo</label>
+          <h4>Price</h4>
+          <label htmlFor="precioMin">Price minimum</label>
           <input
             id="precioMin"
             type="number"
             onChange={(e) => handlePrecio(e)}
           ></input>
           <button onClick={(e) => handlePrecio(e)} value="sinminimo">
-            Sin Minimo?
+            No minimum?
           </button>
-          <label htmlFor="precioMax">Precio Maximo</label>
+          <label htmlFor="precioMax">Price maximum</label>
           <input
             id="precioMax"
             type="number"
             onChange={(e) => handlePrecio(e)}
           ></input>
           <button onClick={(e) => handlePrecio(e)} value="sinmaximo">
-            Sin Maximo?
+            No maximum?
           </button>
         </div>
       </div>
 
       <div>
-        <h4>Ordenar Por:</h4>
+        <h4>Sort by:</h4>
 
-        <button onClick={(e) => handleOrderAlphabet(e)}>Alfabético</button>
+        <button onClick={(e) => handleOrderAlphabet(e)}>Alphabetical</button>
 
         <button onClick={(e) => handleOrderRating(e)}>Rating</button>
 
         <button onClick={(e) => handleOrderReleasedDate(e)}>
-          Fecha de Lanzamiento
+          Released date
         </button>
-        <button onClick={(e) => handleOrderPrecio(e)}>Precio</button>
+        <button onClick={(e) => handleOrderPrecio(e)}>Price</button>
       </div>
     </div>
   );

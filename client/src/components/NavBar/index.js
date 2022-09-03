@@ -26,7 +26,6 @@ export default function NavBar() {
                 <Link  className={'linkStyle'}>Wish List</Link>
                 <Link className={'linkStyle'}>Contact</Link>
                 <Link className={'linkStyle'}>Sign In</Link>
-
             </div>
         </div>
     )
