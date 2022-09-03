@@ -17,18 +17,15 @@ export default function Card({ name, image, platforms,  genre, released, _id, ra
         </div>
         <div className="description">
             <h5>Platforms: {platforms && platforms.join(', ')}</h5>
-       
         
             <h5>Genre: {genre}</h5>           
-        
-        
+
             <h5>Rating: {rating}</h5>
-      
+
             <h5>Price: {price}</h5>
-      
+
             <h5>Released: {released}</h5> 
             </div>
-      
         </div>
     </div>)
 
