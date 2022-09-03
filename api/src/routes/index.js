@@ -1,12 +1,15 @@
-const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const express = require('express')
+const GameRouter = require('./game.routes.js')
 
+const router = express.Router()
 
-const router = Router();
+router.use('/', GameRouter)
+router.use('*/*', (req, res) => {
+    try {
+        res.status(404).send(`This page doesn't exists`)
+    } catch (error) {
+        res.status(404).send(`This page doesn't exists`)
+    }
+})
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
-
-module.exports = router;
+module.exports = router

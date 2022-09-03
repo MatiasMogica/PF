@@ -37,7 +37,9 @@ function NewProduct() {
     },
     image: {
       value: "",
+
       error: "Suba una imagen",
+
     },
     plataforms: {
       value: [],
@@ -57,7 +59,9 @@ function NewProduct() {
       value: null,
       error: "No puede ser negativo",
     },
+
     creado: false,
+
   });
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
@@ -110,6 +114,7 @@ function NewProduct() {
     }
   }
 
+
   async function handleImage(e) {
     const formData = new FormData();
 
@@ -134,6 +139,7 @@ function NewProduct() {
           image: { value: "", error: "Error Subiendo imagen, intente denuevo" },
         })
       );
+
   }
 
   function handleRating(e) {
@@ -192,6 +198,7 @@ function NewProduct() {
   //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
+
 
     const { name, released, image, plataforms, genres, rating, price } =
       newGame;
@@ -255,11 +262,13 @@ function NewProduct() {
         });
       })
       .catch((error) => console.log(error));
+
   }
 
   //Estas 4 funciones son para que el usuario cree o selecione la plataforma/genero
   function handlePlataforms(e) {
     if (e.target.value.length > 1) {
+
       if (newGame.plataforms.value.includes(e.target.value)) {
         let indice = newGame.plataforms.value.indexOf(e.target.value);
         let newplataforms = [...newGame.plataforms.value];
@@ -290,6 +299,7 @@ function NewProduct() {
           ...newGame.plataforms,
           error: "Escribe Algo",
         },
+
       });
     }
   }
@@ -298,6 +308,7 @@ function NewProduct() {
     if (!c) {
       return (
         <div>
+
           {plataforma.map((x) => (
             <div key={x}>
               <input
@@ -308,6 +319,7 @@ function NewProduct() {
               <label htmlFor={`checkbox_${x}`}>{x}</label>
             </div>
           ))}
+
 
           <button
             onClick={() =>
@@ -325,8 +337,10 @@ function NewProduct() {
       return (
         <div>
           <label htmlFor="plataforma_crear">Nombre de la Plataforma</label>
+
           <input id="plataforma_crear" type="text"></input>
           <button onChange={(e) => handlePlataforms(e)}>Agreguar este</button>
+
           {newGame.plataforms.error ? (
             <div>{newGame.plataforms.error}</div>
           ) : null}
@@ -436,7 +450,9 @@ function NewProduct() {
       </div>
 
       <label htmlFor="image">Imagen de Fondo</label>
+
       <input type="file" id="image" onChange={(e) => handleImage(e)}></input>
+
       {newGame.image.error ? <div>{newGame.image.error}</div> : null}
 
       <div>
@@ -469,9 +485,13 @@ function NewProduct() {
 
       {buttonSubmit()}
 
+
       {newGame.creado ? <div> Creado Con Exito!</div> : null}
+
     </form>
   );
 }
 
+
 export default NewProduct;
+
