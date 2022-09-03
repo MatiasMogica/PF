@@ -18,9 +18,26 @@
 }
 
 .navContainer {
-    background-color: #181d27;
+    background-color: #202020;
     display: flex;
     gap: 5px;
     justify-content: space-around;
     padding: 10px;
+    align-items: center;
+}
+.left_container{
+    display: flex;
+    width:40%;
+    justify-content: center;
+    
+}
+.logo{
+    height:60px;
+    width:200px;
+
+}
+.right_container{
+    display: flex;
+    width:40%;
+    justify-content: center;
 }

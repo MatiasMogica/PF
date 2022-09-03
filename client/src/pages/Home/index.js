@@ -27,7 +27,7 @@ export default function Home() {
         }, [dispatch]);
 
     return (
-        <div>
+        <div className="container_home">
             <NavBar />
             <Filtro />
                 {videogames.length !== 0 ? (
