@@ -161,5 +161,5 @@ export const videogamesSlice = createSlice({
 
 export const { getAllVideogames, getVideogameById, filterVideogames, clearVideogame } =
   videogamesSlice.actions;
+  
 export default videogamesSlice.reducer;
-
