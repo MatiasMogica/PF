@@ -6,21 +6,22 @@
     border: 2px rgba(68, 67, 67, 0.356);
     border-radius: 20px;
     margin: 2rem;
-    max-width: 200px;
-    min-width: 100px;
-    min-height: 100px ;
+    width: 280px;
+    min-height: 50px ;
+    height: 450px;
+    text-align: center;
+    
+    
 }
-
-.img_cointainer img{
-    max-width: 30rem;
-    max-height: 37rem;
+.img_name h4{
+    margin-top:10px;
+    margin-bottom: 10px;
 }
-.Platforms{
-    margin: 5px;
+.img_container img{
+    width: 280px;
+    border-radius: 20px 20px 0 0;
 }
-.Price{
-    margin: 5px;
-}
-.Name{
-  align-items: center;
+.description h5 {
+    text-align: justify;
+    margin: 5px 20px 5px 20px;
 }

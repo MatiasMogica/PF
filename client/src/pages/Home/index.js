@@ -7,13 +7,14 @@ import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
 import { Link } from "react-router-dom";
+import './index.css'
 
 export default function Home() {
     let dispatch = useDispatch();
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [vgPerPage, setVgPerPage] = useState(10) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
+    const [vgPerPage, setVgPerPage] = useState(9) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
     const indexOfLastVg = currentPage * vgPerPage
     const indexOfFirstVg = indexOfLastVg - vgPerPage
     const currentVg = videogames.slice(indexOfFirstVg, indexOfLastVg)
@@ -27,14 +28,19 @@ export default function Home() {
         }, [dispatch]);
 
     return (
-        <div>
+        <div className="home">
             <NavBar />
+            
+            <div className="container">
+            
             <Filtro />
+            <div className="container_allCards">
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
-                            <div key={i}>
+                        
                                 <Card
+                                key={i}
                                 _id={v._id}
                                 name={v.name}
                                 image={v.background_image}
@@ -43,14 +49,15 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genre={v.genre} />
-                            </div>
+                            
                         );
                         })
                     ) : (
                     <Spinner />
                 )}
-
-<Paginated
+                </div>
+            </div>
+            <Paginated
             vgPerPage = {vgPerPage}
             videogames = {videogames.length}
             paginated = {paginated}

@@ -1,0 +1,9 @@
+.filtroContainer {
+    background-color: #202020;
+    display: inline-table ;
+    width: 300px;
+    gap: 5px;
+    justify-content: left;
+    padding: 10px;
+    align-items: left;
+}
