@@ -37,7 +37,9 @@ function NewProduct() {
     },
     image: {
       value: "",
-      error: "Deberia ser una url de una imagen!",
+
+      error: "Suba una imagen",
+
     },
     plataforms: {
       value: [],
@@ -57,6 +59,9 @@ function NewProduct() {
       value: null,
       error: "No puede ser negativo",
     },
+
+    creado: false,
+
   });
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
@@ -109,11 +114,32 @@ function NewProduct() {
     }
   }
 
-  function handleImage(e) {
-    setNewGame({
-      ...newGame,
-      image: { value: e.target.value, error: "" },
-    });
+
+  async function handleImage(e) {
+    const formData = new FormData();
+
+    formData.append("file", e.target.files[0]);
+    formData.append("upload_preset", "gu6gzzkc");
+
+    await fetch("https://api.cloudinary.com/v1_1/dhyz4afz7/image/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNewGame({
+          ...newGame,
+          image: { value: data.secure_url, error: "" },
+        });
+      })
+
+      .catch((err) =>
+        setNewGame({
+          ...newGame,
+          image: { value: "", error: "Error Subiendo imagen, intente denuevo" },
+        })
+      );
+
   }
 
   function handleRating(e) {
@@ -172,21 +198,108 @@ function NewProduct() {
   //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
-    //necesito la ruta para enviarle los datos a esa ruta
-    // printear el error si fallo o si paso limpiar los datos y printiar que paso
+
+
+    const { name, released, image, plataforms, genres, rating, price } =
+      newGame;
+
+    const arg = {
+      name: name.value,
+      released: released.value,
+      background_image: image.value,
+      platforms: plataforms.value,
+      genres: genres.value,
+      rating: parseInt(rating.value),
+      price: parseInt(price.value),
+    };
+
+    console.log(arg);
+
+    return fetch(`http://localhost:3001/games`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(arg),
+      redirect: "follow",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNewGame({
+          name: {
+            value: "",
+            error: "Deberia tener entre 2 y 50 caracteres",
+          },
+          description: {
+            value: "",
+            error: "Deberia tener entre 20 y 500 caracteres",
+          },
+          released: {
+            value: "",
+            error: "Por favor selecciona la fecha de lanzamiento",
+          },
+          image: {
+            value: "",
+            error: "Suba una imagen",
+          },
+          plataforms: {
+            value: [],
+            creada: false,
+            error: "Escribe Algo",
+          },
+          genres: {
+            value: [],
+            creada: false,
+            error: "Escribe Algo",
+          },
+          rating: {
+            value: null,
+            error: "Entre 1 y 5",
+          },
+          price: {
+            value: null,
+            error: "No puede ser negativo",
+          },
+          creado: true,
+        });
+      })
+      .catch((error) => console.log(error));
+
   }
 
   //Estas 4 funciones son para que el usuario cree o selecione la plataforma/genero
   function handlePlataforms(e) {
     if (e.target.value.length > 1) {
-      setNewGame({
-        ...newGame,
-        plataforms: { ...newGame.plataforms, value: e.target.value, error: "" },
-      });
+
+      if (newGame.plataforms.value.includes(e.target.value)) {
+        let indice = newGame.plataforms.value.indexOf(e.target.value);
+        let newplataforms = [...newGame.plataforms.value];
+        newplataforms.splice(indice, 1);
+
+        setNewGame({
+          ...newGame,
+          plataforms: {
+            ...newGame.plataforms,
+            value: newplataforms,
+            error: "",
+          },
+        });
+      } else {
+        setNewGame({
+          ...newGame,
+          plataforms: {
+            ...newGame.plataforms,
+            value: [...newGame.plataforms.value, e.target.value],
+            error: "",
+          },
+        });
+      }
     } else {
       setNewGame({
         ...newGame,
-        plataforms: { ...newGame.plataforms, value: "", error: "Escribe Algo" },
+        plataforms: {
+          ...newGame.plataforms,
+          error: "Escribe Algo",
+        },
+
       });
     }
   }
@@ -195,18 +308,19 @@ function NewProduct() {
     if (!c) {
       return (
         <div>
-          <select
-            id="select_plataforma"
-            onChange={(e) => handlePlataforms(e)}
-            defaultValue="Elige Una"
-          >
-            <option disabled>Elige Una</option>
-            {plataforma.map((x) => (
-              <option key={x} value={x}>
-                {x}
-              </option>
-            ))}
-          </select>
+
+          {plataforma.map((x) => (
+            <div key={x}>
+              <input
+                value={x}
+                type="checkbox"
+                onChange={(e) => handlePlataforms(e)}
+              ></input>
+              <label htmlFor={`checkbox_${x}`}>{x}</label>
+            </div>
+          ))}
+
+
           <button
             onClick={() =>
               setNewGame({
@@ -223,11 +337,10 @@ function NewProduct() {
       return (
         <div>
           <label htmlFor="plataforma_crear">Nombre de la Plataforma</label>
-          <input
-            id="plataforma_crear"
-            type="text"
-            onChange={(e) => handlePlataforms(e)}
-          ></input>
+
+          <input id="plataforma_crear" type="text"></input>
+          <button onChange={(e) => handlePlataforms(e)}>Agreguar este</button>
+
           {newGame.plataforms.error ? (
             <div>{newGame.plataforms.error}</div>
           ) : null}
@@ -337,7 +450,9 @@ function NewProduct() {
       </div>
 
       <label htmlFor="image">Imagen de Fondo</label>
-      <input type="url" id="image" onChange={(e) => handleImage(e)}></input>
+
+      <input type="file" id="image" onChange={(e) => handleImage(e)}></input>
+
       {newGame.image.error ? <div>{newGame.image.error}</div> : null}
 
       <div>
@@ -369,8 +484,14 @@ function NewProduct() {
       </div>
 
       {buttonSubmit()}
+
+
+      {newGame.creado ? <div> Creado Con Exito!</div> : null}
+
     </form>
   );
 }
 
+
 export default NewProduct;
+

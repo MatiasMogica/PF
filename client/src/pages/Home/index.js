@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVideogames } from "../../redux/actions/videogamesActions";
 import Spinner from "../../components/Spinner/index";
 import NavBar from "../../components/NavBar/index";
+
 import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"

@@ -8,4 +8,6 @@ export default function Add() {
       <NewProduct />
     </div>
   );
+
+
 }
