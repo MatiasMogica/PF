@@ -14,7 +14,7 @@ export default function Error404() {
         <div className={'container'} >
             <h1>Sorry, that page doesn't exist</h1>
             <img alt="errorPS2"  className={'img'} src={errorPS2} />
-            <div  className={'buttonContainer'}><button className={'button'} onClick={handleClick}>{"<== Go Back"}</button></div>
+            <div className={'buttonContainer'}><button className={'button'} onClick={handleClick}>{"<== Go Back"}</button></div>
         </div>
     )
 }
