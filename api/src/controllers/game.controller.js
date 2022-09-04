@@ -94,7 +94,8 @@ catch(err){
     
 // })
 
-const newGame=async ( req, res) => {
+
+const newGame = async ( req, res) => {
     const { newGame } = req.body;
     const game = new Game({ 
         newGame 

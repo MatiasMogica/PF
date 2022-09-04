@@ -1,4 +1,4 @@
-require('doten').config()
+require('dotenv').config()
 const app = require('./app.js')
 const dbConnection = require('./db.js')
 
