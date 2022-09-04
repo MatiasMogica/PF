@@ -2,6 +2,11 @@ const { Schema, model } = require('mongoose')
 
 const userSchema = new Schema(
     {
+        username: {
+            type: String,
+            require: true,
+            unique: true
+        },
         name: {
             type: String, 
             require: true,
@@ -12,7 +17,7 @@ const userSchema = new Schema(
             require: true,
             unique: true
         },
-        password: {
+        hashPassword: {
             type: String,
             require: true
         },
@@ -32,6 +37,26 @@ const userSchema = new Schema(
         localStorageToken: {
             type: String
           },
+        deleted: {
+            type: Boolean,
+            default: false
+        }
         
+    },
+    {
+        timestamps: true,
+        versionKey: false
     }
 )
+
+userSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id
+        delete returnedObject._id
+        delete returnedObject._v
+
+        delete returnedObject.hashPassword
+    }
+})
+
+module.exports = model("User", userSchema)
