@@ -5,7 +5,7 @@ const AuthRouter = require('./authentication.routes')
 
 const router = express.Router()
 
-router.use("/games", GameRouter)
+router.use("/", GameRouter)
 router.use("/users", UserRouter)
 router.use('/auth', AuthRouter)
 router.use('*/*', (req, res) => {
