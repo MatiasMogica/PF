@@ -26,7 +26,6 @@ export default function Card({ name, image, platforms,  genres, released, idAPI,
 
             <h5>Released: {released}</h5> 
             </div>
-
         </div>
     </div>)
 

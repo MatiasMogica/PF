@@ -35,7 +35,6 @@ export default function Home() {
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
-                        
                                 <Card
                                 key={i}
                                 idAPI={v.idAPI}

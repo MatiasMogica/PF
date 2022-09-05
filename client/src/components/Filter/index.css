@@ -129,6 +129,7 @@
     color: rgb(144, 140, 140);
     
 }
+
 #buscarfiltro:focus{
     border: 8px solid rgb(21, 83, 217);
     margin-top: 22px;
