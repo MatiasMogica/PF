@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getVideogames } from "../../redux/actions/videogamesActions";
+import './NewProduct.css'
 
 
 function NewProduct() {
@@ -38,19 +39,19 @@ function NewProduct() {
     name: {
       value: "",
 
-      error: "It should have between 2 and 50 characters",
+      error: "",
     },
     description: {
       value: "",
-      error: "It should have between 20 and 500 characters",
+      error: "",
     },
     released: {
       value: "",
-      error: "Please select the release date",
+      error: "",
     },
     image: {
       value: "",
-      error: "Upload an image",
+      error: "",
 
     },
     plataforms: {
@@ -68,11 +69,11 @@ function NewProduct() {
     },
     rating: {
       value: null,
-      error: "It should be between 1 and 5",
+      error: "",
     },
     price: {
       value: null,
-      error: "It can't be null or negative",
+      error: "",
 
     },
     creado: false,
@@ -187,6 +188,17 @@ function NewProduct() {
         ...newGame,
         price: { value: e.target.value, error: "" },
       });
+      if(e.target.value===''){
+        return setNewGame({
+          ...newGame,
+          price: {
+            value: "",
+  
+            error: "The price can't be null or negative",
+  
+          },
+        });
+    }
     } else {
       setNewGame({
         ...newGame,
@@ -212,9 +224,9 @@ function NewProduct() {
       !newGame.rating.error &&
       !newGame.price.error ? (
 
-      <button type="submit">Create</button>
+      <button className='btn' type="submit">Create</button>
     ) : (
-      <button type="submit" disabled>
+      <button className='btn'type="submit" disabled>
         Create
 
       </button>
@@ -424,7 +436,7 @@ function NewProduct() {
               </option>
             ))}
           </select>
-          <button
+          <button className="button"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -465,81 +477,87 @@ function NewProduct() {
     }
   }
   return (
+    <div className="container_form">
+      <div className="overlay">
+    <div className="form" >
     <form onSubmit={(e) => handleSubmit(e)}>
-      <div>
+      <div className="container_input">
 
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name</label>
 
-        <input id="name" type="text" onChange={(e) => handleName(e)}></input>
-        {newGame.name.error ? <div>{newGame.name.error}</div> : null}
+        <input className="input" id="name" type="text" onChange={(e) => handleName(e)}></input>
+        {newGame.name.error ? <div className="error">{newGame.name.error}</div> : null}
       </div>
-      <div>
+      <div  className="container_input">
 
-        <label htmlFor="descripcion">Description:</label>
+        <label htmlFor="descripcion">Description</label>
 
-        <textarea id="descripcion" onChange={(e) => handleDesc(e)}></textarea>
+        <textarea  className="input" id="descripcion" onChange={(e) => handleDesc(e)}></textarea>
         {newGame.description.error ? (
-          <div>{newGame.description.error}</div>
+          <div className="error">{newGame.description.error}</div>
         ) : null}
       </div>
-      <div>
+      <div  className="container_input">
 
-        <label htmlFor="released">Release date:</label>
+        <label htmlFor="released">Release date</label>
 
-        <input
+        <input className="input"
           id="released"
           type="date"
           onChange={(e) => handleDate(e)}
         ></input>
-        {newGame.released.error ? <div>{newGame.released.error}</div> : null}
+        {newGame.released.error ? <div className="error">{newGame.released.error}</div> : null}
       </div>
 
-
-      <label htmlFor="image">Background image</label>
-
-
-      <input type="file" id="image" onChange={(e) => handleImage(e)}></input>
-      {newGame.image.error ? <div>{newGame.image.error}</div> : null}
-
-      <div>
-
-        <h5>Platforms</h5>
+      <div className="container_input">
+      <label htmlFor="image">Background image <hr></hr></label>
+      <input  type="file" id="image" onChange={(e) => handleImage(e)}></input>
+      {newGame.image.error ? <div className="error">{newGame.image.error}</div> : null}
+      </div>
+      <div className="container_input">
+      <label htmlFor="platforms">Platforms <hr></hr></label>
+       
         {plataformasOpciones(newGame.plataforms.creada)}
       </div>
-      <div>
-        <h5>Genres</h5>
-
+      <div className="container_input">
+      <label htmlFor="genres">Genres <hr></hr></label>
+          
         {genresOpciones(newGame.genres.creada)}
       </div>
 
-      <div>
-        <label htmlFor="rating">Rating:</label>
+      <div className="container_input">
+        <label htmlFor="rating">Rating</label>
         <input
+        className="input"
           type="number"
           id="rating"
           onChange={(e) => handleRating(e)}
         ></input>
-        {newGame.rating.error ? <div>{newGame.rating.error}</div> : null}
+        {newGame.rating.error ? <div className="error">{newGame.rating.error}</div> : null}
       </div>
-      <div>
+      <div className="container_input">
 
-        <label htmlFor="price">Price:</label>
+        <label htmlFor="price">Price</label>
 
         <input
+        className="input"
           type="number"
           id="price"
           onChange={(e) => handlePrice(e)}
         ></input>
-        {newGame.price.error ? <div>{newGame.price.error}</div> : null}
+        {newGame.price.error ? <div className="error">{newGame.price.error}</div> : null}
       </div>
-
+        <div className="container_btn">
       {buttonSubmit()}
-
+      </div>
 
       {newGame.creado ? <div> Created successfully!</div> : null}
 
 
     </form>
+    </div>
+    </div>
+    </div>
   );
 }
 
