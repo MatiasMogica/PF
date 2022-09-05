@@ -2,7 +2,7 @@ import "./index.css"
 
 export default function Details({details}) {
     return (
-        <div key={details?._id}>
+        <div key={details?.idAPI}>
             <div>
                 <img alt={details?.name} className="image" src={details?.background_image} />
             </div>
@@ -14,7 +14,8 @@ export default function Details({details}) {
                     <p> {details?.rating} </p>
                 </div>
                 <div>
-                    <p>{details?.description}</p>
+                    
+                    <p className="html"dangerouslySetInnerHTML={{ __html:details?.description}}/>
                 </div>
                 <div>
                     <p>{details.genres && details.genres.join(', ')}</p>  

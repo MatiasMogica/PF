@@ -38,6 +38,7 @@ export default function Home() {
                                 <Card
                                 key={i}
                                 _id={v._id}
+                                idAPI={v.idAPI}
                                 name={v.name}
                                 image={v.background_image}
                                 platforms={v.platforms}
