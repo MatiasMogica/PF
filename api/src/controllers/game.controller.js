@@ -31,7 +31,7 @@ const allGames= async(req, res, next) => {
 const detailGame=async(req,res,next)=>{
     const {id}=req.params
 try{
-    //const game=await Game.findById(id)
+    const game=await Game.findById(id)
     //const {game}=await axios(``)
    
     game?res.status(200).json(game):res.status(404).json({message: "Game not found"})

@@ -4,7 +4,7 @@ const gameSchema = new Schema(
     {
         idAPI: {
           type: String,
-          unique: true
+          
         },
         name: {
             type: String,
