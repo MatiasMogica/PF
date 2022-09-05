@@ -6,7 +6,7 @@ function NewProduct() {
   //A continuacion genero 2 arrays, de generos y plataformas, asi cuando creamos un nuevo videojuego podemos ver que genero y que plataforma
   //ya estan creados y nos ahorramos tener que volver a escribirlas.
   const videogames = useSelector((state) => state.videogames.videogames);
-  const [selectNameState, setSelectNameState] = useState([])
+  const [selectNameState, setSelectNameState] = useState([]);
   let dispatch = useDispatch();
 
   var generos = [];
@@ -28,11 +28,9 @@ function NewProduct() {
     });
   });
 
-
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-
 
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
@@ -52,18 +50,18 @@ function NewProduct() {
     image: {
       value: "",
       error: "Upload an image",
-
     },
     plataforms: {
       value: [],
       creada: false,
+      manualValue: "",
 
       error: "Write the name of the new platform",
-
     },
     genres: {
       value: [],
       creada: false,
+      manualValue: "",
 
       error: "Write the name of the new genre",
     },
@@ -74,7 +72,6 @@ function NewProduct() {
     price: {
       value: null,
       error: "It can't be null or negative",
-
     },
     creado: false,
   });
@@ -150,7 +147,11 @@ function NewProduct() {
       .catch((err) =>
         setNewGame({
           ...newGame,
-          image: { value: "", error: "An error occurred while uploading the image, please try again" },
+          image: {
+            value: "",
+            error:
+              "An error occurred while uploading the image, please try again",
+          },
         })
       );
   }
@@ -185,7 +186,6 @@ function NewProduct() {
           value: "",
 
           error: "The price can't be null or negative",
-
         },
       });
     }
@@ -202,12 +202,10 @@ function NewProduct() {
       !newGame.genres.error &&
       !newGame.rating.error &&
       !newGame.price.error ? (
-
       <button type="submit">Create</button>
     ) : (
       <button type="submit" disabled>
         Create
-
       </button>
     );
   }
@@ -224,7 +222,7 @@ function NewProduct() {
       released: released.value,
       background_image: image.value,
       platforms: plataforms.value,
-      genre: genres.value,
+      genres: genres.value,
       rating: parseInt(rating.value),
       price: parseInt(price.value),
     };
@@ -256,18 +254,18 @@ function NewProduct() {
           image: {
             value: "",
             error: "Upload an image",
-
           },
           plataforms: {
             value: [],
             creada: false,
+            manualValue: "",
 
             error: "Write the name of the new platform",
-
           },
           genres: {
             value: [],
             creada: false,
+            manualValue: "",
 
             error: "Write the name of the new genre",
           },
@@ -278,7 +276,6 @@ function NewProduct() {
           price: {
             value: null,
             error: "It can't be null or negative",
-
           },
           creado: true,
         });
@@ -319,7 +316,6 @@ function NewProduct() {
           ...newGame.plataforms,
 
           error: "Write the name of the new platform",
-
         },
       });
     }
@@ -401,7 +397,11 @@ function NewProduct() {
               setNewGame({
                 ...newGame,
 
-                plataforms: { value: "", error: "Write the name of the new platform", creada: true },
+                plataforms: {
+                  value: "",
+                  error: "Write the name of the new platform",
+                  creada: true,
+                },
               })
             }
           >
@@ -410,15 +410,45 @@ function NewProduct() {
         </div>
       );
     } else {
+      function manuallyAddPlataform() {
+        if (newGame.plataforms.manualValue.length > 2) {
+          setNewGame({
+            ...newGame,
+            plataforms: {
+              ...newGame.plataforms,
+              value: [
+                ...newGame.plataforms.value,
+                newGame.plataforms.manualValue,
+              ],
+              error: "",
+            },
+          });
+        } else {
+        }
+      }
+      function manuallyModifyPlataform(e) {
+        setNewGame({
+          ...newGame,
+          plataforms: {
+            ...newGame.plataforms,
+            manualValue: e.target.value,
+          },
+        });
+      }
       return (
         <div>
           <label htmlFor="plataforma_crear">Name of the platform</label>
           <input
             id="plataforma_crear"
             type="text"
-            onChange={(e) => handlePlataforms(e)}
+            onChange={(e) => manuallyModifyPlataform(e)}
           ></input>
-          {newGame.plataforms.error ? <div>{newGame.plataforms.error}</div> : null}
+          <button type="button" onClick={(e) => manuallyAddPlataform(e)}>
+            Add this plataform.
+          </button>
+          {newGame.plataforms.error ? (
+            <div>{newGame.plataforms.error}</div>
+          ) : null}
           <button
             onClick={() =>
               setNewGame({
@@ -436,14 +466,37 @@ function NewProduct() {
 
   function handleGenres(e) {
     if (e.target.value.length > 1) {
-      setNewGame({
-        ...newGame,
-        genres: { ...newGame.genres, value: e.target.value, error: "" },
-      });
+      if (newGame.genres.value.includes(e.target.value)) {
+        let indice = newGame.genres.value.indexOf(e.target.value);
+        let newgenres = [...newGame.genres.value];
+        newgenres.splice(indice, 1);
+
+        setNewGame({
+          ...newGame,
+          genres: {
+            ...newGame.genres,
+            value: newgenres,
+            error: "",
+          },
+        });
+      } else {
+        setNewGame({
+          ...newGame,
+          genres: {
+            ...newGame.genres,
+            value: [...newGame.genres.value, e.target.value],
+            error: "",
+          },
+        });
+      }
     } else {
       setNewGame({
         ...newGame,
-        genres: { ...newGame.genres, value: "", error: "Write the name of the new genre" },
+        genres: {
+          ...newGame.genres,
+
+          error: "Write the name of the new genres",
+        },
       });
     }
   }
@@ -453,14 +506,15 @@ function NewProduct() {
       return (
         <div>
           <select
-            id="select_plataforma"
+            id="select_genres"
             onChange={(e) => handleGenres(e)}
-            defaultValue="Choose one"
+            multiple={true}
+            defaultValue="Choose"
           >
-            <option disabled>Choose one</option>
+            <option disabled>Choose</option>
 
-            {generos.map((x) => (
-              <option key={x} value={x}>
+            {generos.map((x, i) => (
+              <option key={i} value={x}>
                 {x}
               </option>
             ))}
@@ -470,24 +524,52 @@ function NewProduct() {
               setNewGame({
                 ...newGame,
 
-                genres: { value: "", error: "Write the name of the new genre", creada: true },
+                genres: {
+                  value: "",
+                  error: "Write the name of the new platform",
+                  creada: true,
+                },
               })
             }
           >
-            Create a new genre
-
+            Create a new platform
           </button>
         </div>
       );
     } else {
+      function manuallyAddGenre() {
+        if (newGame.genres.manualValue.length > 2) {
+          setNewGame({
+            ...newGame,
+            genres: {
+              ...newGame.genres,
+              value: [...newGame.genres.value, newGame.genres.manualValue],
+              error: "",
+            },
+          });
+        } else {
+        }
+      }
+      function manuallyModifyGenre(e) {
+        setNewGame({
+          ...newGame,
+          genres: {
+            ...newGame.genres,
+            manualValue: e.target.value,
+          },
+        });
+      }
       return (
         <div>
-          <label htmlFor="genres_crear">Nombre del Genero</label>
+          <label htmlFor="plataforma_crear">Name of the platform</label>
           <input
-            id="genres_crear"
+            id="plataforma_crear"
             type="text"
-            onChange={(e) => handleGenres(e)}
+            onChange={(e) => manuallyModifyGenre(e)}
           ></input>
+          <button type="button" onClick={() => manuallyAddGenre()}>
+            Add this genre
+          </button>
           {newGame.genres.error ? <div>{newGame.genres.error}</div> : null}
           <button
             onClick={() =>
@@ -497,9 +579,7 @@ function NewProduct() {
               })
             }
           >
-
             Choose from those already created
-
           </button>
         </div>
       );
@@ -508,14 +588,12 @@ function NewProduct() {
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div>
-
         <label htmlFor="name">Name:</label>
 
         <input id="name" type="text" onChange={(e) => handleName(e)}></input>
         {newGame.name.error ? <div>{newGame.name.error}</div> : null}
       </div>
       <div>
-
         <label htmlFor="descripcion">Description:</label>
 
         <textarea id="descripcion" onChange={(e) => handleDesc(e)}></textarea>
@@ -524,7 +602,6 @@ function NewProduct() {
         ) : null}
       </div>
       <div>
-
         <label htmlFor="released">Release date:</label>
 
         <input
@@ -535,15 +612,12 @@ function NewProduct() {
         {newGame.released.error ? <div>{newGame.released.error}</div> : null}
       </div>
 
-
       <label htmlFor="image">Background image</label>
-
 
       <input type="file" id="image" onChange={(e) => handleImage(e)}></input>
       {newGame.image.error ? <div>{newGame.image.error}</div> : null}
 
       <div>
-
         <h5>Platforms</h5>
         {plataformasOpciones(newGame.plataforms.creada)}
       </div>
@@ -563,7 +637,6 @@ function NewProduct() {
         {newGame.rating.error ? <div>{newGame.rating.error}</div> : null}
       </div>
       <div>
-
         <label htmlFor="price">Price:</label>
 
         <input
@@ -576,10 +649,7 @@ function NewProduct() {
 
       {buttonSubmit()}
 
-
       {newGame.creado ? <div> Created successfully!</div> : null}
-
-
     </form>
   );
 }

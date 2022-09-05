@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
-import './index.css'
+import "./index.css";
 
 function Filtro() {
   //Declaro el dispatch para aplicar filtros.
@@ -21,8 +21,7 @@ function Filtro() {
         generos.push(d);
       }
     });
-  }); 
-
+  });
 
   videogames.forEach((x) => {
     x.platforms.forEach((d) => {
@@ -162,7 +161,7 @@ function Filtro() {
         <h4>Search by keyword</h4>
 
         <label htmlFor="buscarfiltro">
-        Enter keywords here to search for matches!{" "}
+          Enter keywords here to search for matches!{" "}
         </label>
         <input
           type="text"
@@ -200,18 +199,18 @@ function Filtro() {
       <div>
         <h4>Genre</h4>
         <select
-            id="select_genre"
-            onChange={(e) => handleGenres(e)}
-            defaultValue="All"
-            multiple={true}
-          >
-            <option disabled>All</option>
-            {generos.map((x, i) => (
-              <option key={i} value={x}>
-                {x}
-              </option>
-            ))}
-          </select> 
+          id="select_genre"
+          onChange={(e) => handleGenres(e)}
+          defaultValue="All"
+          multiple={true}
+        >
+          <option disabled>All</option>
+          {generos.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
         {/* {generos.map((x) => {
           return (
             <div key={x}>
@@ -231,17 +230,17 @@ function Filtro() {
       <div>
         <h4>Platform</h4>
         <select
-            id="select_plataforma"
-            onClick={(e) => handlePlatforms(e)}
-            multiple={true} 
-            defaultValue="All"
-          >
-            <option disabled>All</option>
-            {plataforma.map((x, i) => (
-              <option key={i} value={x}>
-                {x}
-              </option>
-            ))}
+          id="select_plataforma"
+          onClick={(e) => handlePlatforms(e)}
+          multiple={true}
+          defaultValue="All"
+        >
+          <option disabled>All</option>
+          {plataforma.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
         </select>
         {/* {plataforma.map((x) => {
           return (
