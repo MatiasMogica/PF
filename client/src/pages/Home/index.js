@@ -35,9 +35,10 @@ export default function Home() {
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
+                        
                                 <Card
                                 key={i}
-                                _id={v._id}
+                                idAPI={v.idAPI}
                                 name={v.name}
                                 image={v.background_image}
                                 platforms={v.platforms}
@@ -45,7 +46,6 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genres={v.genres} />
-                            
                         );
                         })
                     ) : (

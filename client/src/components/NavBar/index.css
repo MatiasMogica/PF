@@ -16,6 +16,9 @@
     padding: 10px;
     text-decoration: none;
 }
+.linkStyle:hover{
+    color:#52C9F1;
+}
 
 .navContainer {
     background-color: #202020;

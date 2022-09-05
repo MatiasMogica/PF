@@ -1,21 +1,22 @@
-.home{
-    background-color: rgba(19, 17, 17, 0.89);
+.home {
+    background-color: #161414;
     width: 100%;
     height: 100%;
     z-index: 100;
 }
 
-body{
-    background-color: rgba(19, 17, 17, 0.89);
+body {
+    background-color: #161414;
 }
 
-.container{
+.container {
     display: flex;
     align-items: normal;
 }
 
-.container_allCards{
+.container_allCards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding:0px;
 }
