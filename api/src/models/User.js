@@ -56,6 +56,6 @@ userSchema.set('toJSON', {
         delete returnedObject._id
         delete returnedObject._v
         delete returnedObject.hashPassword
-    }
+    }})
 
 module.exports = model("User", userSchema)
