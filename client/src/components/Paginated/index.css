@@ -20,13 +20,15 @@
     justify-content: center;
     pointer-events: inherit;
     cursor: pointer; */
+   
+   
     appearance: none;
-  background-color: #FAFBFC;
+  background-color: #1e2227;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-shadow: rgba(30, 36, 43, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
   box-sizing: border-box;
-  color: #24292E;
+  color: #edf0f3;
   cursor: pointer;
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -58,13 +60,15 @@
     justify-content: center;
     pointer-events: inherit;
     cursor: pointer; */
+
+
     appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
   box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
   box-sizing: border-box;
-  color: #24292E;
+  color: #edf0f1;
   cursor: pointer;
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -90,8 +94,10 @@
     font-size-adjust: 20px;
     width: 50px;
     height: 50px; */
-    background-color: #24292E;
-    color: white;
+    
+    
+    background-color: #e7e9eb;
+    color: rgb(46, 43, 43);
     
  
 }
@@ -102,6 +108,9 @@
     font-size-adjust: 20px;
     width: 50px;
     height: 50px; */
-    background-color: #24292E;
-    color: white;
+    
+    
+    background-color: #e3e9ee;
+    color: rgb(34, 31, 31);
 }
+

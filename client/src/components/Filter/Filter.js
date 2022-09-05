@@ -16,9 +16,14 @@ function Filtro() {
   var generos = [];
   var plataforma = [];
   videogames.forEach((x) => {
-    if (!generos.includes(x.genre)) {
-      generos.push(x.genre);
-    }
+    x.genres.forEach((g) => {
+      if(!generos.includes(g)){
+        generos.push(g)
+      }
+    })
+    // if (!generos.includes(x.genre)) {
+    //   generos.push(x.genre);
+    // }
   });
 
   videogames.forEach((x) => {
@@ -196,7 +201,7 @@ function Filtro() {
       </div>
 
       <div>
-        <h3>Genre</h3>
+        <h3>Genres</h3>
         {generos.map((x) => {
           return (
             <div key={x}>
@@ -214,7 +219,7 @@ function Filtro() {
       </div>
 
       <div>
-        <h3>Platform</h3>
+        <h3>Platforms</h3>
         {plataforma.map((x) => {
           return (
             <div key={x}>

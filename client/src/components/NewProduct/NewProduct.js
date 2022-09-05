@@ -15,9 +15,14 @@ function NewProduct() {
   var generos = [];
   var plataforma = [];
   videogames.forEach((x) => {
-    if (!generos.includes(x.genre)) {
-      generos.push(x.genre);
-    }
+    x.genres.forEach((g) => {
+      if(!generos.includes(g)){
+        generos.push(g)
+      }
+    })
+    // if (!generos.includes(x.genre)) {
+    //   generos.push(x.genre);
+    // }
   });
 
   videogames.forEach((x) => {

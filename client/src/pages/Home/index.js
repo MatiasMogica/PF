@@ -24,6 +24,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        console.log(videogames)
         dispatch(getVideogames());
         }, [dispatch]);
 
@@ -47,7 +48,7 @@ export default function Home() {
                                 released={v.released}
                                 rating={v.rating}
                                 price={v.price}
-                                genre={v.genre} />                        
+                                genre={v.genres} />                        
                         );
                         })
                     ) : (
