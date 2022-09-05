@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
-
 import './index.css'
 
 function Filtro() {
@@ -20,14 +19,6 @@ function Filtro() {
     x.genres.forEach((d) => {
       if (!generos.includes(d)) {
         generos.push(d);
-      }
-    });
-  });
-
-  videogames.forEach((x) => {
-    x.platforms.forEach((d) => {
-      if (!plataforma.includes(d)) {
-        plataforma.push(d);
       }
     });
   });

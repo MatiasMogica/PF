@@ -30,11 +30,9 @@ function NewProduct() {
     });
   });
 
-
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-
 
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
@@ -54,7 +52,6 @@ function NewProduct() {
     image: {
       value: "",
       error: "",
-
     },
     plataforms: {
       value: [],
@@ -75,7 +72,6 @@ function NewProduct() {
     price: {
       value: null,
       error: "",
-
     },
     creado: false,
   });
@@ -159,7 +155,6 @@ function NewProduct() {
           ...newGame,
 
           image: { value: "", error: "An error occurred while uploading the image, please try again" },
-
         })
       );
   }
@@ -207,7 +202,6 @@ function NewProduct() {
           value: "",
 
           error: "The price can't be null or negative",
-
         },
       });
     }
@@ -224,12 +218,11 @@ function NewProduct() {
       !newGame.genres.error &&
       !newGame.rating.error &&
       !newGame.price.error ? (
-
       <button className='btn' type="submit">Create</button>
+
     ) : (
       <button className='btn'type="submit" disabled>
         Create
-
       </button>
     );
   }
@@ -278,7 +271,6 @@ function NewProduct() {
           image: {
             value: "",
             error: "Upload an image",
-
           },
           plataforms: {
             value: [],
@@ -299,7 +291,6 @@ function NewProduct() {
           price: {
             value: null,
             error: "It can't be null or negative",
-
           },
           creado: true,
         });
@@ -437,16 +428,33 @@ function NewProduct() {
 
   function handleGenres(e) {
     if (e.target.value.length > 1) {
-      setNewGame({
-        ...newGame,
-        genres: { ...newGame.genres, value: e.target.value, error: "" },
-      });
+      if (newGame.genres.value.includes(e.target.value)) {
+        let indice = newGame.genres.value.indexOf(e.target.value);
+        let newgenres = [...newGame.genres.value];
+        newgenres.splice(indice, 1);
+
+        setNewGame({
+          ...newGame,
+          genres: {
+            ...newGame.genres,
+            value: newgenres,
+            error: "",
+          },
+        });
+      } else {
+        setNewGame({
+          ...newGame,
+          genres: {
+            ...newGame.genres,
+            value: [...newGame.genres.value, e.target.value],
+            error: "",
+          },
+        });
+      }
     } else {
       setNewGame({
         ...newGame,
-
         genres: { ...newGame.genres, value: "", error: "Write the name of the new genre" },
-
       });
     }
   }
@@ -544,10 +552,12 @@ function NewProduct() {
 
         <label htmlFor="name">Name</label>
 
+
         <input className="input" id="name" type="text" onChange={(e) => handleName(e)}></input>
         {newGame.name.error ? <div className="error">{newGame.name.error}</div> : null}
       </div>
-      <div  className="container_input">
+      
+      <div className="container_input">
 
         <label htmlFor="descripcion">Description</label>
 
@@ -556,6 +566,7 @@ function NewProduct() {
           <div className="error">{newGame.description.error}</div>
         ) : null}
       </div>
+      
       <div  className="container_input">
 
         <label htmlFor="released">Release date</label>
@@ -567,7 +578,7 @@ function NewProduct() {
         ></input>
         {newGame.released.error ? <div className="error">{newGame.released.error}</div> : null}
       </div>
-
+      
       <div className="container_input">
       <label htmlFor="image">Background image <hr></hr></label>
       <input  type="file" id="image" onChange={(e) => handleImage(e)}></input>
@@ -594,6 +605,7 @@ function NewProduct() {
         ></input>
         {newGame.rating.error ? <div className="error">{newGame.rating.error}</div> : null}
       </div>
+
       <div className="container_input">
 
         <label htmlFor="price">Price</label>
@@ -608,17 +620,16 @@ function NewProduct() {
       </div>
         <div className="container_btn">
       {buttonSubmit()}
+      
       </div>
 
+
       {newGame.creado ? <div> Created successfully!</div> : null}
-
-
     </form>
     </div>
     </div>
     </div>
   );
 }
-
 
 export default NewProduct;
