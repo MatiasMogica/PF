@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
+
 import './index.css'
 
 function Filtro() {
@@ -14,10 +15,13 @@ function Filtro() {
   //Siendo que siempre todas deben estar visibles y no tienen porque mutar las declaro de forma basica.
   var generos = [];
   var plataforma = [];
+  
   videogames.forEach((x) => {
-    if (!generos.includes(x.genre)) {
-      generos.push(x.genre);
-    }
+    x.genres.forEach((d) => {
+      if (!generos.includes(d)) {
+        generos.push(d);
+      }
+    });
   });
 
   videogames.forEach((x) => {
@@ -80,26 +84,26 @@ function Filtro() {
 
   //Esta funcion se encarga de verificar cuales plataformas el usuario quiere filtrar y si le volvio a hacer click a alguna
   //en particular, removerla.
-  function handlePlataforms(e) {
-    let newplataforms = [...filtro.plataforms];
-    if (newplataforms.includes(e.target.value)) {
-      let indice = newplataforms.indexOf(e.target.value);
-      newplataforms.splice(indice, 1);
+  function handlePlatforms(e) {
+    let newPlataforms = [...filtro.plataforms];
+    if (newPlataforms.includes(e.target.value)) {
+      let indice = newPlataforms.indexOf(e.target.value);
+      newPlataforms.splice(indice, 1);
     } else {
-      newplataforms.push(e.target.value);
+      newPlataforms.push(e.target.value);
     }
-    setFiltro({ ...filtro, plataforms: newplataforms });
+    setFiltro({ ...filtro, plataforms: newPlataforms });
   }
   //Lo mismo que la anterior pero con generos
   function handleGenres(e) {
-    let newgenre = [...filtro.genres];
-    if (newgenre.includes(e.target.value)) {
-      let indice = newgenre.indexOf(e.target.value);
-      newgenre.splice(indice, 1);
+    let newGenre = [...filtro.genres];
+    if (newGenre.includes(e.target.value)) {
+      let indice = newGenre.indexOf(e.target.value);
+      newGenre.splice(indice, 1);
     } else {
-      newgenre.push(e.target.value);
+      newGenre.push(e.target.value);
     }
-    setFiltro({ ...filtro, genres: newgenre });
+    setFiltro({ ...filtro, genres: newGenre });
   }
 
   //
@@ -154,37 +158,38 @@ function Filtro() {
   // Creo que el html es self-explanatory...
   return (
     <div id="filtrobox" className="filtroContainer">
-      <div>
-        <h4>Search by keyword</h4>
+      <div className="container_search">
+        <h3>Search by keyword</h3>
 
         <label htmlFor="buscarfiltro">
         Enter keywords here to search for matches!{" "}
-        </label>
+        </label><br/><br/>
+        <div className="search">
         <input
           type="text"
           id="buscarfiltro"
           placeholder="Search"
           className="buscar"
           onChange={(e) => handleName(e)}
-        ></input>
+        ></input></div>
       </div>
 
       <div>
-        <h4>Release date:</h4>
+        <h3>Release date:</h3>
         <label htmlFor="fecha_min">From: </label>
         <input
           type="date"
           id="fecha_min"
           name="trip-start"
           onChange={(e) => handleReleasedMin(e)}
-        ></input>
+        ></input><br/>
         <label htmlFor="fecha_max">To: </label>
         <input
           type="date"
           id="fecha_max"
           name="trip-start"
           onChange={(e) => handleReleasedMax(e)}
-        ></input>
+        ></input><br/>
         <button onClick={(e) => handleReleased(e)} value="tba">
          Hasn't been announced yet?
         </button>
@@ -195,44 +200,42 @@ function Filtro() {
 
       <div>
         <h4>Genre</h4>
-        {generos.map((x) => {
-          return (
-            <div key={x}>
-              <input
-                type="checkbox"
-                id={x}
-                name={x}
-                value={x}
-                onClick={(e) => handleGenres(e)}
-              ></input>
-              <label htmlFor={x}>{x}</label>
-            </div>
-          );
-        })}
+        <select
+          id="select_genre"
+          onChange={(e) => handleGenres(e)}
+          defaultValue="All"
+          multiple={true}
+        >
+          <option disabled>All</option>
+          {generos.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
         <h4>Platform</h4>
-        {plataforma.map((x) => {
-          return (
-            <div key={x}>
-              <input
-                type="checkbox"
-                id={x}
-                name={x}
-                value={x}
-                onClick={(e) => handlePlataforms(e)}
-              ></input>
-              <label htmlFor={x}>{x}</label>
-            </div>
-          );
-        })}
-      </div>
+        <select
+          id="select_plataforma"
+          onClick={(e) => handlePlatforms(e)}
+          multiple={true}
+          defaultValue="All"
+        >
+          <option disabled>All</option>
+          {plataforma.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
+       </div>
 
       <div>
         <div>
-          <h4>Price</h4>
-          <label htmlFor="precioMin">Price minimum</label>
+          <h3>Price</h3>
+          <label htmlFor="precioMin">Price minimum</label><br/>
           <input
             id="precioMin"
             type="number"
@@ -240,8 +243,8 @@ function Filtro() {
           ></input>
           <button onClick={(e) => handlePrecio(e)} value="sinminimo">
             No minimum?
-          </button>
-          <label htmlFor="precioMax">Price maximum</label>
+          </button><br/>
+          <label htmlFor="precioMax">Price maximum</label><br/>
           <input
             id="precioMax"
             type="number"
@@ -254,16 +257,16 @@ function Filtro() {
       </div>
 
       <div>
-        <h4>Sort by:</h4>
+        <h3>Sort by:</h3>
+        <div className='sortBy'>
+        <button className='button-64'role="button" onClick={(e) => handleOrderAlphabet(e)}><span class="text">Alphabet</span></button>
 
-        <button onClick={(e) => handleOrderAlphabet(e)}>Alphabetical</button>
+        <button className='button-64'role="button"  onClick={(e) => handleOrderRating(e)}><span class="text">Rating</span></button>
 
-        <button onClick={(e) => handleOrderRating(e)}>Rating</button>
-
-        <button onClick={(e) => handleOrderReleasedDate(e)}>
-          Released date
+        <button className='button-64' role="button" onClick={(e) => handleOrderReleasedDate(e)}>
+        <span class="text">Released <br/>date</span>
         </button>
-        <button onClick={(e) => handleOrderPrecio(e)}>Price</button>
+        <button className='button-64'role="button" onClick={(e) => handleOrderPrecio(e)}><span class="text">Price</span></button></div>
       </div>
     </div>
   );

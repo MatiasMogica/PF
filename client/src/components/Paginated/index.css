@@ -92,8 +92,11 @@
     height: 50px; */
     background-color: #24292E;
     color: white;
-    transition: all .90s;
+    
+ 
 }
+
+
 .pagination:hover{
     /* font-size: 55px;
     font-size-adjust: 20px;

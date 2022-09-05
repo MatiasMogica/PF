@@ -1,5 +1,8 @@
 const Game = require('../models/Game.js')
 const axios = require('axios')
+require('dotenv').config()
+
+const {API_KEY} = process.env
 
 const allGames= async(req, res, next) => {
     const {name}=req.query
@@ -28,9 +31,10 @@ const allGames= async(req, res, next) => {
 const detailGame=async(req,res,next)=>{
     const {id}=req.params
 try{
-    const game=await Game.findById(id)
-   
-    game?res.status(200).json(game):res.status(404).json({message: "Game not found"})
+    //const game=await Game.findById(id)
+    const {data}=await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+ 
+    data?res.status(200).json(data):res.status(404).json({message: "Game not found"})
 
 
 }

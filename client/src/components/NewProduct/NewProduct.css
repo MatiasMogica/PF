@@ -1,0 +1,84 @@
+.container_form{
+    
+    background-image:url('https://images.alphacoders.com/789/thumb-1920-789452.jpg');
+    overflow: hidden;    
+}
+.overlay{
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px 80px 20px;
+    min-width: 100%;
+}
+
+.form{
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 20px;
+    min-width: 400px;
+    padding: 50px 0px 50px 0px;
+    
+}
+
+.container_input{
+    margin:0px 0px 40px 0px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 320px;
+   
+    
+}
+.input{
+    background-color: rgba(255,255,255,0.1);
+    border:none;
+    outline: none;
+    height: 40px;
+    color : #fff;
+    width: 300px;
+    align-self: center;
+    
+}
+#image{
+    margin: 30px;
+    
+}
+.btn{
+    width:100px;
+    height:40px;
+    color:#fff;
+    background: linear-gradient(to right,#32d3e3,#01506b);
+    cursor: pointer;
+}
+.btn:disabled{
+    cursor:no-drop;
+    
+}
+
+.container_btn{
+    display: flex;
+    justify-content: center;
+}
+.error{
+    color: red;
+}
+.selector_div{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.btn_simple{
+    height: 40px;
+    width:70px;
+    border-radius: 5px;
+    border:transparent;
+}
+.btn_simple:hover{
+    background-color: rgb(155, 155, 155);
+    border:transparent;
+}

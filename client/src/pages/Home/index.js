@@ -36,7 +36,6 @@ export default function Home() {
     return (
         <div className="home">
             <NavBar />
-            
             <div className="container">
             
             
@@ -94,13 +93,14 @@ export default function Home() {
                                 <Card
                                 key={i}
                                 _id={v._id}
+                                idAPI={v.idAPI}
                                 name={v.name}
                                 image={v.background_image}
                                 platforms={v.platforms}
                                 released={v.released}
                                 rating={v.rating}
                                 price={v.price}
-                                genre={v.genre} />                        
+                                genres={v.genres} />
                         );
                         })
                     ) : (
