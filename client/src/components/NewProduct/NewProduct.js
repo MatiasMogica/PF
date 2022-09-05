@@ -335,7 +335,7 @@ function NewProduct() {
   function plataformasOpciones(c) {
     if (!c) {
       return (
-        <div>
+        <div className="selector_div">
           <select
             id="select_plataforma"
             onChange={(e) => handlePlataforms(e)}
@@ -350,7 +350,7 @@ function NewProduct() {
               </option>
             ))}
           </select>
-          <button
+          <button className="btn_simple"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -362,7 +362,7 @@ function NewProduct() {
               })
             }
           >
-            Create a new platform
+          new platform
 
           </button>
         </div>
@@ -460,7 +460,7 @@ function NewProduct() {
   function genresOpciones(c) {
     if (!c) {
       return (
-        <div>
+        <div className="selector_div">
           <select
             id="select_genres"
             onChange={(e) => handleGenres(e)}
@@ -475,7 +475,7 @@ function NewProduct() {
               </option>
             ))}
           </select>
-          <button
+          <button className="btn_simple"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -488,7 +488,7 @@ function NewProduct() {
               })
             }
           >
-            Create a new platform
+            new genre
           </button>
         </div>
       );
