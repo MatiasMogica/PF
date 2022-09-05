@@ -2,9 +2,14 @@ const { Schema, model } = require('mongoose')
 
 const gameSchema = new Schema(
     {
+        idAPI: {
+          type: String,
+          unique: true
+        },
         name: {
             type: String,
             required: true,
+            unique: true
           },
           background_image: {
             type: String,
@@ -26,9 +31,12 @@ const gameSchema = new Schema(
             type: Number,
             required: true,
           },
-          genre: {
-            type: String
-          },
+          genres: [
+            {
+              type: Schema.Types.String,
+              required: true
+            }
+          ],
           deleted: {
             type: Boolean,
             default: false

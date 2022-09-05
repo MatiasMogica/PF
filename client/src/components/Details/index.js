@@ -10,10 +10,19 @@ export default function Details({details}) {
                 <img alt={details?.name} src={details?.background_image} />
             </div>
             <div>
-                <p> {details?.raiting} </p>
+                <p> {details?.rating} </p>
             </div>
             <div>
                 <p>{details?.description}</p>
+            </div>
+            <div>
+            <p>{details.genres && details.genres.join(', ')}</p>  
+            </div>
+            <div>
+            <p>{details.platforms && details.platforms.join(', ')}</p>  
+            </div>
+            <div>
+                <p> ${details?.price} </p>
             </div>
             <div>
                 <p> {details?.released} </p>

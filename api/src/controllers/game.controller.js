@@ -1,4 +1,5 @@
 const Game = require('../models/Game.js')
+const axios = require('axios')
 
 const allGames= async(req, res, next) => {
     const {name}=req.query
@@ -38,61 +39,68 @@ catch(err){
 }
 //----------------------------------------------------------------
 
-// const genres = [
-//     'action',
-//     'indie',
-//     'adventure',
-//     'rPG',
-//     'strategy',
-//     'shooter',
-//     'casual',
-//     'simulation',
-//     'puzzle',
-//     'arcade',
-//     'platformer',
-//     'racing',
-//     'massively-multiplayer',
-//     'sports',
-//     'fighting',
-//     'family',
-//     'board Games',
-//     'educational',
-//     'card'
-// ]
+const genres = [
+    'action',
+    'indie',
+    'adventure',
+    'rPG',
+    'strategy',
+    'shooter',
+    'casual',
+    'simulation',
+    'puzzle',
+    'arcade',
+    'platformer',
+    'racing',
+    'massively-multiplayer',
+    'sports',
+    'fighting',
+    'family',
+    'board Games',
+    'educational',
+    'card'
+]
 
 
-// router.get('/', async (req, res) => {
+const dataApi = (async (req, res) => {
 
-//     genres.forEach(async (current) =>{
-//         const { data } = await axios.get(`https://api.rawg.io/api/games?key=8f18e9d52c1a4529b8ffba93f32936dd&genres=${current}&page_size=9`)
+    
+        const info1 = await axios.get(`https://api.rawg.io/api/games?key=8f18e9d52c1a4529b8ffba93f32936dd&page_size=40`)
+        const info2 = await axios.get(info1.data.next)
+        const info3 = await axios.get(info2.data.next)
+        const info4 = await axios.get(info3.data.next)
+        const info5 = await axios.get(info4.data.next)
 
-//         data.results.forEach((gamer) =>{
-//             Game.create({
-//                 name: gamer.name,
-//                 background_image: gamer.background_image,
-//                 platforms: gamer.platforms.map( (current) => current.platform.name),
-//                 released: gamer.released,
-//                 rating: gamer.rating,
-//                 price: 0,
-//                 genre: current,
+        const infoTotal = info1.data.results.concat(info2.data.results).concat(info3.data.results).concat(info4.data.results).concat(info5.data.results)
+
+        infoTotal.forEach((gamer) =>{
+            Game.create({
+                idAPI: gamer.id,
+                name: gamer.name,
+                background_image: gamer.background_image,
+                platforms: gamer.platforms.map( (current) => current.platform.name),
+                released: gamer.released,
+                rating: gamer.rating,
+                price: 0,
+                genres: gamer.genres.map( (current) => current.name),
                 
                 
-//             })
-//             console.log(gamer.id)
-//             console.log(gamer.name)
-//             console.log(gamer.released)
-//             console.log(gamer.rating)
-//             console.log(gamer.platforms.map( (current) => current.platform.name))
-//             console.log(current)
-
-//         })
+            })
+            
+            console.log(gamer.released)
+            console.log(gamer.rating)
+            console.log(gamer.platforms.map( (current) => current.platform.name))
+            
+            
+        })
         
-//     })
-    
+        
+        res.status(200).json( { msg: 'Games added succesfully'} )
 
 
     
-// })
+})
+
 
 const newGame = async ( req, res) => {
     const { newGame } = req.body;
@@ -193,5 +201,6 @@ module.exports={
     getGenres,
     postGame,
     putGame,
-    deleteGame
+    deleteGame,
+    dataApi
     }

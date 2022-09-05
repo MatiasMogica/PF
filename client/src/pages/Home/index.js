@@ -6,7 +6,6 @@ import NavBar from "../../components/NavBar/index";
 import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
-import { Link } from "react-router-dom";
 import './index.css'
 
 export default function Home() {
@@ -30,15 +29,12 @@ export default function Home() {
     return (
         <div className="home">
             <NavBar />
-            
             <div className="container">
-            
             <Filtro />
             <div className="container_allCards">
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
-                        
                                 <Card
                                 key={i}
                                 _id={v._id}
@@ -48,7 +44,7 @@ export default function Home() {
                                 released={v.released}
                                 rating={v.rating}
                                 price={v.price}
-                                genre={v.genre} />
+                                genres={v.genres} />
                             
                         );
                         })
