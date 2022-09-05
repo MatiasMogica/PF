@@ -36,7 +36,8 @@ const userSchema = new Schema(
         },
         localStorageToken: {
             type: String
-          },
+        },
+
         deleted: {
             type: Boolean,
             default: false
@@ -54,9 +55,7 @@ userSchema.set('toJSON', {
         returnedObject.id = returnedObject._id
         delete returnedObject._id
         delete returnedObject._v
-
         delete returnedObject.hashPassword
     }
-})
 
 module.exports = model("User", userSchema)

@@ -15,10 +15,13 @@ function Filtro() {
   //Siendo que siempre todas deben estar visibles y no tienen porque mutar las declaro de forma basica.
   var generos = [];
   var plataforma = [];
+  
   videogames.forEach((x) => {
-    if (!generos.includes(x.genre)) {
-      generos.push(x.genre);
-    }
+    x.genres.forEach((d) => {
+      if (!generos.includes(d)) {
+        generos.push(d);
+      }
+    });
   });
 
   videogames.forEach((x) => {
@@ -81,26 +84,26 @@ function Filtro() {
 
   //Esta funcion se encarga de verificar cuales plataformas el usuario quiere filtrar y si le volvio a hacer click a alguna
   //en particular, removerla.
-  function handlePlataforms(e) {
-    let newplataforms = [...filtro.plataforms];
-    if (newplataforms.includes(e.target.value)) {
-      let indice = newplataforms.indexOf(e.target.value);
-      newplataforms.splice(indice, 1);
+  function handlePlatforms(e) {
+    let newPlataforms = [...filtro.plataforms];
+    if (newPlataforms.includes(e.target.value)) {
+      let indice = newPlataforms.indexOf(e.target.value);
+      newPlataforms.splice(indice, 1);
     } else {
-      newplataforms.push(e.target.value);
+      newPlataforms.push(e.target.value);
     }
-    setFiltro({ ...filtro, plataforms: newplataforms });
+    setFiltro({ ...filtro, plataforms: newPlataforms });
   }
   //Lo mismo que la anterior pero con generos
   function handleGenres(e) {
-    let newgenre = [...filtro.genres];
-    if (newgenre.includes(e.target.value)) {
-      let indice = newgenre.indexOf(e.target.value);
-      newgenre.splice(indice, 1);
+    let newGenre = [...filtro.genres];
+    if (newGenre.includes(e.target.value)) {
+      let indice = newGenre.indexOf(e.target.value);
+      newGenre.splice(indice, 1);
     } else {
-      newgenre.push(e.target.value);
+      newGenre.push(e.target.value);
     }
-    setFiltro({ ...filtro, genres: newgenre });
+    setFiltro({ ...filtro, genres: newGenre });
   }
 
   //
@@ -196,40 +199,38 @@ function Filtro() {
       </div>
 
       <div>
-        <h3>Genre</h3>
-        {generos.map((x) => {
-          return (
-            <div key={x}>
-              <input
-                type="checkbox"
-                id={x}
-                name={x}
-                value={x}
-                onClick={(e) => handleGenres(e)}
-              ></input>
-              <label htmlFor={x}>{x}</label>
-            </div>
-          );
-        })}
+        <h4>Genre</h4>
+        <select
+          id="select_genre"
+          onChange={(e) => handleGenres(e)}
+          defaultValue="All"
+          multiple={true}
+        >
+          <option disabled>All</option>
+          {generos.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
-        <h3>Platform</h3>
-        {plataforma.map((x) => {
-          return (
-            <div key={x}>
-              <input
-                type="checkbox"
-                id={x}
-                name={x}
-                value={x}
-                onClick={(e) => handlePlataforms(e)}
-              ></input>
-              <label htmlFor={x}>{x}</label>
-            </div>
-          );
-        })}
-      </div>
+        <h4>Platform</h4>
+        <select
+          id="select_plataforma"
+          onClick={(e) => handlePlatforms(e)}
+          multiple={true}
+          defaultValue="All"
+        >
+          <option disabled>All</option>
+          {plataforma.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
+       </div>
 
       <div>
         <div>
