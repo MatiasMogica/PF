@@ -84,7 +84,7 @@ const dataApi = (async (req, res) => {
                 platforms: gamer.platforms.map( (current) => current.platform.name),
                 released: gamer.released,
                 rating: gamer.rating,
-                price: 0,
+                price: Math.floor(Math.random() * (100 - 5) +5),
                 genres: gamer.genres.map( (current) => current.name),
                 
                 

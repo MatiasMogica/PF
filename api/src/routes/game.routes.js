@@ -10,7 +10,7 @@ const router = Router();
 // Configurar los routers
 
 //Para llenar la base de datos
-// router.get('/games/games', dataApi)
+router.get('/games/games', dataApi)
 //Traer todos los juegos de la base de datos
 router.get('/games',allGames)
 //Acceder al detalle de cada juego en la base de datos

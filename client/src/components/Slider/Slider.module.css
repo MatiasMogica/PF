@@ -1,0 +1,14 @@
+.Container {
+    padding: 30px;
+    background: lightgrey;
+  }
+  
+  .slick-slide img {
+    margin: auto;
+  }
+  .img1 {
+    height: auto;
+    width: 100%;
+  
+    
+  }
