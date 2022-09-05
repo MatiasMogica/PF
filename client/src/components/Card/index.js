@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './index.css'
 
-export default function Card({ name, image, platforms,  genres, released, idAPI, rating, price}){
+export default function Card({ name, image, platforms,  genre, released, _id, rating, price}){
 
     return (
         <div className="Card">
         <div>
         <div className="img_name" >
         <div className="img_container">
-        <Link to={`/videogames/${idAPI}`}>
+        <Link to={`/videogames/${_id}`}>
         <img src={image} alt={name} width='200px' height='220px'/>
         </Link>
         </div>
@@ -18,7 +18,7 @@ export default function Card({ name, image, platforms,  genres, released, idAPI,
         <div className="description">
             <h5>Platforms: {platforms && platforms.join(', ')}</h5>
         
-            <h5>Genre: {genres && genres.join(', ')}</h5>           
+            <h5>Genre: {genre && genre.join(', ')}</h5>           
 
             <h5>Rating: {rating}</h5>
 
