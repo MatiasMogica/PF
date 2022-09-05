@@ -69,9 +69,15 @@ export const videogamesSlice = createSlice({
       }
 
       //Para filtrar por genero (accion,aventura,etc)
-      action.payload.genres.forEach((element) => {
+       action.payload.genres.forEach((element) => {
         filtrado = filtrado.filter((x) => {
-          return x.genre === element;
+          let p = false;
+          for (let i = 0; i < x.genres.length; i++) {
+            if (x.genres[i] === element) {
+              p = true;
+            }
+          }
+          return p;
         });
       });
 
