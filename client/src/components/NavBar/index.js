@@ -13,20 +13,34 @@ export default function NavBar() {
     }
 
     return (
-        <div className={'navContainer'}>
-            <div className="left_container">
-                <button className={'button'} onClick={handleClick}>{"<Go Back"}</button>
-                <Link to="/" className={'linkStyle'}>Home</Link>
-                <Link to="/videogame/add" className={'linkStyle'}>Create game</Link> 
-            </div>
-            <div>
-                <img className="logo" src={image} alt="logo"/>
-            </div>
-            <div className="right_container">
-                <Link  className={'linkStyle'}>Wish List</Link>
-                <Link className={'linkStyle'}>Contact</Link>
-                <Link className={'linkStyle'}>Sign In</Link>
-            </div>
-        </div>
+        // <div className={'navContainer'}>
+        //     <div className="left_container">
+        //         <button className={'button'} onClick={handleClick}>{"<Go Back"}</button>
+        //         <Link to="/" className={'linkStyle'}>Home</Link>
+        //         <Link to="/videogame/add" className={'linkStyle'}>Create game</Link> 
+        //     </div>
+        //     <div>
+        //         <img className="logo" src={image} alt="logo"/>
+        //     </div>
+        //     <div className="right_container">
+        //         <Link  className={'linkStyle'}>Wish List</Link>
+        //         <Link className={'linkStyle'}>Contact</Link>
+        //         <Link className={'linkStyle'}>Sign In</Link>
+        //     </div>
+        // </div>
+
+        <>
+
+            <nav className="navBar">
+                <h2 className="logo">Logo<span>app</span></h2>
+                <ul>
+                    <li><a href=''>Create game</a></li>
+                    <li><a href=''>Wish List</a></li>
+                    <li><a href=''>Contact</a></li>
+                </ul>
+                <button className="boton">Login</button>
+            </nav>
+
+        </>
     )
 }
