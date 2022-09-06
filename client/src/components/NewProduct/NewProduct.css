@@ -66,6 +66,7 @@
 }
 .error{
     color: red;
+    font-size: medium;
 }
 .selector_div{
     display:flex;

@@ -9,7 +9,7 @@ import Paginated from "../../components/Paginated/index"
 import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
 import { Link } from "react-router-dom";
 import './index.css'
-import elden from '../../images/elden.jpg'
+
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'

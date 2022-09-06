@@ -259,14 +259,14 @@ function Filtro() {
       <div>
         <h3>Sort by:</h3>
         <div className='sortBy'>
-        <button className='button-64'role="button" onClick={(e) => handleOrderAlphabet(e)}><span class="text">Alphabet</span></button>
+        <button className='button-64'role="button" onClick={(e) => handleOrderAlphabet(e)}><span className="text">Alphabet</span></button>
 
-        <button className='button-64'role="button"  onClick={(e) => handleOrderRating(e)}><span class="text">Rating</span></button>
+        <button className='button-64'role="button"  onClick={(e) => handleOrderRating(e)}><span className="text">Rating</span></button>
 
         <button className='button-64' role="button" onClick={(e) => handleOrderReleasedDate(e)}>
-        <span class="text">Released <br/>date</span>
+        <span className="text">Released date</span>
         </button>
-        <button className='button-64'role="button" onClick={(e) => handleOrderPrecio(e)}><span class="text">Price</span></button></div>
+        <button className='button-64'role="button" onClick={(e) => handleOrderPrecio(e)}><span className="text">Price</span></button></div>
       </div>
     </div>
   );

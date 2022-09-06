@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { allGames, postGame, detailGame, deleteGame, getGenres, putGame, dataApi }= require('../controllers/game.controller')
+const { allGames, postGame, detailGame, deleteGame, getGenres, putGame, dataApi,API }= require('../controllers/game.controller')
 
 // Importar todos los routers;
 
@@ -8,7 +8,7 @@ const { allGames, postGame, detailGame, deleteGame, getGenres, putGame, dataApi 
 const router = Router();
 
 // Configurar los routers
-
+router.get('/games/API',API)
 //Para llenar la base de datos
 router.get('/games/games', dataApi)
 //Traer todos los juegos de la base de datos
@@ -23,6 +23,7 @@ router.delete('/games/:id', deleteGame)
 router.get('/games/genres', getGenres)
 //Editar un juego ya existente
 router.put('/games/:id', putGame)
+
 
 
 module.exports = router;
