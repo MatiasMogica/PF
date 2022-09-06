@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
 
-import './index.css'
-
 function Filtro() {
   //Declaro el dispatch para aplicar filtros.
   const dispatch = useDispatch();
@@ -15,13 +13,10 @@ function Filtro() {
   //Siendo que siempre todas deben estar visibles y no tienen porque mutar las declaro de forma basica.
   var generos = [];
   var plataforma = [];
-  
   videogames.forEach((x) => {
-    x.genres.forEach((d) => {
-      if (!generos.includes(d)) {
-        generos.push(d);
-      }
-    });
+    if (!generos.includes(x.genre)) {
+      generos.push(x.genre);
+    }
   });
 
   videogames.forEach((x) => {
@@ -84,36 +79,27 @@ function Filtro() {
 
   //Esta funcion se encarga de verificar cuales plataformas el usuario quiere filtrar y si le volvio a hacer click a alguna
   //en particular, removerla.
-  function handlePlatforms(e) {
-    let newPlataforms = [...filtro.plataforms];
-    if (newPlataforms.includes(e.target.value)) {
-      let indice = newPlataforms.indexOf(e.target.value);
-      newPlataforms.splice(indice, 1);
+  function handlePlataforms(e) {
+    let newplataforms = [...filtro.plataforms];
+    if (newplataforms.includes(e.target.value)) {
+      let indice = newplataforms.indexOf(e.target.value);
+      newplataforms.splice(indice, 1);
     } else {
-      newPlataforms.push(e.target.value);
+      newplataforms.push(e.target.value);
     }
-    setFiltro({ ...filtro, plataforms: newPlataforms });
+    setFiltro({ ...filtro, plataforms: newplataforms });
   }
-
-  function handlePlatformDelete(e) {
-    setFiltro({...filtro, plataforms: filtro.plataforms.filter(t => t !== e.target.value)})
-}
-
   //Lo mismo que la anterior pero con generos
   function handleGenres(e) {
-    let newGenre = [...filtro.genres];
-    if (newGenre.includes(e.target.value)) {
-      let indice = newGenre.indexOf(e.target.value);
-      newGenre.splice(indice, 1);
+    let newgenre = [...filtro.genres];
+    if (newgenre.includes(e.target.value)) {
+      let indice = newgenre.indexOf(e.target.value);
+      newgenre.splice(indice, 1);
     } else {
-      newGenre.push(e.target.value);
+      newgenre.push(e.target.value);
     }
-    setFiltro({ ...filtro, genres: newGenre });
+    setFiltro({ ...filtro, genres: newgenre });
   }
-
-  function handleGenreDelete(e) {
-    setFiltro({...filtro, genres: filtro.genres.filter(t => t !== e.target.value)})
-}
 
   //
   function handlePrecio(e) {
@@ -166,135 +152,117 @@ function Filtro() {
 
   // Creo que el html es self-explanatory...
   return (
-    <div id="filtrobox" className="filtroContainer">
-      <div className="container_search">
-        <h3>Search by keyword</h3>
+    <div id="filtrobox">
+      <div>
+        <h4>Buscar por Palabra Clave</h4>
 
         <label htmlFor="buscarfiltro">
-        Enter keywords here to search for matches!{" "}
-        </label><br/><br/>
-        <div className="search">
+          Ingrese aqui palabras clave para buscar coinsidencias!{" "}
+        </label>
         <input
           type="text"
           id="buscarfiltro"
-          placeholder="Search"
+          placeholder="Buscar"
           className="buscar"
           onChange={(e) => handleName(e)}
-        ></input></div>
+        ></input>
       </div>
 
       <div>
-        <h3>Release date:</h3>
-        <label htmlFor="fecha_min">From: </label>
+        <h4>Fecha de Lanzamiento</h4>
+        <label htmlFor="fecha_min">Desde</label>
         <input
           type="date"
           id="fecha_min"
           name="trip-start"
           onChange={(e) => handleReleasedMin(e)}
-        ></input><br/>
-        <label htmlFor="fecha_max">To: </label>
+        ></input>
+        <label htmlFor="fecha_max">Hasta</label>
         <input
           type="date"
           id="fecha_max"
           name="trip-start"
           onChange={(e) => handleReleasedMax(e)}
-        ></input><br/>
+        ></input>
         <button onClick={(e) => handleReleased(e)} value="tba">
-         Hasn't been announced yet?
+          Todavia no esta anunciado?
         </button>
         <button onClick={(e) => handleReleased(e)} value="">
-          All
+          Todos
         </button>
       </div>
 
       <div>
-        <h4>Genre</h4>
-        <select
-          id="select_genre"
-          defaultValue={generos}
-          multiple={true}
-          onClick={(e) => handleGenres(e)}
-        >
-          <option disabled>All</option>
-          {generos.map((x, i) => (
-            <option key={i} value={x}>
-              {x}
-            </option>
-          ))}
-        </select>
-
-          {filtro.genres.map((e, i) => {
-            return (
-              <li key={i}>
-                {e}
-                <button type='button' value={e} onClick={handleGenreDelete}>x</button>
-              </li>
-            )
-          })}
-
+        <h4>Genero</h4>
+        {generos.map((x) => {
+          return (
+            <div key={x}>
+              <input
+                type="checkbox"
+                id={x}
+                name={x}
+                value={x}
+                onClick={(e) => handleGenres(e)}
+              ></input>
+              <label htmlFor={x}>{x}</label>
+            </div>
+          );
+        })}
       </div>
 
       <div>
-        <h4>Platform</h4>
-        <select
-          id="select_plataforma"
-          multiple={true}
-          defaultValue={plataforma}
-          onClick={(e) => handlePlatforms(e)}
-        >
-          <option disabled>All</option>
-          {plataforma.map((x, i) => (
-            <option key={i} value={x}>
-              {x}
-            </option>
-          ))}
-        </select>
-        {filtro.plataforms.map((e, i) => {
-            return (
-              <li key={i}>
-                {e}
-                <button type='button' value={e} onClick={handlePlatformDelete}>x</button>
-              </li>
-            )
-          })}
+        <h4>Plataforma</h4>
+        {plataforma.map((x) => {
+          return (
+            <div key={x}>
+              <input
+                type="checkbox"
+                id={x}
+                name={x}
+                value={x}
+                onClick={(e) => handlePlataforms(e)}
+              ></input>
+              <label htmlFor={x}>{x}</label>
+            </div>
+          );
+        })}
       </div>
 
       <div>
         <div>
-          <h3>Price</h3>
-          <label htmlFor="precioMin">Price minimum</label><br/>
+          <h4>Precio</h4>
+          <label htmlFor="precioMin">Precio Minimo</label>
           <input
             id="precioMin"
             type="number"
             onChange={(e) => handlePrecio(e)}
           ></input>
           <button onClick={(e) => handlePrecio(e)} value="sinminimo">
-            No minimum?
-          </button><br/>
-          <label htmlFor="precioMax">Price maximum</label><br/>
+            Sin Minimo?
+          </button>
+          <label htmlFor="precioMax">Precio Maximo</label>
           <input
             id="precioMax"
             type="number"
             onChange={(e) => handlePrecio(e)}
           ></input>
           <button onClick={(e) => handlePrecio(e)} value="sinmaximo">
-            No maximum?
+            Sin Maximo?
           </button>
         </div>
       </div>
 
       <div>
-        <h3>Sort by:</h3>
-        <div className='sortBy'>
+        <h4>Ordenar Por:</h4>
 
-        <button className='button-64' onClick={(e) => handleOrderAlphabet(e)}><span className="text">Alphabet</span></button>
+        <button onClick={(e) => handleOrderAlphabet(e)}>Alfabético</button>
 
-        <button className='button-64'  onClick={(e) => handleOrderRating(e)}><span className="text">Rating</span></button>
+        <button onClick={(e) => handleOrderRating(e)}>Rating</button>
 
-        <button className='button-64'  onClick={(e) => handleOrderReleasedDate(e)}>
-        <span className="text">Released date</span>
+        <button onClick={(e) => handleOrderReleasedDate(e)}>
+          Fecha de Lanzamiento
         </button>
-        <button className='button-64' onClick={(e) => handleOrderPrecio(e)}><span className="text">Price</span></button></div>
+        <button onClick={(e) => handleOrderPrecio(e)}>Precio</button>
       </div>
     </div>
   );

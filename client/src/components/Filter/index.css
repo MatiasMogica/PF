@@ -61,6 +61,7 @@
 
 /* CSS */
 
+
 /* background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);*/
 
 
@@ -82,6 +83,7 @@
   color: rgb(144, 140, 140);
   
 }
+
 #buscarfiltro:focus{
   border: 8px solid rgb(21, 83, 217);
   margin-top: 22px;
