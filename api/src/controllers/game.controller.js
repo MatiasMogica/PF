@@ -1,8 +1,8 @@
 const Game = require('../models/Game.js')
-//const axios = require('axios')
-//require('dotenv').config()
+const axios = require('axios')
+require('dotenv').config()
 
-//const { API_KEY } = process.env
+const {API_KEY} = process.env
 
 const allGames= async(req, res, next) => {
     const {name}=req.query
@@ -31,10 +31,13 @@ const allGames= async(req, res, next) => {
 const detailGame=async(req,res,next)=>{
     const {id}=req.params
 try{
-    const game=await Game.findById(id)
-    //const {game}=await axios(``)
-   
-    game?res.status(200).json(game):res.status(404).json({message: "Game not found"})
+    //const game=await Game.findById(id)
+    const {data}=await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+    if(!data) return res.status(404).json({msg: 'invalid id'})
+    const gameBD=await Game.findOne({idAPI:id})
+    if(!gameBD)return res.status(404).json({msg: 'game not found'})
+    const game= {name: gameBD.name, background_image: gameBD.background_image,platforms: gameBD.platforms,released:gameBD.released,rating: gameBD.rating,price: gameBD.price,genres: gameBD.genres, description:data.description}
+    return res.status(200).json(game)
 
 
 }
@@ -85,7 +88,7 @@ const dataApi = (async (req, res) => {
                 platforms: gamer.platforms.map( (current) => current.platform.name),
                 released: gamer.released,
                 rating: gamer.rating,
-                price: 0,
+                price: Math.floor(Math.random() * (100 - 5) +5),
                 genres: gamer.genres.map( (current) => current.name),
                 
                 
@@ -197,6 +200,16 @@ const deleteGame=async(req,res,next) => {
     }
 }
 
+const API=async(req,res,next)=>{
+    try{
+        const {data}= await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)
+        
+    return res.status(200).json(data.results)
+    }
+    catch(err){
+        next(err);
+    }
+}
 module.exports={
     allGames,
     newGame,
@@ -206,5 +219,6 @@ module.exports={
     postGame,
     putGame,
     deleteGame,
-    dataApi
+    dataApi,
+    API
     }

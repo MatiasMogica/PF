@@ -6,7 +6,14 @@ import NavBar from "../../components/NavBar/index";
 import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
+import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
+import { Link } from "react-router-dom";
 import './index.css'
+
+import horizon from '../../images/horizon.jpg'
+import stray from '../../images/stray.webp'
+import tsushima from '../../images/tsushima.jpg'
+import zelda from '../../images/zelda.jpg'
 
 export default function Home() {
     let dispatch = useDispatch();
@@ -30,15 +37,63 @@ export default function Home() {
         <div className="home">
             <NavBar />
             <div className="container">
+            
+            
             <Filtro />
+
+            
+
+            
+            
+
+
             <div className="container_allCards">
+
+            
+            <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="7000">
+				<Slide>
+					
+						<img src={zelda} alt=""/>
+					
+					<TextoSlide colorFondo="navy">
+						<p>15% descuento</p>
+					</TextoSlide>
+				</Slide>
+				<Slide>
+					
+						<img src={horizon} alt=""/>
+					
+					<TextoSlide>
+						<p>15% descuento</p>
+					</TextoSlide>
+				</Slide>
+                <Slide>
+					
+						<img src={tsushima} alt=""/>
+					
+					<TextoSlide>
+						<p>15% descuento</p>
+					</TextoSlide>
+				</Slide>
+                <Slide>
+					
+						<img src={stray} alt=""/>
+					
+					<TextoSlide>
+						<p>15% descuento</p>
+					</TextoSlide>
+				</Slide>
+			</Slideshow>
+
+
+
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
-                        
                                 <Card
                                 key={i}
                                 _id={v._id}
+                                idAPI={v.idAPI}
                                 name={v.name}
                                 image={v.background_image}
                                 platforms={v.platforms}

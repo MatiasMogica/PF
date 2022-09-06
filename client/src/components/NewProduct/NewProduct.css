@@ -66,4 +66,20 @@
 }
 .error{
     color: red;
+    font-size: medium;
+}
+.selector_div{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.btn_simple{
+    height: 40px;
+    width:70px;
+    border-radius: 5px;
+    border:transparent;
+}
+.btn_simple:hover{
+    background-color: rgb(155, 155, 155);
+    border:transparent;
 }
