@@ -1,18 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-
-import image from "../../images/logo.png"
+/* import image from "../../images/logo.png" */
 import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink} from './NavBarStyle'
 /* import { useDispatch, useSelector } from "react-redux"; */
 
 
 export default function NavBar() {
-    let history = useHistory();
     /* let {amount} = useSelector((state) => state.cart) */
 
-    function handleClick(){
-        history.goBack()
-    }
 
     return (
         // 
@@ -49,6 +43,9 @@ export default function NavBar() {
             </NavLink>
             <Bars/>
             <NavMenu>
+            <NavLink to="/" >
+                    Home
+                </NavLink>
                 <NavLink to="/videogame/add" >
                     Create
                 </NavLink>
@@ -65,8 +62,6 @@ export default function NavBar() {
             </NavBtnLink>
             </NavBtn>
         </Nav>
-      
-
         </>
     )
 }

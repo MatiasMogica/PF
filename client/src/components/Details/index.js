@@ -22,7 +22,6 @@ export default function Details({details}) {
                 </div>
                 <div>
                 <p>{details?.platforms.length && details.platforms.join(', ') }</p>  
-                 
 
                 </div>
                 <div>

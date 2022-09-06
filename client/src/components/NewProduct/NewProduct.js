@@ -332,15 +332,22 @@ function NewProduct() {
     }
   }
 
+  /* function handlePlatformDelete(e) {
+    setNewGame({...newGame, plataforms: {
+      ...newGame.plataforms,
+      value: [newGame?.plataforms.value.filter(t => t !== e.target.value)]
+    }})
+} */
+
   function plataformasOpciones(c) {
     if (!c) {
       return (
         <div className="selector_div">
           <select
             id="select_plataforma"
-            onChange={(e) => handlePlataforms(e)}
             multiple={true}
-            defaultValue="Choose"
+            defaultValue={plataforma}
+            onClick={(e) => handlePlataforms(e)}
           >
             <option disabled>Choose</option>
 
@@ -350,12 +357,20 @@ function NewProduct() {
               </option>
             ))}
           </select>
+          {newGame?.plataforms.value.map((e, i) => {
+            return (
+              <li key={i}>
+                {e}
+                {/* <button type='button' value={e} onClick={handlePlatformDelete}>x</button> */}
+              </li>
+            )
+          })}
           <button className="btn_simple"
             onClick={() =>
               setNewGame({
                 ...newGame,
                 plataforms: {
-                  value: "",
+                  ...newGame.plataforms,
                   error: "Write the name of the new platform",
                   creada: true,
                 },
@@ -363,7 +378,6 @@ function NewProduct() {
             }
           >
           new platform
-
           </button>
         </div>
       );
@@ -411,7 +425,7 @@ function NewProduct() {
             onClick={() =>
               setNewGame({
                 ...newGame,
-                plataforms: { value: "", error: "", creada: false },
+                plataforms: { ...newGame.plataforms, error: "", creada: false },
               })
             }
           >
@@ -450,9 +464,7 @@ function NewProduct() {
     } else {
       setNewGame({
         ...newGame,
-
         genres: { ...newGame.genres, value: "", error: "Write the name of the new genre" },
-
       });
     }
   }
@@ -462,26 +474,32 @@ function NewProduct() {
       return (
         <div className="selector_div">
           <select
-            id="select_genres"
-            onChange={(e) => handleGenres(e)}
-            multiple={true}
-            defaultValue="Choose"
-          >
-            <option disabled>Choose</option>
-
-            {generos.map((x, i) => (
-              <option key={i} value={x}>
-                {x}
-              </option>
-            ))}
-          </select>
+          id="select_genre"
+          defaultValue={generos}
+          multiple={true}
+          onClick={(e) => handleGenres(e)}
+        >
+          <option disabled>All</option>
+          {generos.map((x, i) => (
+            <option key={i} value={x}>
+              {x}
+            </option>
+          ))}
+        </select>
+        {newGame?.genres.value.map((e, i) => {
+            return (
+              <li key={i}>
+                {e}
+                {/* <button type='button' value={e} onClick={handleGenreDelete}>x</button> */}
+              </li>
+            )
+          })}
           <button className="btn_simple"
             onClick={() =>
               setNewGame({
                 ...newGame,
-
                 genres: {
-                  value: "",
+                  ...newGame.genres,
                   error: "Write the name of the new platform",
                   creada: true,
                 },
@@ -531,7 +549,7 @@ function NewProduct() {
             onClick={() =>
               setNewGame({
                 ...newGame,
-                genres: { value: "", error: "", creada: false },
+                genres: { ...newGame.genres, error: "", creada: false },
               })
             }
           >

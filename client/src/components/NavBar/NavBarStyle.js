@@ -18,10 +18,8 @@ text-decoration:none;
 padding:0 1rem;
 height:100%;
 cursor:pointer;
-
 &.active{
     color:#15cdfc;
-
 }
 `
 export const Bars=styled(FaBars)`
@@ -43,9 +41,7 @@ align-items:center;
 margin-right:-24px;
 @media screen and (max-width: 768px) {
     display:none;
-
 }
-
 `
 
 export const NavBtn=styled.nav`
@@ -55,7 +51,6 @@ margin-right:24px;
 @media screen and (max-width: 768px) {
     display:none;
 }
-
 `
 export const NavBtnLink=styled(Link)`
 border-radius: 4px;
@@ -72,7 +67,5 @@ text-decoration:none;
     transition:all 0.2s ease-in-out;
     background:#fff;
     color:#010606;
-
 }
-
 `

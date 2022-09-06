@@ -120,7 +120,6 @@ width: 80%;
 const ContenedorSlideshow = styled.div`
 display: flex;
 flex-wrap: nowrap;
-
 `;
 
 const Slide = styled.div`
@@ -182,4 +181,4 @@ path {
 ${props => props.derecho ? 'right: 0' : 'left: 0'}
 `;
 
-export {Slideshow, Slide, TextoSlide};
+export {Slideshow, Slide, TextoSlide}; 

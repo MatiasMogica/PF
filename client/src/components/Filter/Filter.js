@@ -94,6 +94,11 @@ function Filtro() {
     }
     setFiltro({ ...filtro, plataforms: newPlataforms });
   }
+
+  function handlePlatformDelete(e) {
+    setFiltro({...filtro, plataforms: filtro.plataforms.filter(t => t !== e.target.value)})
+}
+
   //Lo mismo que la anterior pero con generos
   function handleGenres(e) {
     let newGenre = [...filtro.genres];
@@ -105,6 +110,10 @@ function Filtro() {
     }
     setFiltro({ ...filtro, genres: newGenre });
   }
+
+  function handleGenreDelete(e) {
+    setFiltro({...filtro, genres: filtro.genres.filter(t => t !== e.target.value)})
+}
 
   //
   function handlePrecio(e) {
@@ -202,9 +211,9 @@ function Filtro() {
         <h4>Genre</h4>
         <select
           id="select_genre"
-          onChange={(e) => handleGenres(e)}
-          defaultValue="All"
+          defaultValue={generos}
           multiple={true}
+          onClick={(e) => handleGenres(e)}
         >
           <option disabled>All</option>
           {generos.map((x, i) => (
@@ -213,15 +222,25 @@ function Filtro() {
             </option>
           ))}
         </select>
+
+          {filtro.genres.map((e, i) => {
+            return (
+              <li key={i}>
+                {e}
+                <button type='button' value={e} onClick={handleGenreDelete}>x</button>
+              </li>
+            )
+          })}
+
       </div>
 
       <div>
         <h4>Platform</h4>
         <select
           id="select_plataforma"
-          onClick={(e) => handlePlatforms(e)}
           multiple={true}
-          defaultValue="All"
+          defaultValue={plataforma}
+          onClick={(e) => handlePlatforms(e)}
         >
           <option disabled>All</option>
           {plataforma.map((x, i) => (
@@ -230,7 +249,15 @@ function Filtro() {
             </option>
           ))}
         </select>
-       </div>
+        {filtro.plataforms.map((e, i) => {
+            return (
+              <li key={i}>
+                {e}
+                <button type='button' value={e} onClick={handlePlatformDelete}>x</button>
+              </li>
+            )
+          })}
+      </div>
 
       <div>
         <div>
@@ -259,14 +286,15 @@ function Filtro() {
       <div>
         <h3>Sort by:</h3>
         <div className='sortBy'>
-        <button className='button-64'role="button" onClick={(e) => handleOrderAlphabet(e)}><span className="text">Alphabet</span></button>
 
-        <button className='button-64'role="button"  onClick={(e) => handleOrderRating(e)}><span className="text">Rating</span></button>
+        <button className='button-64' onClick={(e) => handleOrderAlphabet(e)}><span className="text">Alphabet</span></button>
 
-        <button className='button-64' role="button" onClick={(e) => handleOrderReleasedDate(e)}>
+        <button className='button-64'  onClick={(e) => handleOrderRating(e)}><span className="text">Rating</span></button>
+
+        <button className='button-64'  onClick={(e) => handleOrderReleasedDate(e)}>
         <span className="text">Released date</span>
         </button>
-        <button className='button-64'role="button" onClick={(e) => handleOrderPrecio(e)}><span className="text">Price</span></button></div>
+        <button className='button-64' onClick={(e) => handleOrderPrecio(e)}><span className="text">Price</span></button></div>
       </div>
     </div>
   );

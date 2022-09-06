@@ -7,8 +7,7 @@ import Add from './pages/Add';
 function App() {
   return (
     <div>
-      <Switch>
-        
+      <Switch>       
         <Route exact path={'/'} component={Home}/>
         <Route exact path={'/videogames/:id'} component={VideogameDetails} />
         <Route exact path={'/videogame/add'} component={Add} />
