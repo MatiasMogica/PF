@@ -283,11 +283,20 @@ export default function Edit() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const { name, released, image, plataforms, genres, rating, price } =
-      newGame;
+    const {
+      name,
+      released,
+      image,
+      plataforms,
+      genres,
+      rating,
+      price,
+      description,
+    } = newGame;
 
     const arg = {
       name: name.value,
+      description: description.value,
       released: released.value,
       background_image: image.value,
       platforms: plataforms.value,

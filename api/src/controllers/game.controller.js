@@ -189,7 +189,7 @@ const postGame = async (req, res) => {
 const putGame = async (req, res) => {
   const { id } = req.params;
   const game = req.body;
-  console.log(id);
+  console.log(game);
   try {
     const gameUpdate = await Game.updateOne({ _id: id }, { $set: game });
     res.status(200).json({ gameUpdate: gameUpdate });
