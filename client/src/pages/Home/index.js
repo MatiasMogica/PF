@@ -40,17 +40,18 @@ export default function Home() {
             <div className="container">
             
             
-            <Filtro />
-
             
 
             
+
+            
             
 
 
-            <div className="container_allCards">
+           
 
-        
+
+        <div>
             <Slideshow controles={true} autoplay={false} velocidad="5000" intervalo="7000">
 				<Slide>
 					
@@ -85,9 +86,12 @@ export default function Home() {
 					</TextoSlide>
 				</Slide>
 			</Slideshow>
-
-
-
+            </div>
+            <div className="container_filter_cards">
+            <div className="contain_filter">
+            <Filtro />
+            </div>
+              <div className="container_allCards">
                 {videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
@@ -106,8 +110,9 @@ export default function Home() {
                         })
                     ) : (
                     <Spinner />
-                )}
+                )}</div>
                 </div>
+             
             </div>
             <Paginated
             vgPerPage = {vgPerPage}
