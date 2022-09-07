@@ -37,6 +37,9 @@ const gameSchema = new Schema(
               required: true
             }
           ],
+          description:{
+            type: String
+          },
           deleted: {
             type: Boolean,
             default: false

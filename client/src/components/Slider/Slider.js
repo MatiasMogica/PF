@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback } from 'react'
-import elden from '../../images/elden.jpg'
+
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
@@ -23,8 +23,8 @@ const intervaloSlideshow = useRef(null);
 
 const siguiente = useCallback(() => {
     // Comprobamos que el slideshow tenga elementos
-    if(slideshow.current.children.length > 0){
-        console.log('Siguiente')
+    if(slideshow.current && (slideshow.current.children.length > 0)){
+        console.log('lleno', slideshow.current.children)
 
         // Obtenemos el primer elemento del slideshow.
         const primerElemento = slideshow.current.children[0];
@@ -52,11 +52,11 @@ const siguiente = useCallback(() => {
         slideshow.current.addEventListener('transitionend', transicion);
 
     }
+    
 }, [velocidad]);
 
 const anterior = () => {
-    console.log('Anterior');
-    if(slideshow.current.children.length > 0){
+    if(slideshow.current &&(slideshow.current.children.length > 0)){
         // Obtenemos el ultimo elemento del slideshow.
         const index = slideshow.current.children.length - 1;
         const ultimoElemento = slideshow.current.children[index];
@@ -71,6 +71,7 @@ const anterior = () => {
             slideshow.current.style.transform = `translateX(0)`;
         }, 30);
     }
+    
 }
 
 useEffect(() => {
@@ -95,6 +96,7 @@ useEffect(() => {
 
 return (
     <ContenedorPrincipal>
+    
         <ContenedorSlideshow ref={slideshow}>
             {children}
         </ContenedorSlideshow>
