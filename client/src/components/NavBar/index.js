@@ -4,6 +4,11 @@ import image from "../../images/logo.png";
 import { useSelector } from "react-redux";
 import "./index.css";
 
+import React from "react";
+import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink,NavLinkLogo} from './NavBarStyle'
+
+
+
 export default function NavBar() {
   let history = useHistory();
   const user = useSelector((state) => state.videogames.logIn);
@@ -11,6 +16,7 @@ export default function NavBar() {
   function handleClick() {
     history.goBack();
   }
+
 
   return (
     <div className={"navContainer"}>
@@ -48,3 +54,4 @@ export default function NavBar() {
     </div>
   );
 }
+

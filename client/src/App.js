@@ -12,6 +12,7 @@ function App() {
   const user = useSelector((state) => state.videogames.logIn);
   return (
     <div>
+
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
@@ -22,6 +23,7 @@ function App() {
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
+
         <Route component={Error404} />
       </Switch>
     </div>
