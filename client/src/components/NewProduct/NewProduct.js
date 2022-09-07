@@ -33,48 +33,48 @@ function NewProduct() {
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-const initialState={
-  name: {
-    value: "",
 
-    error: "",
-  },
-  description: {
-    value: "",
-    error: "",
-  },
-  released: {
-    value: "",
-    error: "",
-  },
-  image: {
-    value: "",
-    error: "",
-  },
-  plataforms: {
-    value: [],
-    creada: false,
-    manualValue: "",
-    error: "",
-  },
-  genres: {
-    value: [],
-    creada: false,
-    manualValue: "",
-    error: "",
-  },
-  rating: {
-    value: null,
-    error: "",
-  },
-  price: {
-    value: null,
-    error: "",
-  },
-  creado: false,
-}
   //Esta variable es el chequeo del formulario y guardado de datos.
-  const [newGame, setNewGame] = useState(initialState);
+  const [newGame, setNewGame] = useState({
+    name: {
+      value: "",
+  
+      error: "",
+    },
+    description: {
+      value: "",
+      error: "",
+    },
+    released: {
+      value: "",
+      error: "",
+    },
+    image: {
+      value: "",
+      error: "",
+    },
+    plataforms: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    genres: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    rating: {
+      value: null,
+      error: "",
+    },
+    price: {
+      value: null,
+      error: "",
+    },
+    creado: false,
+  });
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
 
@@ -225,9 +225,7 @@ const initialState={
   //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
-    for(const property in newGame){
-      if(newGame[property].error)return  
-    }
+
 
     const { name, released, image, plataforms, genres, rating, price,description} =
       newGame;
@@ -244,7 +242,8 @@ const initialState={
     };
 
     console.log(arg);
-
+    
+    
     return fetch(`http://localhost:3001/games`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

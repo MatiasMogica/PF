@@ -38,14 +38,14 @@ export default function NavBar() {
             </div>
 </div>*/}
         <Nav>
-            <NavLinkLogo to='/home'>
+            <NavLinkLogo to='/'>
                 <h1>ZTEAM</h1>
             </NavLinkLogo>
             <Bars/>
             <NavMenu>
-            <NavLink to="/home" >
-                    Home
-                </NavLink>
+            
+                    
+                
                 <NavLink to="/videogame/add" >
                     Create
                 </NavLink>
