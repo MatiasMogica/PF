@@ -9,7 +9,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
         <div>
         <div className="img_name" >
         <div className="img_container">
-        <Link to={`/videogames/${idAPI}`}>
+        <Link to={`/videogames/${_id}`}>
         <img src={image} alt={name} width='200px' height='180px'/>
         </Link>
         </div>

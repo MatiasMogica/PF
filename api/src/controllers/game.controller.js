@@ -27,44 +27,29 @@ const allGames = async (req, res, next) => {
   }
 };
 //----------------------------------------------------------------
-const detailGame = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    const juego = await Game.findById(id);
-    if (!juego) return res.status(404).json({ msg: "Games not found" });
-    if (!juego.idAPI) {
-      const game = {
-        name: juego.name,
-        background_image: juego.background_image,
-        platforms: juego.platforms,
-        released: juego.released,
-        rating: juego.rating,
-        price: juego.price,
-        genres: juego.genres,
-        description: juego.description,
-      };
-      return res.status(200).json(game);
+
+const detailGame=async(req,res,next)=>{
+    const {id}=req.params
+try{
+    const juego=await Game.findById(id)
+    if(!juego)return res.status(404).json({msg: 'Games not found'})
+    if(!juego.idAPI){
+        const game= {name: juego.name, background_image: juego.background_image,platforms:juego.platforms,released:juego.released,rating: juego.rating,price: juego.price,genres: juego.genres, description:juego.description}
+    return res.status(200).json(game)
     }
+    
 
-    const { data } = await axios(
-      `https://api.rawg.io/api/games/${juego.idAPI}?key=${API_KEY}`
-    );
+   const {data}=await axios(`https://api.rawg.io/api/games/${juego.idAPI}?key=${API_KEY}`)
+    
+    const game= {name: juego.name, background_image: juego.background_image,platforms: juego.platforms,released:juego.released,rating: juego.rating,price: juego.price,genres: juego.genres, description:data.description}
+    return res.status(200).json(game)
 
-    const game = {
-      name: juego.name,
-      background_image: juego.background_image,
-      platforms: juego.platforms,
-      released: juego.released,
-      rating: juego.rating,
-      price: juego.price,
-      genres: juego.genres,
-      description: data.description,
-    };
-    return res.status(200).json(game);
-  } catch (err) {
-    next(err);
-  }
-};
+
+}
+catch(err){
+    next(err)}
+}
+
 //----------------------------------------------------------------
 
 const genres = [
