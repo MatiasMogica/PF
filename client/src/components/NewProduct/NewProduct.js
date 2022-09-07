@@ -73,7 +73,46 @@ const initialState={
   creado: false,
 }
   //Esta variable es el chequeo del formulario y guardado de datos.
-  const [newGame, setNewGame] = useState(initialState);
+  const [newGame, setNewGame] = useState({
+    name: {
+      value: "",
+  
+      error: "",
+    },
+    description: {
+      value: "",
+      error: "",
+    },
+    released: {
+      value: "",
+      error: "",
+    },
+    image: {
+      value: "",
+      error: "",
+    },
+    plataforms: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    genres: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    rating: {
+      value: null,
+      error: "",
+    },
+    price: {
+      value: null,
+      error: "",
+    },
+    creado: false,
+  });
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
 
@@ -158,12 +197,25 @@ const initialState={
   }
 
   function handleRating(e) {
-    if (e.target.value >= 0 && e.target.value <= 5) {
+    if(e.target.value===''){
+      return setNewGame({
+        ...newGame,
+        rating: {
+          value: "",
+
+          error: "rating can't be null",
+
+        },
+      });
+  }
+    if (e.target.value >0 && e.target.value <= 5) {
       setNewGame({
         ...newGame,
         rating: { value: e.target.value, error: "" },
       });
-    } else {
+    } 
+   
+    else {
       setNewGame({
         ...newGame,
         rating: {
@@ -186,7 +238,6 @@ const initialState={
           ...newGame,
           price: {
             value: "",
-
             error: "The price can't be null or negative",
           },
         });
@@ -205,7 +256,7 @@ const initialState={
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
     console.log(newGame);
-    return !newGame.name.error &&
+    return  !newGame.name.error &&
       !newGame.description.error &&
       !newGame.released.error &&
       !newGame.image.error &&
@@ -226,9 +277,7 @@ const initialState={
   //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
-    for(const property in newGame){
-      if(newGame[property].error)return  
-    }
+
 
     const { name, released, image, plataforms, genres, rating, price,description} =
       newGame;
@@ -245,7 +294,8 @@ const initialState={
     };
 
     console.log(arg);
-
+    
+    
     return fetch(`http://localhost:3001/games`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

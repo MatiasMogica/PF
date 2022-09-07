@@ -1,57 +1,44 @@
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import image from "../../images/logo.png";
 import { useSelector } from "react-redux";
 import "./index.css";
-
 import React from "react";
 import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink,NavLinkLogo} from './NavBarStyle'
 
 
 
 export default function NavBar() {
-  let history = useHistory();
+
   const user = useSelector((state) => state.videogames.logIn);
 
-  function handleClick() {
-    history.goBack();
-  }
-
-
-  return (
-    <div className={"navContainer"}>
-      <div className="left_container">
-        <button className={"button"} onClick={handleClick}>
-          {"<Go Back"}
-        </button>
-        <Link to="/" className={"linkStyle"}>
-          Home
-        </Link>
-        <Link to="/videogame/add" className={"linkStyle"}>
-          Create game
-        </Link>
-      </div>
-      <div>
-        <img className="logo" src={image} alt="logo" />
-      </div>
-      <div className="right_container">
-        <Link className={"linkStyle"}>Contact</Link>
-        {user.status ? (
-          <div className="logedin">
-            <Link className={"linkStyle"}>Wish List</Link>
-            <Link to="/user" className={"linkStyle"}>
+        <Nav>
+            <NavLinkLogo to='/'>
+                <h1>ZTEAM</h1>
+            </NavLinkLogo>
+            <Bars/>
+            <NavMenu>                                  
+                <NavLink to="/videogame/add" >
+                    Create
+                </NavLink>
+                <NavLink to="/videogame/signUp" >
+                    Sign Up
+                </NavLink>               
+            </NavMenu>
+            <NavBtn>
+            {user.status ? (
+            <NavLink to="/videogame/wishList" >
+                    WishList
+            </NavLink>
+            <NavLink to="/user">
               {user.user}
-            </Link>
-          </div>
+            </NavLink>
         ) : (
-          <div className="right_container">
-            <Link to="/login" className={"linkStyle"}>
+          <NavBtn>
+            <NavBtnLink to="/login">
               Sign In
-            </Link>
-          </div>
+            </NavBtnLink>
+          </NavBtn>
         )}
-      </div>
-    </div>
-  );
+        </Nav>
+        </>
+    )
 }
-
