@@ -1,6 +1,6 @@
 import React from "react";
 /* import image from "../../images/logo.png" */
-import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink} from './NavBarStyle'
+import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink,NavLinkLogo} from './NavBarStyle'
 /* import { useDispatch, useSelector } from "react-redux"; */
 
 
@@ -38,12 +38,12 @@ export default function NavBar() {
             </div>
 </div>*/}
         <Nav>
-            <NavLink to='/'>
+            <NavLinkLogo to='/home'>
                 <h1>ZTEAM</h1>
-            </NavLink>
+            </NavLinkLogo>
             <Bars/>
             <NavMenu>
-            <NavLink to="/" >
+            <NavLink to="/home" >
                     Home
                 </NavLink>
                 <NavLink to="/videogame/add" >
