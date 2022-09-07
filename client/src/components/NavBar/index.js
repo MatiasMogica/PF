@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import image from "../../images/logo.png";
 import { useSelector } from "react-redux";
 import "./index.css";
+import LogOut from "../LogOut/LogOut";
 
 export default function NavBar() {
   let history = useHistory();
@@ -16,13 +17,10 @@ export default function NavBar() {
     <div className={"navContainer"}>
       <div className="left_container">
         <button className={"button"} onClick={handleClick}>
-          {"<Go Back"}
+          {"Go Back"}
         </button>
         <Link to="/" className={"linkStyle"}>
           Home
-        </Link>
-        <Link to="/videogame/add" className={"linkStyle"}>
-          Create game
         </Link>
       </div>
       <div>
@@ -33,9 +31,21 @@ export default function NavBar() {
         {user.status ? (
           <div className="logedin">
             <Link className={"linkStyle"}>Wish List</Link>
-            <Link to="/user" className={"linkStyle"}>
-              {user.user}
-            </Link>
+            <div className="userMenu">
+              <Link to="/user" className={"linkStyle"}>
+                {user.user}
+              </Link>
+              <div className="dropdownmenu">
+                <div className="LogOut">
+                  <LogOut></LogOut>
+                </div>
+                {user.admin ? (
+                  <Link to="/adminPanel" className="adminpanel">
+                    Admin Panel
+                  </Link>
+                ) : null}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="right_container">

@@ -9,6 +9,17 @@
     text-decoration: none;
 }
 
+.dropdownmenu{
+    display: none;
+}
+.userMenu:hover .dropdownmenu{
+  display: inline;
+  position: fixed;
+  background-color: white;
+  padding: 1em;
+  z-index: 99;
+}
+
 .linkStyle {
     color: white;
     display: block;
