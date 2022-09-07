@@ -6,7 +6,7 @@
   justify-content: left;
   padding: 10px 20px 30px 20px;
   align-items: left;
-  margin: 2rem;
+  margin: 0;
   
 }
 .container_search{
@@ -44,7 +44,7 @@
   border:0;
   outline: none;
   font-size:1.2rem;
-  
+  color:#fff;
 }
 #buscarfiltro:hover{
   color:#fff;

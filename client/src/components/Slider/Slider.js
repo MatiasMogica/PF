@@ -18,13 +18,15 @@ const Slideshow = ({
     velocidad="500",
     intervalo="5000"
 }) => {
+
 const slideshow = useRef(null);
 const intervaloSlideshow = useRef(null);
 
 const siguiente = useCallback(() => {
     // Comprobamos que el slideshow tenga elementos
+    
     if(slideshow.current.children.length > 0){
-        console.log('Siguiente')
+
 
         // Obtenemos el primer elemento del slideshow.
         const primerElemento = slideshow.current.children[0];

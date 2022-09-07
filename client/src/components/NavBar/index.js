@@ -1,17 +1,14 @@
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import image from "../../images/logo.png";
 import { useSelector } from "react-redux";
 import "./index.css";
 import LogOut from "../LogOut/LogOut";
+import React from "react";
+import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink,NavLinkLogo} from './NavBarStyle'
 
 export default function NavBar() {
-  let history = useHistory();
+
   const user = useSelector((state) => state.videogames.logIn);
 
-  function handleClick() {
-    history.goBack();
-  }
 
   return (
     <div className={"navContainer"}>
@@ -47,14 +44,15 @@ export default function NavBar() {
               </div>
             </div>
           </div>
+
         ) : (
-          <div className="right_container">
-            <Link to="/login" className={"linkStyle"}>
+          <NavBtn>
+            <NavBtnLink to="/login">
               Sign In
-            </Link>
-          </div>
+            </NavBtnLink>
+          </NavBtn>
         )}
-      </div>
-    </div>
-  );
+        </Nav>
+        </>
+    )
 }
