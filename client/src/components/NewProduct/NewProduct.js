@@ -33,48 +33,48 @@ function NewProduct() {
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
+const initialState={
+  name: {
+    value: "",
 
+    error: "",
+  },
+  description: {
+    value: "",
+    error: "",
+  },
+  released: {
+    value: "",
+    error: "",
+  },
+  image: {
+    value: "",
+    error: "",
+  },
+  plataforms: {
+    value: [],
+    creada: false,
+    manualValue: "",
+    error: "",
+  },
+  genres: {
+    value: [],
+    creada: false,
+    manualValue: "",
+    error: "",
+  },
+  rating: {
+    value: null,
+    error: "",
+  },
+  price: {
+    value: null,
+    error: "",
+  },
+  creado: false,
+}
   //Esta variable es el chequeo del formulario y guardado de datos.
-  const [newGame, setNewGame] = useState({
-    name: {
-      value: "",
-
-      error: "",
-    },
-    description: {
-      value: "",
-      error: "",
-    },
-    released: {
-      value: "",
-      error: "",
-    },
-    image: {
-      value: "",
-      error: "",
-    },
-    plataforms: {
-      value: [],
-      creada: false,
-      manualValue: "",
-      error: "Write the name of the new platform",
-    },
-    genres: {
-      value: [],
-      creada: false,
-      manualValue: "",
-      error: "Write the name of the new genre",
-    },
-    rating: {
-      value: null,
-      error: "",
-    },
-    price: {
-      value: null,
-      error: "",
-    },
-    creado: false,
-  });
+  const [newGame, setNewGame] = useState(initialState);
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
 
@@ -225,10 +225,13 @@ function NewProduct() {
   //Esto es lo que sucedera cuando se envie el formulario
   function handleSubmit(e) {
     e.preventDefault();
+    for(const property in newGame){
+      if(newGame[property].error)return  
+    }
 
-    const { name, released, image, plataforms, genres, rating, price } =
+    const { name, released, image, plataforms, genres, rating, price,description} =
       newGame;
-
+ 
     const arg = {
       name: name.value,
       released: released.value,
@@ -237,6 +240,7 @@ function NewProduct() {
       genres: genres.value,
       rating: parseInt(rating.value),
       price: parseInt(price.value),
+      description:description.value
     };
 
     console.log(arg);
@@ -253,41 +257,41 @@ function NewProduct() {
           name: {
             value: "",
 
-            error: "It should have between 2 and 50 characters",
+            error: "",
           },
           description: {
             value: "",
-            error: "It should have between 20 and 500 characters",
+            error: "",
           },
           released: {
             value: "",
-            error: "Please select the release date",
+            error: "",
           },
           image: {
             value: "",
-            error: "Upload an image",
+            error: "",
 
           },
           plataforms: {
             value: [],
             creada: false,
             manualValue: "",
-            error: "Write the name of the new platform",
+            error: "",
 
           },
           genres: {
             value: [],
             creada: false,
             manualValue: "",
-            error: "Write the name of the new genre",
+            error: "",
           },
           rating: {
             value: null,
-            error: "It should be between 1 and 5",
+            error: "",
           },
           price: {
             value: null,
-            error: "It can't be null or negative",
+            error: "",
           },
           creado: true,
         });
@@ -641,7 +645,7 @@ function NewProduct() {
       </div>
 
 
-      {newGame.creado ? <div> Created successfully!</div> : null}
+      {newGame.creado ? <div className="container_success"> Created successfully!</div> : null}
 
 
     </form>

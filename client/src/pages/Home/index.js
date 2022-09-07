@@ -10,6 +10,7 @@ import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
 import { Link } from "react-router-dom";
 import './index.css'
 
+
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
@@ -18,13 +19,13 @@ import zelda from '../../images/zelda.jpg'
 export default function Home() {
     let dispatch = useDispatch();
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
-
+  
     const [currentPage, setCurrentPage] = useState(1)
     const [vgPerPage, setVgPerPage] = useState(9) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
     const indexOfLastVg = currentPage * vgPerPage
     const indexOfFirstVg = indexOfLastVg - vgPerPage
     const currentVg = videogames.slice(indexOfFirstVg, indexOfLastVg)
-
+   
     const paginated = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
@@ -49,7 +50,7 @@ export default function Home() {
 
             <div className="container_allCards">
 
-            
+        
             <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="7000">
 				<Slide>
 					

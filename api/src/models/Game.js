@@ -5,6 +5,9 @@ const gameSchema = new Schema(
     idAPI: {
       type: String,
     },
+    description:{
+      type: String
+    },
     name: {
       type: String,
       required: true,

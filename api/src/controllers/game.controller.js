@@ -33,10 +33,10 @@ const detailGame=async(req,res,next)=>{
 try{
     //const game=await Game.findById(id)
     const {data}=await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-    if(!data) return res.status(404).json({msg: 'invalid id'})
+   
     const gameBD=await Game.findOne({idAPI:id})
     if(!gameBD)return res.status(404).json({msg: 'game not found'})
-    const game= {name: gameBD.name, background_image: gameBD.background_image,platforms: gameBD.platforms,released:gameBD.released,rating: gameBD.rating,price: gameBD.price,genres: gameBD.genres, description:data.description}
+    const game= {name: gameBD.name, background_image: gameBD.background_image,platforms: gameBD.platforms,released:gameBD.released,rating: gameBD.rating,price: gameBD.price,genres: gameBD.genres, description:data?data.description:gameBD.description}
     return res.status(200).json(game)
 
 
