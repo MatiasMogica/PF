@@ -51,7 +51,7 @@ export default function Home() {
             <div className="container_allCards">
 
         
-            <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="7000">
+            <Slideshow controles={true} autoplay={false} velocidad="5000" intervalo="7000">
 				<Slide>
 					
 						<img src={zelda} alt=""/>
