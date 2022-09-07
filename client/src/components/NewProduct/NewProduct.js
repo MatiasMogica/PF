@@ -33,7 +33,46 @@ function NewProduct() {
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
+const initialState={
+  name: {
+    value: "",
 
+    error: "",
+  },
+  description: {
+    value: "",
+    error: "",
+  },
+  released: {
+    value: "",
+    error: "",
+  },
+  image: {
+    value: "",
+    error: "",
+  },
+  plataforms: {
+    value: [],
+    creada: false,
+    manualValue: "",
+    error: "",
+  },
+  genres: {
+    value: [],
+    creada: false,
+    manualValue: "",
+    error: "",
+  },
+  rating: {
+    value: null,
+    error: "",
+  },
+  price: {
+    value: null,
+    error: "",
+  },
+  creado: false,
+}
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
     name: {
@@ -157,12 +196,25 @@ function NewProduct() {
   }
 
   function handleRating(e) {
-    if (e.target.value >= 0 && e.target.value <= 5) {
+    if(e.target.value===''){
+      return setNewGame({
+        ...newGame,
+        rating: {
+          value: "",
+
+          error: "rating can't be null",
+
+        },
+      });
+  }
+    if (e.target.value >0 && e.target.value <= 5) {
       setNewGame({
         ...newGame,
         rating: { value: e.target.value, error: "" },
       });
-    } else {
+    } 
+   
+    else {
       setNewGame({
         ...newGame,
         rating: {
@@ -187,7 +239,7 @@ function NewProduct() {
           price: {
             value: "",
   
-            error: "The price can't be null or negative",
+            error: "The price can't be null",
   
           },
         });
@@ -206,14 +258,14 @@ function NewProduct() {
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
     console.log(newGame);
-    return !newGame.name.error &&
+    return  !newGame.name.error &&
       !newGame.description.error &&
       !newGame.released.error &&
       !newGame.image.error &&
       !newGame.plataforms.error &&
       !newGame.genres.error &&
       !newGame.rating.error &&
-      !newGame.price.error ? (
+      !newGame.price.error? (
       <button className='btn' type="submit">Create</button>
     ) : (
       <button className='btn'type="submit" disabled>
