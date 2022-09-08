@@ -6,6 +6,7 @@ export const videogamesSlice = createSlice({
     videogames: [],
     details: {},
     videogamesFiltrados: [],
+    logIn: { status: false },
   },
   reducers: {
     getAllVideogames: (state, action) => {
@@ -16,7 +17,7 @@ export const videogamesSlice = createSlice({
       state.details = action.payload;
     },
     clearVideogame: (state) => {
-        state.details = {}
+      state.details = {};
     },
     filterVideogames: (state, action) => {
       //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
@@ -69,7 +70,7 @@ export const videogamesSlice = createSlice({
       }
 
       //Para filtrar por genero (accion,aventura,etc)
-       action.payload.genres.forEach((element) => {
+      action.payload.genres.forEach((element) => {
         filtrado = filtrado.filter((x) => {
           let p = false;
           for (let i = 0; i < x.genres.length; i++) {
@@ -162,10 +163,27 @@ export const videogamesSlice = createSlice({
       //pero ambos funcionan
       return { ...state, videogamesFiltrados: filtrado };
     },
+    logIn: (state, action) => {
+      return {
+        ...state,
+        logIn: {
+          status: true,
+          user: action.payload.username,
+          id: action.payload.id,
+          email: action.payload.email,
+          admin: action.payload.email,
+        },
+      };
+    },
   },
 });
 
-export const { getAllVideogames, getVideogameById, filterVideogames, clearVideogame } =
-  videogamesSlice.actions;
-  
+export const {
+  getAllVideogames,
+  getVideogameById,
+  filterVideogames,
+  clearVideogame,
+  logIn,
+} = videogamesSlice.actions;
+
 export default videogamesSlice.reducer;

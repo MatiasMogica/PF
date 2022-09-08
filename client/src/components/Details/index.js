@@ -18,10 +18,11 @@ export default function Details({details}) {
                     <p className="html"dangerouslySetInnerHTML={{ __html:details?.description}}/>
                 </div>
                 <div>
-                    <p>{details.genres && details.genres.join(', ')}</p>  
+                    <p>{details?.genres.length && details.genres.join(', ') }</p>  
                 </div>
                 <div>
-                    <p>{details.platforms && details.platforms.join(', ')}</p>  
+                <p>{details?.platforms.length && details.platforms.join(', ') }</p>  
+
                 </div>
                 <div>
                     <p className="price"> ${details?.price} </p>

@@ -31,10 +31,18 @@ const allGames= async(req, res, next) => {
 const detailGame=async(req,res,next)=>{
     const {id}=req.params
 try{
-    //const game=await Game.findById(id)
-    const {data}=await axios(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
- 
-    data?res.status(200).json(data):res.status(404).json({message: "Game not found"})
+    const juego=await Game.findById(id)
+    if(!juego)return res.status(404).json({msg: 'Games not found'})
+    if(!juego.idAPI){
+        const game= {name: juego.name, background_image: juego.background_image,platforms:juego.platforms,released:juego.released,rating: juego.rating,price: juego.price,genres: juego.genres, description:juego.description}
+    return res.status(200).json(game)
+    }
+    
+
+   const {data}=await axios(`https://api.rawg.io/api/games/${juego.idAPI}?key=${API_KEY}`)
+    
+    const game= {name: juego.name, background_image: juego.background_image,platforms: juego.platforms,released:juego.released,rating: juego.rating,price: juego.price,genres: juego.genres, description:data.description}
+    return res.status(200).json(game)
 
 
 }
@@ -196,6 +204,16 @@ const deleteGame=async(req,res,next) => {
     }
 }
 
+const API=async(req,res,next)=>{
+    try{
+        const {data}= await axios(`https://api.rawg.io/api/games?key=${API_KEY}`)
+        
+    return res.status(200).json(data.results)
+    }
+    catch(err){
+        next(err);
+    }
+}
 module.exports={
     allGames,
     newGame,
@@ -205,5 +223,6 @@ module.exports={
     postGame,
     putGame,
     deleteGame,
-    dataApi
+    dataApi,
+    API
     }

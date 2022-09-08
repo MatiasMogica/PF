@@ -66,6 +66,7 @@
 }
 .error{
     color: red;
+    font-size: medium;
 }
 .selector_div{
     display:flex;
@@ -81,4 +82,8 @@
 .btn_simple:hover{
     background-color: rgb(155, 155, 155);
     border:transparent;
+}
+.container_success{
+    text-align: center;
+    margin:10px 0px 10px 0px;
 }

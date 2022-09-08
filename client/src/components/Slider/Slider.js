@@ -18,13 +18,14 @@ const Slideshow = ({
     velocidad="500",
     intervalo="5000"
 }) => {
+
 const slideshow = useRef(null);
 const intervaloSlideshow = useRef(null);
 
 const siguiente = useCallback(() => {
     // Comprobamos que el slideshow tenga elementos
     if(slideshow.current && (slideshow.current.children.length > 0)){
-        console.log('lleno', slideshow.current.children)
+        
 
         // Obtenemos el primer elemento del slideshow.
         const primerElemento = slideshow.current.children[0];
@@ -122,7 +123,6 @@ width: 80%;
 const ContenedorSlideshow = styled.div`
 display: flex;
 flex-wrap: nowrap;
-
 `;
 
 const Slide = styled.div`
@@ -184,4 +184,4 @@ path {
 ${props => props.derecho ? 'right: 0' : 'left: 0'}
 `;
 
-export {Slideshow, Slide, TextoSlide};
+export {Slideshow, Slide, TextoSlide}; 
