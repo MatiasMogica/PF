@@ -60,3 +60,24 @@ export default function NavBar() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+// <>
+
+        //     <nav className="navBar">
+        //         <h2 className="logo">Logo<span className="span">app</span></h2>
+        //         <ul>
+        //             <li><a href=''>Create game</a></li>
+        //             <li><a href=''>Wish List</a></li>
+        //             <li><a href=''>Contact</a></li>
+        //         </ul>
+        //         <button className="boton">Login</button>
+        //     </nav>
+
+        // </>

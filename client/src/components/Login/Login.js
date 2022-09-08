@@ -37,11 +37,7 @@ function Login() {
             error: data.error,
           });
         } else {
-          const logindata = {
-            userData: data.userForToken,
-            token: data.token,
-          };
-          dispatch(logIn(logindata));
+          dispatch(logIn(data.userForToken));
         }
       });
   }
