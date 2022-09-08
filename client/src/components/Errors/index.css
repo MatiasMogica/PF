@@ -1,20 +1,11 @@
-.container {
+.errorContainer {
     text-align: center;
 }
 
 .img {
-    height: 300px;
-    width: 300px;
-}
-
-.link {
-    color: rgb(194, 17, 17);
-    display: block;
-    font-size: 40px;
-    font-weight: bold;
-    padding-top: 25px;
-    text-align: center;
-    text-decoration: none;
+    border-radius: 10px;
+    height: 400px;
+    width: 400px;
 }
 
 .buttonContainer {
@@ -24,7 +15,7 @@
     width: 300px;
 }
 
-.button {
+.error {
     background: none;
     border: none;
     color: rgb(194, 17, 17);
