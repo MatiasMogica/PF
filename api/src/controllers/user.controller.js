@@ -1,48 +1,40 @@
-const User = require('../models/User.js')
-const bcrypt = require('bcrypt')
+const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
 
 const userPost = async (req, res) => {
+  const { username, name, email, password, image } = req.body;
 
-    const { 
-        username, 
-        name,
-        email,
-        password,
-        image    
-    } = req.body
+  try {
+    const saltRounds = 10;
 
-    try {
+    const userDB = await User.findOne({ username: username });
 
-        const saltRounds = 10
+    const emailDB = await User.findOne({ email: email });
 
-        const userDB = await User.findOne( { username: username} )
+    if (userDB)
+      res.status(300).json({ error: "This username is already being used" });
 
-        const emailDB = await User.findOne( { email: email } )
+    if (emailDB)
+      res.status(300).json({ error: "This email is already being used" });
 
-        if(userDB) res.status(300).json( { error: 'This username is already being used'} ) 
+    const hashPassword = await bcrypt.hash(password, saltRounds);
 
-        if(emailDB) res.status(300).json( {error: 'This email is already being used'} )
+    const user = new User({
+      username,
+      name,
+      email,
+      hashPassword,
+      image,
+    });
 
-        const hashPassword = await bcrypt.hash(password, saltRounds)
+    const savedUser = await user.save();
 
-        const user = new User({
-            username,
-            name,
-            email,
-            hashPassword,
-            image
-        })
-    
-        const savedUser = await user.save()
-    
-        res.status(200).json( { newUser: savedUser} )
-    } catch (error) {
-        console.log(error)
-    }
-
-    
-} 
+    res.status(200).json({ newUser: savedUser });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
-    userPost
-}
+  userPost,
+};
