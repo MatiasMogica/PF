@@ -1,10 +1,13 @@
-const { Router } = require('express')
-const { login } = require('../controllers/authentication.controller.js')
+const { Router } = require("express");
+const {
+  login,
+  googleSignIn,
+} = require("../controllers/authentication.controller.js");
 
-const router = Router()
-
+const router = Router();
 
 //Ruta para hacer login de usuario
-router.post('/', login)
+router.post("/", login);
+router.post("/google", googleSignIn);
 
-module.exports =  router
+module.exports = router;
