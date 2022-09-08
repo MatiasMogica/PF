@@ -3,17 +3,24 @@ import { useSelector } from "react-redux";
 import "./index.css";
 import LogOut from "../LogOut/LogOut";
 import React from "react";
-import {Nav,NavLink,Bars,NavMenu,NavBtn,NavBtnLink,NavLinkLogo} from './NavBarStyle'
+import image from "../../images/logo.png";
+import {
+  Nav,
+  NavLink,
+  Bars,
+  NavMenu,
+  NavBtn,
+  NavBtnLink,
+  NavLinkLogo,
+} from "./NavBarStyle";
 
 export default function NavBar() {
-
   const user = useSelector((state) => state.videogames.logIn);
-
 
   return (
     <div className={"navContainer"}>
       <div className="left_container">
-        <button className={"button"} onClick={handleClick}>
+        <button className={"button"} onClick={""}>
           {"Go Back"}
         </button>
         <Link to="/" className={"linkStyle"}>
@@ -44,15 +51,12 @@ export default function NavBar() {
               </div>
             </div>
           </div>
-
         ) : (
           <NavBtn>
-            <NavBtnLink to="/login">
-              Sign In
-            </NavBtnLink>
+            <NavBtnLink to="/login">Sign In</NavBtnLink>
           </NavBtn>
         )}
-        </Nav>
-        </>
-    )
+      </div>
+    </div>
+  );
 }

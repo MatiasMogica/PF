@@ -32,51 +32,51 @@ function NewProduct() {
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-const initialState={
-  name: {
-    value: "",
+  const initialState = {
+    name: {
+      value: "",
 
-    error: "",
-  },
-  description: {
-    value: "",
-    error: "",
-  },
-  released: {
-    value: "",
-    error: "",
-  },
-  image: {
-    value: "",
-    error: "",
-  },
-  plataforms: {
-    value: [],
-    creada: false,
-    manualValue: "",
-    error: "",
-  },
-  genres: {
-    value: [],
-    creada: false,
-    manualValue: "",
-    error: "",
-  },
-  rating: {
-    value: null,
-    error: "",
-  },
-  price: {
-    value: null,
-    error: "",
-  },
-  creado: false,
-}
+      error: "",
+    },
+    description: {
+      value: "",
+      error: "",
+    },
+    released: {
+      value: "",
+      error: "",
+    },
+    image: {
+      value: "",
+      error: "",
+    },
+    plataforms: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    genres: {
+      value: [],
+      creada: false,
+      manualValue: "",
+      error: "",
+    },
+    rating: {
+      value: null,
+      error: "",
+    },
+    price: {
+      value: null,
+      error: "",
+    },
+    creado: false,
+  };
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
     name: {
       value: "",
-  
+
       error: "",
     },
     description: {
@@ -197,25 +197,22 @@ const initialState={
   }
 
   function handleRating(e) {
-    if(e.target.value===''){
+    if (e.target.value === "") {
       return setNewGame({
         ...newGame,
         rating: {
           value: "",
 
           error: "rating can't be null",
-
         },
       });
-  }
-    if (e.target.value >0 && e.target.value <= 5) {
+    }
+    if (e.target.value > 0 && e.target.value <= 5) {
       setNewGame({
         ...newGame,
         rating: { value: e.target.value, error: "" },
       });
-    } 
-   
-    else {
+    } else {
       setNewGame({
         ...newGame,
         rating: {
@@ -255,9 +252,7 @@ const initialState={
 
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
-
     return !newGame.name.error &&
-
       !newGame.description.error &&
       !newGame.released.error &&
       !newGame.image.error &&
@@ -279,10 +274,17 @@ const initialState={
   function handleSubmit(e) {
     e.preventDefault();
 
+    const {
+      name,
+      released,
+      image,
+      plataforms,
+      genres,
+      rating,
+      price,
+      description,
+    } = newGame;
 
-    const { name, released, image, plataforms, genres, rating, price,description} =
-      newGame;
- 
     const arg = {
       name: name.value,
       released: released.value,
@@ -291,9 +293,8 @@ const initialState={
       genres: genres.value,
       rating: parseInt(rating.value),
       price: parseInt(price.value),
-      description:description.value
+      description: description.value,
     };
-
 
     return fetch(`http://localhost:3001/games`, {
       method: "POST",
@@ -320,14 +321,12 @@ const initialState={
           image: {
             value: "",
             error: "",
-
           },
           plataforms: {
             value: [],
             creada: false,
             manualValue: "",
             error: "",
-
           },
           genres: {
             value: [],
@@ -733,15 +732,9 @@ const initialState={
         </div>
       </div>
 
-
-
-      {newGame.creado ? <div className="container_success"> Created successfully!</div> : null}
-
-
-    </form>
-    </div>
-    </div>
-
+      {newGame.creado ? (
+        <div className="container_success"> Created successfully!</div>
+      ) : null}
     </div>
   );
 }
