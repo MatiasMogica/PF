@@ -19,9 +19,6 @@ export const videogamesSlice = createSlice({
     clearVideogame: (state) => {
       state.details = {};
     },
-    localStorageUser: (state, action) => {
-      return { ...state, logIn: action.payload };
-    },
     filterVideogames: (state, action) => {
       //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
       var filtrado = [...state.videogames];
@@ -171,11 +168,10 @@ export const videogamesSlice = createSlice({
         ...state,
         logIn: {
           status: true,
-          user: action.payload.userData.username,
-          id: action.payload.userData.id,
-          email: action.payload.userData.email,
-          admin: action.payload.userData.admin,
-          token: action.payload.token,
+          user: action.payload.username,
+          id: action.payload.id,
+          email: action.payload.email,
+          admin: action.payload.email,
         },
       };
     },
@@ -187,7 +183,6 @@ export const {
   getVideogameById,
   filterVideogames,
   clearVideogame,
-  localStorageUser,
   logIn,
 } = videogamesSlice.actions;
 
