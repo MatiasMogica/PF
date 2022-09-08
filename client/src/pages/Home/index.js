@@ -9,7 +9,6 @@ import Paginated from "../../components/Paginated/index"
 import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
 import { Link } from "react-router-dom";
 import './index.css'
-
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
@@ -35,6 +34,10 @@ export default function Home() {
 
     return (
         <div className="home">
+
+
+
+        
             <NavBar />
             <div className="container">
             
@@ -50,13 +53,13 @@ export default function Home() {
             <div className="container_allCards">
 
             
-            <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="7000">
+            <Slideshow controles={true}   autoplay={true} velocidad="5000" intervalo="7000">
 				<Slide>
 					
 						<img src={zelda} alt=""/>
 					
-					<TextoSlide colorFondo="navy">
-						<p>15% descuento</p>
+					<TextoSlide >
+						<p className="desc">15% descuento</p>
 					</TextoSlide>
 				</Slide>
 				<Slide>
@@ -64,7 +67,7 @@ export default function Home() {
 						<img src={horizon} alt=""/>
 					
 					<TextoSlide>
-						<p>15% descuento</p>
+						<p className="desc">15% descuento</p>
 					</TextoSlide>
 				</Slide>
                 <Slide>
@@ -72,7 +75,7 @@ export default function Home() {
 						<img src={tsushima} alt=""/>
 					
 					<TextoSlide>
-						<p>15% descuento</p>
+						<p  className="desc">15% descuento</p>
 					</TextoSlide>
 				</Slide>
                 <Slide>
@@ -80,7 +83,7 @@ export default function Home() {
 						<img src={stray} alt=""/>
 					
 					<TextoSlide>
-						<p>15% descuento</p>
+						<p  className="desc">15% descuento</p>
 					</TextoSlide>
 				</Slide>
 			</Slideshow>

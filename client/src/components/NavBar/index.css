@@ -45,6 +45,16 @@
     justify-content: center;
 }
 
+.logedin{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 4px;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: black;
+}
+
 .navBar{
     display: flex;
     align-items: center;
@@ -62,11 +72,11 @@
     line-height: 19px;
 }
 
-span{
+.span{
     color: #ea1538;
 }
 
-nav ul li{
+/* nav ul li{
     list-style-type: none;
     display: inline-block;
     padding: 10px;
@@ -82,7 +92,7 @@ nav ul li a{
 nav ul li a:hover{
     color: #ea1538;
     transition: .4s;
-}
+} */
 
 .boton{
     border: none;
