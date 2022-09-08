@@ -81,9 +81,8 @@ const dataApi = (async (req, res) => {
         const info2 = await axios.get(info1.data.next)
         const info3 = await axios.get(info2.data.next)
         const info4 = await axios.get(info3.data.next)
-        const info5 = await axios.get(info4.data.next)
 
-        const infoTotal = info1.data.results.concat(info2.data.results).concat(info3.data.results).concat(info4.data.results).concat(info5.data.results)
+        const infoTotal = info1.data.results.concat(info2.data.results).concat(info3.data.results).concat(info4.data.results)
 
         infoTotal.forEach((gamer) =>{
             Game.create({
