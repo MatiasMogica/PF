@@ -1,15 +1,73 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import { getById } from "../../redux/actions/videogamesActions";
+import { clearVideogame } from "../../redux/slices/videogamesSlice";
 import { getVideogames } from "../../redux/actions/videogamesActions";
-import "./NewProduct.css";
+import "./Edit.css";
 
-function NewProduct() {
-  //A continuacion genero 2 arrays, de generos y plataformas, asi cuando creamos un nuevo videojuego podemos ver que genero y que plataforma
-  //ya estan creados y nos ahorramos tener que volver a escribirlas.
+export default function Edit() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { details } = useSelector((state) => state.videogames);
+
+  useEffect(() => {
+    dispatch(getById(id));
+
+    return () => {
+      dispatch(clearVideogame());
+    };
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    setNewGame({
+      name: {
+        value: details.name,
+
+        error: "",
+      },
+      description: {
+        value: details.description,
+        error: "",
+      },
+      released: {
+        value: details.released,
+        error: "",
+      },
+      image: {
+        value: details.background_image,
+        error: "",
+      },
+      plataforms: {
+        value: details.platforms ? details.platforms : [],
+        creada: false,
+        manualValue: "",
+        error: "",
+      },
+      genres: {
+        value: details.genres ? details.genres : [],
+        creada: false,
+        manualValue: "",
+        error: "",
+      },
+      rating: {
+        value: details.rating,
+        error: "",
+      },
+      price: {
+        value: details.price,
+        error: "",
+      },
+    });
+    document.getElementById("name").value = details.name;
+    document.getElementById("descripcion").value = details.description;
+    document.getElementById("released").value = details.released;
+    document.getElementById("rating").value = details.rating;
+    document.getElementById("price").value = details.price;
+  }, [details]);
+
   const videogames = useSelector((state) => state.videogames.videogames);
-
-  let dispatch = useDispatch();
-
   var generos = [];
   var plataforma = [];
 
@@ -32,86 +90,46 @@ function NewProduct() {
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-  const initialState = {
-    name: {
-      value: "",
 
-      error: "",
-    },
-    description: {
-      value: "",
-      error: "",
-    },
-    released: {
-      value: "",
-      error: "",
-    },
-    image: {
-      value: "",
-      error: "",
-    },
-    plataforms: {
-      value: [],
-      creada: false,
-      manualValue: "",
-      error: "",
-    },
-    genres: {
-      value: [],
-      creada: false,
-      manualValue: "",
-      error: "",
-    },
-    rating: {
-      value: null,
-      error: "",
-    },
-    price: {
-      value: null,
-      error: "",
-    },
-    creado: false,
-  };
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
     name: {
-      value: "",
+      value: details.name,
 
       error: "",
     },
     description: {
-      value: "",
+      value: details.description,
       error: "",
     },
     released: {
-      value: "",
+      value: details.released,
       error: "",
     },
     image: {
-      value: "",
+      value: details.background_image,
       error: "",
     },
     plataforms: {
-      value: [],
+      value: details.platforms ? details.platforms : [],
       creada: false,
       manualValue: "",
-      error: "",
+      error: "Write the name of the new platform",
     },
     genres: {
-      value: [],
+      value: details.genres ? details.genres : [],
       creada: false,
       manualValue: "",
-      error: "",
+      error: "Write the name of the new genre",
     },
     rating: {
-      value: null,
+      value: details.rating,
       error: "",
     },
     price: {
-      value: null,
+      value: details.price,
       error: "",
     },
-    creado: false,
   });
 
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
@@ -132,7 +150,7 @@ function NewProduct() {
   }
 
   function handleDesc(e) {
-    if (e.target.value.length < 500 && e.target.value.length > 20) {
+    if (e.target.value.length < 1200 && e.target.value.length > 20) {
       setNewGame({
         ...newGame,
         description: { value: e.target.value, error: "" },
@@ -142,7 +160,7 @@ function NewProduct() {
         ...newGame,
         description: {
           value: "",
-          error: "The description should have between 20 and 500 characters",
+          error: "The description should have between 20 and 1200 characters",
         },
       });
     }
@@ -197,17 +215,7 @@ function NewProduct() {
   }
 
   function handleRating(e) {
-    if (e.target.value === "") {
-      return setNewGame({
-        ...newGame,
-        rating: {
-          value: "",
-
-          error: "rating can't be null",
-        },
-      });
-    }
-    if (e.target.value > 0 && e.target.value <= 5) {
+    if (e.target.value >= 0 && e.target.value <= 5) {
       setNewGame({
         ...newGame,
         rating: { value: e.target.value, error: "" },
@@ -235,6 +243,7 @@ function NewProduct() {
           ...newGame,
           price: {
             value: "",
+
             error: "The price can't be null or negative",
           },
         });
@@ -252,7 +261,6 @@ function NewProduct() {
 
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
-
     return !newGame.name.error &&
       !newGame.description.error &&
       !newGame.released.error &&
@@ -262,11 +270,11 @@ function NewProduct() {
       !newGame.rating.error &&
       !newGame.price.error ? (
       <button className="btn" type="submit">
-        Create
+        Edit
       </button>
     ) : (
       <button className="btn" type="submit" disabled>
-        Create
+        Edit
       </button>
     );
   }
@@ -288,71 +296,26 @@ function NewProduct() {
 
     const arg = {
       name: name.value,
+      description: description.value,
       released: released.value,
       background_image: image.value,
       platforms: plataforms.value,
       genres: genres.value,
       rating: parseInt(rating.value),
       price: parseInt(price.value),
-      description: description.value,
     };
 
-
-    return fetch(`http://localhost:3001/games`, {
-      method: "POST",
+    return fetch(`http://localhost:3001/games/${id}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(arg),
       redirect: "follow",
     })
       .then((response) => response.json())
       .then((data) => {
-        setNewGame({
-          name: {
-            value: "",
-
-            error: "",
-          },
-          description: {
-            value: "",
-            error: "",
-          },
-          released: {
-            value: "",
-            error: "",
-          },
-          image: {
-            value: "",
-            error: "",
-          },
-          plataforms: {
-            value: [],
-            creada: false,
-            manualValue: "",
-            error: "",
-          },
-          genres: {
-            value: [],
-            creada: false,
-            manualValue: "",
-            error: "",
-          },
-          rating: {
-            value: null,
-            error: "",
-          },
-          price: {
-            value: null,
-            error: "",
-          },
-          creado: true,
-        });
-        document.getElementById("name").value = "";
-        document.getElementById("descripcion").value = "";
-        document.getElementById("released").value = "";
-        document.getElementById("image").value = "";
-        document.getElementById("released").value = "";
-        document.getElementById("rating").value = "";
-        document.getElementById("price").value = "";
+        setNewGame({ ...newGame, creado: true });
+        //la ruta del back no envia mensaje de error, sino que envia el componente editado... deberian corregir eso y aca poner para que
+        //muestre ese mensaje (ya sea que se edito correctamente o que no)
       })
       .catch((error) => console.log(error));
   }
@@ -628,117 +591,123 @@ function NewProduct() {
     }
   }
   return (
-    <div className="container_form">
-      <div className="overlay">
-        <div className="form">
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="container_input">
-              <label htmlFor="name">Name</label>
+    <div>
+      <NavBar />
+      <div className="container_form">
+        <div className="overlay">
+          <div className="form">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <div className="container_input">
+                <label htmlFor="name">Name</label>
 
-              <input
-                className="input"
-                id="name"
-                type="text"
-                onChange={(e) => handleName(e)}
-              ></input>
-              {newGame.name.error ? (
-                <div className="error">{newGame.name.error}</div>
-              ) : null}
-            </div>
+                <input
+                  className="input"
+                  id="name"
+                  type="text"
+                  onChange={(e) => handleName(e)}
+                ></input>
+                {newGame.name.error ? (
+                  <div className="error">{newGame.name.error}</div>
+                ) : null}
+              </div>
 
-            <div className="container_input">
-              <label htmlFor="descripcion">Description</label>
+              <div className="container_input">
+                <label htmlFor="descripcion">Description</label>
 
-              <textarea
-                className="input"
-                id="descripcion"
-                onChange={(e) => handleDesc(e)}
-              ></textarea>
-              {newGame.description.error ? (
-                <div className="error">{newGame.description.error}</div>
-              ) : null}
-            </div>
+                <textarea
+                  className="input"
+                  id="descripcion"
+                  onChange={(e) => handleDesc(e)}
+                ></textarea>
+                {newGame.description.error ? (
+                  <div className="error">{newGame.description.error}</div>
+                ) : null}
+              </div>
 
-            <div className="container_input">
-              <label htmlFor="released">Release date</label>
+              <div className="container_input">
+                <label htmlFor="released">Release date</label>
 
-              <input
-                className="input"
-                id="released"
-                type="date"
-                onChange={(e) => handleDate(e)}
-              ></input>
-              {newGame.released.error ? (
-                <div className="error">{newGame.released.error}</div>
-              ) : null}
-            </div>
+                <input
+                  className="input"
+                  id="released"
+                  type="date"
+                  onChange={(e) => handleDate(e)}
+                ></input>
+                {newGame.released.error ? (
+                  <div className="error">{newGame.released.error}</div>
+                ) : null}
+              </div>
 
-            <div className="container_input">
-              <label htmlFor="image">
-                Background image <hr></hr>
-              </label>
-              <input
-                type="file"
-                id="image"
-                onChange={(e) => handleImage(e)}
-              ></input>
-              {newGame.image.error ? (
-                <div className="error">{newGame.image.error}</div>
-              ) : null}
-            </div>
-            <div className="container_input">
-              <label htmlFor="platforms">
-                Platforms <hr></hr>
-              </label>
+              <div className="container_input">
+                <label htmlFor="image">
+                  Background image <hr></hr>
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  onChange={(e) => handleImage(e)}
+                ></input>
+                {newGame.image.value ? (
+                  <img
+                    src={newGame.image.value}
+                    alt="game"
+                    className="image_edit_game"
+                  ></img>
+                ) : null}
+                {newGame.image.error ? (
+                  <div className="error">{newGame.image.error}</div>
+                ) : null}
+              </div>
+              <div className="container_input">
+                <label htmlFor="platforms">
+                  Platforms <hr></hr>
+                </label>
 
-              {plataformasOpciones(newGame.plataforms.creada)}
-            </div>
-            <div className="container_input">
-              <label htmlFor="genres">
-                Genres <hr></hr>
-              </label>
+                {plataformasOpciones(newGame.plataforms.creada)}
+              </div>
+              <div className="container_input">
+                <label htmlFor="genres">
+                  Genres <hr></hr>
+                </label>
 
-              {genresOpciones(newGame.genres.creada)}
-            </div>
+                {genresOpciones(newGame.genres.creada)}
+              </div>
 
-            <div className="container_input">
-              <label htmlFor="rating">Rating</label>
-              <input
-                className="input"
-                type="number"
-                id="rating"
-                onChange={(e) => handleRating(e)}
-              ></input>
-              {newGame.rating.error ? (
-                <div className="error">{newGame.rating.error}</div>
-              ) : null}
-            </div>
+              <div className="container_input">
+                <label htmlFor="rating">Rating</label>
+                <input
+                  className="input"
+                  type="number"
+                  id="rating"
+                  step="0.01"
+                  onChange={(e) => handleRating(e)}
+                ></input>
+                {newGame.rating.error ? (
+                  <div className="error">{newGame.rating.error}</div>
+                ) : null}
+              </div>
 
-            <div className="container_input">
-              <label htmlFor="price">Price</label>
+              <div className="container_input">
+                <label htmlFor="price">Price</label>
 
-              <input
-                className="input"
-                type="number"
-                id="price"
-                onChange={(e) => handlePrice(e)}
-              ></input>
-              {newGame.price.error ? (
-                <div className="error">{newGame.price.error}</div>
-              ) : null}
-            </div>
+                <input
+                  className="input"
+                  type="number"
+                  step="0.01"
+                  id="price"
+                  onChange={(e) => handlePrice(e)}
+                ></input>
+                {newGame.price.error ? (
+                  <div className="error">{newGame.price.error}</div>
+                ) : null}
+              </div>
+              <div className="container_btn">{buttonSubmit()}</div>
 
-            <div className="container_btn">{buttonSubmit()}</div>
-
-            {newGame.creado ? (
-              <div className="container_success"> Created successfully!</div>
-            ) : null}
-          </form>
+              {newGame.creado ? <div> Edited successfully!</div> : null}
+            </form>
+          </div>
         </div>
       </div>
-
     </div>
   );
 }
-
-export default NewProduct;
