@@ -1,6 +1,6 @@
 import "./App.css";
-
 import { Route, Switch } from "react-router-dom";
+import {useSelector} from "react-redux"
 import Error404 from "./components/Errors/index";
 import Home from "./pages/Home";
 import VideogameDetails from "./pages/VideogameDetails";
