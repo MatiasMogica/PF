@@ -2,12 +2,16 @@ import React, { useState } from "react";
 /* import image from "../../images/logo.png" */
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./NavBarStyle";
 /* import { useDispatch, useSelector } from "react-redux"; */
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LogOut from "../LogOut/LogOut";
+import "./index.css";
 
 export default function NavBar() {
   /* let {amount} = useSelector((state) => state.cart) */
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("email")));
-  console.log(user);
+  const userapi = useSelector((state) => state.videogames.logIn);
+
   const history = useHistory();
   const logout = () => {
     localStorage.clear();
@@ -49,7 +53,7 @@ export default function NavBar() {
         <Bars />
         <NavMenu>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/videogame/add">Create</NavLink>
+
           <NavLink to="/videogame/wishList">WishList</NavLink>
         </NavMenu>
         <NavBtn>
@@ -60,6 +64,22 @@ export default function NavBar() {
                 logout
               </NavBtnLink>
             </>
+          ) : userapi.status ? (
+            <div className="userMenu">
+              <Link to="/user" className={"linkStyle"}>
+                {userapi.user}
+              </Link>
+              <div className="dropdownmenu">
+                <div className="LogOut">
+                  <LogOut></LogOut>
+                </div>
+                {userapi.admin ? (
+                  <Link to="/adminPanel" className="adminpanel">
+                    Admin Panel
+                  </Link>
+                ) : null}
+              </div>
+            </div>
           ) : (
             <NavBtnLink to="/signIn">Sign In</NavBtnLink>
           )}
