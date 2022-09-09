@@ -252,7 +252,7 @@ function NewProduct() {
 
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
-    console.log(newGame);
+
     return !newGame.name.error &&
       !newGame.description.error &&
       !newGame.released.error &&
@@ -297,7 +297,6 @@ function NewProduct() {
       description: description.value,
     };
 
-    console.log(arg);
 
     return fetch(`http://localhost:3001/games`, {
       method: "POST",
@@ -737,6 +736,7 @@ function NewProduct() {
           </form>
         </div>
       </div>
+
     </div>
   );
 }
