@@ -48,6 +48,7 @@ function AdminPanel() {
           </Link>
           <SearchBar />
           <div id="admin_panel_videogames_list">
+
             {/* {videogames.map((x) => (
               <div key={x._id} className="admin_panel_videogame">
                 <p
@@ -65,6 +66,7 @@ function AdminPanel() {
                 </button>
                 <Link to={`/edit/${x._id}`}>Edit</Link>
               </div>
+
             ))} */}
             {
               Array.isArray(videogames)? (videogames.length !== 0 ? (

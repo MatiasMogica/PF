@@ -11,6 +11,7 @@ export default function NavBar() {
   /* let {amount} = useSelector((state) => state.cart) */
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("email")));
   const userapi = useSelector((state) => state.videogames.logIn);
+  
   let {amount} = useSelector((state) => state.cart) 
 
   const history = useHistory();

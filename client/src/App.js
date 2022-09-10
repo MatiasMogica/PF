@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
-
+  
   const {cartItems, amount} = useSelector((state) => state.cart)
   
 
@@ -35,12 +35,14 @@ function App() {
       localStorage.setItem('amount', JSON.stringify(amount))
   }, [cartItems, amount])
 
+
   return (
     <div>
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
         <Route exact path={'/cart'} component={CartContainer}/>
+
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
@@ -48,11 +50,13 @@ function App() {
           {user.status ? <Redirect to="/" /> : null}
         </Route>
         {user.admin ? (
+
           <>
             <Route exact path={"/adminPanel"} component={AdminPanel} />
             <Route exact path={"/videogame/add"} component={Add} />
             <Route exact path={"/edit/:id"} component={Edit} />
           </>
+
         ) : null}
 
         <Route component={Error404} />

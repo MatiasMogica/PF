@@ -259,7 +259,6 @@ function NewProduct() {
 
   //Esta funcion es para habilitar o deshabilitar que se pueda subir el formulario.
   function buttonSubmit() {
-   
     return !newGame.name.error &&
       !newGame.description.error &&
       !newGame.released.error &&
@@ -785,6 +784,7 @@ function NewProduct() {
                 <div className="error">{newGame.price.error}</div>
               ) : null}
             </div>
+
             <div className="container_btn">{buttonSubmit()}</div>
             {creado && 
             (newGame.creado ? <div className="container_success"> Created successfully!</div> : null)}

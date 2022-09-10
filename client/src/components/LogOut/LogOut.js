@@ -11,4 +11,5 @@ function LogOut() {
   return <button onClick={() => handlelogOut()}>Log Out</button>;
 }
 
+
 export default LogOut;
