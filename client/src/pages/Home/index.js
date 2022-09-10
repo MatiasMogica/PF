@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames } from "../../redux/actions/videogamesActions";
@@ -7,23 +8,23 @@ import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
 import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
-import { Link } from "react-router-dom";
 import './index.css'
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
 import zelda from '../../images/zelda.jpg'
+import { addItem } from "../../redux/slices/cartSlice";
 
 export default function Home() {
     let dispatch = useDispatch();
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
-
+  
     const [currentPage, setCurrentPage] = useState(1)
     const [vgPerPage, setVgPerPage] = useState(9) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
     const indexOfLastVg = currentPage * vgPerPage
     const indexOfFirstVg = indexOfLastVg - vgPerPage
-    const currentVg = videogames.slice(indexOfFirstVg, indexOfLastVg)
-
+    const currentVg = Array.isArray(videogames)?videogames.slice(indexOfFirstVg, indexOfLastVg):null
+   
     const paginated = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
@@ -31,35 +32,23 @@ export default function Home() {
     useEffect(() => {
         dispatch(getVideogames());
         }, [dispatch]);
+    
 
     return (
         <div className="home">
-
-
-
-        
             <NavBar />
             <div className="container">
             
             
-            <Filtro />
 
-            
-
-            
-            
-
-
-            <div className="container_allCards">
-
-            
-            <Slideshow controles={true}   autoplay={true} velocidad="5000" intervalo="7000">
+        <div>
+            <Slideshow controles={true} autoplay={false} velocidad="5000" intervalo="7000">
 				<Slide>
 					
 						<img src={zelda} alt=""/>
 					
-					<TextoSlide >
-						<p className="desc">15% descuento</p>
+					<TextoSlide colorFondo="navy">
+						<p>15% descuento</p>
 					</TextoSlide>
 				</Slide>
 				<Slide>
@@ -67,7 +56,7 @@ export default function Home() {
 						<img src={horizon} alt=""/>
 					
 					<TextoSlide>
-						<p className="desc">15% descuento</p>
+						<p>15% descuento</p>
 					</TextoSlide>
 				</Slide>
                 <Slide>
@@ -75,7 +64,7 @@ export default function Home() {
 						<img src={tsushima} alt=""/>
 					
 					<TextoSlide>
-						<p  className="desc">15% descuento</p>
+						<p>15% descuento</p>
 					</TextoSlide>
 				</Slide>
                 <Slide>
@@ -83,16 +72,20 @@ export default function Home() {
 						<img src={stray} alt=""/>
 					
 					<TextoSlide>
-						<p  className="desc">15% descuento</p>
+						<p>15% descuento</p>
 					</TextoSlide>
 				</Slide>
 			</Slideshow>
-
-
-
-                {videogames.length !== 0 ? (
+            </div>
+            <div className="container_filter_cards">
+            <div className="contain_filter">
+            <Filtro paginated={paginated} />
+            </div>
+                <div className="container_allCards">
+                {Array.isArray(videogames)?(videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         return (
+                            <div className="Card" key={i}>
                                 <Card
                                 key={i}
                                 _id={v._id}
@@ -104,12 +97,15 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genres={v.genres} />
+                                <button onClick={() => dispatch(addItem(v))}>Add to cart</button>
+                            </div>
                         );
                         })
                     ) : (
                     <Spinner />
-                )}
+                )):<div className="not-found"><h2>{videogames.msg}</h2></div>}</div>
                 </div>
+            
             </div>
             <Paginated
             vgPerPage = {vgPerPage}

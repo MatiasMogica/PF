@@ -12,11 +12,11 @@ export default function Paginated({vgPerPage, videogames, paginated}){
         <div className={'pagination_cointainer'}>
                 {
                     pageNumbers && pageNumbers.map(number => (
-                        <div key={number} onClick={() => paginated(number)} className={'pagination'}>
+                        <button key={number} onClick={() => paginated(number)} className={'pagination'}>
                             <span>
                             {number}
                             </span>
-                        </div>
+                        </button>
                     ))
                 }
         </div>

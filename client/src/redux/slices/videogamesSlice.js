@@ -35,7 +35,11 @@ export const videogamesSlice = createSlice({
             .toLowerCase()
             .includes(action.payload.name.toLowerCase());
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
+    
 
       //Esta parte es para organizar por fecha de lanzamiento, tanto si tenes una minima, como si tenes una mazima o como si tenes ambas.
       if (
@@ -58,6 +62,9 @@ export const videogamesSlice = createSlice({
               x.released <= action.payload.released[1]
             );
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         } else if (
           action.payload.released[0] !== "tba" &&
           action.payload.released[0] !== ""
@@ -65,10 +72,16 @@ export const videogamesSlice = createSlice({
           filtrado = filtrado.filter((x) => {
             return x.released >= action.payload.released[0];
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         } else {
           filtrado = filtrado.filter((x) => {
             return x.released <= action.payload.released[1];
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         }
       }
 
@@ -83,6 +96,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       });
 
       //para filtrar por plataforma (pc,linux,etc)
@@ -96,6 +112,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       });
 
       //para filtrar por precio min/max
@@ -104,11 +123,17 @@ export const videogamesSlice = createSlice({
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.min <= x.price;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
       if (action.payload.precio.max) {
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.max >= x.price;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
 
       //Si llegamos hasta aqui ya se aplicaron los filtros, por lo tanto no se van a remover mas items del array final, solamente ordenarlos

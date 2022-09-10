@@ -39,7 +39,7 @@
     border:none;
     outline: none;
     height: 40px;
-    color : #fff;
+    color : #FAFBFC;
     width: 300px;
     align-self: center;
     
@@ -51,9 +51,10 @@
 .btn{
     width:100px;
     height:40px;
-    color:#fff;
+    color:#FAFBFC;
     background: linear-gradient(to right,#32d3e3,#01506b);
     cursor: pointer;
+    border-radius: 4px;
 }
 .btn:disabled{
     cursor:no-drop;
@@ -87,3 +88,26 @@
     text-align: center;
     margin:10px 0px 10px 0px;
 }
+.input-platform{
+    width:240px;
+    height: 30px;
+}
+.plataform-div-genre{
+    display: flex;
+    
+}
+.rmsc {
+    /*--rmsc-main: #4285f4;*/
+    --rmsc-hover: #FAFBFC;
+    --rmsc-selected: #FAFBFC;
+    --rmsc-border: #ccc;
+    --rmsc-gray: #aaa;
+    --rmsc-bg: #FAFBFC;
+    --rmsc-p: 10px; /* Spacing */
+    --rmsc-radius: 4px; /* Radius */
+    --rmsc-h: 28px; /* Height */
+    color: #202020;
+    max-width: 240px;
+    font-size: 14px;
+   width: 240px;
+  }

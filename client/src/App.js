@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { localStorageUser } from "./redux/slices/videogamesSlice";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import Edit from "./pages/Edit/Edit";
+import CartContainer from "./components/Cart/CartContainer"
 
 function App() {
   const user = useSelector((state) => state.videogames.logIn);
@@ -25,12 +26,23 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+  
+  const {cartItems, amount} = useSelector((state) => state.cart)
+  
+
+  useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+      localStorage.setItem('amount', JSON.stringify(amount))
+  }, [cartItems, amount])
+
 
   return (
     <div>
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
+        <Route exact path={'/cart'} component={CartContainer}/>
+
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
@@ -38,11 +50,13 @@ function App() {
           {user.status ? <Redirect to="/" /> : null}
         </Route>
         {user.admin ? (
-          <div>
+
+          <>
             <Route exact path={"/adminPanel"} component={AdminPanel} />
             <Route exact path={"/videogame/add"} component={Add} />
             <Route exact path={"/edit/:id"} component={Edit} />
-          </div>
+          </>
+
         ) : null}
 
         <Route component={Error404} />

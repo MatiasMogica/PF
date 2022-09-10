@@ -11,6 +11,8 @@ export default function NavBar() {
   /* let {amount} = useSelector((state) => state.cart) */
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("email")));
   const userapi = useSelector((state) => state.videogames.logIn);
+  
+  let {amount} = useSelector((state) => state.cart) 
 
   const history = useHistory();
   const logout = () => {
@@ -53,8 +55,11 @@ export default function NavBar() {
         <Bars />
         <NavMenu>
           <NavLink to="/">Home</NavLink>
-
           <NavLink to="/videogame/wishList">WishList</NavLink>
+          <NavLink to="/cart" >
+                    Cart
+                    {amount}
+                </NavLink>
         </NavMenu>
         <NavBtn>
           {user ? (

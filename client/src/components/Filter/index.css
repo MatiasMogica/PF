@@ -1,7 +1,7 @@
 .filtroContainer {
   background-color: #202020;
   display: inline-table ;
-  width: 300px;
+  width: 280px;
   height: 70%;
   justify-content: left;
   padding: 10px 20px 30px 20px;
@@ -9,45 +9,33 @@
   margin: 0;
   
 }
-.container_search{
-  display: flex;
-  flex-direction:column ;
-  justify-content: center;
-  align-items: center;
-}
-.search{
-  min-width: 100px;
-  width: 240px;
-  height: 20px;
-  display:flex;
-
-  align-items: center;
-  border-radius: 60px;
-  padding: 10px 20px;
-  border:solid 2px;
-  border-top-color:#00DDEB ;
-  border-bottom-color:#5B42F3;
-  border-right-color: #00DDEB;
-  border-left-color: #5B42F3;
-  background-color: #202020;
-  color:#fff;
-}
-.search:hover{
-  background-color: rgb(73, 73, 73);
+.rmsc {
+  /*--rmsc-main: #4285f4;*/
+  --rmsc-hover: #FAFBFC;
+  --rmsc-selected: #FAFBFC;
+  --rmsc-border: #ccc;
+  --rmsc-gray: #aaa;
+  --rmsc-bg: #FAFBFC;
+  --rmsc-p: 10px; /* Spacing */
+  --rmsc-radius: 4px; /* Radius */
+  --rmsc-h: 30px; /* Height */
+  color: #202020;
+  max-width: 240px;
+  font-size: 14px;
+ 
 }
 
-
-#buscarfiltro{
+.buscar{
   width: 166px;
   background:transparent;
   flex: 1;
   border:0;
   outline: none;
   font-size:1.2rem;
-  color:#fff;
+  color:#FAFBFC;
 }
-#buscarfiltro:hover{
-  color:#fff;
+.buscar:hover{
+  color:#202020;
 }
 .sortBy{
   display:flex;
@@ -55,10 +43,60 @@
   align-items: center;
 
 }
+.container_search{
+  display: flex;
+  flex-direction:column ;
+  justify-content: center;
+  align-items: center;
+}
+.searchBar:hover{
+  background-color: #FAFBFC;
+  
 
+}
+.price_input{
+  width: 50px;
+  height: 30px;
+  outline: none;
+  text-align: center;
+}
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button{
+  appearance:none;
+}
 
+.price-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchBar{
+  min-width: 100px;
+  width: 200px;
+  height: 20px;
+  display:flex;
 
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
+  border:none;
+  outline: none;
+  background-color: #3B3B3B;
+  color:#B1B1B1;
+}
 
+.each-price{
+  display: flex;
+  align-items: center;
+  
+  
+}
+.each-price label{
+  margin-right: 10px;
+}
+.each-price input{
+  border-radius: 4px;
+}
 /* CSS */
 
 
@@ -67,6 +105,62 @@
 
 
 
+/* CSS */
+.button-15 {
+  background-color:rgb(131, 130, 130);
+  border:none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FAFBFC;
+  cursor: pointer;
+  direction: ltr;
+  display: block;
+  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -.022em;
+  line-height: 1.47059;
+  min-width: 20px;
+  overflow: visible;
+  padding: 4px 15px;
+  text-align: center;
+ 
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button-15:disabled {
+  cursor: default;
+  opacity: .3;
+}
+
+.button-15:hover {
+  background-color:#585858;
+  border:none;
+  text-decoration: none;
+}
+
+.button-15:active {
+  
+  border-color: #757575;
+  outline: none;
+}
+
+.button-15:focus {
+  box-shadow: rgba(208, 210, 211, 0.5) 0  0 3px 3px;
+  outline: none;
+  background-color:#585858;
+}
+
+.release-container input{
+height: 30px;
+width:240px;
+border-radius: 4px;
+  
+ 
+}
 
 /*#buscarfiltro{
   float: left;
@@ -83,7 +177,6 @@
   color: rgb(144, 140, 140);
   
 }
-
 #buscarfiltro:focus{
   border: 8px solid rgb(21, 83, 217);
   margin-top: 22px;
