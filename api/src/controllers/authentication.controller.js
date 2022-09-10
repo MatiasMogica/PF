@@ -29,7 +29,7 @@ const login = async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
-  res.status(200).json({ auth: "User login success", userForToken });
+  res.status(200).json({ auth: "User login success", userForToken, token });
 };
 
 const googleSignIn = async (req, res = response) => {

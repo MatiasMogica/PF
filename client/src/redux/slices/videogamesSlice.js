@@ -19,6 +19,9 @@ export const videogamesSlice = createSlice({
     clearVideogame: (state) => {
       state.details = {};
     },
+    localStorageUser: (state, action) => {
+      return { ...state, logIn: action.payload };
+    },
     filterVideogames: (state, action) => {
       //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
       var filtrado = [...state.videogames];
@@ -32,7 +35,11 @@ export const videogamesSlice = createSlice({
             .toLowerCase()
             .includes(action.payload.name.toLowerCase());
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
+    
 
       //Esta parte es para organizar por fecha de lanzamiento, tanto si tenes una minima, como si tenes una mazima o como si tenes ambas.
       if (
@@ -55,6 +62,9 @@ export const videogamesSlice = createSlice({
               x.released <= action.payload.released[1]
             );
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         } else if (
           action.payload.released[0] !== "tba" &&
           action.payload.released[0] !== ""
@@ -62,10 +72,16 @@ export const videogamesSlice = createSlice({
           filtrado = filtrado.filter((x) => {
             return x.released >= action.payload.released[0];
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         } else {
           filtrado = filtrado.filter((x) => {
             return x.released <= action.payload.released[1];
           });
+          if (!filtrado.length){
+            filtrado = {msg:'No matches found'}
+          }
         }
       }
 
@@ -80,6 +96,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       });
 
       //para filtrar por plataforma (pc,linux,etc)
@@ -93,6 +112,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       });
 
       //para filtrar por precio min/max
@@ -101,11 +123,17 @@ export const videogamesSlice = createSlice({
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.min <= x.price;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
       if (action.payload.precio.max) {
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.max >= x.price;
         });
+        if (!filtrado.length){
+          filtrado = {msg:'No matches found'}
+        }
       }
 
       //Si llegamos hasta aqui ya se aplicaron los filtros, por lo tanto no se van a remover mas items del array final, solamente ordenarlos
@@ -168,10 +196,11 @@ export const videogamesSlice = createSlice({
         ...state,
         logIn: {
           status: true,
-          user: action.payload.username,
-          id: action.payload.id,
-          email: action.payload.email,
-          admin: action.payload.email,
+          user: action.payload.userData.username,
+          id: action.payload.userData.id,
+          email: action.payload.userData.email,
+          admin: action.payload.userData.admin,
+          token: action.payload.token,
         },
       };
     },
@@ -183,6 +212,7 @@ export const {
   getVideogameById,
   filterVideogames,
   clearVideogame,
+  localStorageUser,
   logIn,
 } = videogamesSlice.actions;
 

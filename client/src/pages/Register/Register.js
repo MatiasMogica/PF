@@ -283,7 +283,7 @@ export default function Register() {
       <div>
         <p>
           Or
-          <Link to="/login" className={"linkStyle"}>
+          <Link to="/signIn" className={"linkStyle"}>
             Log In
           </Link>
         </p>

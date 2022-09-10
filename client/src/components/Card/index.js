@@ -5,7 +5,7 @@ import './index.css'
 export default function Card({ name, image, platforms,  genres, released, _id, rating, price,idAPI}){
 
     return (
-        <div className="Card">
+        <div /* className="Card" */>
         <div>
         <div className="img_name" >
         <div className="img_container">
