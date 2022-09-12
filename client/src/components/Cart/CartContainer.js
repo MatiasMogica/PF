@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import { Link } from 'react-router-dom'
 import { calculateTotal } from '../../redux/slices/cartSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import NavBar from '../NavBar'
@@ -12,6 +13,7 @@ const CartContainer = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        console.log('CARTITEMS', cartItems.length)
         dispatch(calculateTotal())
     }, [dispatch, cartItems]) 
 
@@ -46,6 +48,14 @@ const CartContainer = () => {
                 </div>
                 <button onClick={() => dispatch(openModal())}>Clear cart</button>
             </footer>
+            {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
+            <form action='http://localhost:3001/payment/payment' method='POST'>
+                <input type='hidden' name='title' value={cartItems.map(i => i.name)}/>
+                <input type='hidden' name='price' value={total}/>
+                <input type='hidden' name='picture_url' value={cartItems.map(i => i.background_image)}/>
+                <input type='hidden' name='quantity' value={cartItems.length}/>
+                <input type='submit' value='realizar compra'/>
+            </form>
         </div>
     )
 }
