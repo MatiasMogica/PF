@@ -1,4 +1,3 @@
-
 const { Router } = require("express");
 const {
   userPost,
@@ -9,7 +8,6 @@ const {
   deleteUser,
 } = require("../controllers/user.controller");
 const { tokenVerified } = require("../middlewares/auth.middleware.js");
-
 
 const router = Router();
 
@@ -27,6 +25,5 @@ router.put("/putUser/:idUser", putUser);
 router.delete("/deleteUser/:idUser", deleteUser);
 //Become admin
 router.post("/changeAdminStatus/:idUser", becomeAdmin);
-
 
 module.exports = router;

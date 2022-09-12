@@ -14,11 +14,14 @@ import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
 import zelda from '../../images/zelda.jpg'
 import { addItem } from "../../redux/slices/cartSlice";
+import { Added, AddIcon, Confirm } from "../../icons/Icons";
 
 export default function Home() {
     let dispatch = useDispatch();
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
-  
+    
+    const {cartItems} = useSelector((state) => state.cart)
+
     const [currentPage, setCurrentPage] = useState(1)
     const [vgPerPage, setVgPerPage] = useState(9) // VER CUANTOS VAMOS A RENDERIZAR POR PAG
     const indexOfLastVg = currentPage * vgPerPage
@@ -32,15 +35,12 @@ export default function Home() {
     useEffect(() => {
         dispatch(getVideogames());
         }, [dispatch]);
-    
 
     return (
         <div className="home">
             <NavBar />
             <div className="container">
             
-            
-
         <div>
             <Slideshow controles={true} autoplay={false} velocidad="5000" intervalo="7000">
 				<Slide>
@@ -84,6 +84,7 @@ export default function Home() {
                 <div className="container_allCards">
                 {Array.isArray(videogames)?(videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
+                        const inCart = cartItems.find((i) => i._id === v._id)
                         return (
                             <div className="Card" key={i}>
                                 <Card
@@ -97,7 +98,7 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genres={v.genres} />
-                                <button onClick={() => dispatch(addItem(v))}>Add to cart</button>
+                                {cartItems.includes(inCart) ? <div className="inCart"> <Added /> </div> : <button className="addButton" onClick={() => dispatch(addItem(v))}><AddIcon/></button>}
                             </div>
                         );
                         })

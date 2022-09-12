@@ -6,9 +6,9 @@ import users from "../slices/usersSlice";
 import logIn from "../slices/logInSlice";
 export default configureStore({
   reducer: {
-    videogames: videogames,
-    cart: cart,
-    modal: modal,
+    videogames,
+    cart,
+    modal,
     users,
     logIn,
   },

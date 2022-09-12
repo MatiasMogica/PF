@@ -375,7 +375,6 @@ function NewProduct() {
         let indice = newGame.plataforms.value.indexOf(e.target.value);
         let newplataforms = [...newGame.plataforms.value];
         newplataforms.splice(indice, 1);
-
         setNewGame({
           ...newGame,
           plataforms: {
@@ -542,7 +541,6 @@ function NewProduct() {
         let indice = newGame.genres.value.indexOf(e.target.value);
         let newgenres = [...newGame.genres.value];
         newgenres.splice(indice, 1);
-
         setNewGame({
           ...newGame,
           genres: {

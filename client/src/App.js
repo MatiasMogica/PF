@@ -61,7 +61,6 @@ function App() {
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
           </>
         ) : null}
-
         <Route component={Error404} />
       </Switch>
     </div>

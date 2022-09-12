@@ -34,3 +34,18 @@
     text-align: justify;
     margin: 5px 20px 5px 20px;
 }
+
+.containerRating {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+}
+
+.containerStar {
+    margin-left: -17px;
+    width: 19px;
+}
+
+.spanPrice {
+    color: rgb(3, 85, 3);
+}

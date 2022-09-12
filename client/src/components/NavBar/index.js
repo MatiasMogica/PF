@@ -5,6 +5,7 @@ import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./NavBarStyle";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOut from "../LogOut/LogOut";
+import {CartIcon} from "../../icons/Icons"
 import "./index.css";
 
 export default function NavBar() {
@@ -56,10 +57,12 @@ export default function NavBar() {
         <NavMenu>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/videogame/wishList">WishList</NavLink>
-          <NavLink to="/cart">
-            Cart
-            {amount}
-          </NavLink>
+          <div className="cartIcon">
+            <NavLink to="/cart" >
+              <CartIcon />
+              {amount}
+            </NavLink>
+          </div>
         </NavMenu>
         <NavBtn>
           {user ? (

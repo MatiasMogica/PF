@@ -64,3 +64,19 @@ top:0;
     border: 4px rgba(68, 67, 67, 0.356);
 }
 
+.addButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+}
+
+.inCart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+}
+

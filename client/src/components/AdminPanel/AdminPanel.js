@@ -19,6 +19,8 @@ function AdminPanel() {
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
   );
+
+  /* ESTO */
   const users = useSelector((state) => state.users.filterUsers);
 
   function confirmDelete(e) {
@@ -42,6 +44,18 @@ function AdminPanel() {
       })
       .catch((err) => console.log(err));
   }
+/* ESTO */
+  const [order, setOrder] = useState("firstRender");
+/* ESTO */
+  useEffect(() => {
+    dispatch(FilterUsers({ order }));
+  }, [order]);
+/* ESTO */
+  function handleOrder(e) {
+    setOrder(
+      e.target.value === order ? e.target.value + "_invert" : e.target.value
+    );
+  }
 
   const [order, setOrder] = useState("firstRender");
 
@@ -59,6 +73,7 @@ function AdminPanel() {
     <div>
       <NavBar />
       <div id="admin_panel_container">
+        {/* ACA */}
         <div id="admin_panel_users">
           <div id="admin_panel_users_options">
             <button
@@ -91,6 +106,7 @@ function AdminPanel() {
               </div>
             ))}
           </div>
+{/* HASTA ACA */}
         </div>
         <div id="admin_panel_videogames">
           <Link to="/videogame/add" className={"linkStyle"}>
