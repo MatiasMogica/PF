@@ -120,7 +120,5 @@ module.exports = {
   getUserByID,
   putUser,
   becomeAdmin,
-
   deleteUser,
-
 };

@@ -19,6 +19,7 @@ function AdminPanel() {
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
   );
+
   /* ESTO */
   const users = useSelector((state) => state.users.filterUsers);
 
@@ -50,6 +51,18 @@ function AdminPanel() {
     dispatch(FilterUsers({ order }));
   }, [order]);
 /* ESTO */
+  function handleOrder(e) {
+    setOrder(
+      e.target.value === order ? e.target.value + "_invert" : e.target.value
+    );
+  }
+
+  const [order, setOrder] = useState("firstRender");
+
+  useEffect(() => {
+    dispatch(FilterUsers({ order }));
+  }, [order]);
+
   function handleOrder(e) {
     setOrder(
       e.target.value === order ? e.target.value + "_invert" : e.target.value
@@ -118,6 +131,7 @@ function AdminPanel() {
                 </button>
                 <Link to={`/edit/${x._id}`}>Edit</Link>
               </div>
+
             ))} */}
             {Array.isArray(videogames)
               ? videogames.length !== 0
