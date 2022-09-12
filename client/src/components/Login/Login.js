@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/slices/videogamesSlice";
+import { logIn } from "../../redux/slices/logInSlice";
+import "./logIn.css";
 
 function Login() {
   const [loginData, setloginData] = useState({
@@ -47,7 +48,7 @@ function Login() {
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)} className="form_login">
       <label htmlFor="username">Username:</label>
       <input
         type="text"

@@ -18,3 +18,28 @@
     margin: 0;
     padding: 0;
 }
+
+.user_admin{
+    font-size: medium;
+    margin: 0.1em;
+    padding: 0;
+    color:red;
+}
+
+.user_comun{
+    font-size: medium;
+    margin: 0.1em;
+    padding: 0;
+    color:blue
+}
+
+#list_of_users{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#admin_panel_users_options{
+    display: flex;
+    justify-content: center;
+}

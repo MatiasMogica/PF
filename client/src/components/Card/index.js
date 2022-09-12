@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Star } from "../../icons/Icons";
 import './index.css'
 
 export default function Card({ name, image, platforms,  genres, released, _id, rating, price,idAPI}){
@@ -19,10 +20,12 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
             <h5>Platforms: {platforms && platforms.join(', ')}</h5>
         
             <h5>Genre: {genres && genres.join(', ')}</h5>           
+            <div className="containerRating">
+                <h5>Rating: {rating} </h5>
+                <div className="containerStar"><Star /></div>
+            </div>
 
-            <h5>Rating: {rating}</h5>
-
-            <h5>Price: ${price}</h5>
+            <h5>Price: <span className="spanPrice">${price}</span></h5>
 
             <h5>Released: {released}</h5> 
             </div>

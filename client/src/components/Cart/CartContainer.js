@@ -6,6 +6,9 @@ import { openModal } from '../../redux/slices/modalSlice'
 import NavBar from '../NavBar'
 import CartItem from './CartItem'
 import Modal from './Modal/Modal'
+import './CartContainer.css'
+import emptyCart from '../../images/emptyCart.png'
+import { Trash } from '../../icons/Icons'
 
 const CartContainer = () => {
     const {cartItems, total, amount} = useSelector((state) => state.cart)
@@ -21,7 +24,10 @@ const CartContainer = () => {
         return (
             <div>
                 <NavBar />
-                <h1>Your cart is currently empty</h1>
+                <div className='empty'>
+                    <h1>Your cart is currently empty</h1>
+                    <img alt="cart" className='emptyCart' src={emptyCart} />
+                </div>
             </div>
         )
     }
@@ -29,9 +35,8 @@ const CartContainer = () => {
     return  (
         <div>
             <NavBar />
-            <h2>Your cart</h2>
-            {isOpen && <Modal />}
-            <div>
+            <h1 className='cartTitle'>Your cart</h1>
+            <div className='containerItem'>
                 {
                     cartItems.map((item) => {
                         return <CartItem key={item.idAPI} {...item} />
@@ -42,11 +47,14 @@ const CartContainer = () => {
             <footer>
                 <div>
                     <hr />
-                        <h4>
-                            Total: <span>${total} </span>
-                        </h4>
+                        <h2 className='totalTitle'>
+                            Total: <span className='total'>${total} </span>
+                        </h2>
                 </div>
-                <button onClick={() => dispatch(openModal())}>Clear cart</button>
+                {isOpen && <Modal />}
+                <div className='clearButton'>
+                    <button className='clearButton' onClick={() => dispatch(openModal())}><Trash /></button>
+                </div>
             </footer>
             {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
             <form action='http://localhost:3001/payment/payment' method='POST'>

@@ -28,20 +28,17 @@ function NewProduct() {
       }
     });
   });
-  const [selectedPlatform,setSelectedPlatform]=useState([])
-  const [selectedGenres,setSelectedGenres]  = useState([])
-  const [creado,setCreado]=useState(false)
+  const [selectedPlatform, setSelectedPlatform] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [creado, setCreado] = useState(false);
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
 
-
-  useEffect(()=>{
-   
-    
-    let newplataforms=selectedPlatform.map((platform) =>{
-      return platform.value
-    })
+  useEffect(() => {
+    let newplataforms = selectedPlatform.map((platform) => {
+      return platform.value;
+    });
     setNewGame({
       ...newGame,
       plataforms: {
@@ -49,15 +46,14 @@ function NewProduct() {
         value: newplataforms,
         error: "",
       },
-    })
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selectedPlatform])
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPlatform]);
 
   useEffect(() => {
-    
-    let newgenres=selectedGenres.map((genre) =>{
-      return genre.value
-    })
+    let newgenres = selectedGenres.map((genre) => {
+      return genre.value;
+    });
     setNewGame({
       ...newGame,
       genres: {
@@ -65,12 +61,9 @@ function NewProduct() {
         value: newgenres,
         error: "",
       },
-    })
- // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selectedGenres])
- 
-
- 
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGenres]);
 
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
@@ -117,7 +110,7 @@ function NewProduct() {
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
 
   function handleName(e) {
-    setCreado(false)
+    setCreado(false);
     if (e.target.value.length < 50 && e.target.value.length > 2) {
       setNewGame({ ...newGame, name: { value: e.target.value, error: "" } });
     } else {
@@ -130,11 +123,10 @@ function NewProduct() {
         },
       });
     }
-    
   }
 
   function handleDesc(e) {
-    setCreado(false)
+    setCreado(false);
     if (e.target.value.length < 500 && e.target.value.length > 20) {
       setNewGame({
         ...newGame,
@@ -152,7 +144,7 @@ function NewProduct() {
   }
 
   function handleDate(e) {
-    setCreado(false)
+    setCreado(false);
     if ("chequeo que sea una url de una imagen de a corde") {
       setNewGame({
         ...newGame,
@@ -170,7 +162,6 @@ function NewProduct() {
   }
 
   async function handleImage(e) {
-    
     const formData = new FormData();
 
     formData.append("file", e.target.files[0]);
@@ -202,7 +193,7 @@ function NewProduct() {
   }
 
   function handleRating(e) {
-    setCreado(false)
+    setCreado(false);
     if (e.target.value === "") {
       return setNewGame({
         ...newGame,
@@ -231,7 +222,7 @@ function NewProduct() {
   }
 
   function handlePrice(e) {
-    setCreado(false)
+    setCreado(false);
     if (e.target.value >= 0) {
       setNewGame({
         ...newGame,
@@ -286,7 +277,10 @@ function NewProduct() {
       !newGame.released.value &&
       !newGame.image.value &&
       !newGame.price.value &&
-      !newGame.rating.value ){return }
+      !newGame.rating.value
+    ) {
+      return;
+    }
     const {
       name,
       released,
@@ -297,7 +291,7 @@ function NewProduct() {
       price,
       description,
     } = newGame;
-    
+
     const arg = {
       name: name.value,
       released: released.value,
@@ -308,18 +302,17 @@ function NewProduct() {
       price: parseInt(price.value),
       description: description.value,
     };
-    console.log(arg)
-    setSelectedGenres([])
-    setSelectedPlatform([])
-    setCreado(true)
-    
+
+    setSelectedGenres([]);
+    setSelectedPlatform([]);
+    setCreado(true);
+
     return fetch(`http://localhost:3001/games`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(arg),
       redirect: "follow",
     })
-    
       .then((response) => response.json())
       .then((data) => {
         setNewGame({
@@ -362,8 +355,7 @@ function NewProduct() {
           },
           creado: true,
         });
-        
-      
+
         document.getElementById("name").value = "";
         document.getElementById("descripcion").value = "";
         document.getElementById("released").value = "";
@@ -372,9 +364,7 @@ function NewProduct() {
         document.getElementById("rating").value = "";
         document.getElementById("price").value = "";
       })
-    .catch((error) => console.log(error));
-     
-    
+      .catch((error) => console.log(error));
   }
 
   //Estas 4 funciones son para que el usuario cree o selecione la plataforma/genero
@@ -385,7 +375,6 @@ function NewProduct() {
         let indice = newGame.plataforms.value.indexOf(e.target.value);
         let newplataforms = [...newGame.plataforms.value];
         newplataforms.splice(indice, 1);
-
         setNewGame({
           ...newGame,
           plataforms: {
@@ -426,21 +415,22 @@ function NewProduct() {
     if (!c) {
       return (
         <div className="selector_div">
-           <MultiSelect
-          className="dark"
-        options={plataforma.length && plataforma.map((x)=>{
-          return {label:x,value:x}
-
-        })}
-        hasSelectAll={false}
-        overrideStrings={{
-        search:"Search"}}
-        value={selectedPlatform}
-        onChange={setSelectedPlatform}
-        
-        labelledBy="Select"
-        />
-
+          <MultiSelect
+            className="dark"
+            options={
+              plataforma.length &&
+              plataforma.map((x) => {
+                return { label: x, value: x };
+              })
+            }
+            hasSelectAll={false}
+            overrideStrings={{
+              search: "Search",
+            }}
+            value={selectedPlatform}
+            onChange={setSelectedPlatform}
+            labelledBy="Select"
+          />
 
           {/*
           <select
@@ -456,7 +446,7 @@ function NewProduct() {
               </option>
             ))}
             </select>*/}
-             {/* {newGame?.plataforms.value.map((e, i) => {
+          {/* {newGame?.plataforms.value.map((e, i) => {
             return (
               <li key={i}>
                 {e}
@@ -513,18 +503,23 @@ function NewProduct() {
             <div>{newGame.plataforms.error}</div>
           ) : null}
           <div className="plataform-div-genre">
-          <input
-          className= "input-platform"
-            id="plataforma_crear"
-            type="text"
-            onChange={(e) => manuallyModifyPlataform(e)}
-          ></input>
-          <button className="button-15"type="button" onClick={(e) => manuallyAddPlataform(e)}>
-            Add 
-          </button></div>
-          
+            <input
+              className="input-platform"
+              id="plataforma_crear"
+              type="text"
+              onChange={(e) => manuallyModifyPlataform(e)}
+            ></input>
+            <button
+              className="button-15"
+              type="button"
+              onClick={(e) => manuallyAddPlataform(e)}
+            >
+              Add
+            </button>
+          </div>
+
           <button
-           className="button-15"
+            className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -546,7 +541,6 @@ function NewProduct() {
         let indice = newGame.genres.value.indexOf(e.target.value);
         let newgenres = [...newGame.genres.value];
         newgenres.splice(indice, 1);
-
         setNewGame({
           ...newGame,
           genres: {
@@ -581,19 +575,21 @@ function NewProduct() {
     if (!c) {
       return (
         <div className="selector_div">
-           <MultiSelect
-          className="dark"
-          options={generos.length && generos.map((x)=>{
-            return {label:x,value:x}
-  
-          })}
-          hasSelectAll={false}
-          overrideStrings={{
-          search:"Search"}}
-          value={selectedGenres}
-          onChange={setSelectedGenres}
-          
-          labelledBy="Select"
+          <MultiSelect
+            className="dark"
+            options={
+              generos.length &&
+              generos.map((x) => {
+                return { label: x, value: x };
+              })
+            }
+            hasSelectAll={false}
+            overrideStrings={{
+              search: "Search",
+            }}
+            value={selectedGenres}
+            onChange={setSelectedGenres}
+            labelledBy="Select"
           />
           {/*<select
             id="select_genre"
@@ -616,8 +612,8 @@ function NewProduct() {
               </li>
             );
           })}*/}
-          <button className="button-15"
-            
+          <button
+            className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -660,17 +656,23 @@ function NewProduct() {
         <div>
           {newGame.genres.error ? <div>{newGame.genres.error}</div> : null}
           <div className="plataform-div-genre">
-          <input
-           className= "input-platform"
-            id="plataforma_crear"
-            type="text"
-            onChange={(e) => manuallyModifyGenre(e)}
-          ></input>
-          <button className='button-15'type="button" onClick={() => manuallyAddGenre()}>
-            Add
-          </button></div>
-          
-          <button  className="button-15"
+            <input
+              className="input-platform"
+              id="plataforma_crear"
+              type="text"
+              onChange={(e) => manuallyModifyGenre(e)}
+            ></input>
+            <button
+              className="button-15"
+              type="button"
+              onClick={() => manuallyAddGenre()}
+            >
+              Add
+            </button>
+          </div>
+
+          <button
+            className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -786,8 +788,10 @@ function NewProduct() {
             </div>
 
             <div className="container_btn">{buttonSubmit()}</div>
-            {creado && 
-            (newGame.creado ? <div className="container_success"> Created successfully!</div> : null)}
+            {creado &&
+              (newGame.creado ? (
+                <div className="container_success"> Created successfully!</div>
+              ) : null)}
           </form>
         </div>
       </div>
