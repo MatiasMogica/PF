@@ -135,7 +135,7 @@ export const videogamesSlice = createSlice({
       //Asi que vemos que tipo de orden el usuario seleciono y lo ordenamos como pide.
       switch (action.payload.order) {
         case "+Alphabet-":
-          filtrado.sort((a, b) => {
+          Array.isArray(filtrado) && filtrado.sort((a, b) => {
             const nameA = a.name.toUpperCase();
             const nameB = b.name.toUpperCase();
             return nameA > nameB
@@ -148,7 +148,7 @@ export const videogamesSlice = createSlice({
           });
           break;
         case "-Alphabet+":
-          filtrado.sort((a, b) => {
+          Array.isArray(filtrado) && filtrado.sort((a, b) => {
             const nameA = a.name.toUpperCase();
             const nameB = b.name.toUpperCase();
             return nameA > nameB
@@ -161,22 +161,22 @@ export const videogamesSlice = createSlice({
           });
           break;
         case "+Rating-":
-          filtrado.sort((a, b) => a.rating - b.rating);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => a.rating - b.rating);
           break;
         case "-Rating+":
-          filtrado.sort((a, b) => b.rating - a.rating);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => b.rating - a.rating);
           break;
         case "+RDate-":
-          filtrado.sort((a, b) => new Date(b.released) - new Date(a.released));
+          Array.isArray(filtrado) && filtrado.sort((a, b) => new Date(b.released) - new Date(a.released));
           break;
         case "-RDate+":
-          filtrado.sort((a, b) => new Date(a.released) - new Date(b.released));
+          Array.isArray(filtrado) && filtrado.sort((a, b) => new Date(a.released) - new Date(b.released));
           break;
         case "+Precio-":
-          filtrado.sort((a, b) => a.price - b.price);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => a.price - b.price);
           break;
         case "-Precio+":
-          filtrado.sort((a, b) => b.price - a.price);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => b.price - a.price);
           break;
         default:
           break;
