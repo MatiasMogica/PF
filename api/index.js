@@ -8,4 +8,3 @@ app.listen(PORT, () => {
   dbConnection();
   console.log(`listen on port ${PORT}`);
 });
-

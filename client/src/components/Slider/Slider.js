@@ -1,9 +1,4 @@
 import { useRef, useEffect, useCallback } from 'react'
-
-import horizon from '../../images/horizon.jpg'
-import stray from '../../images/stray.webp'
-import tsushima from '../../images/tsushima.jpg'
-import zelda from '../../images/zelda.jpg'
 import {ReactComponent as FlechaIzquierda} from './iconmonstr-angel-left-thin.svg';
 import {ReactComponent as FlechaDerecha} from './iconmonstr-angel-right-thin.svg';
 import styled from 'styled-components';

@@ -6,7 +6,6 @@ export const videogamesSlice = createSlice({
     videogames: [],
     details: {},
     videogamesFiltrados: [],
-    logIn: { status: false },
   },
   reducers: {
     getAllVideogames: (state, action) => {
@@ -32,6 +31,9 @@ export const videogamesSlice = createSlice({
             .toLowerCase()
             .includes(action.payload.name.toLowerCase());
         });
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
+        }
       }
 
       //Esta parte es para organizar por fecha de lanzamiento, tanto si tenes una minima, como si tenes una mazima o como si tenes ambas.
@@ -55,6 +57,9 @@ export const videogamesSlice = createSlice({
               x.released <= action.payload.released[1]
             );
           });
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
+          }
         } else if (
           action.payload.released[0] !== "tba" &&
           action.payload.released[0] !== ""
@@ -62,10 +67,16 @@ export const videogamesSlice = createSlice({
           filtrado = filtrado.filter((x) => {
             return x.released >= action.payload.released[0];
           });
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
+          }
         } else {
           filtrado = filtrado.filter((x) => {
             return x.released <= action.payload.released[1];
           });
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
+          }
         }
       }
 
@@ -80,6 +91,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
+        }
       });
 
       //para filtrar por plataforma (pc,linux,etc)
@@ -93,6 +107,9 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
+        }
       });
 
       //para filtrar por precio min/max
@@ -101,18 +118,24 @@ export const videogamesSlice = createSlice({
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.min <= x.price;
         });
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
+        }
       }
       if (action.payload.precio.max) {
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.max >= x.price;
         });
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
+        }
       }
 
       //Si llegamos hasta aqui ya se aplicaron los filtros, por lo tanto no se van a remover mas items del array final, solamente ordenarlos
       //Asi que vemos que tipo de orden el usuario seleciono y lo ordenamos como pide.
       switch (action.payload.order) {
         case "+Alphabet-":
-          filtrado.sort((a, b) => {
+          Array.isArray(filtrado) && filtrado.sort((a, b) => {
             const nameA = a.name.toUpperCase();
             const nameB = b.name.toUpperCase();
             return nameA > nameB
@@ -125,7 +148,7 @@ export const videogamesSlice = createSlice({
           });
           break;
         case "-Alphabet+":
-          filtrado.sort((a, b) => {
+          Array.isArray(filtrado) && filtrado.sort((a, b) => {
             const nameA = a.name.toUpperCase();
             const nameB = b.name.toUpperCase();
             return nameA > nameB
@@ -138,22 +161,22 @@ export const videogamesSlice = createSlice({
           });
           break;
         case "+Rating-":
-          filtrado.sort((a, b) => a.rating - b.rating);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => a.rating - b.rating);
           break;
         case "-Rating+":
-          filtrado.sort((a, b) => b.rating - a.rating);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => b.rating - a.rating);
           break;
         case "+RDate-":
-          filtrado.sort((a, b) => new Date(b.released) - new Date(a.released));
+          Array.isArray(filtrado) && filtrado.sort((a, b) => new Date(b.released) - new Date(a.released));
           break;
         case "-RDate+":
-          filtrado.sort((a, b) => new Date(a.released) - new Date(b.released));
+          Array.isArray(filtrado) && filtrado.sort((a, b) => new Date(a.released) - new Date(b.released));
           break;
         case "+Precio-":
-          filtrado.sort((a, b) => a.price - b.price);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => a.price - b.price);
           break;
         case "-Precio+":
-          filtrado.sort((a, b) => b.price - a.price);
+          Array.isArray(filtrado) && filtrado.sort((a, b) => b.price - a.price);
           break;
         default:
           break;
@@ -163,18 +186,6 @@ export const videogamesSlice = createSlice({
       //pero ambos funcionan
       return { ...state, videogamesFiltrados: filtrado };
     },
-    logIn: (state, action) => {
-      return {
-        ...state,
-        logIn: {
-          status: true,
-          user: action.payload.username,
-          id: action.payload.id,
-          email: action.payload.email,
-          admin: action.payload.email,
-        },
-      };
-    },
   },
 });
 
@@ -183,6 +194,7 @@ export const {
   getVideogameById,
   filterVideogames,
   clearVideogame,
+  localStorageUser,
   logIn,
 } = videogamesSlice.actions;
 

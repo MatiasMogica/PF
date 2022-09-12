@@ -1,0 +1,50 @@
+.containerItem {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 1rem 2rem 1rem;
+}
+
+.total {
+    color: green;
+}
+
+.empty {
+    text-align: center;
+}
+
+.emptyCart {
+    height: 400px;
+    width: 500px;
+}
+
+.clearButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    /* margin-left: -10px; */
+    width: 50px;
+}
+
+.cartTitle {
+    text-align: center;
+}
+
+.totalTitle {
+    margin-left: 10px;
+}
+
+.buyButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    /* margin-left: -10px; */
+    width: 50px;
+}
+
+.buttonsContainer {
+    align-items: center;
+    display: flex;
+}

@@ -1,0 +1,49 @@
+#admin_panel_container{
+    display: flex;
+    
+}
+#admin_panel_users{
+    width: 50%;
+}
+#admin_panel_videogames{
+    width: 50%;
+}
+
+.admin_panel_videogame{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+}
+.porque_modificaron_todos_los_p_en_vez_de_trabajar_con_clases{
+    font-size: medium;
+    margin: 0;
+    padding: 0;
+}
+
+.user_admin{
+    font-size: medium;
+    margin: 0.1em;
+    padding: 0;
+    color:red;
+}
+
+.user_comun{
+    font-size: medium;
+    margin: 0.1em;
+    padding: 0;
+    color:blue
+}
+
+#list_of_users{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#admin_panel_users_options{
+    display: flex;
+    justify-content: center;
+}
+
+.pointer {
+    cursor: pointer
+}
