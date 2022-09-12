@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from "react-redux"
+import { Link } from 'react-router-dom'
 import { calculateTotal } from '../../redux/slices/cartSlice'
 import { openModal } from '../../redux/slices/modalSlice'
 import NavBar from '../NavBar'
@@ -48,20 +49,19 @@ const CartContainer = () => {
                 {isOpen && <Modal />}
                 <div className='buttonsContainer'>
                 <h2 className='totalTitle'>
-                            Total: <span className='total'>${total} </span>
-                        </h2>
+                    Total: <span className='total'>${total} </span>
+                </h2>
                     <button className='clearButton' onClick={() => dispatch(openModal())}><Trash /></button>
                     <form action='http://localhost:3001/payment/payment' method='POST'>
-                <input type='hidden' name='title' value={cartItems.map(i => i.name)}/>
-                <input type='hidden' name='price' value={total}/>
-                <input type='hidden' name='picture_url' value={cartItems.map(i => i.background_image)}/>
-                <input type='hidden' name='quantity' value={cartItems.length}/>
-                <button className='buyButton' type='submit' value='Make the purchase'><Bag /></button>
-            </form>
+                       <input type='hidden' name='title' value={cartItems.map(i => i.name)}/>
+                       <input type='hidden' name='price' value={total}/>
+                       <input type='hidden' name='picture_url' value={cartItems.map(i => i.background_image)}/>
+                       <input type='hidden' name='quantity' value={cartItems.length}/>
+                       <button className='buyButton' type='submit' value='Make the purchase'><Bag /></button>
+                     </form>
                 </div>
             </footer>
             {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-            
         </div>
     )
 }

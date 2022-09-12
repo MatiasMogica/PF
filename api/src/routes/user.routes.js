@@ -9,7 +9,6 @@ const {
 } = require("../controllers/user.controller");
 const { tokenVerified } = require("../middlewares/auth.middleware.js");
 
-
 const router = Router();
 
 //Ruta para regitrar nuevo usuario
@@ -26,6 +25,5 @@ router.put("/putUser/:idUser", putUser);
 router.delete("/deleteUser/:idUser", deleteUser);
 //Become admin
 router.post("/changeAdminStatus/:idUser", becomeAdmin);
-
 
 module.exports = router;

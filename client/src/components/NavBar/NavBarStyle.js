@@ -23,6 +23,21 @@ cursor:pointer;
     color:#999;
 }
 `
+export const NavLinkAdmin=styled(Link)`
+color:#202020;
+display:flex;
+align-items:center;
+text-decoration:none;
+padding:0 1rem;
+height:100%;
+cursor:pointer;
+&:hover{
+    color:#999;
+}
+
+
+
+`
 export const Nav=styled.nav`
 background: #000;
 height:80px;

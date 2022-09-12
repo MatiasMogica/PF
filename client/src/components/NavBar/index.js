@@ -123,6 +123,7 @@ position:sticky;
 top:0.7rem;
 overflow : hidden;
 width:20%;
+
 `
 
 const ProfileContainer=styled.div`
@@ -135,6 +136,7 @@ const Avatar=styled.img`
 height :7rem;
 border-radius : 6rem;
 margin-top:20%;
+
 `
 const Name=styled.h3`
 color:white;
@@ -163,6 +165,7 @@ line-height :3rem;
 &:hover{
   color:#81E6D9;
 }
+
 `
 const HLinks=styled.h3`
 padding-left:0.5rem;

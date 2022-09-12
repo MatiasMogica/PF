@@ -23,6 +23,7 @@ color: white ;
 background-color :#5A8DD4;
 cursor: pointer ;
 border:none;
+
 `
 
 export default LogOut;

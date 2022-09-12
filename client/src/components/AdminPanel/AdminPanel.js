@@ -88,6 +88,7 @@ function AdminPanel() {
                     
                     <LinkEdit to={`/edit/${x._id}`} >
                     <BtnEdit className="pointer" >
+
                     <FaRegEdit/>
                     </BtnEdit>
                     </LinkEdit>
@@ -106,6 +107,7 @@ const Container=styled.div`
 display:flex;
 border-radius:2rem;
 margin:0.7rem;
+
 `
 
 
@@ -113,12 +115,14 @@ margin:0.7rem;
 const MainContent=styled.div`
 display:flex;
 flex-direction:column;
+
 `
 const Welcome=styled.div`
 width:80vw;
 display:flex;
 justify-content:space-around;
 align-items:center;
+
 `
 const ContainerGames=styled.div`
 display:flex;
@@ -127,6 +131,7 @@ width:50vw;
 margin-top:10%;
 margin-left:20vw;
 margin-bottom:10%;
+
 `
 const BtnTrash=styled.button`
 color:#FFFFFF;
@@ -146,13 +151,16 @@ width:40px;
 height:40px;
 border:none;
 border-radius:4px;
+
 `
 const Parrafo=styled.p`
 font-size:1rem;
+
 `
 const EachGame=styled.div`
 height:2rem;
 align-items:center;
 margin: 20px 0 0 0;
 flex-wrap:wrap;
+
 `
