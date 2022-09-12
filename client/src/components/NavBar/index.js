@@ -5,13 +5,15 @@ import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./NavBarStyle";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOut from "../LogOut/LogOut";
+import {CartIcon} from "../../icons/Icons"
 import "./index.css";
 
 export default function NavBar() {
   /* let {amount} = useSelector((state) => state.cart) */
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("email")));
-  const userapi = useSelector((state) => state.videogames.logIn);
-  let {amount} = useSelector((state) => state.cart) 
+  const [user] = useState(JSON.parse(localStorage.getItem("email")));
+  const userapi = useSelector((state) => state.logIn.logIn);
+
+  let { amount } = useSelector((state) => state.cart);
 
   const history = useHistory();
   const logout = () => {
@@ -55,23 +57,25 @@ export default function NavBar() {
         <NavMenu>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/videogame/wishList">WishList</NavLink>
-          <NavLink to="/cart" >
-                    Cart
-                    {amount}
-                </NavLink>
+          <div className="cartIcon">
+            <NavLink to="/cart" >
+              <CartIcon />
+              {amount}
+            </NavLink>
+          </div>
         </NavMenu>
         <NavBtn>
           {user ? (
             <>
-              <h4>{user.name}</h4>
+              <h4>{user.user}</h4>
               <NavBtnLink onClick={logout} to="/">
                 logout
               </NavBtnLink>
             </>
           ) : userapi.status ? (
             <div className="userMenu">
-              <Link to="/user" className={"linkStyle"}>
-                {userapi.user}
+              <Link to="/profile" className={"linkStyle"}>
+                {userapi.username}
               </Link>
               <div className="dropdownmenu">
                 <div className="LogOut">

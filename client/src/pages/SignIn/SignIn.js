@@ -19,7 +19,6 @@ export default function SignIn() {
     gapi.load("client:auth2", start);
   }, []);
   const googleSuccess = async (res) => {
-    console.log(res);
     axios({
       method: "POST",
       headers: {
@@ -34,7 +33,6 @@ export default function SignIn() {
   };
   const googleFailure = (error) => {
     console.log(error);
-    console.log("Google Sign In was unsuccessful. Try again Later");
   };
   return (
     <div>
