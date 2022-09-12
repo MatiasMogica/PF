@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { localStorageUser } from "../../redux/slices/videogamesSlice";
+import { localStorageUser } from "../../redux/slices/logInSlice";
 
 function LogOut() {
   const dispatch = useDispatch();
@@ -10,6 +10,5 @@ function LogOut() {
   }
   return <button onClick={() => handlelogOut()}>Log Out</button>;
 }
-
 
 export default LogOut;

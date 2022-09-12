@@ -9,8 +9,6 @@ const login = async (req, res) => {
 
   const user = await User.find({ username });
 
-  console.log(user);
-
   const passwordCorrect =
     user === null || user.length === 0
       ? false
@@ -24,12 +22,17 @@ const login = async (req, res) => {
     id: user[0]._id,
     username: user[0].username,
     email: user[0].email,
+    name: user[0].name,
+    image: user[0].image,
+    purchasedGames: user[0].purchasedGames,
     admin: user[0].admin,
   };
 
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
 
-  res.status(200).json({ auth: "User login success", userForToken, token });
+  user[0].deleted
+    ? res.status(200).json({ error: "User is blocked" })
+    : res.status(200).json({ auth: "User login success", userForToken, token });
 };
 
 const googleSignIn = async (req, res = response) => {
@@ -40,7 +43,7 @@ const googleSignIn = async (req, res = response) => {
     const { email, name, image, username } = await googleVerify(id_token);
 
     let usuario = await User.findOne({ email });
-    console.log(usuario);
+
     if (!usuario) {
       //tengo que crearlo
       const data = {
