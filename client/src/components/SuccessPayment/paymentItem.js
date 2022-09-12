@@ -13,15 +13,6 @@ const PaymentItem = ({_id, name, background_image, rating, price/* , amount */})
                 <h4>Price ${price} </h4>
                 <button>Download</button>
             </div>
-            {/* <div>
-                <button>
-                    <Up />
-                </button>
-                <p> {amount} </p>
-                <button>
-                    <Down />
-                </button>
-            </div> */}
         </div>
     )
 }

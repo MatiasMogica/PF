@@ -8,7 +8,7 @@ import CartItem from './CartItem'
 import Modal from './Modal/Modal'
 import './CartContainer.css'
 import emptyCart from '../../images/emptyCart.png'
-import { Trash } from '../../icons/Icons'
+import { Bag, Trash } from '../../icons/Icons'
 
 const CartContainer = () => {
     const {cartItems, total, amount} = useSelector((state) => state.cart)
@@ -45,25 +45,23 @@ const CartContainer = () => {
                 }
             </div>
             <footer>
-                <div>
                     <hr />
-                        <h2 className='totalTitle'>
-                            Total: <span className='total'>${total} </span>
-                        </h2>
-                </div>
                 {isOpen && <Modal />}
-                <div className='clearButton'>
+                <div className='buttonsContainer'>
+                <h2 className='totalTitle'>
+                    Total: <span className='total'>${total} </span>
+                </h2>
                     <button className='clearButton' onClick={() => dispatch(openModal())}><Trash /></button>
+                    <form action='http://localhost:3001/payment/payment' method='POST'>
+                       <input type='hidden' name='title' value={cartItems.map(i => i.name)}/>
+                       <input type='hidden' name='price' value={total}/>
+                       <input type='hidden' name='picture_url' value={cartItems.map(i => i.background_image)}/>
+                       <input type='hidden' name='quantity' value={cartItems.length}/>
+                       <button className='buyButton' type='submit' value='Make the purchase'><Bag /></button>
+                     </form>
                 </div>
             </footer>
             {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-            <form action='http://localhost:3001/payment/payment' method='POST'>
-                <input type='hidden' name='title' value={cartItems.map(i => i.name)}/>
-                <input type='hidden' name='price' value={total}/>
-                <input type='hidden' name='picture_url' value={cartItems.map(i => i.background_image)}/>
-                <input type='hidden' name='quantity' value={cartItems.length}/>
-                <input type='submit' value='realizar compra'/>
-            </form>
         </div>
     )
 }

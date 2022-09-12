@@ -1,4 +1,3 @@
-
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
@@ -14,6 +13,7 @@ export default function Users(){
   }, [dispatch]);
   const users = useSelector((state) => state.users.filterUsers);
   const [order, setOrder] = useState("firstRender");
+  
   useEffect(() => {
     dispatch(FilterUsers({ order }));
   }, [order]);
@@ -22,20 +22,7 @@ export default function Users(){
       e.target.value === order ? e.target.value + "_invert" : e.target.value
     );
   }
-
-  useEffect(() => {
-    dispatch(FilterUsers({ order }));
-  }, [order]);
-
-  function handleOrder(e) {
-    setOrder(
-      e.target.value === order ? e.target.value + "_invert" : e.target.value
-    );
-  }
-
-
-
-
+  
     return (
         <>
         <div id="admin_panel_users">

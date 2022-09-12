@@ -10,7 +10,18 @@ text-decoration:none;
 padding:0 1rem;
 height:100%;
 cursor:pointer;
-
+`
+export const NavLinkAdmin=styled(Link)`
+color:#202020;
+display:flex;
+align-items:center;
+text-decoration:none;
+padding:0 1rem;
+height:100%;
+cursor:pointer;
+&:hover{
+    color:#999;
+}
 `
 export const NavLinkAdmin=styled(Link)`
 color:#202020;
@@ -64,8 +75,6 @@ cursor:pointer;
 &:hover{
     color:#81E6D9;
 }
-
-
 `
 export const Bars=styled(FaBars)`
 display:none;
@@ -107,7 +116,6 @@ outline:none;
 cursor:pointer;
 transition:all 0.2s ease-in-out;
 text-decoration:none;
-
 &:hover{
     transition:all 0.2s ease-in-out;
     background:#fff;

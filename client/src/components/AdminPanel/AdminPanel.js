@@ -78,15 +78,17 @@ function AdminPanel() {
                       {x.name}
                     </Parrafo>
                     <BtnTrash
+                      className="pointer"
                       onClick={(e) => confirmDelete(e)}
                       id={"btn_delete_" + x._id}
                       value={x._id}>
                       <BsTrash/>
-                     
+                    
                     </BtnTrash>
                     
                     <LinkEdit to={`/edit/${x._id}`} >
-                    <BtnEdit>
+                    <BtnEdit className="pointer" >
+
                     <FaRegEdit/>
                     </BtnEdit>
                     </LinkEdit>
@@ -130,8 +132,6 @@ margin-top:10%;
 margin-left:20vw;
 margin-bottom:10%;
 
-
-
 `
 const BtnTrash=styled.button`
 color:#FFFFFF;
@@ -140,12 +140,9 @@ width:40px;
 height:40px;
 border:none;
 border-radius:4px;
-
-
 `
 const LinkEdit=styled(Link)`
 text-decoration:none;
-
 `
 const BtnEdit=styled.button`
 color:#FFFFFF;
@@ -157,7 +154,6 @@ border-radius:4px;
 
 `
 const Parrafo=styled.p`
-
 font-size:1rem;
 
 `
