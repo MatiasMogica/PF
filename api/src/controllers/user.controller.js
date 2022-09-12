@@ -1,6 +1,7 @@
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
 
+
 const getByName = ({ users, name }) => {
   return users.filter((user) => {
     user.name?.toLowerCase().includes(name.toLowerCase);
@@ -12,6 +13,7 @@ const getByEmail = ({ users, email }) => {
     user.email?.toLowerCase().includes(email.toLowerCase);
   });
 };
+
 
 const userPost = async (req, res) => {
   const { username, name, email, password, image } = req.body;
@@ -46,6 +48,7 @@ const userPost = async (req, res) => {
     console.log(error);
   }
 };
+
 
 const getUsers = async (req, res) => {
   const { name, email } = req.query;
@@ -108,6 +111,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+
 module.exports = {
   getByName,
   getByEmail,
@@ -116,5 +120,7 @@ module.exports = {
   getUserByID,
   putUser,
   becomeAdmin,
+
   deleteUser,
+
 };
