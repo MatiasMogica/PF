@@ -307,7 +307,7 @@ export default function Edit() {
       price: parseInt(price.value),
     };
 
-    return fetch(`http://localhost:3001/games/${id}`, {
+    return fetch(`/games/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(arg),

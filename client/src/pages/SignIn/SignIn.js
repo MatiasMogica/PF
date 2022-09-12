@@ -25,7 +25,7 @@ export default function SignIn() {
       headers: {
         "Content-Type": "application/json",
       },
-      url: "http://localhost:3001/auth/google",
+      url: "/auth/google",
       data: { id_token: res.tokenId },
     }).then((response) => {
       console.log(response);

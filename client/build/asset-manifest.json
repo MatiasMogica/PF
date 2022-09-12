@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cca77018.chunk.css",
+    "main.js": "/static/js/main.c96fefa0.chunk.js",
+    "main.js.map": "/static/js/main.c96fefa0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9eb3191f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9eb3191f.js.map",
+    "static/js/2.9ec207d3.chunk.js": "/static/js/2.9ec207d3.chunk.js",
+    "static/js/2.9ec207d3.chunk.js.map": "/static/js/2.9ec207d3.chunk.js.map",
+    "static/js/3.ce3caf63.chunk.js": "/static/js/3.ce3caf63.chunk.js",
+    "static/js/3.ce3caf63.chunk.js.map": "/static/js/3.ce3caf63.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.cca77018.chunk.css.map": "/static/css/main.cca77018.chunk.css.map",
+    "static/js/2.9ec207d3.chunk.js.LICENSE.txt": "/static/js/2.9ec207d3.chunk.js.LICENSE.txt",
+    "static/media/errorPS2.d60e88f6.gif": "/static/media/errorPS2.d60e88f6.gif",
+    "static/media/horizon.53fa4889.jpg": "/static/media/horizon.53fa4889.jpg",
+    "static/media/iconmonstr-angel-left-thin.b74b51c4.svg": "/static/media/iconmonstr-angel-left-thin.b74b51c4.svg",
+    "static/media/iconmonstr-angel-right-thin.b282d2fc.svg": "/static/media/iconmonstr-angel-right-thin.b282d2fc.svg",
+    "static/media/stray.2cf7687e.webp": "/static/media/stray.2cf7687e.webp",
+    "static/media/tsushima.84ff61b9.jpg": "/static/media/tsushima.84ff61b9.jpg",
+    "static/media/zelda.fc3acab7.jpg": "/static/media/zelda.fc3acab7.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9eb3191f.js",
+    "static/js/2.9ec207d3.chunk.js",
+    "static/css/main.cca77018.chunk.css",
+    "static/js/main.c96fefa0.chunk.js"
+  ]
+}

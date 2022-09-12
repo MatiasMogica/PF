@@ -26,7 +26,7 @@ function AdminPanel() {
   }
 
   async function handleDelete(e) {
-    await fetch(`http://localhost:3001/games/${e.target.value}`, {
+    await fetch(`/games/${e.target.value}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

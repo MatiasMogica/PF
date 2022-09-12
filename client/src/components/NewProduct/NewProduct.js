@@ -313,7 +313,7 @@ function NewProduct() {
     setSelectedPlatform([])
     setCreado(true)
     
-    return fetch(`http://localhost:3001/games`, {
+    return fetch(`/games`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(arg),

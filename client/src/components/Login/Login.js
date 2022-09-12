@@ -23,7 +23,7 @@ function Login() {
 
     const arg = { username: loginData.username, password: loginData.password };
 
-    await fetch(`http://localhost:3001/auth`, {
+    await fetch(`/auth`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(arg),
