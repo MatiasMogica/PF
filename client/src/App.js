@@ -40,6 +40,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path={"/"} component={Home} />
+        <Route exact path={"/home"} component={Home}/>
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
         <Route exact path={"/cart"} component={CartContainer} />
 

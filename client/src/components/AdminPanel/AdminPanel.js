@@ -8,20 +8,26 @@ import SearchBar from "../SearchBar/SearchBar";
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
+import styled from 'styled-components'
+import {BsTrash} from 'react-icons/bs'
+import {FaRegEdit} from 'react-icons/fa'
+import User from './User'
+
 
 function AdminPanel() {
+  const [renderUser,SetRenderUser]=useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideogames());
-    dispatch(getUsers());
   }, [dispatch]);
-
+  const usuario=()=>{
+    SetRenderUser(true)
+    }
+  const userapi = useSelector((state) => state.logIn.logIn);
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
   );
 
-  /* ESTO */
-  const users = useSelector((state) => state.users.filterUsers);
 
   function confirmDelete(e) {
     document.getElementById("btn_delete_" + e.target.value).innerText =
@@ -44,125 +50,121 @@ function AdminPanel() {
       })
       .catch((err) => console.log(err));
   }
-/* ESTO */
-  const [order, setOrder] = useState("firstRender");
-/* ESTO */
-  useEffect(() => {
-    dispatch(FilterUsers({ order }));
-  }, [order]);
-/* ESTO */
-  function handleOrder(e) {
-    setOrder(
-      e.target.value === order ? e.target.value + "_invert" : e.target.value
-    );
-  }
 
-  const [order, setOrder] = useState("firstRender");
-
-  useEffect(() => {
-    dispatch(FilterUsers({ order }));
-  }, [order]);
-
-  function handleOrder(e) {
-    setOrder(
-      e.target.value === order ? e.target.value + "_invert" : e.target.value
-    );
-  }
+  
 
   return (
-    <div>
-      <NavBar />
-      <div id="admin_panel_container">
-        {/* ACA */}
-        <div id="admin_panel_users">
-          <div id="admin_panel_users_options">
-            <button
-              onClick={(e) => handleOrder(e)}
-              id="user_order"
-              value="admin/user"
-            >
-              User/Admin
-            </button>
-            <button
-              onClick={(e) => handleOrder(e)}
-              id="user_order"
-              value="blocked"
-            >
-              Blocked/Unblocked
-            </button>
-            <UserSearchBar />
-            <button onClick={(e) => handleOrder(e)} id="user_order" value="all">
-              All
-            </button>
-          </div>
-          <div id="list_of_users">
-            {users.map((x) => (
-              <div key={x.id}>
-                <Link to={`/users/${x.id}`}>
-                  <p className={x.admin ? "user_admin" : "user_comun"}>
-                    {x.username}
-                  </p>
-                </Link>
-              </div>
-            ))}
-          </div>
-{/* HASTA ACA */}
-        </div>
+    <Container>
+      <NavBar usuario={usuario}/>
+      {renderUser? <User/>:
+      <MainContent>
+
+        <Welcome>
+
+        <h3>Welcome,<b> {userapi.username}</b></h3>
+        <div className="searchBar"> <SearchBar /></div>
+       
+        </Welcome>
         <div id="admin_panel_videogames">
-          <Link to="/videogame/add" className={"linkStyle"}>
-            Create game
-          </Link>
-          <SearchBar />
-          <div id="admin_panel_videogames_list">
-            {/* {videogames.map((x) => (
-              <div key={x._id} className="admin_panel_videogame">
-                <p
-                  id={x._id}
-                  className="porque_modificaron_todos_los_p_en_vez_de_trabajar_con_clases"
-                >
-                  {x.name}
-                </p>
-                <button
-                  onClick={(e) => confirmDelete(e)}
-                  id={"btn_delete_" + x._id}
-                  value={x._id}
-                >
-                  Delete
-                </button>
-                <Link to={`/edit/${x._id}`}>Edit</Link>
-              </div>
-
-            ))} */}
-            {Array.isArray(videogames)
-              ? videogames.length !== 0
-                ? videogames.map((x) => (
-                    <div key={x._id} className="admin_panel_videogame">
-                      <Link to={`/videogames/${x._id}`}>
-                        <p
-                          id={x._id}
-                          className="porque_modificaron_todos_los_p_en_vez_de_trabajar_con_clases"
-                        >
-                          {x.name}
-                        </p>
-                      </Link>
-
-                      <button
-                        onClick={(e) => confirmDelete(e)}
-                        id={"btn_delete_" + x._id}
-                        value={x._id}
-                      >
-                        Delete
-                      </button>
-                      <Link to={`/edit/${x._id}`}>Edit</Link>
-                    </div>
-                  ))
-                : null
-              : null}
-          </div>
+          
+          
+          <ContainerGames>
+            {
+              Array.isArray(videogames)? (videogames.length !== 0 ? (
+                  videogames.map((x) => (
+                    <EachGame key={x._id} className="admin_panel_videogame">
+                    <Parrafo
+                      id={x._id}>
+                      {x.name}
+                    </Parrafo>
+                    <BtnTrash
+                      onClick={(e) => confirmDelete(e)}
+                      id={"btn_delete_" + x._id}
+                      value={x._id}>
+                      <BsTrash/>
+                     
+                    </BtnTrash>
+                    
+                    <LinkEdit to={`/edit/${x._id}`} >
+                    <BtnEdit>
+                    <FaRegEdit/>
+                    </BtnEdit>
+                    </LinkEdit>
+                  </EachGame>
+                  ))) : null
+              ) : null } 
+          </ContainerGames>
         </div>
-      </div>
-    </div>
+      </MainContent>}
+    </Container>
   );
 }
 
 export default AdminPanel;
+const Container=styled.div`
+display:flex;
+border-radius:2rem;
+margin:0.7rem;
+
+`
+
+
+
+const MainContent=styled.div`
+display:flex;
+flex-direction:column;
+
+`
+const Welcome=styled.div`
+width:80vw;
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+`
+const ContainerGames=styled.div`
+display:flex;
+flex-direction:column;
+width:50vw;
+margin-top:10%;
+margin-left:20vw;
+margin-bottom:10%;
+
+
+
+`
+const BtnTrash=styled.button`
+color:#FFFFFF;
+background-color:#5A8DD4;
+width:40px;
+height:40px;
+border:none;
+border-radius:4px;
+
+
+`
+const LinkEdit=styled(Link)`
+text-decoration:none;
+
+`
+const BtnEdit=styled.button`
+color:#FFFFFF;
+background-color:#8068B2;
+width:40px;
+height:40px;
+border:none;
+border-radius:4px;
+
+`
+const Parrafo=styled.p`
+
+font-size:1rem;
+
+`
+const EachGame=styled.div`
+height:2rem;
+align-items:center;
+margin: 20px 0 0 0;
+flex-wrap:wrap;
+
+`
