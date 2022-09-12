@@ -14,7 +14,10 @@ import { useEffect } from "react";
 import { localStorageUser } from "./redux/slices/logInSlice";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import Edit from "./pages/Edit/Edit";
-import CartContainer from "./components/Cart/CartContainer";
+
+import CartContainer from "./components/Cart/CartContainer"
+import SuccessPayment from "./components/SuccessPayment";
+import FailurePayment from "./components/FailurePayment";
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
 
 function App() {
@@ -42,8 +45,9 @@ function App() {
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/home"} component={Home}/>
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
-        <Route exact path={"/cart"} component={CartContainer} />
-
+        <Route exact path={'/cart'} component={CartContainer}/>
+        <Route exact path={'/success'} component={SuccessPayment} />
+        <Route exact path={'/failure'} component={FailurePayment} />
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
@@ -69,3 +73,4 @@ function App() {
 }
 
 export default App;
+
