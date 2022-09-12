@@ -148,16 +148,17 @@ export default function Register() {
       !newUser.name.error &&
       !newUser.userName.error &&
       !newUser.image.error &&
-      !newUser.password.error
+      !newUser.password.error &&
+      newUser.password.identical
     ) {
       return (
-        <button type="submit" className="buttonregister" disabled>
+        <button type="submit" className="buttonregister">
           Register
         </button>
       );
     } else {
       return (
-        <button type="submit" className="buttonregister">
+        <button type="submit" className="buttonregister" disabled>
           Register
         </button>
       );
@@ -187,14 +188,13 @@ export default function Register() {
       .then((data) => {
         if (!data.error) {
           setNewUser({
-            image: { value: "", error: "Upload your profile photo" },
-            userName: { value: "", error: "Your Username" },
-            name: { value: "", error: "Your Name" },
-            email: { value: "", error: "Your email" },
+            image: { value: "", error: "" },
+            userName: { value: "", error: "" },
+            name: { value: "", error: "" },
+            email: { value: "", error: "" },
             password: {
               password: "",
-              error:
-                "Password must have, one digit, one lowercase character, one uppercase character and be at least 8 characters in length but no more than 32",
+              error: "",
               confirmPassword: "",
               identical: false,
             },

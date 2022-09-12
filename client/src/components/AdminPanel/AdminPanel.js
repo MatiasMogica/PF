@@ -8,26 +8,24 @@ import SearchBar from "../SearchBar/SearchBar";
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
-import styled from 'styled-components'
-import {BsTrash} from 'react-icons/bs'
-import {FaRegEdit} from 'react-icons/fa'
-import User from './User'
-
+import styled from "styled-components";
+import { BsTrash } from "react-icons/bs";
+import { FaRegEdit } from "react-icons/fa";
+import User from "./User";
 
 function AdminPanel() {
-  const [renderUser,SetRenderUser]=useState(false)
+  const [renderUser, SetRenderUser] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-  const usuario=()=>{
-    SetRenderUser(true)
-    }
+  const usuario = () => {
+    SetRenderUser(true);
+  };
   const userapi = useSelector((state) => state.logIn.logIn);
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
   );
-
 
   function confirmDelete(e) {
     document.getElementById("btn_delete_" + e.target.value).innerText =
@@ -51,10 +49,9 @@ function AdminPanel() {
       .catch((err) => console.log(err));
   }
 
-  
-
   return (
     <Container>
+
       <NavBar usuario={usuario}/>
       {renderUser? <User/>:
       <MainContent>
@@ -98,11 +95,13 @@ function AdminPanel() {
           </ContainerGames>
         </div>
       </MainContent>}
+
     </Container>
   );
 }
 
 export default AdminPanel;
+
 const Container=styled.div`
 display:flex;
 border-radius:2rem;
@@ -164,3 +163,4 @@ margin: 20px 0 0 0;
 flex-wrap:wrap;
 
 `
+

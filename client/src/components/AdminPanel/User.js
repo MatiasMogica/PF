@@ -1,13 +1,13 @@
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
-import styled from 'styled-components'
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-export default function Users(){
-    const dispatch = useDispatch();
+export default function Users() {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -22,6 +22,7 @@ export default function Users(){
       e.target.value === order ? e.target.value + "_invert" : e.target.value
     );
   }
+
   
     return (
         <>
@@ -65,3 +66,4 @@ export default function Users(){
 
     )
 }
+
