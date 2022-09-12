@@ -26,11 +26,13 @@ function SearchBar() {
 
   return (
     <input
+    className="buscar"
       placeholder="Search"
       type="text"
       onChange={(e) => handleName(e)}
     ></input>
   );
 }
+
 
 export default SearchBar;

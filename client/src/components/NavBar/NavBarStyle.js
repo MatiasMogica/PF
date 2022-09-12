@@ -10,7 +10,18 @@ text-decoration:none;
 padding:0 1rem;
 height:100%;
 cursor:pointer;
-
+`
+export const NavLinkAdmin=styled(Link)`
+color:#202020;
+display:flex;
+align-items:center;
+text-decoration:none;
+padding:0 1rem;
+height:100%;
+cursor:pointer;
+&:hover{
+    color:#999;
+}
 `
 export const Nav=styled.nav`
 background: #000;
@@ -29,6 +40,24 @@ padding:0 1rem;
 height:100%;
 cursor:pointer;
 &.active{
+    color:#81E6D9;
+}
+&:hover{
+    color:#81E6D9;
+}
+`
+export const NavLinkHome=styled(Link)`
+color:#fff;
+display:flex;
+align-items:center;
+text-decoration:none;
+padding:0 1rem;
+height:100%;
+cursor:pointer;
+&.active{
+    color:#81E6D9;
+}
+&:hover{
     color:#81E6D9;
 }
 `
@@ -72,7 +101,6 @@ outline:none;
 cursor:pointer;
 transition:all 0.2s ease-in-out;
 text-decoration:none;
-
 &:hover{
     transition:all 0.2s ease-in-out;
     background:#fff;

@@ -1,17 +1,17 @@
 import NavBar from "../../components/NavBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import "./Register.css";
 
 export default function Register() {
   const [newUser, setNewUser] = useState({
-    image: { value: "", error: "Upload your profile photo" },
-    userName: { value: "", error: "Your Username" },
-    name: { value: "", error: "Your Name" },
-    email: { value: "", error: "Your email" },
+    image: { value: "", error: "" },
+    userName: { value: "", error: "" },
+    name: { value: "", error: "" },
+    email: { value: "", error: "" },
     password: {
       password: "",
-      error:
-        "Password must have, one digit, one lowercase character, one uppercase character and be at least 8 characters in length but no more than 32",
+      error: "",
       identical: false,
     },
     api: { creado: false, error: "" },
@@ -150,10 +150,14 @@ export default function Register() {
       !newUser.image.error &&
       !newUser.password.error
     ) {
-      return <button type="submit">Register</button>;
+      return (
+        <button type="submit" className="buttonregister" disabled>
+          Register
+        </button>
+      );
     } else {
       return (
-        <button type="submit" disabled>
+        <button type="submit" className="buttonregister">
           Register
         </button>
       );
@@ -213,80 +217,125 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <div className="register-boty">
       <NavBar />
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="register_username">Username:</label>
-        <input
-          id="register_username"
-          type="text"
-          onChange={(e) => handleUserName(e)}
-        ></input>
+      <div class="form_wrapper">
+        <div class="form_container">
+          <div class="title_container">
+            <h2>Registration Form</h2>
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <label htmlFor="register_username">Username:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_username"
+                type="text"
+                onChange={(e) => handleUserName(e)}
+              ></input>
+            </div>
 
-        {newUser.userName.error ? newUser.userName.error : null}
+            {newUser.userName.error ? (
+              <p className="register_error">{newUser.userName.error} </p>
+            ) : null}
 
-        <label htmlFor="register_name">Name:</label>
-        <input
-          id="register_name"
-          type="text"
-          onChange={(e) => handleName(e)}
-        ></input>
+            <label htmlFor="register_name">Name:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_name"
+                type="text"
+                onChange={(e) => handleName(e)}
+              ></input>
+            </div>
 
-        {newUser.name.error ? newUser.name.error : null}
+            {newUser.name.error ? (
+              <p className="register_error">{newUser.name.error} </p>
+            ) : null}
 
-        <label htmlFor="register_email">Email:</label>
-        <input
-          id="register_email"
-          type="email"
-          onChange={(e) => handleEmail(e)}
-        ></input>
+            <label htmlFor="register_email">Email:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_email"
+                type="email"
+                onChange={(e) => handleEmail(e)}
+              ></input>
+            </div>
+            {newUser.email.error ? (
+              <p className="register_error">{newUser.email.error} </p>
+            ) : null}
 
-        {newUser.email.error ? newUser.email.error : null}
+            <label htmlFor="register_password">Password:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_password"
+                type="password"
+                onChange={(e) => handlePassword(e)}
+              ></input>
+            </div>
+            {newUser.password.error ? (
+              <p className="register_error">{newUser.password.error} </p>
+            ) : null}
 
-        <label htmlFor="register_password">Password:</label>
-        <input
-          id="register_password"
-          type="password"
-          onChange={(e) => handlePassword(e)}
-        ></input>
+            <label htmlFor="register_password_confirm">Confirm Password:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_password_confirm"
+                type="password"
+                onChange={(e) => handleConfirmPassword(e)}
+              ></input>
+            </div>
+            {newUser.password.identical ? null : newUser.password.password
+                .length > 1 ? (
+              <p className="register_error">Passwords dont match</p>
+            ) : null}
 
-        {newUser.password.error ? newUser.password.error : null}
+            <label htmlFor="register_image">Image:</label>
+            <div class="input_field">
+              <span>
+                <i aria-hidden="true" class="fa fa-lock"></i>
+              </span>
+              <input
+                id="register_image"
+                type="file"
+                onChange={(e) => handleImage(e)}
+              ></input>
+            </div>
+            {newUser.image.value ? (
+              <img src={newUser.image.value} alt="your profile"></img>
+            ) : (
+              <p className="register_error">{newUser.image.value} </p>
+            )}
 
-        <label htmlFor="register_password_confirm">Confirm Password:</label>
-        <input
-          id="register_password_confirm"
-          type="password"
-          onChange={(e) => handleConfirmPassword(e)}
-        ></input>
-
-        {newUser.password.identical ? null : <p>Passwords dont match</p>}
-
-        <label htmlFor="register_image">Image:</label>
-        <input
-          id="register_image"
-          type="file"
-          onChange={(e) => handleImage(e)}
-        ></input>
-        {newUser.image.value ? (
-          <img src={newUser.image.value} alt="your profile"></img>
-        ) : (
-          newUser.image.error
-        )}
-
-        {handleButton()}
-        {newUser.api.error ? (
-          <p>{newUser.api.error}</p>
-        ) : newUser.api.creado ? (
-          <p>Creado con exito</p>
-        ) : null}
-      </form>
-      <div>
-        <p>
-          Or
-          <Link to="/signIn" className={"linkStyle"}>
-            Log In
-          </Link>
-        </p>
+            {handleButton()}
+            {newUser.api.error ? (
+              <p>{newUser.api.error}</p>
+            ) : newUser.api.creado ? (
+              <p>Creado con exito</p>
+            ) : null}
+          </form>
+          <div>
+            <p>
+              Or{" "}
+              <Link to="/signIn" className="linkstyleregister">
+                Log In
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

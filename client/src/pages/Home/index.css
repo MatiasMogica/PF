@@ -9,7 +9,7 @@ body {
     background-color: #161414;
 }
 
-.container {
+.containerHome {
     display: flex;
     flex-direction: column;
     align-items: normal;
@@ -51,7 +51,7 @@ top:0;
     margin: 0px 1rem 2rem 1rem;
     width: 280px;
     min-height: 50px ;
-    height: 450px;
+    /* height: 475px; */
     text-align: center;
     transition: .4s;
     
@@ -68,15 +68,16 @@ top:0;
     background: none;
     border: none;
     cursor: pointer;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
 }
 
 .inCart {
     background: none;
     border: none;
+    color: green;
     cursor: pointer;
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
 }
 
