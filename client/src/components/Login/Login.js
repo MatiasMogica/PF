@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/slices/videogamesSlice";
+import { logIn } from "../../redux/slices/logInSlice";
 
 function Login() {
   const [loginData, setloginData] = useState({

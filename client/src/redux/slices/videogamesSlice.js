@@ -6,7 +6,6 @@ export const videogamesSlice = createSlice({
     videogames: [],
     details: {},
     videogamesFiltrados: [],
-    logIn: { status: false },
   },
   reducers: {
     getAllVideogames: (state, action) => {
@@ -18,9 +17,6 @@ export const videogamesSlice = createSlice({
     },
     clearVideogame: (state) => {
       state.details = {};
-    },
-    localStorageUser: (state, action) => {
-      return { ...state, logIn: action.payload };
     },
     filterVideogames: (state, action) => {
       //Se toman todos los datos de nuestros juegos tal cual como estan originalmente
@@ -35,11 +31,10 @@ export const videogamesSlice = createSlice({
             .toLowerCase()
             .includes(action.payload.name.toLowerCase());
         });
-        if (!filtrado.length){
-          filtrado = {msg:'No matches found'}
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
         }
       }
-    
 
       //Esta parte es para organizar por fecha de lanzamiento, tanto si tenes una minima, como si tenes una mazima o como si tenes ambas.
       if (
@@ -62,8 +57,8 @@ export const videogamesSlice = createSlice({
               x.released <= action.payload.released[1]
             );
           });
-          if (!filtrado.length){
-            filtrado = {msg:'No matches found'}
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
           }
         } else if (
           action.payload.released[0] !== "tba" &&
@@ -72,15 +67,15 @@ export const videogamesSlice = createSlice({
           filtrado = filtrado.filter((x) => {
             return x.released >= action.payload.released[0];
           });
-          if (!filtrado.length){
-            filtrado = {msg:'No matches found'}
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
           }
         } else {
           filtrado = filtrado.filter((x) => {
             return x.released <= action.payload.released[1];
           });
-          if (!filtrado.length){
-            filtrado = {msg:'No matches found'}
+          if (!filtrado.length) {
+            filtrado = { msg: "No matches found" };
           }
         }
       }
@@ -96,8 +91,8 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
-        if (!filtrado.length){
-          filtrado = {msg:'No matches found'}
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
         }
       });
 
@@ -112,8 +107,8 @@ export const videogamesSlice = createSlice({
           }
           return p;
         });
-        if (!filtrado.length){
-          filtrado = {msg:'No matches found'}
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
         }
       });
 
@@ -123,16 +118,16 @@ export const videogamesSlice = createSlice({
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.min <= x.price;
         });
-        if (!filtrado.length){
-          filtrado = {msg:'No matches found'}
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
         }
       }
       if (action.payload.precio.max) {
         filtrado = filtrado.filter((x) => {
           return action.payload.precio.max >= x.price;
         });
-        if (!filtrado.length){
-          filtrado = {msg:'No matches found'}
+        if (!filtrado.length) {
+          filtrado = { msg: "No matches found" };
         }
       }
 
@@ -190,19 +185,6 @@ export const videogamesSlice = createSlice({
       //Remplazamos esto en el nuevo estado, no es necesario usar return, tambien podria ser el callback de state que se le pasa a la funcion.
       //pero ambos funcionan
       return { ...state, videogamesFiltrados: filtrado };
-    },
-    logIn: (state, action) => {
-      return {
-        ...state,
-        logIn: {
-          status: true,
-          user: action.payload.userData.username,
-          id: action.payload.userData.id,
-          email: action.payload.userData.email,
-          admin: action.payload.userData.admin,
-          token: action.payload.token,
-        },
-      };
     },
   },
 });
