@@ -71,6 +71,7 @@ const googleSignIn = async (req, res = response) => {
     res.json({
       msg: "todo bien! google signin",
       token,
+      userForToken,
     });
   } catch (error) {
     res.status(400).json({

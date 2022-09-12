@@ -1,14 +1,13 @@
-
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
-import styled from 'styled-components'
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-export default function Users(){
-    const dispatch = useDispatch();
+export default function Users() {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -33,48 +32,43 @@ export default function Users(){
     );
   }
 
+  console.log(users);
 
-
-
-    return (
-        <>
-        <div id="admin_panel_users">
-          <div id="admin_panel_users_options">
-            <button
-              onClick={(e) => handleOrder(e)}
-              id="user_order"
-              value="admin/user">
-              User/Admin
-            </button>
-            <button
-              onClick={(e) => handleOrder(e)}
-              id="user_order"
-              value="blocked">
-              Blocked/Unblocked
-            </button>
-            <UserSearchBar />
-            <button onClick={(e) => handleOrder(e)} id="user_order" value="all">
-              All
-            </button>
-          </div>
-          <div id="list_of_users">
-            {users.map((x) => (
-              <div key={x.id}>
-                <Link to={`/users/${x.id}`}>
-                  <p className={x.admin ? "user_admin" : "user_comun"}>
-                    {x.username}
-                  </p>
-                </Link>
-              </div>
-            ))}
-          </div>
-          </div>
-        
-        
-        
-        
-        
-        </>
-
-    )
+  return (
+    <>
+      <div id="admin_panel_users">
+        <div id="admin_panel_users_options">
+          <button
+            onClick={(e) => handleOrder(e)}
+            id="user_order"
+            value="admin/user"
+          >
+            User/Admin
+          </button>
+          <button
+            onClick={(e) => handleOrder(e)}
+            id="user_order"
+            value="blocked"
+          >
+            Blocked/Unblocked
+          </button>
+          <UserSearchBar />
+          <button onClick={(e) => handleOrder(e)} id="user_order" value="all">
+            All
+          </button>
+        </div>
+        <div id="list_of_users">
+          {users.map((x) => (
+            <div key={x.id}>
+              <Link to={`/users/${x.id}`}>
+                <p className={x.admin ? "user_admin" : "user_comun"}>
+                  {x.username}
+                </p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 }
