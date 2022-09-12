@@ -14,7 +14,7 @@ import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
 import zelda from '../../images/zelda.jpg'
 import { addItem } from "../../redux/slices/cartSlice";
-import { Added, AddIcon, Confirm } from "../../icons/Icons";
+import { AddIcon, CartIcon } from "../../icons/Icons";
 
 export default function Home() {
     let dispatch = useDispatch();
@@ -39,7 +39,7 @@ export default function Home() {
     return (
         <div className="home">
             <NavBar />
-            <div className="container">
+            <div className="containerHome">
             
         <div>
             <Slideshow controles={true} autoplay={false} velocidad="5000" intervalo="7000">
@@ -98,7 +98,7 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genres={v.genres} />
-                                {cartItems.includes(inCart) ? <div className="inCart"> <Added /> </div> : <button className="addButton" onClick={() => dispatch(addItem(v))}><AddIcon/></button>}
+                                {cartItems.includes(inCart) ? <div className="inCart"> <CartIcon /> </div> : <button className="addButton" onClick={() => dispatch(addItem(v))}><AddIcon/></button>}
                             </div>
                         );
                         })

@@ -163,7 +163,6 @@ background-color:#545479;
 flex-direction: column;
 line-height :3rem;
 &:hover{
-
   color:#81E6D9;
 }
 
@@ -185,8 +184,4 @@ display:flex;
 justify-content: center;
 align-items: center;
 font-size:1rem;
-
-
-
-
 `
