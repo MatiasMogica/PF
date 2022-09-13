@@ -65,5 +65,4 @@ function UserDetailsOptions() {
   );
 }
 
-
 export default UserDetailsOptions;

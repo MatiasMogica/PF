@@ -1,6 +1,9 @@
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
-
+const CourierClient = require("@trycourier/courier").CourierClient;
+const courier = CourierClient({
+  authorizationToken: process.env.COURRIER_API_KEY,
+});
 
 const getByName = ({ users, name }) => {
   return users.filter((user) => {
@@ -13,7 +16,6 @@ const getByEmail = ({ users, email }) => {
     user.email?.toLowerCase().includes(email.toLowerCase);
   });
 };
-
 
 const userPost = async (req, res) => {
   const { username, name, email, password, image } = req.body;
@@ -43,12 +45,33 @@ const userPost = async (req, res) => {
 
     const savedUser = await user.save();
 
+    const { requestId } = await courier.send({
+      message: {
+        to: {
+          data: {
+            name: "Contact-Form",
+          },
+
+          email: user.email,
+        },
+        content: {
+          title: `Welcome ${user.name} to Zteam`,
+          body: `Hi ${user.name} we are happy that you decide to join us your username is ${user.username}.
+        If you want to contact us you can do it to the email: videogames.zteam@gmail.com
+        `,
+        },
+        routing: {
+          method: "single",
+          channels: ["email"],
+        },
+      },
+    });
+
     res.status(200).json({ newUser: savedUser });
   } catch (error) {
     console.log(error);
   }
 };
-
 
 const getUsers = async (req, res) => {
   const { name, email } = req.query;
@@ -110,7 +133,6 @@ const deleteUser = async (req, res) => {
     return res.status(500).json({ error: error });
   }
 };
-
 
 module.exports = {
   getByName,
