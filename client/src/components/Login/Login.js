@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { logIn } from "../../redux/slices/logInSlice";
 import "./logIn.css";
 
@@ -62,7 +63,16 @@ function Login() {
         onChange={(e) => handlePassword(e)}
       ></input>
       <button type="submit">Log In</button>
-      {loginData.error ? <p>{loginData.error}</p> : null}
+      {loginData.error ? (
+        loginData.error === "User is blocked" ? (
+          <div>
+            {loginData.error}, Want to appeal?{" "}
+            <Link to="/contact"> Contact Us</Link>
+          </div>
+        ) : (
+          <p>{loginData.error}</p>
+        )
+      ) : null}
     </form>
   );
 }

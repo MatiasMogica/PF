@@ -219,16 +219,16 @@ export default function Register() {
   return (
     <div className="register-boty">
       <NavBar />
-      <div class="form_wrapper">
-        <div class="form_container">
-          <div class="title_container">
+      <div className="form_wrapper">
+        <div className="form_container">
+          <div className="title_container">
             <h2>Registration Form</h2>
           </div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="register_username">Username:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_username"
@@ -242,9 +242,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_name">Name:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_name"
@@ -258,9 +258,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_email">Email:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_email"
@@ -273,9 +273,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password">Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password"
@@ -288,9 +288,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password_confirm">Confirm Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password_confirm"
@@ -304,9 +304,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_image">Image:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_image"
