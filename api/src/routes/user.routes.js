@@ -6,6 +6,7 @@ const {
   putUser,
   becomeAdmin,
   deleteUser,
+  getUserStats,
 } = require("../controllers/user.controller");
 const { tokenVerified } = require("../middlewares/auth.middleware.js");
 
@@ -25,5 +26,7 @@ router.put("/putUser/:idUser", putUser);
 router.delete("/deleteUser/:idUser", deleteUser);
 //Become admin
 router.post("/changeAdminStatus/:idUser", becomeAdmin);
+//USER STATS
+router.get("/stats", getUserStats);
 
 module.exports = router;
