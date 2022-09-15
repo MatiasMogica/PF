@@ -20,8 +20,11 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { getFriendRequests } from "../../redux/actions/ProfileActions";
-
+import Dropdown from "react-bootstrap/Dropdown";
 import settingslogo from "../../icons/settings.ico";
+import bell from "../../icons/bell.png";
+import NavBarLogIn from "../NavBarLogin/NavBarLogIn";
+
 export default function NavBar({ usuario }) {
   const user = useSelector((state) => state.logIn.logIn);
   const friendRequests = useSelector((state) => state.profile.friendRequests);
@@ -38,7 +41,6 @@ export default function NavBar({ usuario }) {
 
   return (
     //
-
     <>
       {pathname === "/adminPanel" ? (
         <Container>
@@ -82,49 +84,83 @@ export default function NavBar({ usuario }) {
               </NavLink>
             </div>
           </NavMenu>
-          <NavBtn>
-            {user.status ? (
-              <div className="navbar_agrege_notificacion_amigos">
-                {friendRequests.length > 0 ? (
+          {user.status ? (
+            <div className="menu_user_loged_navbar">
+              {friendRequests.length > 0 ? (
+                <div>
                   <div>
-                    <div className="userMenu">
-                      New Friend Request
-                      <div className="dropdownmenu">
-                        {friendRequests.map((x) => (
+                    <Dropdown>
+                      <Dropdown.Toggle id="bell" variant="secondary">
+                        <div>
+                          <div className="number_bell_notifications">
+                            {friendRequests.length}
+                          </div>
+                          <img
+                            src={bell}
+                            alt="no notifications"
+                            className="bell_notification"
+                          ></img>
+                        </div>
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu variant="dark">
+                        {friendRequests.map((x, i) => (
                           <div key={x}>
-                            <NavLink to={`/profile/${x}`}>
-                              Someone Wants to be your friend!
-                            </NavLink>
+                            <Dropdown.Item href={"#/action-" + i} active>
+                              <NavLink to={`/profile/${x}`}>
+                                Friend Request
+                              </NavLink>
+                            </Dropdown.Item>
                           </div>
                         ))}
-                      </div>
-                    </div>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
-                ) : null}
-                <div className="userMenu">
-                  <NavLink to={`/profile/${user.id}`}>{user.username}</NavLink>
-                  <div className="dropdownmenu">
-                    <div className="Settingsprofile">
-                      <img
-                        src={settingslogo}
-                        alt="settings"
-                        className="settingslogo"
-                      ></img>
-                      <NavLinkAdmin to={`/settings`}>Settings</NavLinkAdmin>
-                    </div>
-                    <div className="LogOut">
-                      <LogOut></LogOut>
-                    </div>
-                  </div>
-                  {user.admin ? (
-                    <NavLinkAdmin to="/adminPanel">Admin Panel</NavLinkAdmin>
-                  ) : null}
                 </div>
-              </div>
-            ) : (
-              <NavBtnLink to="/signIn">Sign In</NavBtnLink>
-            )}
-          </NavBtn>
+              ) : (
+                <img
+                  src={bell}
+                  alt="no notifications"
+                  className="bell_notification"
+                ></img>
+              )}
+
+              <Dropdown>
+                <Dropdown.Toggle
+                  id="dropdown-button-dark-example1"
+                  variant="secondary"
+                >
+                  {user.username || "Error Loading Username"}
+                </Dropdown.Toggle>
+                <Dropdown.Menu variant="dark">
+                  <Dropdown.Item href="#/action-1" active>
+                    <NavLinkAdmin to={`/settings`}>
+                      <div className="just_white_text">
+                        <img
+                          src={settingslogo}
+                          alt="settings"
+                          className="settings_logo"
+                        ></img>
+                        Settings
+                      </div>
+                    </NavLinkAdmin>
+                  </Dropdown.Item>
+                  {user.admin ? (
+                    <Dropdown.Item href="#/action-1" active>
+                      <NavLinkAdmin to="/adminPanel">
+                        <div className="just_white_text">Admin Panel</div>
+                      </NavLinkAdmin>
+                    </Dropdown.Item>
+                  ) : null}
+
+                  <Dropdown.Item href="#/action-1" active>
+                    <LogOut></LogOut>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          ) : (
+            <NavBarLogIn />
+          )}
         </Nav>
       )}
     </>

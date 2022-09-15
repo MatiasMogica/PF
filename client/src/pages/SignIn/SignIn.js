@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/slices/logInSlice";
+import { GoogleLogIn } from "../../redux/actions/LogInActions";
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -21,27 +20,11 @@ export default function SignIn() {
 
     gapi.load("client:auth2", start);
   }, []);
+
   const googleSuccess = async (res) => {
-    axios({
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      url: "http://localhost:3001/auth/google",
-      data: { id_token: res.tokenId },
-    }).then((response) => {
-      console.log(response);
-      // localStorage.setItem("email", JSON.stringify(res.profileObj));
-      const logindata = {
-        userData: response.data.userForToken,
-        token: response.data.token,
-      };
-      dispatch(logIn(logindata));
-    });
+    dispatch(GoogleLogIn(res));
   };
-  const googleFailure = (error) => {
-    console.log(error);
-  };
+
   return (
     <div>
       <NavBar />
@@ -54,7 +37,7 @@ export default function SignIn() {
           clientId="189786706143-f1m6squ261r1itibbv9fdtupfmb3v9cn.apps.googleusercontent.com"
           buttonText="Sign In"
           onSuccess={googleSuccess}
-          onFailure={googleFailure}
+          onFailure={() => {}}
           cookiePolicy={"single_host_origin"}
         />
         <p>
