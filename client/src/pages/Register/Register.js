@@ -54,7 +54,13 @@ export default function Register() {
   }
 
   function handleUserName(e) {
-    if (e.target.value.length < 50 && e.target.value.length > 2) {
+    if (
+      e.target.value.length < 50 &&
+      e.target.value.length > 2 &&
+      /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/.test(
+        e.target.value
+      )
+    ) {
       setNewUser({
         ...newUser,
         userName: { value: e.target.value, error: "" },
@@ -64,7 +70,8 @@ export default function Register() {
         ...newUser,
         userName: {
           value: "",
-          error: "It should have between 2 and 50 characters",
+          error:
+            "It should have between 6 and 18 characters, only contain letter,number",
         },
       });
     }
@@ -224,16 +231,16 @@ export default function Register() {
   return (
     <div className="register-boty">
       <NavBar />
-      <div class="form_wrapper">
-        <div class="form_container">
-          <div class="title_container">
+      <div className="form_wrapper">
+        <div className="form_container">
+          <div className="title_container">
             <h2>Registration Form</h2>
           </div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="register_username">Username:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_username"
@@ -247,9 +254,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_name">Name:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_name"
@@ -263,9 +270,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_email">Email:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_email"
@@ -278,9 +285,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password">Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password"
@@ -293,9 +300,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password_confirm">Confirm Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password_confirm"
@@ -309,9 +316,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_image">Image:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_image"

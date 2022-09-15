@@ -20,23 +20,22 @@ const CartContainer = () => {
     const [isOpenModal, openedModal, closeModal] = useModal(false)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log('CARTITEMS', cartItems.length)
-        dispatch(calculateTotal())
-    }, [dispatch, cartItems]) 
+  useEffect(() => {
+    console.log("CARTITEMS", cartItems.length);
+    dispatch(calculateTotal());
+  }, [dispatch, cartItems]);
 
-    if(amount < 1) {
-        return (
-            <div>
-                <NavBar />
-                <div className='empty'>
-                    <h1>Your cart is currently empty</h1>
-                    <img alt="cart" className='emptyCart' src={emptyCart} />
-                </div>
-            </div>
-        )
-    }
-
+  if (amount < 1) {
+    return (
+      <div>
+        <NavBar />
+        <div className="empty">
+          <h1>Your cart is currently empty</h1>
+          <img alt="cart" className="emptyCart" src={emptyCart} />
+        </div>
+      </div>
+    );
+  }
     return  (
         <div>
             <NavBar />
@@ -77,7 +76,10 @@ const CartContainer = () => {
             </Modals>
             {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
         </div>
-    )
-}
+      </footer>
+      {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
+    </div>
+  );
+};
 
-export default CartContainer
+export default CartContainer;
