@@ -24,8 +24,7 @@ const login = async (req, res) => {
     email: user[0].email,
     name: user[0].name,
     image: user[0].image,
-    purchasedGames: user[0].purchasedGames,
-    admin: user[0].admin,
+    backgroundImage: user[0].backgroundImage,
   };
 
   const token = jwt.sign(userForToken, process.env.JWT_secret_key);
@@ -53,6 +52,7 @@ const googleSignIn = async (req, res = response) => {
         hashPassword: ":P",
         image,
         google: true,
+        backgroundImage,
       };
 
       usuario = new User(data);
@@ -64,6 +64,12 @@ const googleSignIn = async (req, res = response) => {
       username: usuario.username,
       email: usuario.email,
       admin: usuario.admin,
+      friends: usuario.friends,
+      age: usuario.age,
+      nationality: usuario.nationality,
+      posts: usuario.posts,
+      createdAt: usuario.createdAt,
+      backgroundImage: usuario.backgroundImage,
     };
 
     const token = jwt.sign(userForToken, process.env.JWT_secret_key);

@@ -49,7 +49,13 @@ export default function Register() {
   }
 
   function handleUserName(e) {
-    if (e.target.value.length < 50 && e.target.value.length > 2) {
+    if (
+      e.target.value.length < 50 &&
+      e.target.value.length > 2 &&
+      /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/.test(
+        e.target.value
+      )
+    ) {
       setNewUser({
         ...newUser,
         userName: { value: e.target.value, error: "" },
@@ -59,7 +65,8 @@ export default function Register() {
         ...newUser,
         userName: {
           value: "",
-          error: "It should have between 2 and 50 characters",
+          error:
+            "It should have between 6 and 18 characters, only contain letter,number",
         },
       });
     }

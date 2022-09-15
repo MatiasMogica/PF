@@ -99,9 +99,28 @@ const getUserByID = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image } = req.body;
+  const {
+    name,
+    email,
+    age,
+    nationality,
+    profileVisibility,
+    image,
+    backgroundImage,
+  } = req.body;
+
   try {
     const user = await User.findById(idUser);
+
+    image ? await user.updateOne({ image }) : null;
+    backgroundImage ? await user.updateOne({ backgroundImage }) : null;
+    name ? await user.updateOne({ name }) : null;
+    email ? await user.updateOne({ email }) : null;
+    age ? await user.updateOne({ age }) : null;
+    nationality ? await user.updateOne({ nationality }) : null;
+    profileVisibility ? await user.updateOne({ profileVisibility }) : null;
+
+    res.status(200).json("Edited Correctly");
   } catch (error) {
     res.status(500).json({ error: error });
   }

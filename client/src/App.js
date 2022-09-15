@@ -20,6 +20,7 @@ import CartContainer from "./components/Cart/CartContainer";
 import SuccessPayment from "./components/SuccessPayment";
 import FailurePayment from "./components/FailurePayment";
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -50,15 +51,17 @@ function App() {
         <Route exact path={"/success"} component={SuccessPayment} />
         <Route exact path={"/failure"} component={FailurePayment} />
         <Route exact path={"/contact"} component={Contact} />
+        {user.status ? (
+          <Route exact path={"/settings"} component={Settings}></Route>
+        ) : null}
+
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
-        <Route exact path={"/profile"} component={Profile}>
-          {!user.status ? <Redirect to="/" /> : null}
-        </Route>
+        <Route exact path={"/profile/:idUser"} component={Profile} />
 
         {user.admin ? (
           <>

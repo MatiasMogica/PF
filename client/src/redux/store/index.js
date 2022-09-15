@@ -4,6 +4,8 @@ import cart from "../slices/cartSlice";
 import modal from "../slices/modalSlice";
 import users from "../slices/usersSlice";
 import logIn from "../slices/logInSlice";
+import profile from "../slices/profileSlice";
+import friend from "../slices/friendSlice";
 export default configureStore({
   reducer: {
     videogames,
@@ -11,5 +13,7 @@ export default configureStore({
     modal,
     users,
     logIn,
+    profile,
+    friend,
   },
 });
