@@ -132,6 +132,11 @@ export default function NavBar({ usuario }) {
                   {user.username || "Error Loading Username"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
+                  <Dropdown.Item href="/" active>
+                    <NavLinkAdmin to={`/profile/${user.id}`}>
+                      <div className="just_white_text">Your Profile</div>
+                    </NavLinkAdmin>
+                  </Dropdown.Item>
                   <Dropdown.Item href="#/action-1" active>
                     <NavLinkAdmin to={`/settings`}>
                       <div className="just_white_text">
