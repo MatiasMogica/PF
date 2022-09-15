@@ -40,6 +40,7 @@ function Contact() {
   function handleContact(e) {
     if (e.target.id === "email") {
       if (
+        //eslint-disable-next-line
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)
       ) {
         setContact({

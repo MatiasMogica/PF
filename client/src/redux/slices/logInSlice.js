@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const logInSlice = createSlice({
-  name: "modal",
+  name: "logIn",
   initialState: {
-    logIn: { status: false },
+    logIn: { status: false, id: "" },
   },
 
   reducers: {
@@ -17,6 +17,7 @@ const logInSlice = createSlice({
           logIn: {
             status: false,
             error: action.payload.error,
+            id: "",
           },
         };
       } else {
