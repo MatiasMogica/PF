@@ -258,11 +258,11 @@ function NewProduct() {
       !newGame.genres.error &&
       !newGame.rating.error &&
       !newGame.price.error ? (
-      <button className="btn" type="submit">
+      <button className="btn_newProduct" type="submit">
         Create
       </button>
     ) : (
-      <button className="btn" type="submit" disabled>
+      <button className="btn_newProduct" type="submit" disabled>
         Create
       </button>
     );
