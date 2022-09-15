@@ -1,9 +1,14 @@
 import NavBar from "../../components/NavBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Modals from "../../components/Modals";
+import { useModal } from "../../components/Modals/useModal";
+import register from '../../images/register.png'
+import './ModalRegister.css'
 import "./Register.css";
 
 export default function Register() {
+  const [isOpenModal, openedModal, closeModal] = useModal(false)
   const [newUser, setNewUser] = useState({
     image: { value: "", error: "" },
     userName: { value: "", error: "" },
@@ -159,7 +164,7 @@ export default function Register() {
       newUser.password.identical
     ) {
       return (
-        <button type="submit" className="buttonregister">
+        <button type="submit" className="buttonregister" onClick={openedModal}>
           Register
         </button>
       );
@@ -331,7 +336,13 @@ export default function Register() {
             {newUser.api.error ? (
               <p>{newUser.api.error}</p>
             ) : newUser.api.creado ? (
-              <p>Creado con exito</p>
+               //<p>Creado con exito</p>
+               <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
+               <h2 className="modal-register-title">Welcome to ZTEAM!</h2>
+               <img src={register} alt="register" className="modal-register-img"/>
+               <p className="modal_text">Thank you for joining our community, explore and download the video games that you like the most!</p>
+               <button className='modal-register-close' onClick={closeModal}>CLOSE</button>
+              </Modals>
             ) : null}
           </form>
           <div>
