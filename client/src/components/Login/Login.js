@@ -8,6 +8,7 @@ import "./logIn.css";
 import { LogInActionApi } from "../../redux/actions/LogInActions";
 
 function Login() {
+  // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(true);
   const [loginData, setloginData] = useState({
     username: "",

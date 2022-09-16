@@ -49,7 +49,6 @@ export const handleImage = async (e, setImage) => {
 
   formData.append("file", e.target.files[0]);
   formData.append("upload_preset", "gu6gzzkc");
-
   await fetch("https://api.cloudinary.com/v1_1/dhyz4afz7/image/upload", {
     method: "POST",
     body: formData,
@@ -59,9 +58,5 @@ export const handleImage = async (e, setImage) => {
       setImage(data.secure_url);
     })
 
-    .catch(() =>
-      setImage(
-        "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
-      )
-    );
+    .catch((e) => console.log(e));
 };

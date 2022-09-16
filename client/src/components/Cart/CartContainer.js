@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { calculateTotal } from "../../redux/slices/cartSlice";
+// eslint-disable-next-line no-unused-vars
 import { openModal } from "../../redux/slices/modalSlice";
 import NavBar from "../NavBar";
 import CartItem from "./CartItem";
@@ -17,6 +17,7 @@ import { Bag, Trash } from "../../icons/Icons";
 const CartContainer = () => {
   const { cartItems, total, amount } = useSelector((state) => state.cart);
   const { isOpen } = useSelector((state) => state.modal);
+  // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(false);
   const dispatch = useDispatch();
 

@@ -1,5 +1,4 @@
 import Dropdown from "react-bootstrap/Dropdown";
-//import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBarLogin.css";
 import { Link } from "react-router-dom";
 import { LogInActionApi } from "../../redux/actions/LogInActions";
@@ -13,6 +12,7 @@ import { gapi } from "gapi-script";
 import { GoogleLogIn } from "../../redux/actions/LogInActions";
 
 function NavBarLogIn() {
+  // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(true);
   const [loginData, setloginData] = useState({
     username: "",
@@ -58,29 +58,29 @@ function NavBarLogIn() {
           Log In
         </Dropdown.Toggle>
         <Dropdown.Menu variant="dark">
-          <form class="px-4 py-3" onSubmit={(e) => handleSubmit(e)}>
-            <div class="form-group">
-              <label for="exampleDropdownFormEmail1">Username</label>
+          <form className="px-4 py-3" onSubmit={(e) => handleSubmit(e)}>
+            <div className="form-group">
+              <label htmlFor="exampleDropdownFormEmail1">Username</label>
               <input
                 type="input"
-                class="form-control"
+                className="form-control"
                 id="exampleDropdownFormEmail1"
                 placeholder="Username"
                 onChange={(e) => handleUserName(e)}
               />
             </div>
-            <div class="form-group">
-              <label for="exampleDropdownFormPassword1">Password</label>
+            <div className="form-group">
+              <label htmlFor="exampleDropdownFormPassword1">Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="exampleDropdownFormPassword1"
                 placeholder="Password"
                 onChange={(e) => handlePassword(e)}
               />
             </div>
-            <div class="form-check"></div>
-            <button type="submit" class="btn btn-primary">
+            <div className="form-check"></div>
+            <button type="submit" className="btn btn-primary">
               Sign in
             </button>
           </form>
@@ -122,31 +122,32 @@ function NavBarLogIn() {
             )
           ) : null}
 
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <div className="dropdown-divider"></div>
+
+          <s className="dropdown-item">
             <Link
               to="/register"
               style={{ textDecoration: "none", color: "white" }}
             >
               Sign Up
             </Link>
-          </a>
-          <a class="dropdown-item" href="#">
+          </s>
+          <s className="dropdown-item">
             <Link
               to="/Remplazame-Por-la-page-para-recuperar-password-cuando-la-tengas"
               style={{ textDecoration: "none", color: "white" }}
             >
               Forgot Password?
             </Link>
-          </a>
-          <a class="dropdown-item" href="#">
+          </s>
+          <s className="dropdown-item">
             <Link
               to="/contact"
               style={{ textDecoration: "none", color: "white" }}
             >
               Contact
             </Link>
-          </a>
+          </s>
         </Dropdown.Menu>
       </Dropdown>
     </div>

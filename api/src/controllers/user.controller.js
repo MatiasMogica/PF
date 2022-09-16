@@ -153,6 +153,22 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const resetUser = async (req, res) => {
+  const { idUser } = req.params;
+  try {
+    const user = await User.findById(idUser);
+
+    await user.updateOne({ friends: [] });
+    await user.updateOne({ friendRequests: [] });
+    await user.updateOne({ image: "empty" });
+    await user.updateOne({ backgroundImage: "empty" });
+    res.status(200).json(user);
+  } catch (e) {
+    console.log(e);
+    res.status(45454).json({ e });
+  }
+};
+
 module.exports = {
   getByName,
   getByEmail,
@@ -162,4 +178,5 @@ module.exports = {
   putUser,
   becomeAdmin,
   deleteUser,
+  resetUser,
 };

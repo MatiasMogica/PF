@@ -12,12 +12,19 @@ import ConfigOptionAge from "./ConfigOptionAge";
 import ConfigOptionNationality from "./ConfigOptionNationality";
 import ConfigOptionEmail from "./ConfigOptionEmail";
 import "./ProfileSettings.css";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 function Settings() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.logIn.logIn);
   const profile = useSelector((state) => state.profile.profileData);
-  const [image, setImage] = useState(user.image);
-  const [imageBackground, setImageBackground] = useState(user.backgroundImage);
+  const [image, setImage] = useState(profile.image);
+  const [imageBackground, setImageBackground] = useState(
+    profile.backgroundImage
+  );
   const [profileData, setProfileData] = useState({
     username: "Public",
     email: { value: "", edit: false, newEmail: "" },
@@ -86,6 +93,7 @@ function Settings() {
         dispatch(getProfileDetails(user.id));
       }
       t();
+      NotificationManager.success("Profile Pic Modificated Correctly", "Saved");
     }
 
     if (imageBackground !== profile.backgroundImage) {
@@ -94,18 +102,14 @@ function Settings() {
         dispatch(getProfileDetails(user.id));
       }
       t();
+      NotificationManager.success("Background Modificated Correctly", "Saved");
     }
-  }, [
-    image,
-    imageBackground,
-    dispatch,
-    profile.backgroundImage,
-    profile.image,
-    user.id,
-  ]);
+    //eslint-disable-next-line
+  }, [image, imageBackground, dispatch]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+
     const data = {
       name: profileData.name.value,
       email: profileData.email.value,
@@ -128,9 +132,14 @@ function Settings() {
         profileData.backgroundImage,
       ],
     };
-    // eslint-disable-next-line
-    const response = saveProfileConfig(data, user.id);
-    //un pop up con la respuesta para ver si se guardaron los cambios o ne
+
+    const response = await saveProfileConfig(data, user.id);
+    response === "Edited Correctly"
+      ? NotificationManager.success("Profile Modificated Correctly", "Saved")
+      : NotificationManager.error(
+          "Error updating Profile, try againg",
+          "Error"
+        );
   }
 
   return (
@@ -312,7 +321,7 @@ function Settings() {
             {profileData.image}
             <span className="btnspan_profile_setting_visibility"></span>
           </button>
-          <button className="icon-btn add-btn">
+          <button className="icon-btn add-btn" type="button">
             <div className="add-icon"></div>
             <input
               className="deleteme_settings_photo"
@@ -350,7 +359,7 @@ function Settings() {
             {profileData.backgroundImage}
             <span className="btnspan_profile_setting_visibility"></span>
           </button>
-          <button className="icon-btn add-btn">
+          <button className="icon-btn add-btn" type="button">
             <div className="add-icon"></div>
             <input
               className="deleteme_settings_photo"
@@ -368,6 +377,7 @@ function Settings() {
           <i></i>
         </button>
       </form>
+      <NotificationContainer />
     </div>
   );
 }

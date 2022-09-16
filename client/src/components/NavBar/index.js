@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   Nav,
   NavLink,
   Bars,
   NavMenu,
-  NavBtn,
-  NavBtnLink,
   NavLinkHome,
   NavLinkAdmin,
 } from "./NavBarStyle";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogOut from "../LogOut/LogOut";
 import { CartIcon } from "../../icons/Icons";
@@ -36,8 +33,6 @@ export default function NavBar({ usuario }) {
       dispatch(getFriendRequests(user.id));
     }
   }, [user.id, dispatch]);
-
-  const history = useHistory();
 
   return (
     //
@@ -105,11 +100,11 @@ export default function NavBar({ usuario }) {
                       <Dropdown.Menu variant="dark">
                         {friendRequests.map((x, i) => (
                           <div key={x}>
-                            <Dropdown.Item href={"#/action-" + i} active>
+                            <s className="dropdown-item">
                               <NavLink to={`/profile/${x}`}>
                                 Friend Request
                               </NavLink>
-                            </Dropdown.Item>
+                            </s>
                           </div>
                         ))}
                       </Dropdown.Menu>
@@ -132,12 +127,12 @@ export default function NavBar({ usuario }) {
                   {user.username || "Error Loading Username"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
-                  <Dropdown.Item href="/" active>
+                  <s className="dropdown-item">
                     <NavLinkAdmin to={`/profile/${user.id}`}>
                       <div className="just_white_text">Your Profile</div>
                     </NavLinkAdmin>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1" active>
+                  </s>
+                  <s className="dropdown-item">
                     <NavLinkAdmin to={`/settings`}>
                       <div className="just_white_text">
                         <img
@@ -148,18 +143,18 @@ export default function NavBar({ usuario }) {
                         Settings
                       </div>
                     </NavLinkAdmin>
-                  </Dropdown.Item>
+                  </s>
                   {user.admin ? (
-                    <Dropdown.Item href="#/action-1" active>
+                    <s className="dropdown-item">
                       <NavLinkAdmin to="/adminPanel">
                         <div className="just_white_text">Admin Panel</div>
                       </NavLinkAdmin>
-                    </Dropdown.Item>
+                    </s>
                   ) : null}
 
-                  <Dropdown.Item href="#/action-1" active>
+                  <s className="dropdown-item">
                     <LogOut></LogOut>
-                  </Dropdown.Item>
+                  </s>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
