@@ -157,13 +157,44 @@ const friendList = async (req, res) => {
 
     for (let i = 0; sender.friends.length > i; i++) {
       let user = await User.findById(sender.friends[i]);
-      newArray.push([user._id, user.image]);
+      newArray.push([user._id, user.image, user.username]);
     }
     res.status(200).json({ msg: "All done", listOfFriends: newArray });
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: e });
   }
+};
+
+const friendRequestList = async (req, res) => {
+  const { id } = req.body;
+  try {
+    let user = await User.findById(id);
+    let RequestListData = [];
+    for (let i = 0; user.friendRequests.length > i; i++) {
+      let requesterUser = await User.findById(user.friendRequests[i]);
+      RequestListData.push([
+        requesterUser.id,
+        requesterUser.image,
+        requesterUser.username,
+      ]);
+    }
+    res.status(200).json(RequestListData);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ e });
+  }
+};
+
+const searchForMatches = async (req, res) => {
+  const { usernameInput } = req.params;
+
+  const t = await User.find({
+    username: {
+      $regex: new RegExp("^" + usernameInput.toLowerCase(), "i"),
+    },
+  });
+  res.status(200).json(t);
 };
 
 module.exports = {
@@ -174,4 +205,6 @@ module.exports = {
   relationship,
   friendList,
   removeFriend,
+  friendRequestList,
+  searchForMatches,
 };

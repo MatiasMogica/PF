@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { IoGameControllerOutline } from "react-icons/io5";
-import { getFriendRequests } from "../../redux/actions/ProfileActions";
+import { IncomingRequestsGetData } from "../../redux/actions/friendActions";
 import Dropdown from "react-bootstrap/Dropdown";
 import settingslogo from "../../icons/settings.ico";
 import bell from "../../icons/bell.png";
@@ -24,13 +24,13 @@ import NavBarLogIn from "../NavBarLogin/NavBarLogIn";
 
 export default function NavBar({ usuario }) {
   const user = useSelector((state) => state.logIn.logIn);
-  const friendRequests = useSelector((state) => state.profile.friendRequests);
+  const friendRequests = useSelector((state) => state.friend.incomingRequests);
   const { pathname } = useLocation();
   let { amount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
     if (user.id) {
-      dispatch(getFriendRequests(user.id));
+      dispatch(IncomingRequestsGetData({ id: user.id }));
     }
   }, [user.id, dispatch]);
 
@@ -98,11 +98,11 @@ export default function NavBar({ usuario }) {
                         </div>
                       </Dropdown.Toggle>
                       <Dropdown.Menu variant="dark">
-                        {friendRequests.map((x, i) => (
-                          <div key={x}>
+                        {friendRequests.map((x) => (
+                          <div key={x[0]}>
                             <s className="dropdown-item">
-                              <NavLink to={`/profile/${x}`}>
-                                Friend Request
+                              <NavLink to={`/profile/${x[0]}`}>
+                                {x[2] + " Wants to be your Friend!"}
                               </NavLink>
                             </s>
                           </div>

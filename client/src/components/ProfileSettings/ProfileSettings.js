@@ -147,24 +147,6 @@ function Settings() {
       <form className="profile_settings_form" onSubmit={(e) => handleSubmit(e)}>
         <div className="configoption_edit">
           <p>Username: {profile.username}</p>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                username:
-                  profileData.username === "Public"
-                    ? "Private"
-                    : profileData.username === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.username}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
         </div>
 
         <ConfigOptionName
@@ -299,28 +281,14 @@ function Settings() {
         <div className="configoption_edit">
           <p>Image</p>
           <img
-            src={profile.image}
+            src={
+              profile.image ||
+              "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+            }
             className="image_settings"
             alt="profile"
           ></img>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                image:
-                  profileData.image === "Public"
-                    ? "Private"
-                    : profileData.image === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.image}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
+
           <button className="icon-btn add-btn" type="button">
             <div className="add-icon"></div>
             <input
