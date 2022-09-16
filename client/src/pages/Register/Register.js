@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Modals from "../../components/Modals";
 import { useModal } from "../../components/Modals/useModal";
-import register from '../../images/register.png'
-import './ModalRegister.css'
+import register from "../../images/register.png";
+import "./ModalRegister.css";
 import "./Register.css";
 
 export default function Register() {
-  const [isOpenModal, openedModal, closeModal] = useModal(false)
+  const [isOpenModal, openedModal, closeModal] = useModal(false);
   const [newUser, setNewUser] = useState({
     image: { value: "", error: "" },
     userName: { value: "", error: "" },
@@ -327,7 +327,13 @@ export default function Register() {
               ></input>
             </div>
             {newUser.image.value ? (
-              <img src={newUser.image.value} alt="your profile"></img>
+              <img
+                src={
+                  newUser.image.value ||
+                  "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+                }
+                alt="your profile"
+              ></img>
             ) : (
               <p className="register_error">{newUser.image.value} </p>
             )}
@@ -336,12 +342,21 @@ export default function Register() {
             {newUser.api.error ? (
               <p>{newUser.api.error}</p>
             ) : newUser.api.creado ? (
-               //<p>Creado con exito</p>
-               <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
-               <h2 className="modal-register-title">Welcome to ZTEAM!</h2>
-               <img src={register} alt="register" className="modal-register-img"/>
-               <p className="modal_text">Thank you for joining our community, explore and download the video games that you like the most!</p>
-               <button className='modal-register-close' onClick={closeModal}>CLOSE</button>
+              //<p>Creado con exito</p>
+              <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
+                <h2 className="modal-register-title">Welcome to ZTEAM!</h2>
+                <img
+                  src={register}
+                  alt="register"
+                  className="modal-register-img"
+                />
+                <p className="modal_text">
+                  Thank you for joining our community, explore and download the
+                  video games that you like the most!
+                </p>
+                <button className="modal-register-close" onClick={closeModal}>
+                  CLOSE
+                </button>
               </Modals>
             ) : null}
           </form>

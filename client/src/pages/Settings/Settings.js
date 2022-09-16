@@ -3,9 +3,10 @@ import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
 import "./Settings.css";
 import Collapse from "react-bootstrap/Collapse";
 import { useState } from "react";
+import FriendsSettings from "../../components/FriendsSettings/FriendsSettings";
 
 function Settings() {
-  const [open, setOpen] = useState({ profile: false });
+  const [open, setOpen] = useState({ profile: false, friends: false });
 
   return (
     <div>
@@ -34,27 +35,21 @@ function Settings() {
         <div className="h-divider">
           <div className="shadow"></div>
           <div className="text">
-            <i>Reviews</i>
+            <i
+              className="i_settings_general"
+              onClick={() => setOpen({ ...open, friends: !open.friends })}
+              aria-controls="profile_settings_general_container_container"
+              aria-expanded={open.profile}
+            >
+              Friends
+            </i>
           </div>
         </div>
-        <br />
-        Aca irian las opciones para poner reviews a los juegos??
-        <div className="h-divider">
-          <div className="shadow"></div>
-          <div className="text">
-            <i>Games</i>
+        <Collapse in={open.friends}>
+          <div id="profile_settings_general_container_container">
+            <FriendsSettings />
           </div>
-        </div>
-        <br />
-        Aca irian las opciones para poder revisar tus juegos???
-        <div className="h-divider">
-          <div className="shadow"></div>
-          <div className="text">
-            <i>ETC</i>
-          </div>
-        </div>
-        <br />
-        Aca irian las opciones para ETC???
+        </Collapse>
       </div>
     </div>
   );

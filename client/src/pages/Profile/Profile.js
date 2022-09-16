@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import "./Profile.css";
 import "animate.css/animate.css";
 import { Animated } from "react-animated-css";
+import CountUp from "react-countup";
 
 function UserDetailsOptions() {
   const { idUser } = useParams();
@@ -33,7 +34,7 @@ function UserDetailsOptions() {
       dispatch(cleanUpActionFriendSlice());
       dispatch(cleanUpActionProfileSlice());
     };
-  }, [dispatch, setEstado]);
+  }, [dispatch, setEstado, idUser]);
   useEffect(() => {
     if (yourUser.id) {
       dispatch(getProfileDetails(yourUser.id));
@@ -54,13 +55,10 @@ function UserDetailsOptions() {
   function calculateTimeOfService() {
     const now = new Date();
     const joined = new Date(userDetails.createdAt);
-    return (
-      Math.floor((now.getTime() - joined.getTime()) / (1000 * 3600 * 24)) +
-      " Days"
-    );
+    return Math.floor((now.getTime() - joined.getTime()) / (1000 * 3600 * 24));
   }
   function cleanTheData() {
-    return userDetails.createdAt.split("T")[0];
+    return userDetails.createdAt.split("T")[0].split("-");
   }
 
   return (
@@ -69,9 +67,9 @@ function UserDetailsOptions() {
       <div
         id="profile_show_general_container"
         style={{
-          "background-image": `url(${userDetails.backgroundImage || null})`,
-          "background-repeat": "no-repeat",
-          "background-size": "cover",
+          backgroundImage: `url(${userDetails.backgroundImage || null})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
         }}
       >
         <div id="profile_show_header_container">
@@ -206,7 +204,12 @@ function UserDetailsOptions() {
                         id="profile_show_image_nationality"
                       ></img>
                     ) : null}
-                    {userDetails.age ? <h2>Age: {userDetails.age}</h2> : null}
+                    {userDetails.age ? (
+                      <h2>
+                        Age:
+                        <CountUp end={userDetails.age} duration={3} />
+                      </h2>
+                    ) : null}
                   </div>
                 </Animated>
               ) : null}
@@ -218,7 +221,12 @@ function UserDetailsOptions() {
                 >
                   <div className="profile_show_card_data">
                     <h2>Reviews</h2>
-                    <h2>{userDetails.reviews.length}</h2>
+                    <h2>
+                      <CountUp
+                        end={userDetails.reviews.length}
+                        duration={userDetails.reviews.length > 3 ? 3 : 1}
+                      />
+                    </h2>
                     <h2>See</h2>
                   </div>
                 </Animated>
@@ -231,7 +239,12 @@ function UserDetailsOptions() {
                 >
                   <div className="profile_show_card_data">
                     <h2>Games</h2>
-                    <h2>{userDetails.purchasedGames.length}</h2>
+                    <h2>
+                      <CountUp
+                        end={userDetails.purchasedGames.length}
+                        duration={userDetails.purchasedGames.length > 3 ? 3 : 1}
+                      />
+                    </h2>
                     <h2>See</h2>
                   </div>
                 </Animated>
@@ -245,9 +258,17 @@ function UserDetailsOptions() {
                   <div className="profile_show_card_data">
                     <h2 className="profile_joined_card">Time of Service</h2>
                     <h2 className="profile_joined_card">
-                      {calculateTimeOfService(userDetails.createdAt)}
+                      <CountUp
+                        end={calculateTimeOfService(userDetails.createdAt)}
+                        duration={userDetails.purchasedGames.length > 3 ? 3 : 1}
+                      />{" "}
+                      Days
                     </h2>
-                    <h2 className="profile_joined_card">{cleanTheData()}</h2>
+                    <h2 className="profile_joined_card">
+                      <CountUp end={cleanTheData()[0]} duration={3} />-
+                      <CountUp end={cleanTheData()[1]} duration={3} />-
+                      <CountUp end={cleanTheData()[2]} duration={3} />
+                    </h2>
                   </div>
                 </Animated>
               ) : null}

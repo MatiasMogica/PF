@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   Nav,
   NavLink,
   Bars,
   NavMenu,
-  NavBtn,
-  NavBtnLink,
   NavLinkHome,
   NavLinkAdmin,
 } from "./NavBarStyle";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogOut from "../LogOut/LogOut";
 import { CartIcon } from "../../icons/Icons";
@@ -19,7 +16,7 @@ import { useLocation } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import { IoGameControllerOutline } from "react-icons/io5";
-import { getFriendRequests } from "../../redux/actions/ProfileActions";
+import { IncomingRequestsGetData } from "../../redux/actions/friendActions";
 import Dropdown from "react-bootstrap/Dropdown";
 import settingslogo from "../../icons/settings.ico";
 import bell from "../../icons/bell.png";
@@ -27,17 +24,15 @@ import NavBarLogIn from "../NavBarLogin/NavBarLogIn";
 
 export default function NavBar({ usuario }) {
   const user = useSelector((state) => state.logIn.logIn);
-  const friendRequests = useSelector((state) => state.profile.friendRequests);
+  const friendRequests = useSelector((state) => state.friend.incomingRequests);
   const { pathname } = useLocation();
   let { amount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
     if (user.id) {
-      dispatch(getFriendRequests(user.id));
+      dispatch(IncomingRequestsGetData({ id: user.id }));
     }
   }, [user.id, dispatch]);
-
-  const history = useHistory();
 
   return (
     //
@@ -103,13 +98,13 @@ export default function NavBar({ usuario }) {
                         </div>
                       </Dropdown.Toggle>
                       <Dropdown.Menu variant="dark">
-                        {friendRequests.map((x, i) => (
-                          <div key={x}>
-                            <Dropdown.Item href={"#/action-" + i} active>
-                              <NavLink to={`/profile/${x}`}>
-                                Friend Request
+                        {friendRequests.map((x) => (
+                          <div key={x[0]}>
+                            <s className="dropdown-item">
+                              <NavLink to={`/profile/${x[0]}`}>
+                                {x[2] + " Wants to be your Friend!"}
                               </NavLink>
-                            </Dropdown.Item>
+                            </s>
                           </div>
                         ))}
                       </Dropdown.Menu>
@@ -132,12 +127,12 @@ export default function NavBar({ usuario }) {
                   {user.username || "Error Loading Username"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu variant="dark">
-                  <Dropdown.Item href="/" active>
+                  <s className="dropdown-item">
                     <NavLinkAdmin to={`/profile/${user.id}`}>
                       <div className="just_white_text">Your Profile</div>
                     </NavLinkAdmin>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1" active>
+                  </s>
+                  <s className="dropdown-item">
                     <NavLinkAdmin to={`/settings`}>
                       <div className="just_white_text">
                         <img
@@ -148,18 +143,18 @@ export default function NavBar({ usuario }) {
                         Settings
                       </div>
                     </NavLinkAdmin>
-                  </Dropdown.Item>
+                  </s>
                   {user.admin ? (
-                    <Dropdown.Item href="#/action-1" active>
+                    <s className="dropdown-item">
                       <NavLinkAdmin to="/adminPanel">
                         <div className="just_white_text">Admin Panel</div>
                       </NavLinkAdmin>
-                    </Dropdown.Item>
+                    </s>
                   ) : null}
 
-                  <Dropdown.Item href="#/action-1" active>
+                  <s className="dropdown-item">
                     <LogOut></LogOut>
-                  </Dropdown.Item>
+                  </s>
                 </Dropdown.Menu>
               </Dropdown>
             </div>

@@ -26,7 +26,6 @@ export const LogInActionApi =
   };
 
 export const GoogleLogIn = (res) => async (dispatch) => {
-  console.log(res);
   axios({
     method: "POST",
     headers: {

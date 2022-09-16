@@ -5,6 +5,8 @@ const friendSlice = createSlice({
   initialState: {
     relacion: "nada",
     friendList: [],
+    incomingRequests: [],
+    usersMatches: [],
   },
   reducers: {
     changeFriendStatus: (state, action) => {
@@ -25,8 +27,22 @@ const friendSlice = createSlice({
       if (action.payload.msg === "All done")
         state.friendList = action.payload.listOfFriends;
     },
-    cleanUpFriendSlice: (state) => {
-      return { relacion: "nada", friendList: [] };
+    cleanUpFriendSlice: () => {
+      return {
+        relacion: "nada",
+        friendList: [],
+        incomingRequests: [],
+        usersMatches: [],
+      };
+    },
+    friendRequestsData: (state, action) => {
+      return { ...state, incomingRequests: action.payload };
+    },
+    searchedUsersInDB: (state, action) => {
+      return {
+        ...state,
+        usersMatches: action.payload.map((x) => [x.id, x.image, x.username]),
+      };
     },
   },
 });
@@ -36,5 +52,7 @@ export const {
   setInitialFriendState,
   getListofFriends,
   cleanUpFriendSlice,
+  friendRequestsData,
+  searchedUsersInDB,
 } = friendSlice.actions;
 export default friendSlice.reducer;

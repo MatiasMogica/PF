@@ -37,7 +37,13 @@ function UserDetailsOptions() {
       <p>Created: {userDetails.createdAt}</p>
       <p>Email: {userDetails.email}</p>
       {userDetails.admin ? <p>This user is an Admin</p> : <p>Not an Admin</p>}
-      <img alt="user" src={userDetails.image} />
+      <img
+        alt="user"
+        src={
+          userDetails.image ||
+          "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+        }
+      />
 
       {userDetails.purchasedGames
         ? userDetails.purchasedGames.map((x) => {

@@ -28,7 +28,6 @@ export const getOtherUserProfileDetails = (id) => (dispatch) => {
 };
 
 export const getFriendRequests = (id) => (dispatch) => {
-  console.log(id);
   fetch(`http://localhost:3001/users/users/${id}`, {
     method: "GET",
   })
