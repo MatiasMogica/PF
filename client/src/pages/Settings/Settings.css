@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital@1&display=swap');
+
+.settings_general_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Chakra Petch' !important;
+}
+
+#settings_title{
+    font-family: 'Chakra Petch' !important;
+    text-align: center;
+}
+
+#profile_settings_general_container_container{
+    width: 100%;
+}
+
+
+
+/* Divididores por aca*/
+.h-divider {
+    margin: auto;
+    margin-top: 80px;
+    width: 100%;
+    position: relative;
+    
+  }
+  
+  .h-divider .shadow {
+    overflow: hidden;
+    height: 20px;
+  }
+  
+  .h-divider .shadow:after {
+    content: '';
+    display: block;
+    margin: -25px auto 0;
+    width: 100%;
+    height: 25px;
+    border-radius: 125px/12px;
+    box-shadow: 0 0 8px white;
+  }
+  
+  .h-divider .text {
+    width: 100px;
+    height: 45px;
+    padding: 10px;
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: -33px;
+    left: 50%;
+    margin-left: -60px;
+    border-radius: 100%;
+    box-shadow: 0 2px 4px #999;
+    background: white;
+  }
+  
+  .h-divider .text i {
+    position: absolute;
+    font-family: 'Chakra Petch' !important;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    border-radius: 100%;
+    border: 1px dashed #aaa;
+    text-align: center;
+    line-height: 50px;
+    font-weight: 900;
+    color: black;
+  }
+
+  /* Gracias boostrap por tanto perdon por tan poco collapse css*/
+
+  .collapse:not(.show) {
+    display: none;
+  }
+  .collapse:not(.show) {
+    display: none;
+  }
+  
+  .collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }

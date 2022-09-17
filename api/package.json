@@ -20,6 +20,7 @@
     "supertest-as-promised": "^4.0.2"
   },
   "dependencies": {
+    "@trycourier/courier": "^3.15.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",

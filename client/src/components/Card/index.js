@@ -1,9 +1,21 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Star } from "../../icons/Icons";
+import { AddIcon, CartIcon, Heart, RedHeart, Star } from "../../icons/Icons";
+import { addItem } from "../../redux/slices/cartSlice";
+import { addWished } from "../../redux/slices/wishListSlice";
 import './index.css'
 
 export default function Card({ name, image, platforms,  genres, released, _id, rating, price,idAPI}){
+    
+    const dispatch = useDispatch()
+    const {wishedItems} = useSelector((state) => state.wishList)
+    const { cartItems } = useSelector((state) => state.cart);
+    let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
+    let game = videogames.find((i) => i._id === _id)
+
+    const inCart = cartItems.find((i) => i._id === _id);
+    const inWished = wishedItems.find((i) => i._id === _id);
 
     return (
         <div /* className="Card" */>
@@ -29,8 +41,34 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
 
             <h5>Released: {released}</h5> 
             </div>
-
+            <div className="buttonsContainer">
+                {wishedItems.includes(inWished) ? (
+                    <div className="wishedContainer">
+                        {" "}
+                        <RedHeart />{" "}
+                        </div>
+                    ) : (
+                        <button
+                            className="addWished"
+                            onClick={() => dispatch(addWished(game))}
+                        >
+                        <Heart />
+                        </button>
+                    )}
+                {cartItems.includes(inCart) ? (
+                    <div className="inCart">
+                        {" "}
+                        <CartIcon />{" "}
+                        </div>
+                    ) : (
+                        <button
+                        className="addButton"
+                        onClick={() => dispatch(addItem(game))}
+                        >
+                        <AddIcon />
+                        </button>
+                    )}
+            </div>
         </div>
     </div>)
-
 }

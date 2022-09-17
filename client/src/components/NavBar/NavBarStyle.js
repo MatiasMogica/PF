@@ -23,6 +23,7 @@ cursor:pointer;
     color:#999;
 }
 `
+
 export const Nav=styled.nav`
 background: #000;
 height:80px;

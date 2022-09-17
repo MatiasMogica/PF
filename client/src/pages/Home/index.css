@@ -58,17 +58,17 @@ top:0;
 }
 
 .Card:hover{
-    transform: scale(1.1);
-    cursor: pointer;
+    /* transform: scale(1.1); */
     background-color: rgba(225, 217, 217, 0.356);
     border: 4px rgba(68, 67, 67, 0.356);
-}
+} 
 
 .addButton {
     background: none;
     border: none;
     cursor: pointer;
     height: 60px;
+    margin-right: 10px;
     width: 60px;
 }
 
@@ -78,6 +78,66 @@ top:0;
     color: green;
     cursor: pointer;
     height: 50px;
+    margin-right: 20px;
+    width: 55px;
+}
+
+.buttonsContainer {
+    align-items: center;
+    display: flex;
+}
+
+.addWished {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 60px;
+    margin-right: 10px;
+    width: 60px;
+}
+
+.wishedContainer {
+    background: none;
+    border: none;
+    /* color: white; */
+    cursor: pointer;
+    fill: red;
+    height: 60px;
+    margin-right: 10px;
+    width: 60px;
+}
+
+.floatContainer {
+    display: inline;
+    position:fixed;
+	width: 80px;
+	height: 80px;
+	bottom: 40px;
+	right: 20px;
+	background-color: white;
+	border-radius:50px;
+	text-align: center;
+    transition: .4s;
+	box-shadow: 2px 2px 3px rgb(51, 94, 211);
+}
+
+.floatContainer:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    /* background-color: rgba(225, 217, 217, 0.356); */
+    border: 4px rgba(68, 67, 67, 0.356);
+}
+
+.float {
+    /* display: inline; */
+    margin-left: 14px;
     width: 50px;
+	height: 50px;
+}
+
+.cartLink {
+    color:rgb(127, 62, 211);
+    text-decoration: none;
 }
 

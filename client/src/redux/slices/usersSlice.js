@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const usersSlice = createSlice({
-  name: "modal",
+  name: "users",
   initialState: {
     users: [],
     filterUsers: [],

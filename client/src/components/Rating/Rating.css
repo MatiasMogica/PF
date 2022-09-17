@@ -1,0 +1,16 @@
+.likesContainer {
+    align-items: center;
+    display: flex;
+}
+
+.likesButtons {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+}
+
+.reviewErrors {
+    color: black;
+}
