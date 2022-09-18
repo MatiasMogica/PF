@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital@1&display=swap');
+
+.image_settings{
+    width: 50px;
+    height: 50px;
+    border-style: solid;
+}
+
+.image_settings:hover{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    z-index: 99;
+}
+
+
+#profile_settings_general_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 100%;
+   text-align: center;
+}
+
+.i_settings_general{
+  cursor: pointer;
+}
+
+.profile_settings_form{
+    width: 100%;
+    display: grid;
+    
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.configoption_edit{
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.settings_two_btns_container{
+    display: flex;
+}
+
+/* Los botones copados esos de visibilidad*/
+
+.btn_profile_setting_visibility{
+    border: none;
+ display: block;
+ position: relative;
+ padding: 0.7em 2.4em;
+ font-size: 18px;
+ background: transparent;
+ cursor: pointer;
+ user-select: none;
+ overflow: hidden;
+ color: royalblue;
+ z-index: 1;
+ font-family: inherit;
+ font-weight: 500;
+}
+
+.btnspan_profile_setting_visibility{
+    position: absolute;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ background: transparent;
+ z-index: -1;
+ border: 4px solid royalblue;
+}
+
+.btnspan_profile_setting_visibility::before{
+    content: "";
+ display: block;
+ position: absolute;
+ width: 8%;
+ height: 500%;
+ background: var(--lightgray);
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) rotate(-60deg);
+ transition: all 0.3s;
+}
+.btn_profile_setting_visibility:hover .btnspan_profile_setting_visibility::before {
+    transform: translate(-50%, -50%) rotate(-90deg);
+    width: 100%;
+    background: royalblue;
+   }
+.btn_profile_setting_visibility:hover {
+    color: white;
+   }
+.btn_profile_setting_visibility:active .btnspan_profile_setting_visibility::before {
+    background: #2751cd;
+   }
+
+
+/* Los botones copados esos de subir fotitos*/
+.deleteme_settings_photo{
+    opacity: 0;
+   position:absolute; 
+   
+   }
+   .icon-btn {
+     width: 50px;
+     height: 50px;
+     border: 1px solid #cdcdcd;
+     background: white;
+     border-radius: 25px;
+     overflow: hidden;
+     position: relative;
+     transition: width 0.2s ease-in-out;
+     font-weight: 500;
+     font-family: inherit;
+   }
+   
+   .add-btn:hover {
+     width: 120px;
+   }
+   
+   .add-btn::before,
+   .add-btn::after {
+     transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+     content: "";
+     position: absolute;
+     height: 4px;
+     width: 10px;
+     top: calc(50% - 2px);
+     background: seagreen;
+   }
+   
+   .add-btn::after {
+     right: 14px;
+     overflow: hidden;
+     border-top-right-radius: 2px;
+     border-bottom-right-radius: 2px;
+   }
+   
+   .add-btn::before {
+     left: 14px;
+     border-top-left-radius: 2px;
+     border-bottom-left-radius: 2px;
+   }
+   
+   .icon-btn:focus {
+     outline: none;
+   }
+   
+   .btn-txt {
+     opacity: 0;
+     transition: opacity 0.2s;
+   }
+   
+   .add-btn:hover::before,
+   .add-btn:hover::after {
+     width: 4px;
+     border-radius: 2px;
+   }
+   
+   .add-btn:hover .btn-txt {
+     opacity: 1;
+   }
+   
+   .add-icon::after,
+   .add-icon::before {
+     transition: all 0.2s ease-in-out;
+     content: "";
+     position: absolute;
+     height: 20px;
+     width: 2px;
+     top: calc(50% - 10px);
+     background: seagreen;
+     overflow: hidden;
+   }
+   
+   .add-icon::before {
+     left: 22px;
+     border-top-left-radius: 2px;
+     border-bottom-left-radius: 2px;
+   }
+   
+   .add-icon::after {
+     right: 22px;
+     border-top-right-radius: 2px;
+     border-bottom-right-radius: 2px;
+   }
+   
+   .add-btn:hover .add-icon::before {
+     left: 15px;
+     height: 4px;
+     top: calc(50% - 2px);
+   }
+   
+   .add-btn:hover .add-icon::after {
+     right: 15px;
+     height: 4px;
+     top: calc(50% - 2px);
+   }
+
+   /* El boton de guardar cambios */
+.btn_profile_setting_save {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 10px 30px;
+    transition: 0.5s;
+    position: relative;
+    font-size: 17px;
+    background: #333;
+    border: none;
+    color: #fff;
+    margin-top: 100px;
+  }
+  
+  .btn_profile_setting_save:hover {
+    letter-spacing: 0.25em;
+    background: #ff1867;
+    color: #ff1867;
+    box-shadow: 0 0 45px #ff1867;
+    cursor: pointer;
+  }
+  
+  .btn_profile_setting_save::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: #222222;
+  }
+  
+  .btn_profile_setting_save span {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .btn_profile_setting_save i {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+  
+  .btn_profile_setting_save i::before {
+    content: '';
+    position: absolute;
+    border: 2px solid #ff1867;
+    width: 7px;
+    height: 4px;
+    top: -3.5px;
+    left: 80%;
+    background: #222222;
+    transform: translateX(-50%);
+    transition: 0.5s;
+  }
+  
+  .btn_profile_setting_save:hover i::before {
+    width: 20px;
+    left: 20%;
+  }
+  
+  .btn_profile_setting_save i::after {
+    content: '';
+    position: absolute;
+    border: 2px solid #ff1867;
+    width: 7px;
+    height: 4px;
+    bottom: -3.5px;
+    left: 20%;
+    background: #222222;
+    transform: translateX(-50%);
+    transition: 0.5s;
+  }
+  
+  .btn_profile_setting_save:hover i::after {
+    width: 20px;
+    left: 80%;
+  }
+
+  /* Inputs */
+.settings_profile_data_input{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    font-weight: 500;
+    font-size: .8vw;
+    color: #fff;
+    background-color: rgb(28,28,30);
+    box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    padding: 0.4vw;
+    max-width: 190px;
+    transition: .4s;
+  }
+  
+  .settings_profile_data_input:hover {
+    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+  }
+  
+  .settings_profile_data_input:focus {
+    box-shadow: 0 0 0 .15vw skyblue;
+  }
+  

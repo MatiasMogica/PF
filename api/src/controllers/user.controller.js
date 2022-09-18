@@ -99,9 +99,28 @@ const getUserByID = async (req, res) => {
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image } = req.body;
+  const {
+    name,
+    email,
+    age,
+    nationality,
+    profileVisibility,
+    image,
+    backgroundImage,
+  } = req.body;
+
   try {
     const user = await User.findById(idUser);
+
+    image ? await user.updateOne({ image }) : null;
+    backgroundImage ? await user.updateOne({ backgroundImage }) : null;
+    name ? await user.updateOne({ name }) : null;
+    email ? await user.updateOne({ email }) : null;
+    age ? await user.updateOne({ age }) : null;
+    nationality ? await user.updateOne({ nationality }) : null;
+    profileVisibility ? await user.updateOne({ profileVisibility }) : null;
+
+    res.status(200).json("Edited Correctly");
   } catch (error) {
     res.status(500).json({ error: error });
   }
@@ -138,7 +157,6 @@ const deleteUser = async (req, res) => {
 const getUserStats = async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-
   try {
     const data = await User.aggregate([
       { $match: { createdAt: { $gte: lastYear } } },
@@ -160,6 +178,22 @@ const getUserStats = async (req, res) => {
   }
 };
 
+const resetUser = async (req, res) => {
+  const { idUser } = req.params;
+  try {
+    const user = await User.findById(idUser);
+
+    await user.updateOne({ friends: [] });
+    await user.updateOne({ friendRequests: [] });
+    await user.updateOne({ image: "empty" });
+    await user.updateOne({ backgroundImage: "empty" });
+    res.status(200).json(user);
+  } catch (e) {
+    console.log(e);
+    res.status(45454).json({ e });
+  }
+};
+
 module.exports = {
   getByName,
   getByEmail,
@@ -170,4 +204,5 @@ module.exports = {
   becomeAdmin,
   deleteUser,
   getUserStats,
+  resetUser,
 };

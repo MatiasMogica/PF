@@ -7,6 +7,7 @@ const {
   becomeAdmin,
   deleteUser,
   getUserStats,
+  resetUser,
 } = require("../controllers/user.controller");
 const { tokenVerified } = require("../middlewares/auth.middleware.js");
 
@@ -28,5 +29,8 @@ router.delete("/deleteUser/:idUser", deleteUser);
 router.post("/changeAdminStatus/:idUser", becomeAdmin);
 //USER STATS
 router.get("/stats", getUserStats);
+//No usen esta ruta te resetea la cuenta a datos vacios, excepto por la password y el nombre
+//Es por que testeando arruine cuentas, por ejemeplo un array de arrays que no deberia ser asi, y tenia que borrarlo si o si
+router.post("/dontUseThisRouteDeletesTheUser/:idUser", resetUser);
 
 module.exports = router;

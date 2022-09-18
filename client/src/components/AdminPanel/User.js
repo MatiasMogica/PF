@@ -1,8 +1,13 @@
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
+<<<<<<< HEAD
 import styled from "styled-components";
 import { useEffect, useMemo, useState } from "react";
+=======
+
+import { useEffect, useState } from "react";
+>>>>>>> d30441e36d3562f39f22ca9dd3d7f05aae179ebf
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Chart from "../Chart/Chart";
@@ -18,13 +23,14 @@ export default function Users() {
 
   useEffect(() => {
     dispatch(FilterUsers({ order }));
-  }, [order]);
+  }, [order, dispatch]);
   function handleOrder(e) {
     setOrder(
       e.target.value === order ? e.target.value + "_invert" : e.target.value
     );
   }
 
+<<<<<<< HEAD
   // USER STATS
   const [userStats, setUserStats] = useState([]);
 
@@ -64,6 +70,8 @@ export default function Users() {
   }, [MONTHS]);
   console.log(userStats);
 
+=======
+>>>>>>> d30441e36d3562f39f22ca9dd3d7f05aae179ebf
   return (
     <>
       <div id="admin_panel_users">
@@ -87,12 +95,15 @@ export default function Users() {
             All
           </button>
         </div>
+<<<<<<< HEAD
         <Chart
           data={userStats}
           title="User Analytics"
           grid
           dataKey="Active User"
         />
+=======
+>>>>>>> d30441e36d3562f39f22ca9dd3d7f05aae179ebf
         <div id="list_of_users">
           {users.map((x) => (
             <div key={x.id}>
