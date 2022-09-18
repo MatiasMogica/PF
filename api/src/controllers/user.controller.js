@@ -96,6 +96,33 @@ const getUserByID = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
+const userGames=async(req,res,next)=>{
+  const { idUser } = req.params;
+
+  const {cartItems } = req.body;
+  //array de ids de juegos comprados
+  const idItems=cartItems.map(cart=>{
+    return cart._id
+  })
+
+  
+  try {
+    const user = await User.findById(idUser);
+    if(!user)return res.status(404).send('user not found')
+    
+    const newItems=[...new Set([...user.purchasedGames,...idItems])]
+    
+    const userUpdated=await User.findByIdAndUpdate(idUser, {purchasedGames:newItems}, {
+      new: true
+    });
+    console.log(userUpdated);
+    if(!userUpdated) return response.status(400).send('Not updated')
+    return res.status(200).json(userUpdated)
+    
+  } catch (error) {
+    next(error)
+  }
+}
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
@@ -205,4 +232,5 @@ module.exports = {
   deleteUser,
   getUserStats,
   resetUser,
+  userGames
 };

@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PaymentItem from "./paymentItem";
-import Modals from "../Modals";
-import { useModal } from "../Modals/useModal";
-import check from "../../images/transfer.png";
+import Modals from "../../Modals/index";
+import { useModal } from "../../Modals/useModal";
+import check from "../../../images/transfer.png";
 import "./index.css";
 
 export default function SuccessPayment() {

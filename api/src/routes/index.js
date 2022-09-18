@@ -6,10 +6,12 @@ const SendEmailRouter = require("./sendemails.routes.js");
 const PaymentRouter = require("./payment.routes.js");
 const ReviewsRouter = require("./reviews.routes.js");
 const FriendsRouter = require("./friends.routes.js");
+const OrderRouter= require('./order.routes.js')
 
 const router = express.Router();
 
 router.use("/", GameRouter);
+router.use('/order', OrderRouter)
 router.use("/payment", PaymentRouter);
 router.use("/users", UserRouter);
 router.use("/auth", AuthRouter);
