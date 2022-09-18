@@ -1,8 +1,8 @@
 import React from "react";
-import Modals from "../Modals";
-import { useModal } from "../Modals/useModal";
+import Modals from "../../Modals/index";
+import { useModal } from "../../Modals/useModal";
 import { Link } from "react-router-dom";
-import rechazado from "../../images/rechazado.png";
+import rechazado from "../../../images/rechazado.png";
 import "./index.css";
 
 export default function FailurePayment() {
