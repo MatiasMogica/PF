@@ -1,10 +1,12 @@
 import { getUsers } from "../../redux/actions/usersActions";
 import UserSearchBar from "../UserSearchBar/UserSearchBar";
 import { FilterUsers } from "../../redux/slices/usersSlice";
-
-import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Chart from "../Chart/Chart";
+import axios from "axios";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -22,6 +24,44 @@ export default function Users() {
       e.target.value === order ? e.target.value + "_invert" : e.target.value
     );
   }
+
+  // USER STATS
+  const [userStats, setUserStats] = useState([]);
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await axios.get("http://localhost:3001/users/stats");
+        res.data.map((item) => {
+          setUserStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], "Active User": item.total },
+          ]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats();
+  }, [MONTHS]);
 
   return (
     <>
@@ -46,6 +86,12 @@ export default function Users() {
             All
           </button>
         </div>
+        <Chart
+          data={userStats}
+          title="User Analytics"
+          grid
+          dataKey="Active User"
+        />
         <div id="list_of_users">
           {users.map((x) => (
             <div key={x.id}>
