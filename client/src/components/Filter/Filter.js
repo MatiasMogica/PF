@@ -50,6 +50,8 @@ function Filtro({paginated}) {
   });
 const [selectedPlatform,setSelectedPlatform]=useState(filtro.plataforms)
 const [selectedGenres,setSelectedGenres]  = useState(filtro.genres)
+
+console.log(selectedGenres)
   //Uso un use effect, para unicamente despatchar cuando el Filtro sea actualizado y no antes.
   useEffect(() => {
     dispatch(filterVideogames(filtro));
@@ -166,10 +168,17 @@ useEffect(() => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
 },[selectedGenres])
 
+
+
+
+
   // Creo que el html es self-explanatory...
   return (
-    <div id="filtrobox" className="filtroContainer">
-      <div className="container_search">
+
+    
+    <div id="filtrobox" className="container">
+      <div className="opciones">
+      {/* <div className="container_search">
         <h4>Search by keyword</h4>
 
         <div className="searchBar">
@@ -180,13 +189,14 @@ useEffect(() => {
           className="buscar"
           onChange={(e) => handleName(e)}
         ></input></div>
-      </div>
+      </div> */}
 
       <div >
         <h4>Release date</h4>
         <div className="release-container">
         <label htmlFor="fecha_min">From</label><br/>
         <input
+          className="inputs"
           type="date"
           id="fecha_min"
           name="trip-start"
@@ -195,6 +205,7 @@ useEffect(() => {
         <div className="release-container">
         <label htmlFor="fecha_max">To</label><br/>
         <input
+        className="inputs"
           type="date"
           id="fecha_max"
           name="trip-start"
@@ -211,7 +222,8 @@ useEffect(() => {
       <div>
         <h4>Genre</h4>
         <MultiSelect
-          
+        
+        
         options={generos.length && generos.map((x)=>{
           return {label:x,value:x}
 
@@ -221,7 +233,6 @@ useEffect(() => {
         search:"Search"}}
         value={selectedGenres}
         onChange={setSelectedGenres}
-        
         labelledBy="Select"
         />
       </div>
@@ -229,7 +240,7 @@ useEffect(() => {
       <div>
         <h4>Platform</h4>
           <MultiSelect
-          className="dark"
+          className="multiselect"
         options={plataforma.length && plataforma.map((x)=>{
           return {label:x,value:x}
 
@@ -290,7 +301,32 @@ useEffect(() => {
         </button>
         <button className='button-15' onClick={(e) => handleOrderPrecio(e)}><span className="text">Price</span></button></div>
       </div>
+      </div>
+
+      
     </div>
+
+
+  // <div className="container">
+
+    
+
+
+
+      
+  //    {generos.length && generos.map((el, index) =>{
+  //     return(
+  //       <div key={index}>
+  //       <div className="filterDiv">
+  //       <button id="el" name={el} value={selectedGenres} className="filterBtn" onChange={setSelectedGenres}>{el}</button>
+        
+  //       </div>
+  //       </div>
+  //     )
+  //   })} 
+       
+
+  //  </div> 
   );
 }
 

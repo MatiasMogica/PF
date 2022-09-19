@@ -1,5 +1,5 @@
 import "./App.css";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Error404 from "./components/Errors/index";
