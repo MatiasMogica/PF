@@ -1,3 +1,5 @@
+/* eslint no-undef: "off"*/
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogames } from "../../redux/actions/videogamesActions";
@@ -7,7 +9,7 @@ import Filtro from "../../components/Filter/Filter";
 import Card from "../../components/Card/index"
 import Paginated from "../../components/Paginated/index"
 import {Slideshow, Slide, TextoSlide} from "../../components/Slider/Slider.js"
-import './index.css'
+import './index.scss'
 import horizon from '../../images/horizon.jpg'
 import stray from '../../images/stray.webp'
 import tsushima from '../../images/tsushima.jpg'
@@ -15,6 +17,7 @@ import zelda from '../../images/zelda.jpg'
 import { addItem } from "../../redux/slices/cartSlice";
 import { AddIcon, CartIcon } from "../../icons/Icons";
 import Particle from "../../components/Particle/Particle";
+import jquery from 'jquery';
 
 export default function Home() {
     let dispatch = useDispatch();
@@ -39,11 +42,22 @@ export default function Home() {
     return (
         <div className="home">
           <Particle />
+
             <NavBar />
+            
             <div className="containerHome">
             
         <div>
-            <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="3000">
+            
+            </div>
+            <div className="container_filter_cards">
+            <div className="contain_filter">
+            <Filtro paginated={paginated} />
+            </div>
+                <div className="container_allCards">
+
+                <div className="slidermargin">
+                <Slideshow controles={true} autoplay={true} velocidad="5000" intervalo="3000">
 				<Slide>
 					
 						<img src={zelda} alt=""/>
@@ -77,12 +91,8 @@ export default function Home() {
 					</TextoSlide>
 				</Slide>
 			</Slideshow>
-            </div>
-            <div className="container_filter_cards">
-            <div className="contain_filter">
-            <Filtro paginated={paginated} />
-            </div>
-                <div className="container_allCards">
+                </div>
+
                 {Array.isArray(videogames)?(videogames.length !== 0 ? (
                     currentVg?.map((v, i) => {
                         const inCart = cartItems.find((i) => i._id === v._id)

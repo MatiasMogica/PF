@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { Star } from "../../icons/Icons";
 import './index.scss'
 import Tilit from 'tilt.js'
-import jquery from 'jquery';
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
+
 
 
 export default function Card({ name, image, platforms,  genres, released, _id, rating, price,idAPI}){

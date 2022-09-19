@@ -32,6 +32,16 @@ justify-content:space-between;
 padding:0.5rem calc((100vw - 1000px)/2);
 z-index:10;
 `
+
+export const Nav=styled.nav`
+background: #000;
+height:80px;
+display:flex;
+justify-content:space-between;
+padding:0.5rem calc((100vw - 1000px)/2);
+z-index:10;
+`
+
 export const NavLink1=styled(Link)`
 color:#fff;
 display:flex;
@@ -47,6 +57,23 @@ cursor:pointer;
     color:#81E6D9;
 }
 `
+
+export const NavLink=styled(Link)`
+color:#fff;
+display:flex;
+align-items:center;
+text-decoration:none;
+padding:0 1rem;
+height:100%;
+cursor:pointer;
+&.active{
+    color:#81E6D9;
+}
+&:hover{
+    color:#81E6D9;
+}
+`
+
 export const NavLinkHome=styled(Link)`
 color:#fff;
 display:flex;
