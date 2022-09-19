@@ -41,8 +41,13 @@ const userSchema = new Schema(
         deleted: {
             type: Boolean,
             default: false
-        }
-        
+        },
+        wish_list: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Game",
+            },
+          ],
     },
     {
         timestamps: true,

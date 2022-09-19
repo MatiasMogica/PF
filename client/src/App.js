@@ -1,5 +1,5 @@
 import "./App.css";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Error404 from "./components/Errors/index";
@@ -19,6 +19,7 @@ import CartContainer from "./components/Cart/CartContainer"
 import SuccessPayment from "./components/SuccessPayment";
 import FailurePayment from "./components/FailurePayment";
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
+import Particle from "./components/Particle/Particle";
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -42,8 +43,11 @@ function App() {
   return (
     <div>
       <Switch>
+      
         <Route exact path={"/"} component={Home} />
-        <Route exact path={"/home"} component={Home}/>
+        <Route exact path={"/home"} component={Home}>
+        <Particle />
+        </Route>
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
         <Route exact path={'/cart'} component={CartContainer}/>
         <Route exact path={'/success'} component={SuccessPayment} />
@@ -67,6 +71,7 @@ function App() {
           </>
         ) : null}
         <Route component={Error404} />
+        
       </Switch>
     </div>
   );

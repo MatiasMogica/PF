@@ -1,24 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components'
 /* import image from "../../images/logo.png" */
-import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink,NavLinkHome,NavLinkAdmin} from "./NavBarStyle";
+import { Nav1, NavLink1, Bars, NavMenu, NavBtn, NavBtnLink,NavLinkHome,NavLinkAdmin } from "./NavBarStyle";
 /* import { useDispatch, useSelector } from "react-redux"; */
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogOut from "../LogOut/LogOut";
 import {CartIcon} from "../../icons/Icons"
 import "./index.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {AiOutlineShoppingCart,AiOutlineHome} from 'react-icons/ai'
 import {FiUsers} from 'react-icons/fi'
 import {IoGameControllerOutline} from 'react-icons/io5'
 import userIcon from '../../images/user.png'
+import menu from '../../images/menu.png'
+import SearchBar from "../SearchBar/SearchBar";
+
+
+
+
+
 export default function NavBar({usuario}) {
   /* let {amount} = useSelector((state) => state.cart) */
   const [user] = useState(JSON.parse(localStorage.getItem("email")));
   const userapi = useSelector((state) => state.logIn.logIn);
   const {pathname}=useLocation()
   let { amount } = useSelector((state) => state.cart);
+  
 
   
   const history = useHistory();
@@ -26,12 +34,36 @@ export default function NavBar({usuario}) {
     localStorage.clear();
 
     history.replace("/");
+
+
+
+
+    
   };
+
+  useEffect(() => {
+    let menu = document.querySelector('.menu-icon')
+    let navbar = document.querySelector('.menu')
+    menu.onclick = () => {
+      navbar.classList.toggle('active')
+      menu.classList.toggle('move')
+    }
+
+  }, [])
+
+  
+  
+
+    
+  
+    
   return (
     //
 
     <>
       
+      
+
       { console.log(pathname)}
       {pathname==='/adminPanel'?
        <Container>
@@ -50,28 +82,46 @@ export default function NavBar({usuario}) {
           <FiUsers color='white'/>
           <HLinks>Users</HLinks>
           </BtnUser></div>
-          <NavLink to="/videogame/add">
+          <NavLink1 to="/videogame/add">
             <IoGameControllerOutline/>
             <HLinks>Create</HLinks>
-          </NavLink>
+          </NavLink1>
         </NavMenuAdmin>
        
      </Container >
-      :(<Nav>
-        <NavLink to="/">
+      :(<Nav1>
+        <div className="menu-icon">
+        <div className="line1"></div>
+        <div className="line2"></div>
+        <div className="line3"></div>
+      </div>
+
+        <div className="menu">
+          <img src={menu} alt="Cyberpunk image"/>
+          <div className="nnavbar">
+          
+            <Link to="/" className="links"><span>Home</span></Link>
+            <Link to="/videogame/wishList" className="links"><span>Wish list</span></Link>
+            <Link to="/cart" className="links"><span>Cart</span></Link>
+            </div>
+        </div>
+
+        
+        {/* <NavLink1 to="/">
           <h1>ZTEAM</h1>
-        </NavLink>
-        <Bars />
-        <NavMenu>
-          <NavLinkHome to="/home">Home</NavLinkHome>
-          <NavLink to="/videogame/wishList">WishList</NavLink>
+        </NavLink1> */}
+        {/* <Bars /> */}
+        
+          {/* <NavLinkHome to="/home">Home</NavLinkHome>
+          <NavLink1 to="/videogame/wishList">WishList</NavLink1>
           <div className="cartIcon">
-            <NavLink to="/cart" >
+            <NavLink1 to="/cart" >
               <CartIcon />
               {amount}
-            </NavLink>
-          </div>
-        </NavMenu>
+            </NavLink1>
+          </div> */}
+          <SearchBar/>
+        
         <NavBtn>
           {user ? (
             <>
@@ -81,10 +131,10 @@ export default function NavBar({usuario}) {
               </NavBtnLink>
             </>
           ) : userapi.status ? (
-            <div className="userMenu">
-              <NavLink to="/profile">
+            <div>
+              <NavLink1 to="/profile">
                 {userapi.username}
-              </NavLink>
+              </NavLink1>
               <div className="dropdownmenu">
                 <div className="LogOut">
                   <LogOut></LogOut>
@@ -97,10 +147,14 @@ export default function NavBar({usuario}) {
               </div>
             </div>
           ) : (
-            <NavBtnLink to="/signIn">Sign In</NavBtnLink>
+            <Link to="/signIn">
+            <span className="navbar-text" >
+            <button>Sign In</button>
+            </span>
+            </Link>
           )}
         </NavBtn>
-        </Nav>
+        </Nav1>
     )
       
       
@@ -123,7 +177,6 @@ position:sticky;
 top:0.7rem;
 overflow : hidden;
 width:20%;
-
 `
 
 const ProfileContainer=styled.div`
@@ -136,7 +189,6 @@ const Avatar=styled.img`
 height :7rem;
 border-radius : 6rem;
 margin-top:20%;
-
 `
 const Name=styled.h3`
 color:white;
@@ -165,7 +217,6 @@ line-height :3rem;
 &:hover{
   color:#81E6D9;
 }
-
 `
 const HLinks=styled.h3`
 padding-left:0.5rem;

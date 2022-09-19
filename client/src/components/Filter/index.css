@@ -59,7 +59,49 @@
   height: 30px;
   outline: none;
   text-align: center;
+  color: #fff;
 }
+
+
+.price_input::after{
+  /* Layout */
+  content: "";
+  position: absolute;
+  bottom: -17px;
+  right: -17px;
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+
+  /* Border */
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+
+  /* Animation */
+  transition: color 1s ease-out;
+  transition: border-color 1s ease-out;
+}
+
+.price_input:hover::after,
+.price_input:hover{
+  color: var(--blue);
+  background: var(--black-hover-background);
+  
+  border-color: var(--blue);
+
+  transition: color 0.23s linear;
+  transition: border-color 0.23s linear;
+}
+
+
+
+
+
+
+
+
+
 input[type=number]::-webkit-outer-spin-button, 
 input[type=number]::-webkit-inner-spin-button{
   appearance:none;
@@ -162,6 +204,11 @@ border-radius: 4px;
  
 }
 
+
+.multiselect {
+  background-color: black;
+}
+
 /*#buscarfiltro{
   float: left;
   
@@ -184,3 +231,155 @@ border-radius: 4px;
   font-weight: bold;
   font-size: 28px;
 }*/
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --red: rgba(211, 87, 91, 0.81);
+  --red-glow: rgba(211, 87, 91, 0.91);
+  --red-scanline: rgba(204, 94, 98, 0.2);
+  --black-scanline: rgba(1, 1, 1, 0.9);
+  --black-hover-background: rgba(0, 0, 0, 0.25);
+  --blue: #61e4fa;
+  --yellow: #f7f500;
+  --text-shadow: rgb(0, 208, 255);
+}
+
+
+
+
+
+
+.logo {
+  font-family: "Cyberpunk";
+  color: var(--yellow);
+  text-align: center;
+  font-size: 42px;
+  text-shadow: var(--text-shadow) 2px 3px 0px;
+  line-height: 1.5;
+  padding: 25px 0px;
+}
+
+.sublogo {
+  font-family: "GinesoSoft-ConMed";
+  font-size: 24px;
+  color: var(--text-shadow);
+  text-shadow: none;
+  text-align: right;
+  letter-spacing: 24px;
+  padding-right: 15px;
+}
+
+
+
+.inputs {
+  text-transform: uppercase;
+  cursor: pointer;
+  /* layout */
+  padding: 10px;
+  margin: 15px 0px;
+  overflow: hidden;
+  width: 350px;
+  height: 54.5px;
+  clip-path: polygon(350px 0px, 350px 29px, 322px 57px, 0px 57px, 0px 0px);
+
+  /* font */
+  color: #fff;
+  font-size: 20px;
+  text-shadow: 0px 0px 3px var(--red-glow), 0px 1px 4px var(--blue);
+
+  /* Border */
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  /* Animation */
+  transition: color 1s ease-out;
+  transition: border-color 1s ease-out;
+}
+
+
+
+.inputs::after{
+  /* Layout */
+  content: "";
+  position: absolute;
+  bottom: -17px;
+  right: -17px;
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+
+  /* Border */
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+
+  /* Animation */
+  transition: color 1s ease-out;
+  transition: border-color 1s ease-out;
+}
+
+.inputs:hover::after,
+.inputs:hover{
+  color: var(--blue);
+  background: var(--black-hover-background);
+  
+  border-color: var(--blue);
+
+  transition: color 0.23s linear;
+  transition: border-color 0.23s linear;
+}
+
+
+
+
+.container {
+  background-color: transparent;
+  display: inline-table;
+  justify-content: left;
+  height: 90%;
+  margin: 0;
+  max-width: 300px;
+}
+
+.container input {
+  background: black;
+}
+
+.container label {
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+.filterDiv {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.filterDiv * {
+  pointer-events: none;
+}
+
+.filterBtn {
+  background-color: #2d2d2d;
+  padding: 4px;
+  border: 1px transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
