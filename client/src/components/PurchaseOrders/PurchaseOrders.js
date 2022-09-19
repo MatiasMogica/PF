@@ -1,19 +1,16 @@
 
 import NavBarAdmin from "../NavBar/NavBarAdmin"
 import styled from "styled-components"
-
-import { useEffect,useState } from "react";
-import axios from "axios"
+import  {getOrders} from "../../redux/actions/orderActions";
+import { useDispatch,useSelector} from "react-redux";
+import { useEffect} from "react";
 import DetailOrder from "./DetailOrder";
 export default function PurchaseOrders(){
-    const [order,setOrder]=useState([])
+    const order = useSelector((state) => state.orders.orders);
+    const dispatch=useDispatch()
     useEffect(() => {  
-        axios('http://localhost:3001/order/order')
-        .then(({data}) =>{
-            setOrder(data)}
-        )
-        .catch((err) =>console.log(err))
-    },[])
+       dispatch(getOrders())
+    },[dispatch])
 
     
     return (
