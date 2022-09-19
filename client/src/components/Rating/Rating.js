@@ -68,7 +68,6 @@ export default function Rating() {
             } catch (error) {
                 console.log(error)
             }
-            <Redirect to="/" />
         }
     }
 

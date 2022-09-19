@@ -1,9 +1,27 @@
+import axios from "axios";
+import { useEffect, useReducer } from "react";
+import { useDispatch } from "react-redux";
 import { Star } from "../../icons/Icons";
 import "./index.css"
 
 export default function Details({details}) {
 
     console.log(details)
+    const dispatch = useDispatch()
+    const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+
+    useEffect(() => {
+    }, [reducerValue])
+
+    async function handleClick(id) {
+         try {
+            await axios.delete(`http://localhost:3001/reviews/${id}`)
+        forceUpdate();
+            /* history.push(`/videogames/${id}`) */
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div key={details?.idAPI}>

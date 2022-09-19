@@ -5,7 +5,7 @@ import { addReview } from "../slices/videogamesSlice";
 
 export const getReviews = () => (dispatch) => {
     axios(`http://localhost:3001/reviews`)
-    .then(res => dispatch(getAllReviews(res.data)))
+    .then(res => dispatch(res.data))
     .catch(e => console.log(e))
 }
 
