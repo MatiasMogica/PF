@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import styled from 'styled-components'
 /* import image from "../../images/logo.png" */
@@ -5,9 +6,11 @@ import { Nav1, NavLink1, Bars, NavMenu, NavBtn, NavBtnLink,NavLinkHome,NavLinkAd
 /* import { useDispatch, useSelector } from "react-redux"; */
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import LogOut from "../LogOut/LogOut";
 import {CartIcon} from "../../icons/Icons"
 import "./index.css";
+
 import { useLocation, Link } from "react-router-dom";
 import {AiOutlineShoppingCart,AiOutlineHome} from 'react-icons/ai'
 import {FiUsers} from 'react-icons/fi'
@@ -25,6 +28,7 @@ export default function NavBar({usuario}) {
   const [user] = useState(JSON.parse(localStorage.getItem("email")));
   const userapi = useSelector((state) => state.logIn.logIn);
   const {pathname}=useLocation()
+
   let { amount } = useSelector((state) => state.cart);
   
 
@@ -62,6 +66,7 @@ export default function NavBar({usuario}) {
 
     <>
       
+
       
 
       {pathname==='/adminPanel'?
@@ -102,6 +107,7 @@ export default function NavBar({usuario}) {
             <Link to="/" className="links"><span>Home</span></Link>
             <Link to="/videogame/wishList" className="links"><span>Wish list</span></Link>
             <Link to="/cart" className="links"><span>Cart</span></Link>
+
             </div>
         </div>
 
@@ -148,6 +154,7 @@ export default function NavBar({usuario}) {
           ) : (
             <NavBarLogIn />
           )}
+
         </NavBtn>
         </Nav1>
     )
@@ -231,3 +238,4 @@ justify-content: center;
 align-items: center;
 font-size:1rem;
 `
+

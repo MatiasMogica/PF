@@ -6,6 +6,7 @@ import users from "../slices/usersSlice";
 import logIn from "../slices/logInSlice";
 import profile from "../slices/profileSlice";
 import friend from "../slices/friendSlice";
+import orders from "../slices/orderSlice";
 export default configureStore({
   reducer: {
     videogames,
@@ -15,5 +16,6 @@ export default configureStore({
     logIn,
     profile,
     friend,
+    orders
   },
 });
