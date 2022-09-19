@@ -15,10 +15,9 @@ import { useEffect } from "react";
 import { localStorageUser } from "./redux/slices/logInSlice";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import Edit from "./pages/Edit/Edit";
-import Wishlist from "./pages/WishList/WishList"
+import Payment from "./components/Payment/Payment"
 import CartContainer from "./components/Cart/CartContainer";
-import SuccessPayment from "./components/SuccessPayment";
-import FailurePayment from "./components/FailurePayment";
+import WishList from "./pages/WishList/WishList"
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
 import Settings from "./pages/Settings/Settings";
 
@@ -34,7 +33,7 @@ function App() {
     window.localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  const { cartItems, amount } = useSelector((state) => state.cart);
+  const { cartItems, amount } = useSelector((state) => state.cart)
   const {wishedItems, wishedAmount } = useSelector((state) => state.wishList)
 
   useEffect(() => {
@@ -47,16 +46,16 @@ function App() {
     localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount))
   }, [wishedItems, wishedAmount]);
 
+
   return (
     <div>
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/home"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
-        <Route exact path={'/wishList'} component={Wishlist}/>
+        <Route exact path={"/wishlist"} component={ WishList } />
         <Route exact path={"/cart"} component={CartContainer} />
-        <Route exact path={"/success"} component={SuccessPayment} />
-        <Route exact path={"/failure"} component={FailurePayment} />
+        <Route exact path={'/payment'} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
         {user.status ? (
           <Route exact path={"/settings"} component={Settings}></Route>

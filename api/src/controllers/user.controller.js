@@ -96,6 +96,33 @@ const getUserByID = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
+const userGames=async(req,res,next)=>{
+  const { idUser } = req.params;
+
+  const {cartItems } = req.body;
+  //array de ids de juegos comprados
+  const idItems=cartItems.map(cart=>{
+    return cart._id
+  })
+
+  
+  try {
+    const user = await User.findById(idUser);
+    if(!user)return res.status(404).send('user not found')
+    
+    const newItems=[...new Set([...user.purchasedGames,...idItems])]
+    
+    const userUpdated=await User.findByIdAndUpdate(idUser, {purchasedGames:newItems}, {
+      new: true
+    });
+    console.log(userUpdated);
+    if(!userUpdated) return response.status(400).send('Not updated')
+    return res.status(200).json(userUpdated)
+    
+  } catch (error) {
+    next(error)
+  }
+}
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
@@ -153,6 +180,47 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// GET USER STATS
+const getUserStats = async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+  try {
+    const data = await User.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const resetUser = async (req, res) => {
+  const { idUser } = req.params;
+  try {
+    const user = await User.findById(idUser);
+
+    await user.updateOne({ friends: [] });
+    await user.updateOne({ friendRequests: [] });
+    await user.updateOne({ image: "empty" });
+    await user.updateOne({ backgroundImage: "empty" });
+    res.status(200).json(user);
+  } catch (e) {
+    console.log(e);
+    res.status(45454).json({ e });
+  }
+};
+
 const putUserWishList = async (req, res) => {
   const { idUser } = req.params;
   const { wishList } = req.body
@@ -172,5 +240,8 @@ module.exports = {
   putUser,
   becomeAdmin,
   deleteUser,
+  getUserStats,
+  resetUser,
+  userGames,
   putUserWishList
 };

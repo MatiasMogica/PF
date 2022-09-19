@@ -4,25 +4,24 @@ import Modals from "../Modals";
 import { useModal } from "../Modals/useModal";
 import like from "../../images/like.gif";
 import dislike from "../../images/dislike.jpg";
-import { useState } from "react";
-
-/* function validate(value) {
-    let errors = {}
-
-    if(!value.review) {
-        errors.review = "A review is required!"
-    } else if (value.review.length < 10) {
-        errors.review = "The review should contain at less 10 characters!"
-    } else if (value.review.length > 100) {
-        errors.review = "The review should contain less than 100 characters!"
-    }
-return errors
-} */
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { postReview } from "../../redux/actions/reviewsActions";
+import {useParams} from 'react-router-dom'
+import { addReview } from "../../redux/slices/videogamesSlice";
+import { getById } from "../../redux/actions/videogamesActions";
 
 export default function Rating() {
-
+    const { id } = useParams();
     const [isOpenLike, openedLike, closeLike] = useModal(false);
     const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
+    const dispatch = useDispatch()
+    console.log(id)
+
+    useEffect(() => {
+        dispatch(getById(id))
+    }, [dispatch, id])
+
     const [input, setInput] = useState({
         review: {
             value: "",
@@ -56,6 +55,7 @@ export default function Rating() {
                 setInput({
                     review: "",
                 })
+                dispatch(addReview(id))
             } catch (error) {
                 console.log(error)
             }
@@ -74,7 +74,6 @@ export default function Rating() {
                     <form onSubmit={handleSubmit}>
                         <textarea onChange={(e) => handleReview(e)} />
                         {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
-                    </form>
                         <div className="container-modal-buttons">
                             <button type="submit" className="modal-cart-close" >
                                 UPLOAD
@@ -83,6 +82,7 @@ export default function Rating() {
                                 CANCEL
                             </button>
                         </div>
+                    </form>
             </Modals>
             <Modals isOpenModal={isOpenDislike} closeModal={closeDislike}>
                 <h2 className="modal-cart-title">Leave a review</h2>
@@ -90,7 +90,6 @@ export default function Rating() {
                     <form onSubmit={handleSubmit}>
                         <textarea onChange={(e) => handleReview(e)} />
                         {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
-                    </form>
                         <div className="container-modal-buttons">
                             <button type="submit" className="modal-cart-close" >
                                 UPLOAD
@@ -99,6 +98,7 @@ export default function Rating() {
                                 CANCEL
                             </button>
                         </div>
+                    </form>
             </Modals>
         </div>
     )

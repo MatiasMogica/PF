@@ -1,12 +1,13 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 const gameSchema = new Schema(
   {
     idAPI: {
       type: String,
     },
-    description:{
-      type: String
+    description: {
+      type: String,
     },
     name: {
       type: String,
@@ -43,6 +44,15 @@ const gameSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    // comments: { type: [String], default: [] },
+    // comments: [
+    //   {
+    //     type: [String],
+    //     ref: "Review",
+    //     default: [],
+    //   },
+    // ],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   {
     timestamps: true,

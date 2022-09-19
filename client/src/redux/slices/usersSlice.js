@@ -6,6 +6,7 @@ const usersSlice = createSlice({
     users: [],
     filterUsers: [],
     userDetails: {},
+    userWishList: [],
   },
   reducers: {
     getAllUsers: (state, action) => {
@@ -49,8 +50,11 @@ const usersSlice = createSlice({
     userDetails: (state, action) => {
       return { ...state, userDetails: action.payload.user };
     },
+    /* userWishList: (state, action) => {
+      return {...state, userWishList: action.payload.user.wish_list}
+    } */
   },
 });
 
-export const { getAllUsers, FilterUsers, userDetails } = usersSlice.actions;
+export const { getAllUsers, FilterUsers, userDetails, userWishList } = usersSlice.actions;
 export default usersSlice.reducer;

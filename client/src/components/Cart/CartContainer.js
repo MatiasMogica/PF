@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateTotal } from "../../redux/slices/cartSlice";
+// eslint-disable-next-line no-unused-vars
 import NavBar from "../NavBar";
 import CartItem from "./CartItem";
 import Modals from "../Modals";
@@ -13,6 +14,8 @@ import { Bag, Trash } from "../../icons/Icons";
 
 const CartContainer = () => {
   const { cartItems, total, amount } = useSelector((state) => state.cart);
+  const {id,username} = useSelector((state) => state.logIn.logIn);
+  // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(false);
   const dispatch = useDispatch();
 
@@ -51,6 +54,11 @@ const CartContainer = () => {
             <Trash />
           </button>
           <form action="http://localhost:3001/payment/payment" method="POST">
+          <input type='hidden' name="user_id" value={id}/>
+          <input type='hidden' name='games_id' value={cartItems.map(i=>i._id)}/>
+          <input type='hidden' name="username" value={username}/>
+          <input type='hidden' name="cartItems" value={cartItems.map(i=>{
+                            return `${i.name}%${i.price}`})}/>
             <input
               type="hidden"
               name="title"

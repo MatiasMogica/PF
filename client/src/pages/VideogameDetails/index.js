@@ -14,6 +14,8 @@ export default function DogDetails() {
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.videogames);
   const {amount} = useSelector((state) => state.cart)
+  const {reviews} = useSelector((state) => state.reviews)
+  console.log(reviews)
 
   useEffect(() => {
     dispatch(getById(id));
@@ -38,7 +40,7 @@ export default function DogDetails() {
           ) : (
             <Spinner />
           )}
-        {/* <Rating />  */}
+        <Rating /> 
         </div>
       }
     </div>

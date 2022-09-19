@@ -2,6 +2,9 @@ import { Star } from "../../icons/Icons";
 import "./index.css"
 
 export default function Details({details}) {
+
+    console.log(details)
+
     return (
         <div key={details?.idAPI}>
             <div className="imageContainer">
@@ -26,6 +29,17 @@ export default function Details({details}) {
                 </div>
                 <div>
                     <p className="info">{details?.platforms.length && details.platforms.join(', ') }</p>  
+                </div>
+                <div>
+                     {details?.comments.map((c) => {
+                        return (
+                            <div key={c._id}>
+                                {c.comments}
+                            </div>
+                        
+                    )
+                    }
+                         )} 
                 </div>
                 
             </div>

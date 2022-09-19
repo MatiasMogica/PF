@@ -1,4 +1,5 @@
-import { getAllUsers, userDetails } from "../slices/usersSlice";
+import axios from "axios"
+import { getAllUsers, userDetails, userWishList } from "../slices/usersSlice";
 
 export const getUsers = () => (dispatch) => {
   fetch(`http://localhost:3001/users/users`, {
@@ -33,3 +34,9 @@ export const getUserDetails = (id) => (dispatch) => {
     .then((res) => dispatch(userDetails(res)))
     .catch((e) => console.log(e));
 };
+
+/* export const getUserWishList = (id) => (dispatch) => {
+  axios(`http://localhost:3001/users/putUserWishList/${id}`)
+  .then(res => dispatch(userWishList(res)))
+    .catch(e => console.log(e))
+} */
