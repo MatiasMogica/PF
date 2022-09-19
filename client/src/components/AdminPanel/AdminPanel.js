@@ -9,17 +9,18 @@ import SearchBar from "../SearchBar/SearchBar";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import User from "./User";
+import NavBarAdmin from "../NavBar/NavBarAdmin";
+
 
 function AdminPanel() {
-  const [renderUser, SetRenderUser] = useState(false);
+  {/*const [renderUser, SetRenderUser] = useState(false);*/}
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
-  const usuario = () => {
+ {/* const usuario = () => {
     SetRenderUser(true);
-  };
+  };*/}
   const userapi = useSelector((state) => state.logIn.logIn);
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
@@ -49,10 +50,8 @@ function AdminPanel() {
 
   return (
     <Container>
-      <NavBar usuario={usuario} />
-      {renderUser ? (
-        <User />
-      ) : (
+      <NavBarAdmin/>
+      
         <MainContent>
           <Welcome>
             <h3>
@@ -91,7 +90,7 @@ function AdminPanel() {
             </ContainerGames>
           </div>
         </MainContent>
-      )}
+      
     </Container>
   );
 }
