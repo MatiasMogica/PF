@@ -9,11 +9,6 @@ export const reviewsSlice = createSlice({
         getAllReviews: (state, {payload}) => {
             state.reviews = payload
         },
-        createReview: (state, {payload}) => {
-            const reviewId = payload
-            
-            state.reviews.push(reviewId)
-        },
         deleteAReview: (state, {payload}) => {
             const reviewId = payload
             state.reviews = state.reviews.filter(r => r.id !== reviewId);

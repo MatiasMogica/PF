@@ -31,9 +31,10 @@ export default function Details({details}) {
                     <p className="info">{details?.platforms.length && details.platforms.join(', ') }</p>  
                 </div>
                 <div>
-                     {details?.comments.map((c) => {
+                     {details.comments?.map((c) => {
                         return (
                             <div key={c._id}>
+                                <button onClick={() => {}}>X</button>
                                 {c.comments}
                             </div>
                         

@@ -15,10 +15,6 @@ export const videogamesSlice = createSlice({
     getVideogameById: (state, action) => {
       state.details = action.payload;
     },
-    addReview: (state, {payload}) => {
-      const game = state.videogames.find((i) => i._id === payload._id)
-      game?.comments.push(payload)
-    },
     clearVideogame: (state) => {
       state.details = {};
     },

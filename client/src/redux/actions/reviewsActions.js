@@ -11,7 +11,7 @@ export const getReviews = () => (dispatch) => {
 
 export const postReview = (id) => (dispatch) => {
     axios(`http://localhost:3001/reviews/${id}`)
-    .then(res => dispatch(addReview(res.data)))
+    .then(res => dispatch(res.data))
     .catch(e => console.log(e))
 }
 
