@@ -40,7 +40,9 @@ function GamesOwnedById() {
             ? gamesArray.length + " games owned by " + userDetails.username
             : userDetails.username + " dont have games or they are private"}
         </h1>
-        <div>gamesArray es el array de ids de juegos que este perfil tiene</div>
+        <div>
+          gamesArray es el array de ids de juegos que este perfil tiene asd
+        </div>
       </div>
     </div>
   );
