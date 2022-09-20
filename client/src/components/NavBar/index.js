@@ -51,17 +51,9 @@ export default function NavBar({ usuario }) {
     }
   }, [user.id, dispatch]);
 
-<<<<<<< HEAD
-  }, [])
-
-  
-  
+   
   
     
-  
-    
-=======
->>>>>>> c5cf0986013f4f631c216bcf0dc2ff502dad663f
   return (
     //
 
