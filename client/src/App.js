@@ -17,9 +17,10 @@ import AdminPanel from "./components/AdminPanel/AdminPanel";
 import Edit from "./pages/Edit/Edit";
 import Payment from "./components/Payment/Payment"
 import CartContainer from "./components/Cart/CartContainer";
-
+import PurchaseOrders from "./components/PurchaseOrders/PurchaseOrders"
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
 import Settings from "./pages/Settings/Settings";
+import Users from "./components/AdminPanel/User"
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -63,9 +64,12 @@ function App() {
 
         {user.admin ? (
           <>
+           
             <Route exact path={"/adminPanel"} component={AdminPanel} />
             <Route exact path={"/videogame/add"} component={Add} />
             <Route exact path={"/edit/:id"} component={Edit} />
+            <Route exact path={"/adminPanel/purchaseOrders"} component={PurchaseOrders} />
+            <Route exact path={"/adminPanel/user"} component={Users} />
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
           </>
         ) : null}
