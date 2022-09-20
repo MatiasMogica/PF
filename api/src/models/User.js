@@ -21,6 +21,10 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
+    resetToken: {
+      type: String,
+      default: ""
+    },
     admin: {
       type: Boolean,
       default: false,

@@ -134,7 +134,7 @@ function NavBarLogIn() {
           </s>
           <s className="dropdown-item">
             <Link
-              to="/Remplazame-Por-la-page-para-recuperar-password-cuando-la-tengas"
+              to="/forgot-password"
               style={{ textDecoration: "none", color: "white" }}
             >
               Forgot Password?

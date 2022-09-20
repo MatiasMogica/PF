@@ -22,6 +22,8 @@ import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options"
 import Settings from "./pages/Settings/Settings";
 import GamesOwnedById from "./pages/GamesOwnedById/GamesOwnedById";
 import Users from "./components/AdminPanel/User";
+import ForgotPassword from "./components/ForgotPassword/forgot";
+import Reset from "./components/ForgotPassword/reset";
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -65,6 +67,8 @@ function App() {
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
+        <Route path='/forgot-password' component={ForgotPassword} />
+        <Route path='/reset-password' component={Reset} />
 
         {user.admin ? (
           <>
