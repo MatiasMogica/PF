@@ -1,6 +1,6 @@
-import axios from "axios";
+/* import axios from "axios";
 
-import { getAllReviews, deleteAReview, createReview } from "../slices/reviewsSlice";
+import { getAllReviews, deleteAReview, createReview } from "../slices/likesSlice";
 import { addReview } from "../slices/videogamesSlice";
 
 export const getReviews = () => (dispatch) => {
@@ -19,4 +19,4 @@ export const deleteReview = (id) => (dispatch) => {
     axios(`http://localhost:3001/reviews/${id}`)
     .then(res => dispatch(deleteAReview(res.data)))
     .catch(e => console.log(e))
-}
+} */

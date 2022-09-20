@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Star } from "../../icons/Icons";
 import { getById } from "../../redux/actions/videogamesActions";
@@ -9,19 +9,24 @@ import { useModal } from "../Modals/useModal";
 import like from "../../images/like.gif";
 
 import "./index.css"
+import { getPercentageOfLikes, getTotalvotes } from "../../redux/slices/likesSlice";
 
 export default function Details({details}) {
 
     console.log(details)
     const dispatch = useDispatch()
     const { id } = useParams();
+    const {likes, percentageOfLikes, votesTotal} = useSelector(state => state.likes)
     const [isOpenLike, openedLike, closeLike] = useModal(false);
     const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-
+    console.log("likes", likes)
+    console.log("percentageLikes", percentageOfLikes)
     useEffect(() => {
         dispatch(getById(id))
-    }, [reducerValue])
+        dispatch(getTotalvotes())
+        dispatch(getPercentageOfLikes())
+    }, [reducerValue, dispatch])
 
     const [input, setInput] = useState({
         review: {
@@ -48,28 +53,11 @@ export default function Details({details}) {
           });
         }
       }
-
-
-
-    async function handleSubmit(e) {
-        e.preventDefault()
-        if(!input.review.error) {
-            try {
-                await axios.post(`http://localhost:3001/reviews/${id}`, {
-            comments: input.review.value,
-          })
-            forceUpdate();
-                /* history.push(`/videogames/${id}`) */
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }
     
     async function handleUpdate(reviewId) {
-        console.log("Este es id", id)
+        reviewId.preventDefault()
         try {
-            await axios.update(`http://localhost:3001/reviews/${reviewId}`, {
+            await axios.put(`http://localhost:3001/reviews/${reviewId}`, {
                 comments: input.review.value,
             })
         forceUpdate();
@@ -83,10 +71,39 @@ export default function Details({details}) {
         console.log("Este es id", id)
         try {
             await axios.delete(`http://localhost:3001/reviews/${reviewId}`)
-        forceUpdate();
+            forceUpdate();
         } catch (error) {
             console.log(error)
         }
+    }
+
+    function Opinion() {
+        if(percentageOfLikes <= 20) {
+            return (
+                <p>Not recommended</p>
+            )
+        }
+        if(percentageOfLikes > 20 && percentageOfLikes <= 40) {
+            return (
+                <p>Not good</p>
+            )
+        }
+        if(percentageOfLikes > 40 && percentageOfLikes <= 60) {
+            return (
+                <p>OK</p>
+            )
+        }
+        if(percentageOfLikes > 60 && percentageOfLikes <= 80) {
+            return (
+                <p>Good</p>
+            )
+        }
+        if(percentageOfLikes > 80 && percentageOfLikes <= 100) {
+            return (
+                <p>Amazing</p>
+            )
+        }
+        return null
     }
 
     return (
@@ -115,26 +132,23 @@ export default function Details({details}) {
                     <p className="info">{details?.platforms.length && details.platforms.join(', ') }</p>  
                 </div>
                 <div>
+                    <p>{votesTotal === 0 ? "No reviews" : percentageOfLikes + "%"} </p>
+                    <Opinion />
                     {details.comments?.map((c) => {
                         return (
                             <div key={c._id}>
                                 <button onClick={() => handleClick(c._id)}>X</button>
                                 <button onClick={openedLike}>Edit</button>
                                 {c.comments}
-                            </div>
-                    )
-                    }
-                        )} 
-                </div>
-                <Modals isOpenModal={isOpenLike} closeModal={closeLike}>
+                                <Modals isOpenModal={isOpenLike} closeModal={closeLike}>
                 <div>
                 <h2 className="modal-cart-title">Leave a review</h2>
                     <img src={like} alt="deleteCart" className="modal_img" />
-                    <form onSubmit={ handleSubmit }>
+                    <form onSubmit={(c) => handleUpdate(c._id) }>
                         <textarea onChange={(e) => handleReview(e)} name={input.review.value} />
                         {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
                         <div className="container-modal-buttons">
-                            <button type="submit" className="modal-cart-close" onClick={handleUpdate} >
+                            <button type="submit" className="modal-cart-close" onClick={closeLike} >
                                 UPLOAD
                             </button>
                         </div>
@@ -144,6 +158,11 @@ export default function Details({details}) {
                     </button>
                 </div>
             </Modals>
+                            </div>
+                    )
+                    }
+                        )} 
+                </div>
             </div>
         </div>
     )

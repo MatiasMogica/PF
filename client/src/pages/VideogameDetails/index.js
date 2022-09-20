@@ -9,13 +9,13 @@ import { clearVideogame } from "../../redux/slices/videogamesSlice";
 import { CartIcon } from "../../icons/Icons";
 import Rating from "../../components/Rating/Rating";
 
-export default function DogDetails() {
+export default function VideogameDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.videogames);
   const {amount} = useSelector((state) => state.cart)
-  const {reviews} = useSelector((state) => state.reviews)
-  console.log(reviews)
+ /*  const {reviews} = useSelector((state) => state.reviews)
+  console.log(reviews) */
 
   useEffect(() => {
     dispatch(getById(id));

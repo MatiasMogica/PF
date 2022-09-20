@@ -6,11 +6,10 @@ import { useModal } from "../Modals/useModal";
 import like from "../../images/like.gif";
 import dislike from "../../images/dislike.jpg";
 import { useEffect, useReducer, useState } from "react";
-import { useDispatch } from "react-redux"
-import { postReview } from "../../redux/actions/reviewsActions";
-import {useParams, useHistory, Redirect, useLocation} from 'react-router-dom'
-import { addReview } from "../../redux/slices/videogamesSlice";
+import { useDispatch, useSelector } from "react-redux"
+import {useParams } from 'react-router-dom'
 import { getById } from "../../redux/actions/videogamesActions";
+import { AddDislike, AddLike, getPercentageOfLikes, getTotalvotes } from "../../redux/slices/likesSlice";
 /* import { useNavigate } from "react-router-dom"; */
 
 export default function Rating() {
@@ -18,14 +17,15 @@ export default function Rating() {
     const [isOpenLike, openedLike, closeLike] = useModal(false);
     const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
     const dispatch = useDispatch()
-    const history = useHistory()
-    let location = useLocation()
+    const {likes, percentageOfLikes, votesTotal} = useSelector(state => state.likes)
     /* const navigate = useNavigate() */
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
     console.log(id)
 
     useEffect(() => {
         dispatch(getById(id))
+        dispatch(getTotalvotes())
+        dispatch(getPercentageOfLikes())
     }, [reducerValue, dispatch])
 
     const [input, setInput] = useState({
@@ -56,15 +56,42 @@ export default function Rating() {
 
 
 
-    async function handleSubmit(e) {
+    async function handleSubmitLike(e) {
         e.preventDefault()
         if(!input.review.error) {
             try {
                 await axios.post(`http://localhost:3001/reviews/${id}`, {
             comments: input.review.value,
           })
+            dispatch(AddLike())
             forceUpdate();
-                /* history.push(`/videogames/${id}`) */
+            setInput({
+                review: {
+                    value: "",
+                    error: ""
+                },
+            })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    async function handleSubmitDislike(e) {
+        e.preventDefault()
+        if(!input.review.error) {
+            try {
+                await axios.post(`http://localhost:3001/reviews/${id}`, {
+            comments: input.review.value,
+        })
+            dispatch(AddDislike())
+            forceUpdate();
+            setInput({
+                review: {
+                    value: "",
+                    error: ""
+                },
+            })
             } catch (error) {
                 console.log(error)
             }
@@ -81,7 +108,7 @@ export default function Rating() {
                 <div>
                 <h2 className="modal-cart-title">Leave a review</h2>
                     <img src={like} alt="deleteCart" className="modal_img" />
-                    <form onSubmit={ handleSubmit }>
+                    <form onSubmit={ handleSubmitLike }>
                         <textarea onChange={(e) => handleReview(e)} />
                         {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
                         <div className="container-modal-buttons">
@@ -98,11 +125,11 @@ export default function Rating() {
             <Modals isOpenModal={isOpenDislike} closeModal={closeDislike}>
                 <h2 className="modal-cart-title">Leave a review</h2>
                     <img src={dislike} alt="deleteCart" className="modal_img" />
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmitDislike}>
                         <textarea onChange={(e) => handleReview(e)} />
                         {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
                         <div className="container-modal-buttons">
-                            <button type="submit" className="modal-cart-close" >
+                            <button type="submit" className="modal-cart-close" onClick={closeDislike} >
                                 UPLOAD
                             </button> 
                         </div>

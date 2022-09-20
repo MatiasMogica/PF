@@ -7,7 +7,7 @@ import logIn from "../slices/logInSlice";
 import wishList from "../slices/wishListSlice"
 import profile from "../slices/profileSlice";
 import friend from "../slices/friendSlice";
-import reviews from "../slices/reviewsSlice";
+import likes from "../slices/likesSlice";
 
 export default configureStore({
   reducer: {
@@ -19,6 +19,6 @@ export default configureStore({
     wishList,
     profile,
     friend,
-    reviews,
+    likes,
   },
 });
