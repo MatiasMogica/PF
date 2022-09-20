@@ -1,7 +1,9 @@
 /* eslint no-undef: "off"*/
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Star } from "../../icons/Icons";
+import { useDispatch, useSelector } from "react-redux";
+import { AddIcon, CartIcon, Heart, RedHeart, Star } from "../../icons/Icons";
+import { addItem } from "../../redux/slices/cartSlice";
 import './index.scss'
 import Tilit from 'tilt.js'
 import jQuery from "jquery";
@@ -11,8 +13,12 @@ window.$ = window.jQuery = jQuery;
 
 export default function Card({ name, image, platforms,  genres, released, _id, rating, price,idAPI}){
 
-    console.log(rating)
+    const dispatch = useDispatch()
+    const { cartItems } = useSelector((state) => state.cart);
+    let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
+    let game = videogames.find((i) => i._id === _id)
 
+    const inCart = cartItems.find((i) => i._id === _id);
 
     useEffect(() => {
         (function (factory) {
@@ -129,6 +135,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
                  * @returns {{x: tilt value, y: tilt value}}
                  */
                 const getValues = function() {
+                    if(this.mousePositions){
                     const width = $(this).outerWidth();
                     const height = $(this).outerHeight();
                     const left = $(this).offset().left;
@@ -141,7 +148,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
                     // angle
                     const angle = Math.atan2(this.mousePositions.x - (left+width/2),- (this.mousePositions.y - (top+height/2)) )*(180/Math.PI);
                     // Return x & y tilt values
-                    return {tiltX, tiltY, 'percentageX': percentageX * 100, 'percentageY': percentageY * 100, angle};
+                    return {tiltX, tiltY, 'percentageX': percentageX * 100, 'percentageY': percentageY * 100, angle};}
                 };
         
                 /**
@@ -354,44 +361,39 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
           <span>Price: {price}$</span>
             <span>Platforms: {platforms[0]}, {platforms[1]}</span>
             <span>Rating: {rating}</span>
-
+            
           </span>
+          
         </p>
+        
       </div>
     </div>
+    
   </div>
 
 
-        {/* <div className="img_name" >
-        <div className="img_container">
-        <Link to={`/videogames/${_id}`}>
-        <img src={image} alt={name} width='200px' height='180px'/>
-        </Link>
-        </div>
-            <h4>{name}</h4>
-        </div>
-        <div className="description">
-            <h5>Platforms: {platforms && platforms.join(', ')}</h5>
         
-            <h5>Genre: {genres && genres.join(', ')}</h5>           
-            <div className="containerRating">
-                <h5>Rating: {rating} </h5>
-                <div className="containerStar"><Star /></div>
-            </div>
-
-            <h5>Price: <span className="spanPrice">${price}</span></h5>
-
-            <h5>Released: {released}</h5> 
-            </div>
-             */}
 
 
-
+  {cartItems.includes(inCart) ? (
+                    <button className="inCart">
+                        {" "}
+                        <CartIcon />{" "}
+                        </button>
+                    ) : (
+                        <button
+                        className="addButton"
+                        onClick={() => dispatch(addItem(game))}
+                        >
+                        <AddIcon />
+                        </button>
+                    )}
 
 
 
 
 </Link>
+
     </div>)
 
 }

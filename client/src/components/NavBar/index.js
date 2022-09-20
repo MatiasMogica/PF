@@ -51,6 +51,9 @@ export default function NavBar({ usuario }) {
     }
   }, [user.id, dispatch]);
 
+   
+  
+    
   return (
     //
 

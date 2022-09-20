@@ -18,6 +18,7 @@ import { addItem } from "../../redux/slices/cartSlice";
 import { AddIcon, CartIcon } from "../../icons/Icons";
 import Particle from "../../components/Particle/Particle";
 import jquery from 'jquery';
+import Banner from "../../components/Banner/Banner";
 
 export default function Home() {
     let dispatch = useDispatch();
@@ -44,7 +45,6 @@ export default function Home() {
           <Particle />
 
             <NavBar />
-            
             <div className="containerHome">
             
         <div>
@@ -109,7 +109,7 @@ export default function Home() {
                                 rating={v.rating}
                                 price={v.price}
                                 genres={v.genres} />
-                                {cartItems.includes(inCart) ? <div className="inCart"> <CartIcon /> </div> : <button className="addButton" onClick={() => dispatch(addItem(v))}><AddIcon/></button>}
+                                {/* {cartItems.includes(inCart) ? <div className="inCart"> <CartIcon /> </div> : <button className="addButton" onClick={() => dispatch(addItem(v))}><AddIcon/></button>} */}
                             </div>
                         );
                         })

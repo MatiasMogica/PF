@@ -27,7 +27,7 @@ export const NavLinkAdmin = styled(Link)`
 
 export const Nav1=styled.nav`
 background: #eaeaea;
-height:80px;
+height:90px;
 display:flex;
 justify-content:space-between;
 padding:0.5rem calc((100vw - 1000px)/2);
