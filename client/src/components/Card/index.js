@@ -371,9 +371,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
     
   </div>
 
-
-        
-
+  </Link>
 
   {cartItems.includes(inCart) ? (
                     <button className="inCart">
@@ -388,11 +386,6 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
                         <AddIcon />
                         </button>
                     )}
-
-
-
-
-</Link>
 
     </div>)
 
