@@ -2,14 +2,34 @@ const Review = require("../models/Reviews");
 const Game = require("../models/Game");
 
 const postReview = async (req, res) => {
-  const { id } = req.params;
-  const { comments } = req.body;
-  const saveComment = await Review({ comments });
-  await saveComment.save();
+  try {
+    const { id } = req.params;
+    const { comments, author } = req.body;
+    console.log(req.body);
+    const saveComment = await Review({ comments, author });
+    await saveComment.save();
 
-  const foundComm = await Review.find({ comments: { $in: comments } });
+    const foundComm = await Review.find({ comments: { $in: comments } });
+    const postGame = await Game.findById(id);
+    postGame.comments.push(foundComm.map((e) => e._id));
+    console.log(postGame);
+
+    const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
+      new: true,
+    });
+
+    res.status(201).json(updatedGame);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const postLike = async (req, res) => {
+  const { id } = req.params;
+  const { getPercentageOfLikes } = req.body;
+
   const postGame = await Game.findById(id);
-  postGame.comments.push(foundComm.map((e) => e._id));
+  postGame.getPercentageOfLikes = getPercentageOfLikes;
 
   const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
     new: true,
@@ -19,31 +39,43 @@ const postReview = async (req, res) => {
 };
 
 const getAllReviews = async (req, res) => {
-  const allReviews = await Review.find();
+  try {
+    const allReviews = await Review.find();
 
-  res.json(allReviews);
+    res.status(200).json(allReviews);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateReviews = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const { comments } = req.body;
+    const { comments } = req.body;
 
-  const updateReviews = await Review.findByIdAndUpdate(id, {
-    $set: {
-      comments: comments,
-    },
-  });
+    const updateReviews = await Review.findByIdAndUpdate(id, {
+      $set: {
+        comments: comments,
+      },
+    });
 
-  res.json("update reviews done");
+    res.status(201).json("update reviews done");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const deleteReviews = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const eliminar = await Review.findByIdAndDelete(id);
+    const eliminar = await Review.findByIdAndDelete(id);
 
-  res.json(eliminar);
+    res.status(200).json(eliminar);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
@@ -51,4 +83,5 @@ module.exports = {
   getAllReviews,
   deleteReviews,
   updateReviews,
+  postLike,
 };
