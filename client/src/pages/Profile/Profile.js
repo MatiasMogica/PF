@@ -22,12 +22,14 @@ import "./Profile.css";
 import "animate.css/animate.css";
 import { Animated } from "react-animated-css";
 import CountUp from "react-countup";
+import { useHistory } from "react-router-dom";
 
 function UserDetailsOptions() {
   const { idUser } = useParams();
   const dispatch = useDispatch();
   const yourUser = useSelector((state) => state.logIn.logIn);
   const [estado, setEstado] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     return () => {
@@ -192,6 +194,7 @@ function UserDetailsOptions() {
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
                   isVisible={estado}
+                  className="animated_block_of_data"
                 >
                   <div className="profile_show_card_data">
                     {userDetails.name ? (
@@ -218,14 +221,12 @@ function UserDetailsOptions() {
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
                   isVisible={estado}
+                  className="animated_block_of_data"
                 >
                   <div className="profile_show_card_data">
                     <h2>Reviews</h2>
                     <h2>
-                      <CountUp
-                        end={userDetails.reviews.length}
-                        duration={userDetails.reviews.length > 3 ? 3 : 1}
-                      />
+                      <CountUp end={userDetails.reviews.length} duration={3} />
                     </h2>
                     <h2>See</h2>
                   </div>
@@ -236,13 +237,17 @@ function UserDetailsOptions() {
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
                   isVisible={estado}
+                  className="animated_block_of_data"
                 >
-                  <div className="profile_show_card_data">
+                  <div
+                    className="profile_show_card_data"
+                    onClick={() => history.push(`/games/${userDetails.id}`)}
+                  >
                     <h2>Games</h2>
                     <h2>
                       <CountUp
                         end={userDetails.purchasedGames.length}
-                        duration={userDetails.purchasedGames.length > 3 ? 3 : 1}
+                        duration={3}
                       />
                     </h2>
                     <h2>See</h2>
@@ -254,13 +259,18 @@ function UserDetailsOptions() {
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
                   isVisible={estado}
+                  className="animated_block_of_data"
                 >
                   <div className="profile_show_card_data">
                     <h2 className="profile_joined_card">Time of Service</h2>
                     <h2 className="profile_joined_card">
                       <CountUp
                         end={calculateTimeOfService(userDetails.createdAt)}
-                        duration={userDetails.purchasedGames.length > 3 ? 3 : 1}
+                        duration={
+                          calculateTimeOfService(userDetails.createdAt) > 3
+                            ? 3
+                            : 1
+                        }
                       />{" "}
                       Days
                     </h2>
@@ -279,11 +289,12 @@ function UserDetailsOptions() {
         <h2 className="profile_friends_title">Friends</h2>
         <div id="lower_profile_section">
           {friend.friendList.length > 0 && userDetails.friends ? (
-            <div className="friends_icons_container">
+            <div>
               <Animated
                 animationIn="animate__slideInLeft"
                 animationOut="fadeOut"
                 isVisible={estado}
+                className="friends_icons_container"
               >
                 {friend.friendList.map((x) => (
                   <div key={x[0]} className="block">

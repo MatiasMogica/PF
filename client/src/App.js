@@ -15,11 +15,12 @@ import { useEffect } from "react";
 import { localStorageUser } from "./redux/slices/logInSlice";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import Edit from "./pages/Edit/Edit";
-import Payment from "./components/Payment/Payment"
+import Payment from "./components/Payment/Payment";
 import CartContainer from "./components/Cart/CartContainer";
 
 import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
 import Settings from "./pages/Settings/Settings";
+import GamesOwnedById from "./pages/GamesOwnedById/GamesOwnedById";
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -47,10 +48,14 @@ function App() {
         <Route exact path={"/home"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
         <Route exact path={"/cart"} component={CartContainer} />
-        <Route exact path={'/payment'} component={Payment} />
+        <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
         {user.status ? (
-          <Route exact path={"/settings"} component={Settings}></Route>
+          <>
+            <Route exact path={"/settings"} component={Settings}></Route>
+            <Route exact path={"/profile/:idUser"} component={Profile} />
+            <Route exact path={"/games/:idUser"} component={GamesOwnedById} />
+          </>
         ) : null}
 
         <Route exact path={"/register"} component={Register}>
@@ -59,7 +64,6 @@ function App() {
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
-        <Route exact path={"/profile/:idUser"} component={Profile} />
 
         {user.admin ? (
           <>

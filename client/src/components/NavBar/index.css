@@ -9,6 +9,10 @@
     text-decoration: none;
 }
 
+.irqSpr {
+    height: 10vh !important;
+}
+
 .menu_user_loged_navbar{
     display: flex;
     justify-content: center;
@@ -271,7 +275,7 @@ button, select {
     background-clip: padding-box;
     border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
     border-radius: var(--bs-dropdown-border-radius);
-    width: 50px;
+    
 }
 
 .dropdown-menu-dark {

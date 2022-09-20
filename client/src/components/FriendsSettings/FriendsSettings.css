@@ -59,3 +59,11 @@
       transition: none;
     }
   }
+
+  @media (max-width: 950px) {
+    .friend_individual_avatar {
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+    }
+  }

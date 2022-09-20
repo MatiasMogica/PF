@@ -99,13 +99,11 @@ export default function NavBar({ usuario }) {
                       </Dropdown.Toggle>
                       <Dropdown.Menu variant="dark">
                         {friendRequests.map((x) => (
-                          <div key={x[0]}>
-                            <s className="dropdown-item">
-                              <NavLink to={`/profile/${x[0]}`}>
-                                {x[2] + " Wants to be your Friend!"}
-                              </NavLink>
-                            </s>
-                          </div>
+                          <s className="dropdown-item" key={x[0]}>
+                            <NavLink to={`/profile/${x[0]}`}>
+                              {x[2] + " Wants to be your Friend!"}
+                            </NavLink>
+                          </s>
                         ))}
                       </Dropdown.Menu>
                     </Dropdown>
