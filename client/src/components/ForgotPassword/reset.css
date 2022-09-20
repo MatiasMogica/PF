@@ -1,0 +1,45 @@
+.modal-reset-title {
+    margin-top: -40px;
+    font-size: 1.5rem;
+    color: black;
+    text-align: center
+}
+
+.modal-reset-text {
+    font-size: 1rem;
+    margin-top: 30px;
+    color: black;
+}
+
+.modal-reset-label {
+    color: black;
+    margin-top: 20px;
+}
+
+.modal-reset-errors {
+    color: red;
+}
+
+.modal-reset-submit {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(31, 202, 31);
+    padding: 1em 2em;
+    border: 1px solid;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 250;
+    transition: background-color .3s;
+    margin-bottom: -50px;
+}
+
+.modal-reset-submit:hover {
+    color: rgb(31, 202, 31);
+    background-color: #fff;
+}
+
+.container-reset-button {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 100px;
+}

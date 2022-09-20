@@ -39,6 +39,28 @@ const sendContact = async (req, res) => {
   }
 };
 
+const forgotEmail = async(token, email) => {
+
+  await courier.send({
+    message: {
+      to: {
+        data: {
+          name: "Forgot Email",
+        },
+
+        email: email,
+      },
+      content: { title: "Recover your password", body: `Your verification token is: ${token}`,},
+      routing: {
+        method: "single",
+        channels: ["email"],
+      },
+    },
+  });
+
+}
+
 module.exports = {
   sendContact,
+  forgotEmail,
 };

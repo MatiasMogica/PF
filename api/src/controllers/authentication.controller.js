@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 const { response } = require("express");
+const { forgotEmail } = require("../controllers/sendemails.controller")
 const { googleVerify } = require("../helpers/google-verify.js");
 
 const login = async (req, res) => {
@@ -87,7 +88,68 @@ const googleSignIn = async (req, res = response) => {
   }
 };
 
+const forgotPassword = async(req, res) => {
+  const { email } = req.body 
+
+  if((await User.findOne({ email })) === null)
+    return res 
+    .status(400)
+    .json({ error: "User with this email does not exists." })
+
+    const token = jwt.sign({_id : User._id }, process.env.JWT_secret_key, { expiresIn: "20m" })
+
+    await User.findOneAndUpdate(
+      { email },
+      {
+        resetToken: token,
+      }
+    );
+  
+    
+    forgotEmail(token, email)
+    console.log('email enviado', token)
+  
+    res.status(200).json({ auth: "Email send", Token: token });
+  
+}
+
+const resetPassword = async(req, res) => {
+  const { resetToken, newP } = req.body
+
+  try {
+    const compare = jwt.verify(resetToken, process.env.JWT_secret_key)
+
+    if(!compare)
+      return res
+      .status(400)
+      .json({ error: "Wrong or expired token"})
+      
+    if (await User.findOne({ resetToken }) === null) return res.status(400).json({ error: "Wrong or expired token" })
+
+    await User.findOneAndUpdate(
+      { resetToken },
+      {
+        hashPassword: await bcrypt.hash(newP, 10) 
+      }
+    );
+
+    await User.findOneAndUpdate({ resetToken },
+      {
+        resetToken: ""
+      }
+    )
+
+    res.status(200).json({ auth: "Password changed" });
+    console.log("contraseña cambiada")
+  } catch (err) {
+    res.status(400).json(err);
+  }
+
+}
+
 module.exports = {
   login,
   googleSignIn,
+  forgotPassword,
+  resetPassword,
 };
