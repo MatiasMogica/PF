@@ -13,14 +13,14 @@ import "./CartContainer.css";
 import emptyCart from "../../images/emptyCart.png";
 import carritovacio from "../../images/carritovacio.png";
 import { Bag, Trash, Remove, Star } from "../../icons/Icons";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Particle from "../../components/Particle/Particle";
 
-import styles from './Shopping.module.css'
+import styles from "./Shopping.module.css";
 
 const CartContainer = () => {
   const { cartItems, total, amount } = useSelector((state) => state.cart);
-  const {id,username} = useSelector((state) => state.logIn.logIn);
+  const { id, username } = useSelector((state) => state.logIn.logIn);
   const { isOpen } = useSelector((state) => state.modal);
   // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(false);
@@ -43,232 +43,249 @@ const CartContainer = () => {
     );
   }
   return (
-  //   <div>
-  //     <NavBar />
-  //     <h1 className="cartTitle">Your cart</h1>
-  //     <div className="containerItem">
-  //       {cartItems.map((item) => {
-  //         return <CartItem key={item._id} {...item} />;
-  //       })}
-  //     </div>
-  //     <footer>
-  //       <hr />
-  //       {isOpen && <Modal />}
-  //       <div className="buttonsContainer">
-  //         <h2 className="totalTitle">
-  //           Total: <span className="total">${total} </span>
-  //         </h2>
-  //         <button className="clearButton" onClick={openedModal}>
-  //           <Trash />
-  //         </button>
-  //         <form action="http://localhost:3001/payment/payment" method="POST">
-  //         <input type='hidden' name="user_id" value={id}/>
-  //         <input type='hidden' name='games_id' value={cartItems.map(i=>i._id)}/>
-  //         <input type='hidden' name="username" value={username}/>
-  //         <input type='hidden' name="cartItems" value={cartItems.map(i=>{
-  //                           return `${i.name}%${i.price}`})}/>
-  //           <input
-  //             type="hidden"
-  //             name="title"
-  //             value={cartItems.map((i) => i.name)}
-  //           />
-  //           <input type="hidden" name="price" value={total} />
-  //           <input
-  //             type="hidden"
-  //             name="picture_url"
-  //             value={cartItems.map((i) => i.background_image)}
-  //           />
-  //           <input type="hidden" name="quantity" value={cartItems.length} />
-  //           <button
-  //             className="buyButton"
-  //             type="submit"
-  //             value="Make the purchase"
-  //           >
-  //             <Bag />
-  //           </button>
-  //         </form>
-  //       </div>
-  //     </footer>
-  //     <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
-  //       <h2 className="modal-cart-title">Are you sure?</h2>
-  //       <img src={carritovacio} alt="deleteCart" className="modal_img" />
-  //       <p className="modal_text">
-  //         You are about to delete all the items saved in the cart, if you wish,
-  //         press 'DELETE', otherwise press 'CANCEL'.
-  //       </p>
-  //       <div className="container-modal-buttons">
-  //         <button className="modal-cart-close" onClick={closeModal}>
-  //           CANCEL
-  //         </button>
-  //         <button
-  //           className="modal-cart-delete"
-  //           onClick={() => dispatch(clearCart())}
-  //         >
-  //           DELETE
-  //         </button>
-  //       </div>
-  //     </Modals>
-  //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-  //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-  //   </div>
-  // );
+    //   <div>
+    //     <NavBar />
+    //     <h1 className="cartTitle">Your cart</h1>
+    //     <div className="containerItem">
+    //       {cartItems.map((item) => {
+    //         return <CartItem key={item._id} {...item} />;
+    //       })}
+    //     </div>
+    //     <footer>
+    //       <hr />
+    //       {isOpen && <Modal />}
+    //       <div className="buttonsContainer">
+    //         <h2 className="totalTitle">
+    //           Total: <span className="total">${total} </span>
+    //         </h2>
+    //         <button className="clearButton" onClick={openedModal}>
+    //           <Trash />
+    //         </button>
+    //         <form action="http://localhost:3001/payment/payment" method="POST">
+    //         <input type='hidden' name="user_id" value={id}/>
+    //         <input type='hidden' name='games_id' value={cartItems.map(i=>i._id)}/>
+    //         <input type='hidden' name="username" value={username}/>
+    //         <input type='hidden' name="cartItems" value={cartItems.map(i=>{
+    //                           return `${i.name}%${i.price}`})}/>
+    //           <input
+    //             type="hidden"
+    //             name="title"
+    //             value={cartItems.map((i) => i.name)}
+    //           />
+    //           <input type="hidden" name="price" value={total} />
+    //           <input
+    //             type="hidden"
+    //             name="picture_url"
+    //             value={cartItems.map((i) => i.background_image)}
+    //           />
+    //           <input type="hidden" name="quantity" value={cartItems.length} />
+    //           <button
+    //             className="buyButton"
+    //             type="submit"
+    //             value="Make the purchase"
+    //           >
+    //             <Bag />
+    //           </button>
+    //         </form>
+    //       </div>
+    //     </footer>
+    //     <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
+    //       <h2 className="modal-cart-title">Are you sure?</h2>
+    //       <img src={carritovacio} alt="deleteCart" className="modal_img" />
+    //       <p className="modal_text">
+    //         You are about to delete all the items saved in the cart, if you wish,
+    //         press 'DELETE', otherwise press 'CANCEL'.
+    //       </p>
+    //       <div className="container-modal-buttons">
+    //         <button className="modal-cart-close" onClick={closeModal}>
+    //           CANCEL
+    //         </button>
+    //         <button
+    //           className="modal-cart-delete"
+    //           onClick={() => dispatch(clearCart())}
+    //         >
+    //           DELETE
+    //         </button>
+    //       </div>
+    //     </Modals>
+    //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
+    //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
+    //   </div>
+    // );
 
-
-
-
-
-
-
-
-
-  <div >
-          <Particle />
-
-    <NavBar />
-    <div className={styles.cartContainer}>
-    <div className={styles.container}>
-      <h2>Shopping cart</h2>
-      {cartItems.length === 0 ? (
-        <div className={styles.cartEmpty}>
-          <p>Your shopping cart is currently empty</p>
-          <div className={styles.startShopping}>
-            <Link to='/'>
-            <svg xmlns="http://www.w3.org/2000/svg" 
-            width="20" 
-            height="20" 
-            fill="currentColor" 
-            class="bi bi-arrow-left" 
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-              <span>Start shopping</span>
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className={styles.titles}>
-            <h3 className={styles.productTitle}>Product</h3>
-            <h3 className={styles.price}>Price</h3>
-            <h3 className={styles.quantity}>Rating</h3>
-            
-          </div>
-          <div className={styles.cartItems}>
-            {cartItems?.map(cartItem => (
-              <div className={styles.cartItem} key={cartItem.id}>
-                <div className={styles.cartProduct}>
-                  <img src={cartItem.background_image} alt={cartItem.name} width="70px" height="70px"/>
-                  <div>
-                    <h3>{cartItem.name}</h3>
-                    <p>{cartItem.description}</p>
-                    <button type="button" onClick={() => dispatch(removeItem(cartItem._id))}>Remove</button>
-
-                  </div>
-                </div>
-                <div className={styles.cartProductPrice}>${cartItem.price}</div>
-                <div className={styles.cartProductQuantity}>
-                  <button className={styles.cartProductQuantityButton} >{cartItem.rating} <div className="star"> <Star /> </div></button>
-                </div>
-                
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.cartSummary}>
-            <button className={styles.clearCart}>Clear cart</button>
-            <div className={styles.cartCheckout}>
-              <div className={styles.subtotal}>
-                <span>Subtotal</span>
-                <span className={styles.amount}>$</span>
-              </div>
-              <p>Taxes and shipping calculated at checkout</p>
-              {/* <PayButton cartItems={cart.cartItems} userInfo={userById} cartInfo={cart}/> */}
-              <div className={styles.continueShopping}>
+    <div>
+      <NavBar />
+      <div className={styles.cartContainer}>
+        <div className={styles.container}>
+          <h2>Shopping cart</h2>
+          {cartItems.length === 0 ? (
+            <div className={styles.cartEmpty}>
+              <p>Your shopping cart is currently empty</p>
+              <div className={styles.startShopping}>
                 <Link to="/">
-                <svg
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
                     fill="currentColor"
-                    className="bi bi-arrow-left"
+                    class="bi bi-arrow-left"
                     viewBox="0 0 16 16"
                   >
                     <path
-                      fillRule="evenodd"
+                      fill-rule="evenodd"
                       d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                     />
                   </svg>
-                  <span>Continue Shopping</span>
+                  <span>Start shopping</span>
                 </Link>
               </div>
             </div>
-          </div>
-          
+          ) : (
+            <div>
+              <div className={styles.titles}>
+                <h3 className={styles.productTitle}>Product</h3>
+                <h3 className={styles.price}>Price</h3>
+                <h3 className={styles.quantity}>Rating</h3>
+              </div>
+              <div className={styles.cartItems}>
+                {cartItems?.map((cartItem) => (
+                  <div className={styles.cartItem} key={cartItem.id}>
+                    <div className={styles.cartProduct}>
+                      <img
+                        src={cartItem.background_image}
+                        alt={cartItem.name}
+                        width="70px"
+                        height="70px"
+                      />
+                      <div>
+                        <h3>{cartItem.name}</h3>
+                        <p>{cartItem.description}</p>
+                        <button
+                          type="button"
+                          onClick={() => dispatch(removeItem(cartItem._id))}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                    <div className={styles.cartProductPrice}>
+                      ${cartItem.price}
+                    </div>
+                    <div className={styles.cartProductQuantity}>
+                      <button className={styles.cartProductQuantityButton}>
+                        {cartItem.rating}{" "}
+                        <div className="star">
+                          {" "}
+                          <Star />{" "}
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.cartSummary}>
+                <button className={styles.clearCart}>Clear cart</button>
+                <div className={styles.cartCheckout}>
+                  <div className={styles.subtotal}>
+                    <span>Subtotal</span>
+                    <span className={styles.amount}>$</span>
+                  </div>
+                  <p>Taxes and shipping calculated at checkout</p>
+                  {/* <PayButton cartItems={cart.cartItems} userInfo={userById} cartInfo={cart}/> */}
+                  <div className={styles.continueShopping}>
+                    <Link to="/">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        className="bi bi-arrow-left"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                        />
+                      </svg>
+                      <span>Continue Shopping</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        
-        )}</div>
-   {/* <Footer />      */}
-   <footer>
-        <hr />
-        {isOpen && <Modal />}
-        <div className="buttonsContainer">
-          <h2 className="totalTitle">
-            Total: <span className="total">${total} </span>
-          </h2>
-          <button className="clearButton" onClick={openedModal}>
-            <Trash />
-          </button>
-          <form action="http://localhost:3001/payment/payment" method="POST">
-          <input type='hidden' name="user_id" value={id}/>
-          <input type='hidden' name='games_id' value={cartItems.map(i=>i._id)}/>
-          <input type='hidden' name="username" value={username}/>
-          <input type='hidden' name="cartItems" value={cartItems.map(i=>{
-                            return `${i.name}%${i.price}`})}/>
-            <input
-              type="hidden"
-              name="title"
-              value={cartItems.map((i) => i.name)}
-            />
-            <input type="hidden" name="price" value={total} />
-            <input
-              type="hidden"
-              name="picture_url"
-              value={cartItems.map((i) => i.background_image)}
-            />
-            <input type="hidden" name="quantity" value={cartItems.length} />
-            <button
-              className="buyButton"
-              type="submit"
-              value="Make the purchase"
-            >
-              <Bag />
+        {/* <Footer />      */}
+        <footer>
+          <hr />
+          {isOpen && <Modal />}
+          <div className="buttonsContainer">
+            <h2 className="totalTitle">
+              Total: <span className="total">${total} </span>
+            </h2>
+            <button className="clearButton" onClick={openedModal}>
+              <Trash />
             </button>
-          </form>
-        </div>
-      </footer>
-      <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
-        <h2 className="modal-cart-title">Are you sure?</h2>
-        <img src={carritovacio} alt="deleteCart" className="modal_img" />
-        <p className="modal_text">
-          You are about to delete all the items saved in the cart, if you wish,
-          press 'DELETE', otherwise press 'CANCEL'.
-        </p>
-        <div className="container-modal-buttons">
-          <button className="modal-cart-close" onClick={closeModal}>
-            CANCEL
-          </button>
-          <button
-            className="modal-cart-delete"
-            onClick={() => dispatch(clearCart())}
-          >
-            DELETE
-          </button>
-        </div>
-      </Modals>
+            <form action="http://localhost:3001/payment/payment" method="POST">
+              <input type="hidden" name="user_id" value={id} />
+              <input
+                type="hidden"
+                name="games_id"
+                value={cartItems.map((i) => i._id)}
+              />
+              <input type="hidden" name="username" value={username} />
+              <input
+                type="hidden"
+                name="cartItems"
+                value={cartItems.map((i) => {
+                  return `${i.name}%${i.price}`;
+                })}
+              />
+              <input
+                type="hidden"
+                name="title"
+                value={cartItems.map((i) => i.name)}
+              />
+              <input type="hidden" name="price" value={total} />
+              <input
+                type="hidden"
+                name="picture_url"
+                value={cartItems.map((i) => i.background_image)}
+              />
+              <input type="hidden" name="quantity" value={cartItems.length} />
+              <button
+                className="buyButton"
+                type="submit"
+                value="Make the purchase"
+              >
+                <Bag />
+              </button>
+            </form>
+          </div>
+        </footer>
+        <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
+          <h2 className="modal-cart-title">Are you sure?</h2>
+          <img src={carritovacio} alt="deleteCart" className="modal_img" />
+          <p className="modal_text">
+            You are about to delete all the items saved in the cart, if you
+            wish, press 'DELETE', otherwise press 'CANCEL'.
+          </p>
+          <div className="container-modal-buttons">
+            <button className="modal-cart-close" onClick={closeModal}>
+              CANCEL
+            </button>
+            <button
+              className="modal-cart-delete"
+              onClick={() => dispatch(clearCart())}
+            >
+              DELETE
+            </button>
+          </div>
+        </Modals>
+      </div>
     </div>
-    
-    </div>
-  )
+  );
 };
 
 export default CartContainer;
