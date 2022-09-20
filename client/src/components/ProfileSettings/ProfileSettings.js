@@ -144,206 +144,209 @@ function Settings() {
 
   return (
     <div id="profile_settings_general_container">
-      <form className="profile_settings_form" onSubmit={(e) => handleSubmit(e)}>
-        <div className="configoption_edit">
-          <p>Username: {profile.username}</p>
-        </div>
+      <form id="profileSettings_form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="profile_settings_form">
+          <div className="configoption_edit">
+            <p>Username: {profile.username}</p>
+          </div>
 
-        <ConfigOptionName
-          key="name"
-          setProfileData={setProfileData}
-          profileData={profileData}
-        />
+          <ConfigOptionName
+            key="name"
+            setProfileData={setProfileData}
+            profileData={profileData}
+          />
 
-        <ConfigOptionEmail
-          key="email"
-          setProfileData={setProfileData}
-          profileData={profileData}
-        />
+          <ConfigOptionEmail
+            key="email"
+            setProfileData={setProfileData}
+            profileData={profileData}
+          />
 
-        <ConfigOptionAge
-          key="age"
-          setProfileData={setProfileData}
-          profileData={profileData}
-        />
+          <ConfigOptionAge
+            key="age"
+            setProfileData={setProfileData}
+            profileData={profileData}
+          />
 
-        <ConfigOptionNationality
-          key="Nationality"
-          setProfileData={setProfileData}
-          profileData={profileData}
-        />
+          <ConfigOptionNationality
+            key="Nationality"
+            setProfileData={setProfileData}
+            profileData={profileData}
+          />
 
-        <div className="configoption_edit">
-          <p>Friends</p>{" "}
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                friends:
-                  profileData.friends === "Public"
-                    ? "Private"
-                    : profileData.friends === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.friends}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>Reviews</p>{" "}
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                reviews:
-                  profileData.reviews === "Public"
-                    ? "Private"
-                    : profileData.reviews === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.reviews}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>You joined: {profile.createdAt}</p>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                joined:
-                  profileData.joined === "Public"
-                    ? "Private"
-                    : profileData.joined === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.joined}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>Games</p>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                games:
-                  profileData.games === "Public"
-                    ? "Private"
-                    : profileData.games === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.games}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>Posts</p>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                posts:
-                  profileData.posts === "Public"
-                    ? "Private"
-                    : profileData.posts === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.posts}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>Image</p>
-          <img
-            src={
-              profile.image ||
-              "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
-            }
-            className="image_settings"
-            alt="profile"
-          ></img>
-
-          <button className="icon-btn add-btn" type="button">
-            <div className="add-icon"></div>
-            <input
-              className="deleteme_settings_photo"
-              type="file"
-              onChange={(e) => handleImage(e, setImage, image)}
-            ></input>
-            <div className="btn-txt">Add Photo</div>
-          </button>
-        </div>
-        <div className="configoption_edit">
-          <p>Profile Background Image</p>
-          <img
-            className="image_settings"
-            src={
-              profile.backgroundImage ||
-              "https://i.ibb.co/470T9nR/backgroundimage.png"
-            }
-            alt="profile"
-          ></img>
-          <button
-            className="btn_profile_setting_visibility"
-            type="button"
-            onClick={() =>
-              setProfileData({
-                ...profileData,
-                backgroundImage:
-                  profileData.backgroundImage === "Public"
-                    ? "Private"
-                    : profileData.backgroundImage === "Private"
-                    ? "Friends"
-                    : "Public",
-              })
-            }
-          >
-            {profileData.backgroundImage}
-            <span className="btnspan_profile_setting_visibility"></span>
-          </button>
-          <button className="icon-btn add-btn" type="button">
-            <div className="add-icon"></div>
-            <input
-              className="deleteme_settings_photo"
-              type="file"
-              onChange={(e) =>
-                handleImage(e, setImageBackground, imageBackground)
+          <div className="configoption_edit">
+            <p>Friends</p>{" "}
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  friends:
+                    profileData.friends === "Public"
+                      ? "Private"
+                      : profileData.friends === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
               }
-            ></input>
-            <div className="btn-txt">Add Photo</div>
+            >
+              {profileData.friends}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>Reviews</p>{" "}
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  reviews:
+                    profileData.reviews === "Public"
+                      ? "Private"
+                      : profileData.reviews === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
+              }
+            >
+              {profileData.reviews}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>You joined: {profile.createdAt}</p>
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  joined:
+                    profileData.joined === "Public"
+                      ? "Private"
+                      : profileData.joined === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
+              }
+            >
+              {profileData.joined}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>Games</p>
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  games:
+                    profileData.games === "Public"
+                      ? "Private"
+                      : profileData.games === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
+              }
+            >
+              {profileData.games}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>Posts</p>
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  posts:
+                    profileData.posts === "Public"
+                      ? "Private"
+                      : profileData.posts === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
+              }
+            >
+              {profileData.posts}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>Image</p>
+            <img
+              src={
+                profile.image ||
+                "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+              }
+              className="image_settings"
+              alt="profile"
+            ></img>
+
+            <button className="icon-btn add-btn" type="button">
+              <div className="add-icon"></div>
+              <input
+                className="deleteme_settings_photo"
+                type="file"
+                onChange={(e) => handleImage(e, setImage, image)}
+              ></input>
+              <div className="btn-txt">Add Photo</div>
+            </button>
+          </div>
+          <div className="configoption_edit">
+            <p>Profile Background Image</p>
+            <img
+              className="image_settings"
+              src={
+                profile.backgroundImage ||
+                "https://i.ibb.co/470T9nR/backgroundimage.png"
+              }
+              alt="profile"
+            ></img>
+            <button
+              className="btn_profile_setting_visibility"
+              type="button"
+              onClick={() =>
+                setProfileData({
+                  ...profileData,
+                  backgroundImage:
+                    profileData.backgroundImage === "Public"
+                      ? "Private"
+                      : profileData.backgroundImage === "Private"
+                      ? "Friends"
+                      : "Public",
+                })
+              }
+            >
+              {profileData.backgroundImage}
+              <span className="btnspan_profile_setting_visibility"></span>
+            </button>
+            <button className="icon-btn add-btn" type="button">
+              <div className="add-icon"></div>
+              <input
+                className="deleteme_settings_photo"
+                type="file"
+                onChange={(e) =>
+                  handleImage(e, setImageBackground, imageBackground)
+                }
+              ></input>
+              <div className="btn-txt">Add Photo</div>
+            </button>
+          </div>
+        </div>
+        <div id="ProfileSettings_contenedor_btn_save">
+          <button className="btn_profile_setting_save">
+            <span>Save changes</span>
+            <i></i>
           </button>
         </div>
-        <div></div>
-        <button className="btn_profile_setting_save">
-          <span>Save changes</span>
-          <i></i>
-        </button>
       </form>
       <NotificationContainer />
     </div>

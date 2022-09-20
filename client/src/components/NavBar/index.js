@@ -137,6 +137,7 @@ export default function NavBar({ usuario }) {
                               className="bell_notification"
                             ></img>
                           </div>
+
                         </Dropdown.Toggle>
                         <Dropdown.Menu variant="dark">
                           {friendRequests.map((x) => (
@@ -149,6 +150,7 @@ export default function NavBar({ usuario }) {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
+
                   </div>
                 ) : (
                   <img

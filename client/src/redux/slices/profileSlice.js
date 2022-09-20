@@ -25,6 +25,7 @@ const profileSlice = createSlice({
     },
     profilePageData: {},
     friendRequests: [],
+    otherUserGames: [],
   },
   reducers: {
     profileDetails: (state, action) => {
@@ -140,7 +141,11 @@ const profileSlice = createSlice({
         },
         profilePageData: {},
         friendRequests: [],
+        otherUserGames: [],
       };
+    },
+    getGamesUser: (state, action) => {
+      state.otherUserGames = action.payload.games;
     },
   },
 });
@@ -150,5 +155,6 @@ export const {
   otherUserProfileDetails,
   friendRequests,
   cleanUpProfileSlice,
+  getGamesUser,
 } = profileSlice.actions;
 export default profileSlice.reducer;

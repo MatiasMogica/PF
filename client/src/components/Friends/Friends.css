@@ -34,3 +34,19 @@
 .friend_name_and_redirect{
     cursor: pointer;
 }
+
+@media (max-width: 950px) {
+    .friend_individual_avatar {
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+    }
+
+    .settings_profile_data_input {
+        font-size: 20px;
+    }
+    .asd541asd{
+        text-align: center;
+        width: 100%;
+    }
+  }
