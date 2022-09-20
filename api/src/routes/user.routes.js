@@ -8,7 +8,8 @@ const {
   deleteUser,
   getUserStats,
   resetUser,
-  userGames
+  userGames,
+  seeUserGames,
 } = require("../controllers/user.controller");
 const { tokenVerified } = require("../middlewares/auth.middleware.js");
 
@@ -34,6 +35,8 @@ router.get("/stats", getUserStats);
 //Es por que testeando arruine cuentas, por ejemeplo un array de arrays que no deberia ser asi, y tenia que borrarlo si o si
 router.post("/dontUseThisRouteDeletesTheUser/:idUser", resetUser);
 //agrear juegos comprados
-router.put("/userGames/:idUser", userGames)
+router.put("/userGames/:idUser", userGames);
+//ver juegos y si podes verlo nomas
+router.post("/userGames", seeUserGames);
 
 module.exports = router;

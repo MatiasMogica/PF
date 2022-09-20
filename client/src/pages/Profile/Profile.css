@@ -31,8 +31,8 @@
     
 }
 .friends_icon_profile{
-  height: 90px !important;
-  width: 90px !important;
+  height: 90px ;
+  width: 90px ;
   border-radius: 100%;
   
 }
@@ -57,7 +57,7 @@ text-align: center;
  background-color: #161414;
 }
 
-.animate__slideInLeft{
+.cj314hn124{
   display: grid;
   align-items: center;
   justify-content: center;
@@ -466,3 +466,74 @@ align-items: center;
                          transparent)
  }
 
+
+
+ @media (max-width: 950px) {
+  #profile_show_image{
+    width: 120px;
+    height: 120px;
+  }
+
+  #profile_show_image_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #profile_show_username{
+    font-size: 20px;
+  }
+
+  .profile_show_card_data{
+    width: 100px;
+    height: 150px;
+    font-size: 10px;
+  }
+
+  #profile_show_cards_datas{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .animated_block_of_data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  #profile_show_header_container{
+    height: 40vh;
+  }
+  
+  #lower_profile_section{
+    width: 100%;
+    height: 50vh;
+  }
+
+  .friends_icons_container{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .friends_icon_profile{
+    width: 50px;
+    height: 50px;
+  }
+  
+  .block{
+    width: 50px;
+    height: 50px;
+  }
+
+  .user_profile_add_etc_options_single{
+    margin-top: 104px;
+  }
+
+  
+
+}

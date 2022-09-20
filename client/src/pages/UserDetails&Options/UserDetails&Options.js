@@ -45,12 +45,6 @@ function UserDetailsOptions() {
         }
       />
 
-      {userDetails.purchasedGames
-        ? userDetails.purchasedGames.map((x) => {
-            return <div>Purchase History</div>;
-          })
-        : null}
-
       {userDetails.deleted ? <p>This user is blocked from the site</p> : null}
 
       {id === user ? null : userDetails.admin ? (
