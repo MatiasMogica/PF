@@ -26,6 +26,10 @@
   cursor: pointer;
 }
 
+#profileSettings_form{
+  width: 100%;
+}
+
 .profile_settings_form{
     width: 100%;
     display: grid;
@@ -302,4 +306,28 @@
   .settings_profile_data_input:focus {
     box-shadow: 0 0 0 .15vw skyblue;
   }
+
+  #ProfileSettings_contenedor_btn_save{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
   
+
+  @media (max-width: 950px) {
+    .btnspan_profile_setting_visibility {
+      padding: 0px;
+      
+    }
+
+    .btn_profile_setting_visibility{
+      padding: 1em;
+      font-size: small;
+    }
+
+    .profile_settings_form{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
