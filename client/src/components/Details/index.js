@@ -7,7 +7,7 @@ import { getById } from "../../redux/actions/videogamesActions";
 import Modals from "../Modals";
 import { useModal } from "../Modals/useModal";
 import like from "../../images/like.gif";
-
+import {postLikes} from "../../redux/actions/LikeAction.js";
 import "./index.css";
 import {
   getPercentageOfLikes,
@@ -21,6 +21,11 @@ export default function Details({ details }) {
   const { likes, percentageOfLikes, votesTotal } = useSelector(
     (state) => state.likes
   );
+  
+   useEffect(()=>{
+      dispatch(postLikes(likes,percentageOfLikes,votesTotal))
+    }, [likes, percentageOfLikes, votesTotal])
+  
   const [isOpenLike, openedLike, closeLike] = useModal(false);
   const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
