@@ -137,7 +137,6 @@ export default function NavBar({ usuario }) {
                               className="bell_notification"
                             ></img>
                           </div>
-
                         </Dropdown.Toggle>
                         <Dropdown.Menu variant="dark">
                           {friendRequests.map((x) => (
@@ -150,7 +149,6 @@ export default function NavBar({ usuario }) {
                         </Dropdown.Menu>
                       </Dropdown>
                     </div>
-
                   </div>
                 ) : (
                   <img
@@ -165,7 +163,9 @@ export default function NavBar({ usuario }) {
                     id="dropdown-button-dark-example1"
                     variant="secondary"
                   >
-                    {user.username || "Error Loading Username"}
+                    {user.username.length > 0
+                      ? user.username
+                      : "Error Loading Username"}
                   </Dropdown.Toggle>
                   <Dropdown.Menu variant="dark">
                     <s className="dropdown-item">
