@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Chart from "../Chart/Chart";
 import axios from "axios";
+import NavBarAdmin from "../NavBar/NavBarAdmin";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -65,6 +66,8 @@ export default function Users() {
 
   return (
     <>
+    <Container>
+    <NavBarAdmin/>
       <div id="admin_panel_users">
         <div id="admin_panel_users_options">
           <button
@@ -104,6 +107,12 @@ export default function Users() {
           ))}
         </div>
       </div>
+      </Container>
     </>
   );
 }
+const Container = styled.div`
+  display: flex;
+  border-radius: 2rem;
+  margin: 0.7rem;
+`;

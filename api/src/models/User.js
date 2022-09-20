@@ -42,7 +42,12 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-
+        wish_list: [
+    {
+              type: Schema.Types.ObjectId,
+              ref: "Game",
+            },
+          ],
     friends: {
       type: Array,
     },
