@@ -1,0 +1,69 @@
+#friends_settings_container{
+    display: flex;
+}
+
+#friends_settings_sidebar{
+    width: 20vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.asd4sa4d4asd{
+    width: 100%;
+}
+
+#jkhn42kj4{
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+}
+
+.friends_sidebar_settings_buttons{
+    display: flex;
+    margin-top: 2em;
+    background-color: rgb(1, 29, 29);
+    padding: 1em;
+    border-radius: 5%;
+    cursor: pointer;
+
+}
+
+.icon_friends_settings{
+    width: 30px;
+    height: 30px;
+}
+
+.side_bar_button_after_icon{
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    border: transparent;
+    color: white;
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+
+
+/* Boostrap collapse horizontal*/
+
+.collapsing.collapse-horizontal {
+    width: 0;
+    height: auto;
+    transition: width 0.35s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .collapsing.collapse-horizontal {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 950px) {
+    .friend_individual_avatar {
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+    }
+  }

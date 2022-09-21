@@ -1,0 +1,52 @@
+.settings_your_friends_container{
+    display: flex;
+    flex-direction: column;
+    width: 80vw !important;;
+}
+
+#input_settings_your_friends_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 3em;
+}
+
+#friends_list_settings{
+    display: grid;
+    grid-template: 1fr 1fr 1fr 1fr;
+}
+
+.friend_individual_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.friend_individual_avatar{
+    border-radius: 100%;
+    width: 96px;
+    height: 96px;
+
+}
+
+.friend_name_and_redirect{
+    cursor: pointer;
+}
+
+@media (max-width: 950px) {
+    .friend_individual_avatar {
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+    }
+
+    .settings_profile_data_input {
+        font-size: 20px;
+    }
+    .asd541asd{
+        text-align: center;
+        width: 100%;
+    }
+  }

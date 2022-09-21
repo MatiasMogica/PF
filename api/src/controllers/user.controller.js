@@ -1,6 +1,9 @@
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
-
+const CourierClient = require("@trycourier/courier").CourierClient;
+const courier = CourierClient({
+  authorizationToken: process.env.COURRIER_API_KEY,
+});
 
 const getByName = ({ users, name }) => {
   return users.filter((user) => {
@@ -13,7 +16,6 @@ const getByEmail = ({ users, email }) => {
     user.email?.toLowerCase().includes(email.toLowerCase);
   });
 };
-
 
 const userPost = async (req, res) => {
   const { username, name, email, password, image } = req.body;
@@ -43,12 +45,33 @@ const userPost = async (req, res) => {
 
     const savedUser = await user.save();
 
+    const { requestId } = await courier.send({
+      message: {
+        to: {
+          data: {
+            name: "Contact-Form",
+          },
+
+          email: user.email,
+        },
+        content: {
+          title: `Welcome ${user.name} to Zteam`,
+          body: `Hi ${user.name} we are happy that you decide to join us your username is ${user.username}.
+        If you want to contact us you can do it to the email: videogames.zteam@gmail.com
+        `,
+        },
+        routing: {
+          method: "single",
+          channels: ["email"],
+        },
+      },
+    });
+
     res.status(200).json({ newUser: savedUser });
   } catch (error) {
     console.log(error);
   }
 };
-
 
 const getUsers = async (req, res) => {
   const { name, email } = req.query;
@@ -73,12 +96,60 @@ const getUserByID = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
+const userGames = async (req, res, next) => {
+  const { idUser } = req.params;
+
+  const { cartItems } = req.body;
+  //array de ids de juegos comprados
+  const idItems = cartItems.map((cart) => {
+    return cart._id;
+  });
+
+  try {
+    const user = await User.findById(idUser);
+    if (!user) return res.status(404).send("user not found");
+
+    const newItems = [...new Set([...user.purchasedGames, ...idItems])];
+
+    const userUpdated = await User.findByIdAndUpdate(
+      idUser,
+      { purchasedGames: newItems },
+      {
+        new: true,
+      }
+    );
+    console.log(userUpdated);
+    if (!userUpdated) return response.status(400).send("Not updated");
+    return res.status(200).json(userUpdated);
+  } catch (error) {
+    next(error);
+  }
+};
 
 const putUser = async (req, res) => {
   const { idUser } = req.params;
-  const { name, email, password, image } = req.body;
+  const {
+    name,
+    email,
+    age,
+    nationality,
+    profileVisibility,
+    image,
+    backgroundImage,
+  } = req.body;
+
   try {
     const user = await User.findById(idUser);
+
+    image ? await user.updateOne({ image }) : null;
+    backgroundImage ? await user.updateOne({ backgroundImage }) : null;
+    name ? await user.updateOne({ name }) : null;
+    email ? await user.updateOne({ email }) : null;
+    age ? await user.updateOne({ age }) : null;
+    nationality ? await user.updateOne({ nationality }) : null;
+    profileVisibility ? await user.updateOne({ profileVisibility }) : null;
+
+    res.status(200).json("Edited Correctly");
   } catch (error) {
     res.status(500).json({ error: error });
   }
@@ -111,6 +182,73 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// GET USER STATS
+const getUserStats = async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+  try {
+    const data = await User.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const resetUser = async (req, res) => {
+  const { idUser } = req.params;
+  try {
+    const user = await User.findById(idUser);
+
+    await user.updateOne({ friends: [] });
+    await user.updateOne({ friendRequests: [] });
+    await user.updateOne({ image: "empty" });
+    await user.updateOne({ backgroundImage: "empty" });
+    res.status(200).json(user);
+  } catch (e) {
+    console.log(e);
+    res.status(45454).json({ e });
+  }
+};
+
+const seeUserGames = async (req, res) => {
+  const { idsender, idreciver } = req.body;
+  try {
+    const reciver = await User.findById(idreciver);
+    var cf = false;
+    reciver.friends.forEach((x) => {
+      if (x === idsender) cf = true;
+    });
+    var c =
+      reciver.profileVisibility[4] === "Public"
+        ? true
+        : reciver.profileVisibility[4] === "Friends"
+        ? cf
+        : false;
+
+    c = idsender === idreciver ? true : c;
+    if (c) {
+      res.status(200).json({ games: reciver.purchasedGames });
+    } else {
+      res.status(400).json({ games: "You cant see this user games" });
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ e });
+  }
+};
 
 module.exports = {
   getByName,
@@ -121,4 +259,8 @@ module.exports = {
   putUser,
   becomeAdmin,
   deleteUser,
+  getUserStats,
+  resetUser,
+  userGames,
+  seeUserGames,
 };

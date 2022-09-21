@@ -1,9 +1,14 @@
 import NavBar from "../../components/NavBar";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Modals from "../../components/Modals";
+import { useModal } from "../../components/Modals/useModal";
+import register from "../../images/register.png";
+import "./ModalRegister.css";
 import "./Register.css";
 
 export default function Register() {
+  const [isOpenModal, openedModal, closeModal] = useModal(false);
   const [newUser, setNewUser] = useState({
     image: { value: "", error: "" },
     userName: { value: "", error: "" },
@@ -49,7 +54,13 @@ export default function Register() {
   }
 
   function handleUserName(e) {
-    if (e.target.value.length < 50 && e.target.value.length > 2) {
+    if (
+      e.target.value.length < 50 &&
+      e.target.value.length > 2 &&
+      /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/.test(
+        e.target.value
+      )
+    ) {
       setNewUser({
         ...newUser,
         userName: { value: e.target.value, error: "" },
@@ -59,7 +70,8 @@ export default function Register() {
         ...newUser,
         userName: {
           value: "",
-          error: "It should have between 2 and 50 characters",
+          error:
+            "It should have between 6 and 18 characters, only contain letter,number",
         },
       });
     }
@@ -152,7 +164,7 @@ export default function Register() {
       newUser.password.identical
     ) {
       return (
-        <button type="submit" className="buttonregister">
+        <button type="submit" className="buttonregister" onClick={openedModal}>
           Register
         </button>
       );
@@ -219,16 +231,16 @@ export default function Register() {
   return (
     <div className="register-boty">
       <NavBar />
-      <div class="form_wrapper">
-        <div class="form_container">
-          <div class="title_container">
+      <div className="form_wrapper">
+        <div className="form_container">
+          <div className="title_container">
             <h2>Registration Form</h2>
           </div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <label htmlFor="register_username">Username:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_username"
@@ -242,9 +254,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_name">Name:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_name"
@@ -258,9 +270,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_email">Email:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_email"
@@ -273,9 +285,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password">Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password"
@@ -288,9 +300,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_password_confirm">Confirm Password:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_password_confirm"
@@ -304,9 +316,9 @@ export default function Register() {
             ) : null}
 
             <label htmlFor="register_image">Image:</label>
-            <div class="input_field">
+            <div className="input_field">
               <span>
-                <i aria-hidden="true" class="fa fa-lock"></i>
+                <i aria-hidden="true" className="fa fa-lock"></i>
               </span>
               <input
                 id="register_image"
@@ -315,7 +327,13 @@ export default function Register() {
               ></input>
             </div>
             {newUser.image.value ? (
-              <img src={newUser.image.value} alt="your profile"></img>
+              <img
+                src={
+                  newUser.image.value ||
+                  "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+                }
+                alt="your profile"
+              ></img>
             ) : (
               <p className="register_error">{newUser.image.value} </p>
             )}
@@ -324,7 +342,22 @@ export default function Register() {
             {newUser.api.error ? (
               <p>{newUser.api.error}</p>
             ) : newUser.api.creado ? (
-              <p>Creado con exito</p>
+              //<p>Creado con exito</p>
+              <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
+                <h2 className="modal-register-title">Welcome to ZTEAM!</h2>
+                <img
+                  src={register}
+                  alt="register"
+                  className="modal-register-img"
+                />
+                <p className="modal_text">
+                  Thank you for joining our community, explore and download the
+                  video games that you like the most!
+                </p>
+                <button className="modal-register-close" onClick={closeModal}>
+                  CLOSE
+                </button>
+              </Modals>
             ) : null}
           </form>
           <div>

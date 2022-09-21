@@ -18,7 +18,7 @@ const allGames = async (req, res, next) => {
         : res.status(404).json({ msg: "Game not found" });
     }
 
-    const resultBD = await Game.find({});
+    const resultBD = await Game.find({}).populate("comments");
     resultBD.length
       ? res.status(200).json(resultBD)
       : res.status(404).json({ msg: "There are not documents on Game Model" });
@@ -30,7 +30,7 @@ const allGames = async (req, res, next) => {
 const detailGame = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const juego = await Game.findById(id);
+    const juego = await Game.findById(id).populate("comments");
     if (!juego) return res.status(404).json({ msg: "Games not found" });
     if (!juego.idAPI) {
       const game = {
@@ -42,6 +42,7 @@ const detailGame = async (req, res, next) => {
         price: juego.price,
         genres: juego.genres,
         description: juego.description,
+        comments: juego.comments,
       };
       return res.status(200).json(game);
     }

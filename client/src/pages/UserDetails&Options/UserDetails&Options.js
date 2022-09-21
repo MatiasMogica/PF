@@ -37,13 +37,13 @@ function UserDetailsOptions() {
       <p>Created: {userDetails.createdAt}</p>
       <p>Email: {userDetails.email}</p>
       {userDetails.admin ? <p>This user is an Admin</p> : <p>Not an Admin</p>}
-      <img alt="user" src={userDetails.image} />
-
-      {userDetails.purchasedGames
-        ? userDetails.purchasedGames.map((x) => {
-            return <div>Purchase History</div>;
-          })
-        : null}
+      <img
+        alt="user"
+        src={
+          userDetails.image ||
+          "https://steamuserimages-a.akamaihd.net/ugc/875249057839988996/1D2881C5C9B3AD28A1D8852903A8F9E1FF45C2C8/"
+        }
+      />
 
       {userDetails.deleted ? <p>This user is blocked from the site</p> : null}
 
@@ -64,6 +64,5 @@ function UserDetailsOptions() {
     </div>
   );
 }
-
 
 export default UserDetailsOptions;

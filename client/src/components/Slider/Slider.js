@@ -113,6 +113,7 @@ position: relative;
 margin: 0px auto;
 overflow: hidden;
 width: 80%;
+margin-bot: 40px;
 `;
 
 const ContenedorSlideshow = styled.div`

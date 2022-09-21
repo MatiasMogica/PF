@@ -6,8 +6,8 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #151515;
-  color:#fff;
+  background-color: #000;
+  color:#fff !important;
   box-sizing: border-box;
 }
 

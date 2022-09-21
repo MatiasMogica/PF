@@ -1,0 +1,197 @@
+
+section.light,
+section.dark {
+	display: flex;
+	width: 20%;
+	height: 100%;
+	align-items: center;
+	justify-content: space-around;
+}
+section.light {
+	background-color: #e0e5ec;
+}
+section.dark {
+	background-color: #131419;
+}
+div.circle,
+div.circle_black {
+	position: relative;
+	display: flex;
+	width: 40px;
+	height: 40px;
+	border-radius: 40px;
+	align-items: center;
+	justify-content: center;
+}
+div.circle:before,
+div.circle_black:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	width: 40px;
+	height: 40px;
+	content: " ";
+	cursor: pointer;
+	transition: 0.3s ease-out;
+	border-radius: 40px;
+	filter: blur(7px);
+}
+div.circle.long,
+div.circle_black.long {
+	width: 60px;
+	height: 17px;
+}
+div.circle.long:before,
+div.circle_black.long:before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 60px;
+	height: 17px;
+}
+div.circle:before {
+	box-shadow: 8px 8px 20px #a9a8b7, -8px -8px 20px #fff;
+}
+div.circle_black:before {
+	box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5),
+		-8px -8px 20px rgba(255, 255, 255, 0.2);
+}
+div.circle:hover:before {
+	box-shadow: 8px 8px 20px #a9a8b7, -8px -8px 20px #fff,
+		inset -8px -8px 20px #fff, inset 8px 8px 20px #a9a8b7;
+}
+div.circle_black:hover:before {
+	box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.5),
+		-8px -8px 20px rgba(255, 255, 255, 0.2), inset 8px 8px 20px rgba(0, 0, 0, 1),
+		inset -8px -8px 20px rgba(255, 255, 255, 0.2);
+}
+div.circle:hover:before,
+div.circle_black:hover:before {
+	transition: 0.3s ease-in;
+	transform: scale(1.05);
+}
+div.circle p,
+div.circle_black p {
+	position: relative;
+	z-index: 5;
+	user-select: none;
+	cursor: pointer;
+  color: white;
+  font-size: 20px;
+}
+div.circle_black {
+	color: white;
+}
+@media (max-width: 700px) {
+	body {
+		height: auto;
+		flex-direction: column;
+	}
+	section.light,
+	section.dark {
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url(//fonts.googleapis.com/css?family=Vibur);
+
+
+.logo {
+	display: flex;
+	text-align: center;
+  text-align: center;
+  width: 15%;
+  height: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+   user-select: none;
+   position: relative;
+   margin-top: -6px;
+   margin-left: -8px;
+}
+
+.logo b{
+  font: 10 5vh "Vibur";
+  color: #fee;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #16e590, 0 0 0.5em #16e590, 0 0 0.1em #16e590, 0 10px 3px #000;
+}
+.logo b span{
+  animation: blink linear infinite 2s;
+}
+.logo b span:nth-of-type(2){
+  animation: blink linear infinite 3s;
+}
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+    
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+
+#btn-twtr{
+  clear:both;
+  color:#fff;
+  border:2px solid;
+  border-radius:3px;
+  text-align:center;
+  text-decoration:none;
+  display:block;
+  font-family:sans-serif;
+  font-size:4px;
+  background:rgba(0,0,0,0.2);
+  box-shadow:0 0 0px 3px rgba(0,0,0,0.2);
+  opacity:0.4
+}#btn-twtr:hover{color:#fff;opacity:1}

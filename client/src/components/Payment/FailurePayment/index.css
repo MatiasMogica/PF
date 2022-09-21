@@ -1,0 +1,23 @@
+.modal-failure-close {
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(238, 13, 13);
+    padding: 1em 3em;
+    border: 1px solid;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 300;
+    transition: background-color .3s;
+    text-decoration: none;
+}
+
+.modal-failure-close:hover {
+    color: rgb(238, 13, 13);
+    background-color: #fff;
+}
+
+.modal-failure-title{
+    margin-top: -30px;
+    font-size: 2rem;
+    color: rgb(238, 13, 13);
+}
