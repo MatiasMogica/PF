@@ -1,0 +1,28 @@
+.wishedImage {
+    border-radius: 10px;
+    float: left;
+    height: 200px;
+    margin-left: 25px;
+    margin-top: 29px;
+    width: 250px;
+}
+
+.wishedItemContainer {
+    background-color: rgb(66, 75, 75);
+    border-radius: 20px;
+    text-align: center;
+    margin-left: 200px;
+    width: 1000px;
+}
+
+.removeButton {
+    float: right;
+}
+
+.wishedRating {
+    align-items: center;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    margin-top: -15px;
+}

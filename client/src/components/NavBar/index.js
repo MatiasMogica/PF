@@ -108,7 +108,7 @@ export default function NavBar({ usuario }) {
               <Link to="/" className="links">
                 <span>Home</span>
               </Link>
-              <Link to="/videogame/wishList" className="links">
+              <Link to="/wishList" className="links">
                 <span>Wish list</span>
               </Link>
               <Link to="/cart" className="links">
