@@ -23,6 +23,7 @@ import NavBarLogIn from "../NavBarLogin/NavBarLogIn";
 import Dropdown from "react-bootstrap/Dropdown";
 import bell from "../../icons/bell.png";
 import settingslogo from "../../icons/settings.ico";
+import Logo from "../Logo/Logo";
 
 export default function NavBar({ usuario }) {
   const user = useSelector((state) => state.logIn.logIn);
@@ -87,6 +88,14 @@ export default function NavBar({ usuario }) {
         </Container>
       ) : (
         <Nav1>
+          {/* <div className="menu-logo">
+<section class="dark">
+<div class="circle_black">
+				<p>Menu</p>
+		</div>
+</section>
+
+          </div> */}
           <div className="menu-icon">
             <div className="line1"></div>
             <div className="line2"></div>
@@ -107,6 +116,9 @@ export default function NavBar({ usuario }) {
               </Link>
             </div>
           </div>
+
+          <Logo />
+
           {/* <NavLink1 to="/">
           <h1>ZTEAM</h1>
         </NavLink1> */}
@@ -120,7 +132,8 @@ export default function NavBar({ usuario }) {
               {amount}
             </NavLink1>
           </div> */}
-          <SearchBar />
+          
+          
 
           <NavBtn>
             {user.status ? (

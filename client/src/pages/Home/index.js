@@ -19,6 +19,8 @@ import { AddIcon, CartIcon } from "../../icons/Icons";
 import Particle from "../../components/Particle/Particle";
 import jquery from 'jquery';
 import Banner from "../../components/Banner/Banner";
+import Logo from '../../components/Logo/Logo.js'
+
 
 export default function Home() {
     let dispatch = useDispatch();
@@ -45,6 +47,7 @@ export default function Home() {
           <Particle />
 
             <NavBar />
+
             <div className="containerHome">
             
         <div>
