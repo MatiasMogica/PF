@@ -36,7 +36,6 @@ router.post("/payment", async (req, res) => {
   games_id = [...req.body.games_id.split(",")].map((i) => {
     return { _id: i };
   });
-  console.log(games_id);
   cartItems = [...req.body.cartItems.split(",")];
   const games = cartItems.map((item) => {
     return {
@@ -48,6 +47,7 @@ router.post("/payment", async (req, res) => {
   order = {
     user_id: req.body.user_id,
     username: req.body.username,
+    email: req.body.email,
     games: games,
     total_price: parseInt(req.body.price),
   };
@@ -106,19 +106,26 @@ router.get("/payment", async (req, res, next) => {
         `http://localhost:3001/users/userGames/${order.user_id}`,
         { cartItems: games_id }
       );
-
       await courier.send({
         message: {
           to: {
             data: {
-              name: "someone purchased some games",
+              name: "games-purchased",
             },
 
-            email: "aca va el email al que queres que se le envie el mensaje",
+            email: order.email,
           },
           content: {
-            title: "Z-Team || New games purchased Successfully",
-            body: "",
+            title: "Thanks " + order.username + " for your purchase!",
+            body: `
+          ${order.username} Thank you for purchasing:
+          ${order.games.map(
+            (x) => `
+             -${x.title} for ${x.subtotal_price}$`
+          )}
+        
+          For a total of: ${order.total_price}
+          `,
           },
           routing: {
             method: "single",
