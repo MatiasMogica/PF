@@ -7,6 +7,7 @@ import { addItem } from "../../redux/slices/cartSlice";
 import './index.scss'
 import Tilit from 'tilt.js'
 import jQuery from "jquery";
+import { addWished } from "../../redux/slices/wishListSlice";
 window.$ = window.jQuery = jQuery;
 
 
@@ -15,10 +16,12 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
 
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state) => state.cart);
+    const {wishedItems} = useSelector((state) => state.wishList)
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
     let game = videogames.find((i) => i._id === _id)
 
     const inCart = cartItems.find((i) => i._id === _id);
+    const inWished = wishedItems.find((i) => i._id === _id);
 
     useEffect(() => {
         (function (factory) {
@@ -372,6 +375,20 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
   </div>
 
   </Link>
+  
+  {wishedItems.includes(inWished) ? (
+                    <button className="wishedContainer" disabled>
+                        {" "}
+                        <RedHeart />{" "}
+                        </button>
+                    ) : (
+                        <button
+                            className="addWished"
+                            onClick={() => dispatch(addWished(game))}
+                        >
+                        <Heart />
+                        </button>
+                    )}
 
   {cartItems.includes(inCart) ? (
                     <button className="inCart">
@@ -386,7 +403,6 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
                         <AddIcon />
                         </button>
                     )}
-
     </div>)
 
 }
