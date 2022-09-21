@@ -7,7 +7,7 @@ import { getById } from "../../redux/actions/videogamesActions";
 import Modals from "../Modals";
 import { useModal } from "../Modals/useModal";
 import like from "../../images/like.gif";
-import {postLikes} from "../../redux/actions/LikeAction.js";
+import { postLikes } from "../../redux/actions/LikeAction.js";
 import "./index.css";
 import {
   getPercentageOfLikes,
@@ -21,11 +21,12 @@ export default function Details({ details }) {
   const { likes, percentageOfLikes, votesTotal } = useSelector(
     (state) => state.likes
   );
-  
-   useEffect(()=>{
-      dispatch(postLikes(likes,percentageOfLikes,votesTotal))
-    }, [likes, percentageOfLikes, votesTotal])
-  
+
+  useEffect(() => {
+    dispatch(postLikes(id, percentageOfLikes, likes, votesTotal));
+    console.log(percentageOfLikes);
+  }, [likes, percentageOfLikes, votesTotal]);
+
   const [isOpenLike, openedLike, closeLike] = useModal(false);
   const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -144,8 +145,14 @@ export default function Details({ details }) {
           </p>
         </div>
         <div>
-          <p>{votesTotal === 0 ? "No reviews" : percentageOfLikes + "%"} </p>
-          {/* <h1>{details.likeCount === null ? 0 : details.likeCount}%</h1> */}
+          {/* <p>{votesTotal === 0 ? "No reviews" : percentageOfLikes + "%"} </p> */}
+          <h1>
+            porcentaje desde el back |
+            {details.getPercentageOfLikes === null
+              ? 0
+              : details.getPercentageOfLikes}
+            %
+          </h1>
           <Opinion />
           {details.comments?.map((c) => {
             return (

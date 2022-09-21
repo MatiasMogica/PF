@@ -30,7 +30,9 @@ const allGames = async (req, res, next) => {
 const detailGame = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const juego = await Game.findById(id).populate("comments");
+    const juego = await Game.findById(id)
+      .populate("comments")
+      .populate("getPercentageOfLikes");
     if (!juego) return res.status(404).json({ msg: "Games not found" });
     if (!juego.idAPI) {
       const game = {

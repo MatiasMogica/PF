@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
@@ -13,8 +13,8 @@ export default function VideogameDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.videogames);
-  const {amount} = useSelector((state) => state.cart)
- /*  const {reviews} = useSelector((state) => state.reviews)
+  const { amount } = useSelector((state) => state.cart);
+  /*  const {reviews} = useSelector((state) => state.reviews)
   console.log(reviews) */
 
   useEffect(() => {
@@ -30,17 +30,19 @@ export default function VideogameDetails() {
         <div>
           <NavBar />
           <div className="floatContainer">
-                    <Link className="cartLink" to="/cart" >
-                        {amount}
-                        <div className="float"><CartIcon /></div>
-                    </Link>
-                </div>
+            <Link className="cartLink" to="/cart">
+              {amount}
+              <div className="float">
+                <CartIcon />
+              </div>
+            </Link>
+          </div>
           {Object.keys(details).length > 0 ? (
             <Details details={details} />
           ) : (
             <Spinner />
           )}
-        <Rating /> 
+          <Rating />
         </div>
       }
     </div>

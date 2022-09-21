@@ -13,7 +13,7 @@ export const likesSlice = createSlice({
       state.likes++;
     },
     AddDislike: (state) => {
-      state.dislikes--;
+      state.dislikes++;
     },
     getTotalvotes: (state) => {
       let votes = state.likes + state.dislikes;

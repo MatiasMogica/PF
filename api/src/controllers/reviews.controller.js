@@ -26,10 +26,15 @@ const postReview = async (req, res) => {
 
 const postLike = async (req, res) => {
   const { id } = req.params;
-  const { getPercentageOfLikes } = req.body;
+  const { likes, dislike } = req.body;
+
+  let totalVotes = likes + dislike;
+  let percentage = Math.trunc((likes * 100) / totalVotes);
+
+  // const { getPercentageOfLikes } = req.body;
 
   const postGame = await Game.findById(id);
-  postGame.getPercentageOfLikes = getPercentageOfLikes;
+  postGame.getPercentageOfLikes = percentage;
 
   const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
     new: true,

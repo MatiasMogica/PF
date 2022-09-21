@@ -30,6 +30,8 @@ export default function Rating() {
   /* const navigate = useNavigate() */
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
   console.log(id);
+  console.log(likes);
+  console.log(dislikes);
 
   useEffect(() => {
     dispatch(getById(id));
@@ -98,7 +100,6 @@ export default function Rating() {
             JSON.parse(localStorage.getItem("user")).status === false
               ? "User Anónimo"
               : JSON.parse(localStorage.getItem("user")).username,
-          likeCount: percentageOfLikes,
         });
         dispatch(AddDislike());
         forceUpdate();
