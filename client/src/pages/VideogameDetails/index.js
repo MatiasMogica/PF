@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar";
 import Spinner from "../../components/Spinner";
 import { getById } from "../../redux/actions/videogamesActions";
 import Details from "../../components/Details";
 import { clearVideogame } from "../../redux/slices/videogamesSlice";
+import { CartIcon } from "../../icons/Icons";
 
 export default function DogDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.videogames);
+  const {amount} = useSelector((state) => state.cart)
 
   useEffect(() => {
     dispatch(getById(id));
@@ -24,6 +26,12 @@ export default function DogDetails() {
       {
         <div>
           <NavBar />
+          <div className="floatContainer">
+                <Link className="cartLink" to="/cart" >
+                    {amount}
+                    <div className="float"><CartIcon /></div>
+                </Link>
+            </div>
           {Object.keys(details).length > 0 ? (
             <Details details={details} />
           ) : (

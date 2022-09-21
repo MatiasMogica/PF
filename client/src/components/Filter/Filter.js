@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterVideogames } from "../../redux/slices/videogamesSlice";
 import { MultiSelect } from "react-multi-select-component";
 import './index.css'
+import SearchBar from '../SearchBar/SearchBar.js'
 
 function Filtro({paginated}) {
   //Declaro el dispatch para aplicar filtros.
@@ -177,6 +178,9 @@ useEffect(() => {
 
     
     <div id="filtrobox" className="container">
+
+      <SearchBar />
+
       <div className="opciones">
       {/* <div className="container_search">
         <h4>Search by keyword</h4>
