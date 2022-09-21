@@ -24,6 +24,7 @@ import GamesOwnedById from "./pages/GamesOwnedById/GamesOwnedById";
 import Users from "./components/AdminPanel/User";
 import ForgotPassword from "./components/ForgotPassword/forgot";
 import Reset from "./components/ForgotPassword/reset";
+import WishList from "./pages/WishList/WishList";
 
 function App() {
   const user = useSelector((state) => state.logIn.logIn);
@@ -38,11 +39,17 @@ function App() {
   }, [user]);
 
   const { cartItems, amount } = useSelector((state) => state.cart);
+  const {wishedItems, wishedAmount } = useSelector((state) => state.wishList)
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
     localStorage.setItem("amount", JSON.stringify(amount));
   }, [cartItems, amount]);
+
+  useEffect(() => {
+    localStorage.setItem("wishList", JSON.stringify(wishedItems));
+    localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount))
+  }, [wishedItems, wishedAmount]);
 
   return (
     <div>
@@ -50,6 +57,7 @@ function App() {
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/home"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
+        <Route exact path={"/wishlist"} component={ WishList } />
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
