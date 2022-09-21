@@ -61,13 +61,16 @@ function App() {
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
-        {user.status ? (
-          <>
-            <Route exact path={"/settings"} component={Settings}></Route>
-            <Route exact path={"/profile/:idUser"} component={Profile} />
-            <Route exact path={"/games/:idUser"} component={GamesOwnedById} />
-          </>
-        ) : null}
+        
+        <Route exact path={"/settings"} component={Settings}>
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
+        <Route exact path={"/profile/:idUser"} component={Profile}>
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
+        <Route exact path={"/games/:idUser"} component={GamesOwnedById}>
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
 
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
@@ -79,7 +82,7 @@ function App() {
         <Route path='/reset-password' component={Reset} />
 
         {user.admin ? (
-          <>
+          <Switch>
             <Route exact path={"/adminPanel"} component={AdminPanel} />
             <Route exact path={"/videogame/add"} component={Add} />
             <Route exact path={"/edit/:id"} component={Edit} />
@@ -90,7 +93,7 @@ function App() {
             />
             <Route exact path={"/adminPanel/user"} component={Users} />
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
-          </>
+          </ Switch>
         ) : null}
         <Route component={Error404} />
       </Switch>
