@@ -1,17 +1,17 @@
 import React from "react"
-// import "./CartItem.css"
+import './paymentItem.css'
 
 const PaymentItem = ({_id, name, background_image, rating, price/* , amount */}) => {
 
 
     return (
-        <div key={_id}>
-            <img alt={name} className="image" src={background_image} />
+        <div className="paytemContainer" key={_id}>
+            <img className="payImage" alt={name} src={background_image} />
             <div>
-                <h4>Name: {name} </h4>
-                <h4>Rating: {rating} </h4>
-                <h4>Price ${price} </h4>
-                <button>Download</button>
+                <h4 className="payItemTitle"> {name} </h4>
+                <h4 className="payRating">Rating: {rating} </h4>
+                <h4 className="payPrice">Price ${price} </h4>
+                {/* <button className="btnDw">Download</button> */}
             </div>
         </div>
     )
