@@ -1,5 +1,5 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Error404 from "./components/Errors/index";
@@ -61,11 +61,13 @@ function App() {
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
+
         
         <Route exact path={"/settings"} component={Settings}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
         <Route exact path={"/profile/:idUser"} component={Profile}>
+
           {user.status ? <Redirect to="/" /> : null}
         </Route>
         <Route exact path={"/games/:idUser"} component={GamesOwnedById}>
@@ -78,8 +80,20 @@ function App() {
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
-        <Route path='/forgot-password' component={ForgotPassword} />
-        <Route path='/reset-password' component={Reset} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={Reset} />
+
+        <Route exact path={"/adminPanel"} component={AdminPanel}></Route>
+        <Route exact path={"/videogame/add"} component={Add} />
+        <Route exact path={"/edit/:id"} component={Edit} />
+        <Route
+          exact
+          path={"/adminPanel/purchaseOrders"}
+          component={PurchaseOrders}
+        />
+        <Route exact path={"/adminPanel/user"} component={Users} />
+        <Route exact path={"/users/:id"} component={UserDetailsOptions} />
+
 
         {user.admin ? (
           <Switch>
@@ -95,6 +109,7 @@ function App() {
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
           </ Switch>
         ) : null}
+
         <Route component={Error404} />
       </Switch>
     </div>

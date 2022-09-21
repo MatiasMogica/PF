@@ -13,10 +13,10 @@ import "./CartContainer.css";
 import emptyCart from "../../images/emptyCart.png";
 import carritovacio from "../../images/carritovacio.png";
 import { Bag, Trash, Remove, Star } from "../../icons/Icons";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Particle from "../../components/Particle/Particle";
 
-import styles from './Shopping.module.css'
+import styles from "./Shopping.module.css";
 
 const CartContainer = () => {
   const { cartItems, total, amount } = useSelector((state) => state.cart);
@@ -121,6 +121,7 @@ const CartContainer = () => {
 
 
 
+
     <div className="background-cart">
 
       <NavBar />
@@ -132,19 +133,24 @@ const CartContainer = () => {
 
         <div className={styles.container}>
 
+
           <h2>Shopping cart</h2>
           {cartItems.length === 0 ? (
             <div className={styles.cartEmpty}>
               <p>Your shopping cart is currently empty</p>
               <div className={styles.startShopping}>
+
                 <Link to='/'>
                   <svg xmlns="http://www.w3.org/2000/svg"
+
                     width="20"
                     height="20"
                     fill="currentColor"
                     class="bi bi-arrow-left"
+
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+
                   </svg>
                   <span>Start shopping</span>
                 </Link>
@@ -153,6 +159,7 @@ const CartContainer = () => {
           ) : (
             <div>
               <div className={styles.titles}>
+
                 
 
               </div>
@@ -184,10 +191,12 @@ const CartContainer = () => {
                     </div>
                   
 
+
                 ))}
               </div>
 
               <div className={styles.cartSummary}>
+
               <button className="clearButton" onClick={openedModal}>
             <button className={styles.clearCart}>Clear cart</button>
 
@@ -195,6 +204,7 @@ const CartContainer = () => {
                 <div className={styles.cartCheckout}>
                   <div className={styles.subtotal}>
                     <span>Subtotal: {total}$</span>
+
                     <span className={styles.amount}>$</span>
                   </div>
                   <p>Taxes and shipping calculated at checkout</p>
@@ -215,15 +225,17 @@ const CartContainer = () => {
                         />
                       </svg>
                       <span>Continue Shopping</span>
-                      
+
                     </Link>
                   </div>
                 </div>
               </div>
 
+
             </div>
 
           )}</div>
+
         {/* <Footer />      */}
         <footer>
           <hr />
@@ -236,12 +248,14 @@ const CartContainer = () => {
               <Trash />
             </button>
             <form action="http://localhost:3001/payment/payment" method="POST">
+
               <input type='hidden' name="user_id" value={id} />
               <input type='hidden' name='games_id' value={cartItems.map(i => i._id)} />
               <input type='hidden' name="username" value={username} />
               <input type='hidden' name="cartItems" value={cartItems.map(i => {
                 return `${i.name}%${i.price}`
               })} />
+
               <input
                 type="hidden"
                 name="title"
@@ -268,8 +282,10 @@ const CartContainer = () => {
           <h2 className="modal-cart-title">Are you sure?</h2>
           <img src={carritovacio} alt="deleteCart" className="modal_img" />
           <p className="modal_text">
+
             You are about to delete all the items saved in the cart, if you wish,
             press 'DELETE', otherwise press 'CANCEL'.
+
           </p>
           <div className="container-modal-buttons">
             <button className="modal-cart-close" onClick={closeModal}>
@@ -281,6 +297,7 @@ const CartContainer = () => {
             >
               DELETE
             </button>
+
             
           </div>
         </Modals>
@@ -289,8 +306,9 @@ const CartContainer = () => {
 
 
 
+
     </div>
-  )
+  );
 };
 
 export default CartContainer;
