@@ -44,7 +44,9 @@ const detailGame = async (req, res, next) => {
         description: juego.description,
         comments: juego.comments,
         // likeCount: juego.likeCount,
-        getPercentageOfLikes: juego.getPercentageOfLikes,
+        // getPercentageOfLikes: juego.getPercentageOfLikes,
+        likes: juego.likes,
+        dislikes: juego.dislikes,
       };
       return res.status(200).json(game);
     }
