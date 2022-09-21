@@ -1,5 +1,5 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Error404 from "./components/Errors/index";
@@ -53,13 +53,18 @@ function App() {
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
-        {user.status ? (
-          <>
-            <Route exact path={"/settings"} component={Settings}></Route>
-            <Route exact path={"/profile/:idUser"} component={Profile} />
-            <Route exact path={"/games/:idUser"} component={GamesOwnedById} />
-          </>
-        ) : null}
+
+        <Route exact path={"/settings"} component={Settings}>
+          {" "}
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
+        <Route exact path={"/profile/:idUser"} component={Profile}>
+          {" "}
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
+        <Route exact path={"/games/:idUser"} component={GamesOwnedById}>
+          {user.status ? <Redirect to="/" /> : null}
+        </Route>
 
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
@@ -67,23 +72,20 @@ function App() {
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
-        <Route path='/forgot-password' component={ForgotPassword} />
-        <Route path='/reset-password' component={Reset} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={Reset} />
 
-        {user.admin ? (
-          <>
-            <Route exact path={"/adminPanel"} component={AdminPanel} />
-            <Route exact path={"/videogame/add"} component={Add} />
-            <Route exact path={"/edit/:id"} component={Edit} />
-            <Route
-              exact
-              path={"/adminPanel/purchaseOrders"}
-              component={PurchaseOrders}
-            />
-            <Route exact path={"/adminPanel/user"} component={Users} />
-            <Route exact path={"/users/:id"} component={UserDetailsOptions} />
-          </>
-        ) : null}
+        <Route exact path={"/adminPanel"} component={AdminPanel}></Route>
+        <Route exact path={"/videogame/add"} component={Add} />
+        <Route exact path={"/edit/:id"} component={Edit} />
+        <Route
+          exact
+          path={"/adminPanel/purchaseOrders"}
+          component={PurchaseOrders}
+        />
+        <Route exact path={"/adminPanel/user"} component={Users} />
+        <Route exact path={"/users/:id"} component={UserDetailsOptions} />
+
         <Route component={Error404} />
       </Switch>
     </div>

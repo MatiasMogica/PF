@@ -11,16 +11,19 @@ import { BsTrash } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
 
-
 function AdminPanel() {
-  {/*const [renderUser, SetRenderUser] = useState(false);*/}
+  {
+    /*const [renderUser, SetRenderUser] = useState(false);*/
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
- {/* const usuario = () => {
+  {
+    /* const usuario = () => {
     SetRenderUser(true);
-  };*/}
+  };*/
+  }
   const userapi = useSelector((state) => state.logIn.logIn);
   const videogames = useSelector(
     (state) => state.videogames.videogamesFiltrados
@@ -50,47 +53,46 @@ function AdminPanel() {
 
   return (
     <Container>
-      <NavBarAdmin/>
-      
-        <MainContent>
-          <Welcome>
-            <h3>
-              Welcome,<b> {userapi.username}</b>
-            </h3>
-            <div className="searchBar">
-              {" "}
-              <SearchBar />
-            </div>
-          </Welcome>
-          <div id="admin_panel_videogames">
-            <ContainerGames>
-              {Array.isArray(videogames)
-                ? videogames.length !== 0
-                  ? videogames.map((x) => (
-                      <EachGame key={x._id} className="admin_panel_videogame">
-                        <Parrafo id={x._id}>{x.name}</Parrafo>
-                        <BtnTrash
-                          className="pointer"
-                          onClick={(e) => confirmDelete(e)}
-                          id={"btn_delete_" + x._id}
-                          value={x._id}
-                        >
-                          <BsTrash />
-                        </BtnTrash>
+      <NavBarAdmin />
 
-                        <LinkEdit to={`/edit/${x._id}`}>
-                          <BtnEdit className="pointer">
-                            <FaRegEdit />
-                          </BtnEdit>
-                        </LinkEdit>
-                      </EachGame>
-                    ))
-                  : null
-                : null}
-            </ContainerGames>
+      <MainContent>
+        <Welcome>
+          <h3>
+            Welcome,<b> {userapi.username}</b>
+          </h3>
+          <div className="searchBar">
+            {" "}
+            <SearchBar />
           </div>
-        </MainContent>
-      
+        </Welcome>
+        <div id="admin_panel_videogames">
+          <ContainerGames>
+            {Array.isArray(videogames)
+              ? videogames.length !== 0
+                ? videogames.map((x) => (
+                    <EachGame key={x._id} className="admin_panel_videogame">
+                      <Parrafo id={x._id}>{x.name}</Parrafo>
+                      <BtnTrash
+                        className="pointer"
+                        onClick={(e) => confirmDelete(e)}
+                        id={"btn_delete_" + x._id}
+                        value={x._id}
+                      >
+                        <BsTrash />
+                      </BtnTrash>
+
+                      <LinkEdit to={`/edit/${x._id}`}>
+                        <BtnEdit className="pointer">
+                          <FaRegEdit />
+                        </BtnEdit>
+                      </LinkEdit>
+                    </EachGame>
+                  ))
+                : null
+              : null}
+          </ContainerGames>
+        </div>
+      </MainContent>
     </Container>
   );
 }
