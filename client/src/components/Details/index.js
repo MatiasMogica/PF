@@ -22,11 +22,6 @@ export default function Details({ details }) {
     (state) => state.likes
   );
 
-  useEffect(() => {
-    dispatch(postLikes(id, percentageOfLikes, likes, votesTotal));
-    console.log(percentageOfLikes);
-  }, [likes, percentageOfLikes, votesTotal]);
-
   const [isOpenLike, openedLike, closeLike] = useModal(false);
   const [isOpenDislike, openedDislike, closeDislike] = useModal(false);
   const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
