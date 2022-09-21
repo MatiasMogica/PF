@@ -146,13 +146,6 @@ export default function Details({ details }) {
         </div>
         <div>
           {/* <p>{votesTotal === 0 ? "No reviews" : percentageOfLikes + "%"} </p> */}
-          <h1>
-            porcentaje desde el back |
-            {details.getPercentageOfLikes === null
-              ? 0
-              : details.getPercentageOfLikes}
-            %
-          </h1>
           <Opinion />
           {details.comments?.map((c) => {
             return (

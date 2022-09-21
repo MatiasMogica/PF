@@ -56,7 +56,9 @@ const gameSchema = new Schema(
     // likeCount: { type: Number, default: 0 },
     // likes: { type: Number, default: 0 },
     // disklikes: { type: Number, default: 0 },
-    getPercentageOfLikes: { type: Number, default: 0 },
+    // getPercentageOfLikes: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
+    dislikes: { type: Number, default: 0 },
   },
   {
     timestamps: true,

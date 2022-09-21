@@ -24,17 +24,39 @@ const postReview = async (req, res) => {
   }
 };
 
+// const postLike = async (req, res) => {
+//   const { id } = req.params;
+//   const { likes, dislikes } = req.body;
+
+//   const postGame = await Game.findById(id);
+//   postGame.likes = postGame.likes + 1;
+//   postGame.dislikes = postGame.dislikes + 1;
+
+//   const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
+//     new: true,
+//   });
+
+//   res.json(updatedGame);
+// };
+
 const postLike = async (req, res) => {
   const { id } = req.params;
-  const { likes, dislike } = req.body;
-
-  let totalVotes = likes + dislike;
-  let percentage = Math.trunc((likes * 100) / totalVotes);
-
-  // const { getPercentageOfLikes } = req.body;
 
   const postGame = await Game.findById(id);
-  postGame.getPercentageOfLikes = percentage;
+  postGame.likes = postGame.likes + 1;
+
+  const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
+    new: true,
+  });
+
+  res.json(updatedGame);
+};
+
+const postDislike = async (req, res) => {
+  const { id } = req.params;
+
+  const postGame = await Game.findById(id);
+  postGame.dislikes = postGame.dislikes + 1;
 
   const updatedGame = await Game.findByIdAndUpdate(id, postGame, {
     new: true,
@@ -89,4 +111,5 @@ module.exports = {
   deleteReviews,
   updateReviews,
   postLike,
+  postDislike,
 };
