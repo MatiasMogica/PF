@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useRef } from 'react'
-import { GreenLike, RedDisLike, Star } from "../../icons/Icons";
+import { GreenLike, RedDisLike, RemoveComment, Star } from "../../icons/Icons";
 import axios from "axios"
 import "./index.css"
 import VanillaTilt from 'vanilla-tilt';
@@ -14,7 +14,7 @@ export default function Details({ details }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-
+    console.log(details)
     useEffect(() => {
         dispatch(getById(id))
     }, [reducerValue, dispatch, id])
@@ -71,11 +71,12 @@ export default function Details({ details }) {
 		</div>
         </Tilt> 
 		<p><span><p >{details?.platforms.length && details.platforms.join(', ') }</p></span></p>
-        {details.comments?.map((c) => {
+    {/* {details.comments?.length === [] ? <h1>No comments</h1> : <h1>Comments</h1>} */}
+          {details.comments?.map((c) => {
             return (
-              <div key={c._id}>
-                <button onClick={() => handleClick(c._id)}>X</button>
-                {c.comments} | {c.author}
+              <div className='commentsContainer' key={c._id}>
+                <button className='removeComment' onClick={() => handleClick(c._id)}><RemoveComment /> </button>
+                <p className='commentsText'>{c.comments} | {c.author} </p>
               </div>
             );
           })}

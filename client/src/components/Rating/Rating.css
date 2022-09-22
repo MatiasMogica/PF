@@ -7,7 +7,7 @@
 }
 
 .reviewErrors {
-    color: black;
+    color: black !important;
 }
 
 .reviewButton {
@@ -30,9 +30,25 @@
 }
 
 .modalTitle {
-    color: black;
+    color: red !important;
+    margin-top: -30px !important;
+    width: 300px !important;
 }
 
 .reviewTextArea {
-    width: 205px;
+    text-align: center !important;
+    width: 200px;
+}
+
+.spanReview {
+    color: green !important;
+}
+
+.reviewImg {
+    width: 90% !important;
+    max-width: 200px !important;
+}
+
+.reviewImgContainer {
+    text-align: center !important;
 }

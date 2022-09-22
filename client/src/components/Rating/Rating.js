@@ -17,7 +17,6 @@ export default function Rating() {
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
     const [like, setLike] = useState(false)
     const [dislike, setDislike] = useState(false)
-    console.log(id)
 
     useEffect(() => {
         dispatch(getById(id))
@@ -103,20 +102,29 @@ export default function Rating() {
             </div>
             <Modals isOpenModal={isOpenReview} closeModal={closeReview} >
                 <div>
-                {/* <h2 className="modalTitle">Leave a review</h2> */}
-                    <img src={likeGif} alt="deleteCart" className="modal_img" />
+                <h2 className="modalTitle">Leave a <span className="spanReview">review</span></h2> 
+                    <div className="reviewImgContainer"><img src={likeGif} alt="deleteCart" className="reviewImg" /></div>
                     <form onSubmit={ handleSubmit }>
-                        <textarea className="reviewTextArea" onChange={(e) => handleReview(e)} />
-                        {input.review.error ? <p className="reviewErrors"> {input.review.error} </p> : null }
+                        <div className="reviewImgContainer"><textarea className="reviewTextArea" onChange={(e) => handleReview(e)} /></div>
+                        {input.review.error || input.review.value === "" ? (
+              <p className="reviewErrors"> {input.review.error} </p>
+            ) : null}
                         <div /* className="container-modal-buttons" */>
-                            <button type="submit" className="modal-cart-close" onClick={closeReview} >
-                                UPLOAD A REVIEW
-                            </button>
+                        <button
+                type="submit"
+                className="modal-cart-close"
+                onClick={closeReview}
+                disabled={
+                  input.review.error || input.review.value === "" ? true : false
+                }
+              >
+                UPLOAD
+              </button>
                         </div>
                     </form>
                     <button className="modal-cart-delete" onClick={closeReview}>
                                 CANCEL
-                            </button>
+                    </button>
                 </div>
             </Modals>
         </div>

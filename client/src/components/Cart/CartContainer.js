@@ -19,11 +19,13 @@ import Particle from "../../components/Particle/Particle";
 import styles from "./Shopping.module.css";
 
 const CartContainer = () => {
+  const user = useSelector((state) => state.logIn.logIn);
   const { cartItems, total, amount } = useSelector((state) => state.cart);
   const { id, username, email } = useSelector((state) => state.logIn.logIn);
   const { isOpen } = useSelector((state) => state.modal);
   // eslint-disable-next-line no-unused-vars
   const [isOpenModal, openedModal, closeModal] = useModal(false);
+  const [isSigned, openedSigned, closeSigned] = useModal(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,76 +45,6 @@ const CartContainer = () => {
     );
   }
   return (
-    //   <div>
-    //     <NavBar />
-    //     <h1 className="cartTitle">Your cart</h1>
-    //     <div className="containerItem">
-    //       {cartItems.map((item) => {
-    //         return <CartItem key={item._id} {...item} />;
-    //       })}
-    //     </div>
-    //     <footer>
-    //       <hr />
-    //       {isOpen && <Modal />}
-    //       <div className="buttonsContainer">
-    //         <h2 className="totalTitle">
-    //           Total: <span className="total">${total} </span>
-    //         </h2>
-    //         <button className="clearButton" onClick={openedModal}>
-    //           <Trash />
-    //         </button>
-    //         <form action="http://localhost:3001/payment/payment" method="POST">
-    //         <input type='hidden' name="user_id" value={id}/>
-    //         <input type='hidden' name='games_id' value={cartItems.map(i=>i._id)}/>
-    //         <input type='hidden' name="username" value={username}/>
-    //         <input type='hidden' name="cartItems" value={cartItems.map(i=>{
-    //                           return `${i.name}%${i.price}`})}/>
-    //           <input
-    //             type="hidden"
-    //             name="title"
-    //             value={cartItems.map((i) => i.name)}
-    //           />
-    //           <input type="hidden" name="price" value={total} />
-    //           <input
-    //             type="hidden"
-    //             name="picture_url"
-    //             value={cartItems.map((i) => i.background_image)}
-    //           />
-    //           <input type="hidden" name="quantity" value={cartItems.length} />
-    //           <button
-    //             className="buyButton"
-    //             type="submit"
-    //             value="Make the purchase"
-    //           >
-    //             <Bag />
-    //           </button>
-    //         </form>
-    //       </div>
-    //     </footer>
-    //     <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
-    //       <h2 className="modal-cart-title">Are you sure?</h2>
-    //       <img src={carritovacio} alt="deleteCart" className="modal_img" />
-    //       <p className="modal_text">
-    //         You are about to delete all the items saved in the cart, if you wish,
-    //         press 'DELETE', otherwise press 'CANCEL'.
-    //       </p>
-    //       <div className="container-modal-buttons">
-    //         <button className="modal-cart-close" onClick={closeModal}>
-    //           CANCEL
-    //         </button>
-    //         <button
-    //           className="modal-cart-delete"
-    //           onClick={() => dispatch(clearCart())}
-    //         >
-    //           DELETE
-    //         </button>
-    //       </div>
-    //     </Modals>
-    //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-    //     {/* <button onSubmit={(e) => handleSubmit(e)}>Terminar compra</button> */}
-    //   </div>
-    // );
-
     <div className="background-cart">
       <NavBar />
 
@@ -148,7 +80,7 @@ const CartContainer = () => {
                 {cartItems?.map((cartItem) => (
                   <div className={styles.cartItem} key={cartItem.id}>
                     <div class="background-img">
-                      <img
+                      <img alt="background"
                         src={cartItem.background_image}
                         className="imagengames"
                       />
@@ -255,13 +187,38 @@ const CartContainer = () => {
                 value={cartItems.map((i) => i.background_image)}
               />
               <input type="hidden" name="quantity" value={cartItems.length} />
-              <button
+              {user.status === !null ? <button
                 className="buyButton"
                 type="submit"
                 value="Make the purchase"
               >
                 <Bag />
-              </button>
+              </button> : 
+                <div>
+                  <h2 className="disabledTitle">You have to be logged to make a purchase!</h2>
+                  <button className="disabledBuyButton" disabled><Bag /></button>
+                </div>}
+              <Modals isOpenModal={isSigned} closeModal={closeSigned}>
+          <h2 className="modal-cart-title">Are you sure?</h2>
+          <img src={carritovacio} alt="deleteCart" className="modal_img" />
+          <p className="modal_text">
+            You are about to delete all the items saved in the cart, if you
+            wish, press 'DELETE', otherwise press 'CANCEL'.
+          </p>
+          <div className="container-modal-buttons">
+            <button className="modal-cart-close" onClick={closeSigned}>
+              CLOSE
+            </button>
+          </div>
+        </Modals>
+              {/* {user.status ? !null : <button
+                className="buyButton"
+                type="submit"
+                value="Make the purchase"
+              >
+                <Bag />
+              </button>} */}
+              
             </form>
           </div>
         </footer>
