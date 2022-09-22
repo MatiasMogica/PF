@@ -54,34 +54,47 @@ export default function PurchaseOrders() {
 
   return (
     <>
-      <Chart
+      
+      <Container>
+        
+        <NavBarAdmin />
+
+        <Content>
+        <Chart
         data={orderStats}
         title="Order Analytics"
         grid
         dataKey="Monthly orders income"
       />
-      <Container>
-        <NavBarAdmin />
         <DivMainOrder>
           {order &&
             order.map((order) => {
               return <CardOrder key={order.id} {...order} />;
             })}
         </DivMainOrder>
+        </Content>
       </Container>
     </>
   );
 }
 const Container = styled.div`
   display: flex;
-  border-radius: 2rem;
+
+  
 `;
 const DivMainOrder = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #202020;
-  width: 80%;
   height: fit-content;
-  min-height: 80%;
-  margin: 20px;
+  width: 80vw;
+  margin: 0 auto;
+
 `;
+const Content= styled.div`
+display: flex;
+flex-direction: column;
+margin-left:15%;
+
+
+`

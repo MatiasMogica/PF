@@ -5,14 +5,15 @@ import NavBar from "../../components/NavBar";
 import { getById } from "../../redux/actions/videogamesActions";
 import { clearVideogame } from "../../redux/slices/videogamesSlice";
 import { getVideogames } from "../../redux/actions/videogamesActions";
-
+import { MultiSelect } from "react-multi-select-component";
 import "./Edit.css";
 
 export default function Edit() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { details } = useSelector((state) => state.videogames);
-
+  const [selectedPlatform, setSelectedPlatform] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   useEffect(() => {
     dispatch(getById(id));
 
@@ -66,6 +67,13 @@ export default function Edit() {
     document.getElementById("released").value = details.released;
     document.getElementById("rating").value = details.rating;
     document.getElementById("price").value = details.price;
+    setSelectedPlatform(details.platforms? details.platforms.map(e =>{
+      return {label:e,value:e}
+    }) : [])
+    setSelectedGenres(details.genres? details.genres.map(e =>{
+      return {label:e,value:e}
+    }):[])
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
   const videogames = useSelector((state) => state.videogames.videogames);
@@ -87,11 +95,13 @@ export default function Edit() {
       }
     });
   });
-
+  
   useEffect(() => {
     dispatch(getVideogames());
   }, [dispatch]);
 
+
+  
   //Esta variable es el chequeo del formulario y guardado de datos.
   const [newGame, setNewGame] = useState({
     name: {
@@ -115,13 +125,13 @@ export default function Edit() {
       value: details.platforms ? details.platforms : [],
       creada: false,
       manualValue: "",
-      error: "Write the name of the new platform",
+      error: "Add a new platform",
     },
     genres: {
       value: details.genres ? details.genres : [],
       creada: false,
       manualValue: "",
-      error: "Write the name of the new genre",
+      error: "Add a new genre",
     },
     rating: {
       value: details.rating,
@@ -132,8 +142,40 @@ export default function Edit() {
       error: "",
     },
   });
+  console.log(selectedGenres)
 
+ 
+  // const [selectedGenres, setSelectedGenres] = useState([]);
+
+  useEffect(() => {
+    let newplataforms = selectedPlatform.map((platform) => {
+      return platform.value;
+    });
+    setNewGame({
+      ...newGame,
+      plataforms: {
+        ...newGame.plataforms,
+        value: newplataforms,
+        error: "",
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPlatform]);
   //Todas estas funciones son para hacer comprobaciones sobre el estado del formulario.
+  useEffect(() => {
+    let newgenres = selectedGenres.map((genre) => {
+      return genre.value;
+    });
+    setNewGame({
+      ...newGame,
+      genres: {
+        ...newGame.genres,
+        value: newgenres,
+        error: "",
+      },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGenres]);
 
   function handleName(e) {
     if (e.target.value.length < 50 && e.target.value.length > 2) {
@@ -270,11 +312,11 @@ export default function Edit() {
       !newGame.genres.error &&
       !newGame.rating.error &&
       !newGame.price.error ? (
-      <button className="btn" type="submit">
+      <button className="btn_newProduct" type="submit">
         Edit
       </button>
     ) : (
-      <button className="btn" type="submit" disabled>
+      <button className="btn_newProduct" type="submit" disabled>
         Edit
       </button>
     );
@@ -322,7 +364,7 @@ export default function Edit() {
   }
 
   //Estas 4 funciones son para que el usuario cree o selecione la plataforma/genero
-  function handlePlataforms(e) {
+  /*function handlePlataforms(e) {
     if (e.target.value.length > 1) {
       if (newGame.plataforms.value.includes(e.target.value)) {
         let indice = newGame.plataforms.value.indexOf(e.target.value);
@@ -356,7 +398,7 @@ export default function Edit() {
         },
       });
     }
-  }
+  }*/
 
   /* function handlePlatformDelete(e) {
     setNewGame({...newGame, plataforms: {
@@ -369,7 +411,23 @@ export default function Edit() {
     if (!c) {
       return (
         <div className="selector_div">
-          <select
+             <MultiSelect
+            
+            options={
+              plataforma.length &&
+              plataforma.map((x) => {
+                return { label: x, value: x };
+              })
+            }
+            hasSelectAll={false}
+            overrideStrings={{
+              search: "Search",
+            }}
+            value={selectedPlatform}
+            onChange={setSelectedPlatform}
+            labelledBy="Select"
+          />
+          {/*<select
             id="select_plataforma"
             multiple={true}
             defaultValue={plataforma}
@@ -387,18 +445,19 @@ export default function Edit() {
             return (
               <li key={i}>
                 {e}
-                {/* <button type='button' value={e} onClick={handlePlatformDelete}>x</button> */}
+                 <button type='button' value={e} onClick={handlePlatformDelete}>x</button> 
               </li>
             );
-          })}
+          })} */}
+        
           <button
-            className="btn_simple"
+            className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
                 plataforms: {
                   ...newGame.plataforms,
-                  error: "Write the name of the new platform",
+                  error: "Add a new platform",
                   creada: true,
                 },
               })
@@ -436,19 +495,21 @@ export default function Edit() {
       }
       return (
         <div>
-          <label htmlFor="plataforma_crear">Name of the platform</label>
+          <div className="plataform-div-genre">
           <input
             id="plataforma_crear"
             type="text"
             onChange={(e) => manuallyModifyPlataform(e)}
           ></input>
-          <button type="button" onClick={(e) => manuallyAddPlataform(e)}>
-            Add this plataform.
+          <button type="button"className="button-15" onClick={(e) => manuallyAddPlataform(e)}>
+            Add
           </button>
+          </div>
           {newGame.plataforms.error ? (
             <div>{newGame.plataforms.error}</div>
           ) : null}
           <button
+          className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -456,55 +517,71 @@ export default function Edit() {
               })
             }
           >
-            Choose from those already created
+            Back
           </button>
         </div>
       );
     }
   }
 
-  function handleGenres(e) {
-    if (e.target.value.length > 1) {
-      if (newGame.genres.value.includes(e.target.value)) {
-        let indice = newGame.genres.value.indexOf(e.target.value);
-        let newgenres = [...newGame.genres.value];
-        newgenres.splice(indice, 1);
+  // function handleGenres(e) {
+  //   if (e.target.value.length > 1) {
+  //     if (newGame.genres.value.includes(e.target.value)) {
+  //       let indice = newGame.genres.value.indexOf(e.target.value);
+  //       let newgenres = [...newGame.genres.value];
+  //       newgenres.splice(indice, 1);
 
-        setNewGame({
-          ...newGame,
-          genres: {
-            ...newGame.genres,
-            value: newgenres,
-            error: "",
-          },
-        });
-      } else {
-        setNewGame({
-          ...newGame,
-          genres: {
-            ...newGame.genres,
-            value: [...newGame.genres.value, e.target.value],
-            error: "",
-          },
-        });
-      }
-    } else {
-      setNewGame({
-        ...newGame,
-        genres: {
-          ...newGame.genres,
-          value: "",
-          error: "Write the name of the new genre",
-        },
-      });
-    }
-  }
+  //       setNewGame({
+  //         ...newGame,
+  //         genres: {
+  //           ...newGame.genres,
+  //           value: newgenres,
+  //           error: "",
+  //         },
+  //       });
+  //     } else {
+  //       setNewGame({
+  //         ...newGame,
+  //         genres: {
+  //           ...newGame.genres,
+  //           value: [...newGame.genres.value, e.target.value],
+  //           error: "",
+  //         },
+  //       });
+  //     }
+  //   } else {
+  //     setNewGame({
+  //       ...newGame,
+  //       genres: {
+  //         ...newGame.genres,
+  //         value: "",
+  //         error: "Write the name of the new genre",
+  //       },
+  //     });
+  //   }
+  // }
 
   function genresOpciones(c) {
     if (!c) {
       return (
         <div className="selector_div">
-          <select
+          <MultiSelect
+            
+            options={
+              generos.length &&
+              generos.map((x) => {
+                return { label: x, value: x };
+              })
+            }
+            hasSelectAll={false}
+            overrideStrings={{
+              search: "Search",
+            }}
+            value={selectedGenres}
+            onChange={setSelectedGenres}
+            labelledBy="Select"
+          />
+          {/* <select
             id="select_genre"
             defaultValue={generos}
             multiple={true}
@@ -521,18 +598,18 @@ export default function Edit() {
             return (
               <li key={i}>
                 {e}
-                {/* <button type='button' value={e} onClick={handleGenreDelete}>x</button> */}
+                {/* <button type='button' value={e} onClick={handleGenreDelete}>x</button> 
               </li>
             );
-          })}
+          })} */}
           <button
-            className="btn_simple"
+            className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
                 genres: {
                   ...newGame.genres,
-                  error: "Write the name of the new platform",
+                  error: "Add a new genre",
                   creada: true,
                 },
               })
@@ -567,17 +644,19 @@ export default function Edit() {
       }
       return (
         <div>
-          <label htmlFor="plataforma_crear">Name of the platform</label>
+          <div className="plataform-div-genre">
           <input
             id="plataforma_crear"
             type="text"
             onChange={(e) => manuallyModifyGenre(e)}
           ></input>
-          <button type="button" onClick={() => manuallyAddGenre()}>
-            Add this genre
+          <button type="button"className="button-15" onClick={() => manuallyAddGenre()}>
+            Add
           </button>
+          </div>
           {newGame.genres.error ? <div>{newGame.genres.error}</div> : null}
           <button
+          className="button-15"
             onClick={() =>
               setNewGame({
                 ...newGame,
@@ -585,7 +664,7 @@ export default function Edit() {
               })
             }
           >
-            Choose from those already created
+            Back
           </button>
         </div>
       );

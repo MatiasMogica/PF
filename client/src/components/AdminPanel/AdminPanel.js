@@ -100,9 +100,8 @@ function AdminPanel() {
 export default AdminPanel;
 
 const Container = styled.div`
-  display: flex;
-  border-radius: 2rem;
-  margin: 0.7rem;
+display: flex;
+border-radius: 2rem;
 `;
 
 const MainContent = styled.div`
