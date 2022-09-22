@@ -333,6 +333,8 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
         });
     }, [])
 
+    console.log(userDetails.purchasedGames)
+
 
     return (
         <div class="wrapper">
@@ -389,7 +391,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
             >
             <Heart />
             </button>
-        )
+        ) 
   } 
   {
     userDetails.purchasedGames?.includes(game) ? <Added /> : cartItems.includes(inCart) ? (

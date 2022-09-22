@@ -244,7 +244,8 @@ function UserDetailsOptions() {
                   </div>
                 </Animated>
               ) : null}
-              {userDetails.reviews ? (
+              {/* LO COMENTÉ PORQUE NO ESTA HECHA LA RELACION DE USER  CON LAS REVIEWS */}
+              {/* {userDetails.reviews ? (
                 <Animated
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
@@ -259,7 +260,7 @@ function UserDetailsOptions() {
                     <h2>See</h2>
                   </div>
                 </Animated>
-              ) : null}
+              ) : null} */}
               {userDetails.purchasedGames ? (
                 <Animated
                   animationIn="animate__backInUp"

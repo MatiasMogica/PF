@@ -1,16 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PaymentItem from "./paymentItem";
 import Modals from "../../Modals/index";
 import { useModal } from "../../Modals/useModal";
 import check from "../../../images/transfer.png";
 import "./index.css";
+import { clearCart } from "../../../redux/slices/cartSlice";
 
 export default function SuccessPayment() {
   const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch()
   // eslint-disable-next-line
   const [isOpenModal, openedModal, closeModal] = useModal(true);
+
+ /*  useEffect(() => {
+    dispatch(clearCart())
+  }, [dispatch]) */
+
   return (
     <div>
       <h4 className="title">Games added in your last purchase</h4>
@@ -25,7 +32,7 @@ export default function SuccessPayment() {
       </div>
       <div className="btnHCont">
       <Link to={"/"}>
-      <button className="btnHome">
+      <button className="btnHome" onClick={() => dispatch(clearCart())}>
         Return home
       </button>
       </Link>

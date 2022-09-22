@@ -8,7 +8,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useDispatch } from "react-redux"
 import {useParams } from 'react-router-dom'
 import { getById } from "../../redux/actions/videogamesActions";
-/* import { useNavigate } from "react-router-dom"; */
+import styled from "styled-components";
 
 export default function Rating() {
     const { id } = useParams();

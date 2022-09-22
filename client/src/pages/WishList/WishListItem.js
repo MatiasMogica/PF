@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { AddIcon, CartIcon, Remove, Star } from "../../icons/Icons"
+import { AddIcon, CartIcon, Info, Remove, Star } from "../../icons/Icons"
 import { addItem } from "../../redux/slices/cartSlice"
 import { removeWished } from "../../redux/slices/wishListSlice"
 import "./WishListItem.css"
@@ -26,11 +26,10 @@ export default function WishListItem ({_id, name, background_image, rating, pric
                     <div className="star"><Star /></div>
                 </div>
             </div>
-            <div>
-                <p>${price}</p>
-            <div>
+                <p className="wishPrice" >${price}</p>
+            <div className="wishButtonsContainer">
                 <Link to={`/videogames/${_id}`}>
-                    <button>See details</button>
+                    <button className="addButton"><Info /></button>
                 </Link>
                 {cartItems.includes(inCart) ? (
                     <div className="inCart">
@@ -46,8 +45,7 @@ export default function WishListItem ({_id, name, background_image, rating, pric
                         </button>
                     )}
             </div>
-            </div>
-            <p>{genres.length && genres.join(', ') }</p>
+            <p className="wishGenres">{genres.length && genres.join(', ') }</p>
         </div>
     )
 }
