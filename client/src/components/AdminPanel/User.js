@@ -69,7 +69,7 @@ export default function Users() {
     <>
     <Container>
     <NavBarAdmin/>
-      <div id="admin_panel_users">
+      <div id="admin_panel_users" className="panel">
         <div id="admin_panel_users_options">
           <div>
           <button
@@ -127,9 +127,8 @@ export default function Users() {
   );
 }
 const Container = styled.div`
-  display: flex;
-  border-radius: 2rem;
-  margin: 0.7rem;
+display: flex;
+border-radius: 2rem
 `;
 
 const DivContUser = styled.div`

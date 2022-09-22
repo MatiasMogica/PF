@@ -6,7 +6,9 @@
 .admin-user:hover {
     background-color: rgb(160, 189, 207);
 }
-
+.panel{
+    margin-left:30%;
+}
 .btn11-cont {
     margin-top: 2px;
 width: 160px;
