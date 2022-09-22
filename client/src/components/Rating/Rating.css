@@ -8,6 +8,8 @@
 
 .reviewErrors {
     color: black !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
 }
 
 .reviewButton {
@@ -51,4 +53,10 @@
 
 .reviewImgContainer {
     text-align: center !important;
+}
+
+.containerCartButtons {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
 }

@@ -29,10 +29,11 @@
     justify-content: center;
     margin-top: -40px;
 }
-/* .wishButtonsContainer {
-    align-items: center;
+.wishButtonsContainer {
+    margin-left: 570px;
     display: flex;
-} */
+    text-align: center;
+} 
 
 .wishPrice {
     font-size: 20px;

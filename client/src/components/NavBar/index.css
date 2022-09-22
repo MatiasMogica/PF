@@ -301,7 +301,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   --dark-color: #1b182b;
   --ligth-color: #322f40;
   --text-color: #fff;
-  margin: 0 0 auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -314,7 +313,8 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   cursor: pointer;
   z-index: 200;
   transition: 0.3s;
-  margin-top: 1%;
+   margin-top: -18px;
+
 }
 
 

@@ -64,6 +64,11 @@ const detailGame = async (req, res, next) => {
       price: juego.price,
       genres: juego.genres,
       description: data.description,
+      comments: juego.comments,
+      // likeCount: juego.likeCount,
+      // getPercentageOfLikes: juego.getPercentageOfLikes,
+      likes: juego.likes,
+      dislikes: juego.dislikes,
     };
     return res.status(200).json(game);
   } catch (err) {
