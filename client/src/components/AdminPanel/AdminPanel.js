@@ -60,10 +60,10 @@ function AdminPanel() {
           <h3>
             Welcome,<b> {userapi.username}</b>
           </h3>
-          <div className="searchBar">
+          {/* <div className="searchBar">
             {" "}
+          </div> */}
             <SearchBar />
-          </div>
         </Welcome>
         <div id="admin_panel_videogames">
           <ContainerGames>

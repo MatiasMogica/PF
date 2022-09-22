@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Chart from "../Chart/Chart";
 import axios from "axios";
 import NavBarAdmin from "../NavBar/NavBarAdmin";
+import './user.css'
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -70,24 +71,32 @@ export default function Users() {
     <NavBarAdmin/>
       <div id="admin_panel_users">
         <div id="admin_panel_users_options">
+          <div>
           <button
             onClick={(e) => handleOrder(e)}
             id="user_order"
             value="admin/user"
+            className="btn11-cont"
           >
             User/Admin
           </button>
+          </div>
+          <div>
           <button
             onClick={(e) => handleOrder(e)}
             id="user_order"
             value="blocked"
+            className="btn12-cont"
           >
             Blocked/Unblocked
           </button>
-          <UserSearchBar />
-          <button onClick={(e) => handleOrder(e)} id="user_order" value="all">
+          </div>
+          <div>
+          <button onClick={(e) => handleOrder(e)} id="user_order" value="all" className="btn13-cont">
             All
           </button>
+          </div>
+          <UserSearchBar />
         </div>
         <Chart
           data={userStats}
@@ -96,15 +105,21 @@ export default function Users() {
           dataKey="Active User"
         />
         <div id="list_of_users">
+        <DivContUser>
           {users.map((x) => (
-            <div key={x.id}>
+            <div key={x.id} className="admin-user"> 
               <Link to={`/users/${x.id}`}>
-                <p className={x.admin ? "user_admin" : "user_comun"}>
+                <button className="nombre-usuarios">
+                {/* <p className={x.admin ? "user_admin" : "user_comun"}> */}
                   {x.username}
-                </p>
+                </button>
               </Link>
+              <div className="es-admin">
+              {x.admin ? "User admin" : null}
+              </div>
             </div>
           ))}
+        </DivContUser>
         </div>
       </div>
       </Container>
@@ -115,4 +130,14 @@ const Container = styled.div`
   display: flex;
   border-radius: 2rem;
   margin: 0.7rem;
+`;
+
+const DivContUser = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #202020;
+  width: 80%;
+  height: fit-content;
+  min-height: 80%;
+  margin: 20px;
 `;
