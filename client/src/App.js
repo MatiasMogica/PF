@@ -18,7 +18,7 @@ import Edit from "./pages/Edit/Edit";
 import Payment from "./components/Payment/Payment";
 import CartContainer from "./components/Cart/CartContainer";
 import PurchaseOrders from "./components/PurchaseOrders/PurchaseOrders";
-import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
+import UserDetailsOptions from "./pages/UserDetailsOptions/UserDetailsOptions";
 import Settings from "./pages/Settings/Settings";
 import GamesOwnedById from "./pages/GamesOwnedById/GamesOwnedById";
 import Users from "./components/AdminPanel/User";
