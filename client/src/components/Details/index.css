@@ -289,3 +289,25 @@ header {
     height: 200px;
     margin: 0px auto;
 }
+
+.commentsContainer {
+    background-color: rgba(255,255,255, 0.05);
+    border: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 500px;
+    z-index: 1;
+}
+
+.removeComment {
+    background: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+    height: 60px;
+    width: 60px;
+}
+
+.commentsText {
+    margin-left: 10px !important;
+}
