@@ -1,0 +1,46 @@
+.GamesOwnedById_general_container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.GamesOwnedById_H1{
+    text-align: center;
+    margin-top: 1em;
+}
+
+.GamesOwnedById_images{
+    width: 10vw;
+    height: 10vh;
+    border-radius: 5%;
+    padding-right: 1em;
+}
+
+.GamesOwnedById_Card{
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    margin: 1em;
+    background-color: #282c34;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.GamesOwnedById_Card_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    
+}
+
+
+
+@media (max-width: 950px) {
+    .GamesOwnedById_Card_container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .GamesOwnedById_images{
+        width: 80px;
+        height: 80px;
+    }
+}

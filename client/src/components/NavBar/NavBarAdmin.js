@@ -53,7 +53,7 @@ const Container = styled.div`
   width: 20%;
   min-height: 97vh;
   border-radius: 2rem;
-  background-color: #545479;
+  background-color: #202020;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,7 +97,7 @@ const NavMenuAdmin = styled.div`
   justify-content: center;
   border-radius: 2rem;
   display: flex;
-  background-color: #545479;
+  background-color: #202020;
   flex-direction: column;
   line-height: 1rem;
   &:hover {

@@ -26,6 +26,8 @@ const profileSlice = createSlice({
     profilePageData: {},
     friendRequests: [],
     otherUserGames: [],
+    filteredOtherUserGames: [],
+    activity: [],
   },
   reducers: {
     profileDetails: (state, action) => {
@@ -142,10 +144,28 @@ const profileSlice = createSlice({
         profilePageData: {},
         friendRequests: [],
         otherUserGames: [],
+        filteredOtherUserGames: [],
+        activity: [],
       };
     },
     getGamesUser: (state, action) => {
       state.otherUserGames = action.payload.games;
+      state.filteredOtherUserGames = action.payload.games;
+    },
+    filterUserVideogames: (state, action) => {
+      if (action.payload.name !== "") {
+        state.filteredOtherUserGames = state.otherUserGames.filter((x) =>
+          x.name.toLowerCase().includes(action.payload.name.toLowerCase())
+        );
+      } else {
+        state.filteredOtherUserGames = state.otherUserGames;
+      }
+    },
+    dispatchActivity: (state, action) => {
+      if (!action.payload.msg) {
+        const t = action.payload.sort((a, b) => a.createdAt - b.createdAt);
+        state.activity = t;
+      }
     },
   },
 });
@@ -156,5 +176,7 @@ export const {
   friendRequests,
   cleanUpProfileSlice,
   getGamesUser,
+  filterUserVideogames,
+  dispatchActivity,
 } = profileSlice.actions;
 export default profileSlice.reducer;

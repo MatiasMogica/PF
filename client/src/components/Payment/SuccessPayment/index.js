@@ -13,7 +13,7 @@ export default function SuccessPayment() {
   const [isOpenModal, openedModal, closeModal] = useModal(true);
   return (
     <div>
-      <h3 className="title">Successful payment</h3>
+      <h4 className="title">Games added in your last purchase</h4>
       <div className="Succes_container">
         {cartItems.map((item) => {
           return (
@@ -23,9 +23,13 @@ export default function SuccessPayment() {
           );
         })}
       </div>
-      <button>
-        <Link to={"/"}>Return home</Link>
+      <div className="btnHCont">
+      <Link to={"/"}>
+      <button className="btnHome">
+        Return home
       </button>
+      </Link>
+      </div>
       <Modals isOpenModal={isOpenModal} closeModal={closeModal}>
         <h2 className="modal-success-title">Successful payment!</h2>
         <img src={check} alt="success" className="modal_img" />

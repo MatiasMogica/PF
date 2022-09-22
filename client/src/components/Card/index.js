@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AddIcon, CartIcon, Heart, RedHeart, Star } from "../../icons/Icons";
+import { Added, AddIcon, CartIcon, Heart, RedHeart, Star } from "../../icons/Icons";
 import { addItem } from "../../redux/slices/cartSlice";
 import './index.scss'
 import Tilit from 'tilt.js'
@@ -17,6 +17,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state) => state.cart);
     const {wishedItems} = useSelector((state) => state.wishList)
+    const {userDetails} = useSelector((state) => state.users)
     let videogames = useSelector((state) => state.videogames.videogamesFiltrados);
     let game = videogames.find((i) => i._id === _id)
 
@@ -375,8 +376,37 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
   </div>
 
   </Link>
-  
-  {wishedItems.includes(inWished) ? (
+  {
+    userDetails.purchasedGames?.includes(game) ? <Added /> : wishedItems.includes(inWished) ? (
+        <button className="wishedContainer" disabled>
+            {" "}
+            <RedHeart />{" "}
+            </button>
+        ) : (
+            <button
+                className="addWished"
+                onClick={() => dispatch(addWished(game))}
+            >
+            <Heart />
+            </button>
+        )
+  } 
+  {
+    userDetails.purchasedGames?.includes(game) ? <Added /> : cartItems.includes(inCart) ? (
+        <button className="inCart">
+            {" "}
+            <CartIcon />{" "}
+            </button>
+        ) : (
+            <button
+            className="addButton"
+            onClick={() => dispatch(addItem(game))}
+            >
+            <AddIcon />
+            </button>
+        )
+  }
+  {/* {wishedItems.includes(inWished) ? (
                     <button className="wishedContainer" disabled>
                         {" "}
                         <RedHeart />{" "}
@@ -402,7 +432,7 @@ export default function Card({ name, image, platforms,  genres, released, _id, r
                         >
                         <AddIcon />
                         </button>
-                    )}
+                    )} */}
     </div>)
 
 }

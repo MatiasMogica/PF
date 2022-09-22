@@ -1,0 +1,39 @@
+.likesButtons {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+}
+
+.reviewErrors {
+    color: black;
+}
+
+.reviewButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+}
+
+.likesButtonsContainer {
+    align-items: center;
+    display: flex;
+    margin-bottom: -10px;
+    margin-top: 10px;
+}
+
+.reviewModal {
+    z-index: 1;
+}
+
+.modalTitle {
+    position: relative;
+    color: black;
+}
+
+.reviewTextArea {
+    width: 205px;
+}
