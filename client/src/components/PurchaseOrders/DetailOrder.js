@@ -21,7 +21,7 @@ export default function DetailOrder({id,handleModalClose}){
             <DivMain>
             <MiniContainer>
             <p style={{color:'grey'}}>Order N°{order?.id}</p>
-            <p style={{color:'grey'}}>Created on {Object.entries(order).length && new Date(order.createdAt).toLocaleString()}</p>
+            <p style={{color:'grey'}}>Created on {Object.entries(order).length && new Date(order.updatedAt).toLocaleString()}</p>
             </MiniContainer>
             <DivUsuario>
              <Title><p><FaRegUser/> Customer</p></Title>
