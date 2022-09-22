@@ -4,6 +4,7 @@ const postOrder = async (req, res, next) => {
   const newOrder = req.body;
   try {
     const order = new Order(newOrder);
+    console.log(order);
     await order.save();
     res.status(201).json(order);
   } catch (err) {
@@ -46,4 +47,34 @@ const idOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { postOrder, deleteOrder, allOrders, idOrder };
+const getOrderStats = async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+
+  try {
+    const income = await Order.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: lastYear },
+        },
+      },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+          sales: "$total_price",
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: "$sales" },
+        },
+      },
+    ]);
+    res.status(200).json(income);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports = { postOrder, deleteOrder, allOrders, idOrder, getOrderStats };
