@@ -29,7 +29,7 @@ function AdminPanel() {
     (state) => state.videogames.videogamesFiltrados
   );
 
-  function confirmDelete(e) {
+  /* function confirmDelete(e) {
     document.getElementById("btn_delete_" + e.target.value).innerText =
       "Are you Sure?";
     document
@@ -37,7 +37,7 @@ function AdminPanel() {
       .addEventListener("click", (event) => {
         handleDelete(e);
       });
-  }
+  } */
 
   async function handleDelete(e) {
     await fetch(`http://localhost:3001/games/${e.target.value}`, {
@@ -74,7 +74,7 @@ function AdminPanel() {
                       <Parrafo id={x._id}>{x.name}</Parrafo>
                       <BtnTrash
                         className="pointer"
-                        onClick={(e) => confirmDelete(e)}
+                        onClick={(e) => handleDelete(e)}
                         id={"btn_delete_" + x._id}
                         value={x._id}
                       >

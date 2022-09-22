@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { localStorageUser } from "../../redux/slices/logInSlice";
 import styled from "styled-components"
 import {useHistory} from "react-router-dom";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 function LogOut() {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const history=useHistory()
   function handlelogOut() {
     window.localStorage.setItem("user", JSON.stringify({ status: false }));
     dispatch(localStorageUser({ status: false }));
+    dispatch(clearCart())
     history.replace('/')
   }
   
