@@ -65,13 +65,13 @@ export default function Details({ details }) {
                     <a><span>{el}</span></a>)
                 })}
                     <div className='likesContainer'>
-                    <GreenLike /> {details?.likes} - <RedDisLike /> {details?.dislikes}
+                    <GreenLike /> <p> {details?.likes} </p> <RedDisLike /> <p>{details?.dislikes}</p> 
                     </div>
 			</div>
 		</div>
         </Tilt> 
 		<p><span><p >{details?.platforms.length && details.platforms.join(', ') }</p></span></p>
-    {/* {details.comments?.length === [] ? <h1>No comments</h1> : <h1>Comments</h1>} */}
+    {details.comments?.length === 0 ? <h1>No comments</h1> : <h1>Comments</h1>} 
           {details.comments?.map((c) => {
             return (
               <div className='commentsContainer' key={c._id}>

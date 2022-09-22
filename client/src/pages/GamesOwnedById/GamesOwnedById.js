@@ -11,7 +11,6 @@ import { cleanUpActionFriendSlice } from "../../redux/actions/friendActions";
 import "./GamesOwnedById.css";
 import { Animated } from "react-animated-css";
 import { useHistory } from "react-router-dom";
-import Spinner from "../../components/Spinner/index"
 
 function GamesOwnedById() {
   const { idUser } = useParams();
@@ -57,22 +56,22 @@ function GamesOwnedById() {
             <div className="GamesOwnedById_Card_container">
               {filterGamesArray.map((x) => (
                 <div
-                  key={x._id}
+                  key={x?._id}
                   className="GamesOwnedById_Card"
                   onClick={() => history.push(`/videogames/${x._id}`)}
                 >
                   <img
-                    src={x.background_image}
+                    src={x?.background_image}
                     alt="game"
                     className="GamesOwnedById_images"
                   ></img>
-                  <div>{x.name}</div>
+                  <div>{x?.name}</div>
                 </div>
               ))}
             </div>
           </Animated>
         ) : (
-          <Spinner />
+          <div>No games found by that name</div>
         )}
       </div>
     </div>

@@ -290,6 +290,10 @@ header {
     margin: 0px auto;
 }
 
+.likesContainer p {
+    font-size: 30px !important;
+}
+
 .commentsContainer {
     background-color: rgba(255,255,255, 0.05);
     border: white;

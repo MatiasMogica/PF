@@ -53,6 +53,7 @@ export default function Rating() {
         try {
             await axios.post(`http://localhost:3001/reviews/likes/${id}`)
             setLike(true)
+            forceUpdate();
         }
         catch(error) {
             console.log(error)
@@ -64,6 +65,7 @@ export default function Rating() {
         try {
             await axios.post(`http://localhost:3001/reviews/dislikes/${id}`)
             setDislike(true)
+            forceUpdate();
         }
         catch(error) {
             console.log(error)
@@ -109,7 +111,7 @@ export default function Rating() {
                         {input.review.error || input.review.value === "" ? (
               <p className="reviewErrors"> {input.review.error} </p>
             ) : null}
-                        <div /* className="container-modal-buttons" */>
+                        <div className="containerCartButtons">
                         <button
                 type="submit"
                 className="modal-cart-close"
@@ -120,11 +122,11 @@ export default function Rating() {
               >
                 UPLOAD
               </button>
+              <button type="button" className="modal-cart-delete" onClick={closeReview}>
+                                CANCEL
+              </button>
                         </div>
                     </form>
-                    <button className="modal-cart-delete" onClick={closeReview}>
-                                CANCEL
-                    </button>
                 </div>
             </Modals>
         </div>
