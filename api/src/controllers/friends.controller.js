@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const Order = require("../models/Order.js");
 require("dotenv").config();
 
 const friendRequest = async (req, res) => {
@@ -197,6 +198,43 @@ const searchForMatches = async (req, res) => {
   res.status(200).json(t);
 };
 
+const gamesDataById = async (req, res) => {
+  const { idReciver, idSender, page } = req.body;
+  try {
+    const reciver = await User.findById(idReciver);
+    var cf = false;
+    reciver.friends.forEach((x) => {
+      if (x === idSender) cf = true;
+    });
+    var c =
+      reciver.profileVisibility[7] === "Public"
+        ? true
+        : reciver.profileVisibility[7] === "Friends"
+        ? cf
+        : false;
+
+    c = idSender === idReciver ? true : c;
+
+    if (c) {
+      var t = await Order.find({
+        user_id: idReciver,
+      });
+      t = t.filter((x) => x.payment_status === "approved");
+
+      if (t.length >= page) {
+        res.status(200).json({ games: t.slice(0, page) });
+      } else {
+        res.status(200).json({ msg: "no more data to show" });
+      }
+    } else {
+      res.status(400).json({ msg: "you cant see this user data" });
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).json(e);
+  }
+};
+
 module.exports = {
   friendRequest,
   cancelFriendRequest,
@@ -207,4 +245,5 @@ module.exports = {
   removeFriend,
   friendRequestList,
   searchForMatches,
+  gamesDataById,
 };

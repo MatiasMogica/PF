@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar";
 import { CartIcon, Trash } from "../../icons/Icons";
 import { clearWishList } from "../../redux/slices/wishListSlice";
 import WishListItem from "./WishListItem";
+import empty from "../../images/brokenHeart.png"
 
 
 export default function WishList() {
@@ -29,7 +30,16 @@ export default function WishList() {
         setSearch(e.target.value)
     }
 
-    
+    function NotFound() {
+        if(filteredGames().length === 0) {
+            return (
+                <h1>
+                    There is no match in your wishlist
+                </h1>
+            )
+        }
+        return null
+    }
 
     if(wishedAmount < 1) {
         return (
@@ -37,7 +47,7 @@ export default function WishList() {
                 <NavBar />
                 <div className='empty'>
                     <h1>Your WishList is currently empty</h1>
-                    {/* <img alt="cart" className='emptyCart' src={emptyCart} /> */}
+                    <img alt="empty Wishlist" className='emptyCart' src={empty} /> 
                     <div className="floatContainer">
                     <Link className="cartLink" to="/cart" >
                         {amount}
@@ -59,7 +69,7 @@ export default function WishList() {
                     </Link>
             </div>
             <div className="container_search">
-        <h4>Search by keyword</h4>
+        <h2 className="searchTitle">Search by keyword</h2>
             <div className="searchBar">
                 <input
                     type="text"
@@ -68,7 +78,7 @@ export default function WishList() {
                     className="buscar"
                     onChange={(e) => handleOnSearch(e)}
                 ></input></div>
-                <button className='clearButton' onClick={() => dispatch(clearWishList())}><Trash /></button>
+                {/* <button className='clearButton' onClick={() => dispatch(clearWishList())}><Trash /></button> */}
             </div>
                 <div>
                 {
@@ -76,6 +86,7 @@ export default function WishList() {
                         return <WishListItem key={item.idAPI} {...item} />
                     }) 
                 }
+                <NotFound />
                 </div>
             </div>
     )

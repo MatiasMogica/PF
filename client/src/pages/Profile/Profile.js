@@ -4,6 +4,7 @@ import {
   getOtherUserProfileDetails,
   getProfileDetails,
   cleanUpActionProfileSlice,
+  getActivity,
 } from "../../redux/actions/ProfileActions";
 import {
   sendFriendRequest,
@@ -29,6 +30,7 @@ function UserDetailsOptions() {
   const dispatch = useDispatch();
   const yourUser = useSelector((state) => state.logIn.logIn);
   const [estado, setEstado] = useState(true);
+  const [activityPage, setactivityPage] = useState(1);
   const history = useHistory();
 
   useEffect(() => {
@@ -48,12 +50,22 @@ function UserDetailsOptions() {
   }, [dispatch, yourUser.id, idUser]);
 
   useEffect(() => {
-    if (yourUser.id && idUser)
+    if (yourUser.id && idUser) {
       dispatch(setInitialState({ idSender: yourUser.id, idReciver: idUser }));
-  }, [yourUser.id, idUser, dispatch]);
+      dispatch(
+        getActivity({
+          idSender: yourUser.id,
+          idReciver: idUser,
+          page: activityPage,
+        })
+      );
+    }
+  }, [yourUser.id, idUser, dispatch, activityPage]);
 
   const userDetails = useSelector((state) => state.profile.profilePageData);
   const friend = useSelector((state) => state.friend);
+  const activity = useSelector((state) => state.profile.activity);
+
   function calculateTimeOfService() {
     const now = new Date();
     const joined = new Date(userDetails.createdAt);
@@ -61,6 +73,22 @@ function UserDetailsOptions() {
   }
   function cleanTheData() {
     return userDetails.createdAt.split("T")[0].split("-");
+  }
+
+  async function handleLoadMore() {
+    const answer = await dispatch(
+      getActivity({
+        idSender: yourUser.id,
+        idReciver: idUser,
+        page: activityPage + 1,
+      })
+    );
+    if (answer !== "Already all data is visualized") {
+      setactivityPage(activityPage + 1);
+    } else {
+      document.getElementById("load_more_profile").innerHTML =
+        "There is nothing else to load";
+    }
   }
 
   return (
@@ -216,14 +244,15 @@ function UserDetailsOptions() {
                   </div>
                 </Animated>
               ) : null}
-              {userDetails.reviews ? (
+              {/* LO COMENTÉ PORQUE NO ESTA HECHA LA RELACION DE USER  CON LAS REVIEWS */}
+              {/* {userDetails.reviews ? (
                 <Animated
                   animationIn="animate__backInUp"
                   animationOut="fadeOut"
                   isVisible={estado}
                   className="animated_block_of_data"
                 >
-                  <div className="profile_show_card_data">
+                  <div className="profile_show_card_data profile_show_card_data_click">
                     <h2>Reviews</h2>
                     <h2>
                       <CountUp end={userDetails.reviews.length} duration={3} />
@@ -231,7 +260,7 @@ function UserDetailsOptions() {
                     <h2>See</h2>
                   </div>
                 </Animated>
-              ) : null}
+              ) : null} */}
               {userDetails.purchasedGames ? (
                 <Animated
                   animationIn="animate__backInUp"
@@ -240,7 +269,7 @@ function UserDetailsOptions() {
                   className="animated_block_of_data"
                 >
                   <div
-                    className="profile_show_card_data"
+                    className="profile_show_card_data profile_show_card_data_click"
                     onClick={() => history.push(`/games/${userDetails.id}`)}
                   >
                     <h2>Games</h2>
@@ -285,11 +314,11 @@ function UserDetailsOptions() {
             </div>
           </div>
         </div>
-
-        <h2 className="profile_friends_title">Friends</h2>
         <div id="lower_profile_section">
           {friend.friendList.length > 0 && userDetails.friends ? (
             <div>
+              <h2 className="profile_friends_title">Friends</h2>
+
               <Animated
                 animationIn="animate__slideInLeft"
                 animationOut="fadeOut"
@@ -326,9 +355,39 @@ function UserDetailsOptions() {
               )}
             </div>
           )}
+          <Animated
+            animationIn="animate__slideInRight"
+            animationOut="fadeOut"
+            isVisible={estado}
+            className="overflow_profile_activity"
+          >
+            <div id="profile_activity_container">
+              {activity.map((x) => (
+                <div key={x.id} className="profile_activity_recent">
+                  <p>
+                    {x.createdAt.split("T")[0] +
+                      " " +
+                      x.createdAt.split("T")[1].split(":")[0] +
+                      ":" +
+                      x.createdAt.split("T")[1].split(":")[1] +
+                      "hs."}
+                  </p>
+                  <p>
+                    {userDetails.username} now Owns {x.games.length} new games!
+                  </p>
+                  <div className="profile_activity_newgames">
+                    {x.games.map((x) => (
+                      <div>{x.title}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div onClick={() => handleLoadMore()} id="load_more_profile">
+                Load More...
+              </div>
+            </div>
+          </Animated>
         </div>
-
-        <div></div>
       </div>
     </div>
   );

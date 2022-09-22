@@ -9,6 +9,7 @@ const {
   friendList,
   friendRequestList,
   searchForMatches,
+  gamesDataById,
 } = require("../controllers/friends.controller");
 
 // Importar todos los routers;
@@ -33,4 +34,7 @@ router.post("/friendList", friendList);
 router.post("/friendrequestlist", friendRequestList);
 //Buscar el usuario en la db para mandarle solicitud de amistad
 router.get("/searchForMatches/:usernameInput", searchForMatches);
+//Ver juegos del usuario
+router.post("/gamesDataById", gamesDataById);
+
 module.exports = router;

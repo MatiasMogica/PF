@@ -1,0 +1,78 @@
+.admin-user{
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+}
+
+.admin-user:hover {
+    background-color: rgb(160, 189, 207);
+}
+.panel{
+    margin-left:30%;
+}
+.btn11-cont {
+    margin-top: 2px;
+width: 160px;
+max-width: 100%;
+height: 40px;
+border: 5px;
+font-weight: 400;
+letter-spacing: 1.15px;
+border: 0.5px solid rgb(187, 187, 187);
+color: gray;
+background: none;
+outline: none;
+cursor: pointer;
+text-decoration: none;
+}
+
+.btn12-cont {
+    margin-top: 2px;
+width: 160px;
+max-width: 100%;
+height: 40px;
+border: 5px;
+font-weight: 400;
+letter-spacing: 1.15px;
+border: 0.5px solid rgb(187, 187, 187);
+color: gray;
+background: none;
+outline: none;
+cursor: pointer;
+text-decoration: none;
+}
+
+.btn13-cont {
+    margin-top: 2px;
+width: 160px;
+max-width: 100%;
+height: 40px;
+border: 5px;
+font-weight: 400;
+letter-spacing: 1.15px;
+border: 0.5px solid rgb(187, 187, 187);
+color: gray;
+background: none;
+outline: none;
+cursor: pointer;
+text-decoration: none;
+}
+
+.nombre-usuarios {
+    margin-top: 2px;
+    width: 160px;
+    max-width: 100%;
+    height: 40px;
+    border: 5px;
+    font-weight: 400;
+    letter-spacing: 1.15px;
+    border: 0.5px solid rgb(187, 187, 187);
+    color: gray;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.es-admin {
+   margin-top: 8px;
+}

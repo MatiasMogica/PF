@@ -44,15 +44,9 @@ const gameSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    // comments: { type: [String], default: [] },
-    // comments: [
-    //   {
-    //     type: [String],
-    //     ref: "Review",
-    //     default: [],
-    //   },
-    // ],
     comments: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+    likes: { type: Number, default: 0 },
+    dislikes: { type: Number, default: 0 },
   },
   {
     timestamps: true,

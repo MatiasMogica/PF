@@ -2,3 +2,14 @@
     max-width: 500px;
     max-height: 100px;
 }
+.rmsc {
+    --rmsc-main: #4285f4;
+    --rmsc-hover: #aaa;
+    --rmsc-selected: #aaa;
+    --rmsc-border: #ccc;
+    --rmsc-gray: #aaa;
+    --rmsc-bg: #fff;
+    --rmsc-p: 10px; /* Spacing */
+    --rmsc-radius: 4px; /* Radius */
+    --rmsc-h: 30px; /* Height */
+  }

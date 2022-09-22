@@ -1,4 +1,5 @@
 const User = require("../models/User.js");
+const Game = require("../models/Game.js");
 const bcrypt = require("bcrypt");
 const CourierClient = require("@trycourier/courier").CourierClient;
 const courier = CourierClient({
@@ -225,6 +226,7 @@ const resetUser = async (req, res) => {
 
 const seeUserGames = async (req, res) => {
   const { idsender, idreciver } = req.body;
+
   try {
     const reciver = await User.findById(idreciver);
     var cf = false;
@@ -240,7 +242,13 @@ const seeUserGames = async (req, res) => {
 
     c = idsender === idreciver ? true : c;
     if (c) {
-      res.status(200).json({ games: reciver.purchasedGames });
+      var newArray = [];
+      for (let i = 0; reciver.purchasedGames.length > i; i++) {
+        let t = await Game.findById(reciver.purchasedGames[i]);
+        newArray.push(t);
+      }
+
+      res.status(200).json({ games: newArray.slice(0) });
     } else {
       res.status(400).json({ games: "You cant see this user games" });
     }

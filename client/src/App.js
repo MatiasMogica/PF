@@ -1,5 +1,5 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import Error404 from "./components/Errors/index";
@@ -18,7 +18,7 @@ import Edit from "./pages/Edit/Edit";
 import Payment from "./components/Payment/Payment";
 import CartContainer from "./components/Cart/CartContainer";
 import PurchaseOrders from "./components/PurchaseOrders/PurchaseOrders";
-import UserDetailsOptions from "./pages/UserDetails&Options/UserDetails&Options";
+import UserDetailsOptions from "./pages/UserDetailsOptions/UserDetailsOptions";
 import Settings from "./pages/Settings/Settings";
 import GamesOwnedById from "./pages/GamesOwnedById/GamesOwnedById";
 import Users from "./components/AdminPanel/User";
@@ -39,7 +39,7 @@ function App() {
   }, [user]);
 
   const { cartItems, amount } = useSelector((state) => state.cart);
-  const {wishedItems, wishedAmount } = useSelector((state) => state.wishList)
+  const { wishedItems, wishedAmount } = useSelector((state) => state.wishList);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -48,7 +48,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("wishList", JSON.stringify(wishedItems));
-    localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount))
+    localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount));
   }, [wishedItems, wishedAmount]);
 
   return (
@@ -57,17 +57,20 @@ function App() {
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/home"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
-        <Route exact path={"/wishlist"} component={ WishList } />
+        <Route exact path={"/wishlist"} component={WishList} />
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
-        {user.status ? (
-          <>
-            <Route exact path={"/settings"} component={Settings}></Route>
-            <Route exact path={"/profile/:idUser"} component={Profile} />
-            <Route exact path={"/games/:idUser"} component={GamesOwnedById} />
-          </>
-        ) : null}
+
+        <Route exact path={"/settings"} component={Settings}>
+          {user.status ? null : <Redirect to="/" />}
+        </Route>
+        <Route exact path={"/profile/:idUser"} component={Profile}>
+          {user.status ? null : <Redirect to="/" />}
+        </Route>
+        <Route exact path={"/games/:idUser"} component={GamesOwnedById}>
+          {user.status ? null : <Redirect to="/" />}
+        </Route>
 
         <Route exact path={"/register"} component={Register}>
           {user.status ? <Redirect to="/" /> : null}
@@ -75,11 +78,22 @@ function App() {
         <Route exact path={"/signIn"} component={SignIn}>
           {user.status ? <Redirect to="/" /> : null}
         </Route>
-        <Route path='/forgot-password' component={ForgotPassword} />
-        <Route path='/reset-password' component={Reset} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={Reset} />
+
+        <Route exact path={"/adminPanel"} component={AdminPanel}></Route>
+        <Route exact path={"/videogame/add"} component={Add} />
+        <Route exact path={"/edit/:id"} component={Edit} />
+        <Route
+          exact
+          path={"/adminPanel/purchaseOrders"}
+          component={PurchaseOrders}
+        />
+        <Route exact path={"/adminPanel/user"} component={Users} />
+        <Route exact path={"/users/:id"} component={UserDetailsOptions} />
 
         {user.admin ? (
-          <>
+          <Switch>
             <Route exact path={"/adminPanel"} component={AdminPanel} />
             <Route exact path={"/videogame/add"} component={Add} />
             <Route exact path={"/edit/:id"} component={Edit} />
@@ -90,8 +104,9 @@ function App() {
             />
             <Route exact path={"/adminPanel/user"} component={Users} />
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
-          </>
+          </Switch>
         ) : null}
+
         <Route component={Error404} />
       </Switch>
     </div>

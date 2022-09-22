@@ -7,6 +7,7 @@ import {
   handleBlockUser,
 } from "../../redux/actions/usersActions";
 import NavBar from "../../components/NavBar/index";
+import "./UserDetailsOptions.css"
 
 function UserDetailsOptions() {
   const dispatch = useDispatch();
@@ -29,16 +30,19 @@ function UserDetailsOptions() {
     dispatch(getUserDetails(id));
   }
 
-  console.log("UserDetails",userDetails)
   return (
     <div>
       <NavBar></NavBar>
-      <h1>{userDetails.username}</h1>
+    <div className="user-details-cont">
+      <h1 className="user-details-title">{userDetails.username}</h1>
+      <div className="user-details-info">
       <p>Name: {userDetails.name}</p>
       <p>Created: {userDetails.createdAt}</p>
       <p>Email: {userDetails.email}</p>
+      </div>
       {userDetails.admin ? <p>This user is an Admin</p> : <p>Not an Admin</p>}
       <img
+        className="user-det-img"
         alt="user"
         src={
           userDetails.image ||
@@ -46,22 +50,28 @@ function UserDetailsOptions() {
         }
       />
 
-      {userDetails.deleted ? <p>This user is blocked from the site</p> : null}
-
+      {userDetails.deleted ? <p>This user is blocked from the site </p> : null}
+      <div className="cont-btn-userdetail">
+        <div className="espacio-btn">
       {id === user ? null : userDetails.admin ? (
-        <button onClick={() => changeAdmin(userDetails.id)}>
+        <button onClick={() => changeAdmin(userDetails.id)} className="btn-userdet">
           Remove Admin
         </button>
       ) : (
-        <button onClick={() => changeAdmin(userDetails.id)}>
+        <button onClick={() => changeAdmin(userDetails.id)} className="btn-userdet">
           Upgrade to Admin
         </button>
       )}
+      </div>
+      <div>
       {id === user ? null : userDetails.deleted ? (
-        <button onClick={() => blockUser(userDetails.id)}>Unblock User</button>
+        <button onClick={() => blockUser(userDetails.id)} className="btn-userdet">Unblock User </button>
       ) : (
-        <button onClick={() => blockUser(userDetails.id)}>Block User</button>
+        <button onClick={() => blockUser(userDetails.id)} className="btn-userdet">Block User</button>
       )}
+      </div>
+      </div>
+    </div>
     </div>
   );
 }

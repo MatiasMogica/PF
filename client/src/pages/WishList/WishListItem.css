@@ -1,22 +1,25 @@
 .wishedImage {
     border-radius: 10px;
     float: left;
-    height: 200px;
+    height: 210px;
     margin-left: 25px;
-    margin-top: 29px;
-    width: 250px;
+    margin-top: 15px;
+    width: 230px;
 }
 
 .wishedItemContainer {
     background-color: rgb(66, 75, 75);
     border-radius: 20px;
     text-align: center;
+    margin-bottom: 10px;
     margin-left: 200px;
+    margin-top: 30px;
     width: 1000px;
 }
 
 .removeButton {
     float: right;
+    margin-right: 10px;
 }
 
 .wishedRating {
@@ -24,5 +27,17 @@
     display: flex;
     font-size: 20px;
     justify-content: center;
-    margin-top: -15px;
+    margin-top: -40px;
+}
+/* .wishButtonsContainer {
+    align-items: center;
+    display: flex;
+} */
+
+.wishPrice {
+    font-size: 20px;
+}
+
+.wishGenres {
+    margin-top: 10px;
 }

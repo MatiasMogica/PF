@@ -196,7 +196,7 @@ header {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	z-index: 1;
+	z-index: 6;
 	width: 820px;
 	height: 100%;
 	padding: 40px 30px;
@@ -250,7 +250,7 @@ header {
 .container-02 .glassmorphic-card .contentBox h3 {
 	font-size: 1.8em;
 	color: #fff;
-	z-index: 1;
+	z-index: 8;
 }
 .container-02 .glassmorphic-card .contentBox p {
 	font-size: 1em;
@@ -279,4 +279,13 @@ header {
 }
 .container-02 p span {
 	font-weight: 700;
+}
+
+.likesContainer {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
 }
