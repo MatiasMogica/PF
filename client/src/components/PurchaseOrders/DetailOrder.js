@@ -6,9 +6,7 @@ import { OrderId } from "../../redux/actions/orderActions";
 import {GrClose} from "react-icons/gr"
 import {FaRegUser} from "react-icons/fa"
 import {BsHandbag,BsCreditCard2Back} from "react-icons/bs"
-import {GrMoney} from "react-icons/gr"
 import { FcOk,FcHighPriority} from "react-icons/fc";
-import {GrStatusGood} from "react-icons/gr"
 export default function DetailOrder({id,handleModalClose}){
     
     const order=useSelector(state=>state.orders.order);
@@ -22,33 +20,42 @@ export default function DetailOrder({id,handleModalClose}){
             <CloseBtn onClick={handleModalClose}><GrClose/></CloseBtn>
             <DivMain>
             <MiniContainer>
-            <p>Order N°{order?.id}</p>
-            <p>Created on {Object.entries(order).length && new Date(order.createdAt).toLocaleString()}</p>
+            <p style={{color:'grey'}}>Order N°{order?.id}</p>
+            <p style={{color:'grey'}}>Created on {Object.entries(order).length && new Date(order.createdAt).toLocaleString()}</p>
             </MiniContainer>
             <DivUsuario>
-             <p><FaRegUser/> Customer</p>
+             <Title><p><FaRegUser/> Customer</p></Title>
             <MiniContainer>
             <p>id_customer {order?.user_id}</p>
             <p>{order?.username}</p>
             </MiniContainer>
             </DivUsuario>
             <DivUsuario>
-            <p><BsHandbag/> Quantity  {Object.entries(order).length?order.games.length:null}</p>
-            <DivUsuario>{Object.entries(order).length && order.games.map((e,i)=>{
-                return <MiniContainer key={i}><p>{e.title}</p><p>$ {e.subtotal_price}</p></MiniContainer>
-            })}</DivUsuario>
+            <Title><p><BsHandbag/> Products</p></Title>
+            
+       
+            <MiniContainer><p>Quantity</p><p>{Object.entries(order).length?order.games.length:null} Games</p> </MiniContainer>
+                {Object.entries(order).length && order.games.map((e,i)=>{
+                return <MiniContainer><p>{e.title}</p><p>$ {e.subtotal_price}</p></MiniContainer>
+            })}<hr/>
+            <MiniContainer><p> $ Total</p> <p>$ {order?.total_price}</p></MiniContainer>
+        
             </DivUsuario>
-            <MiniContainer><p><GrMoney/> Total</p> <p>$ {order?.total_price}</p></MiniContainer>
+            
+      
+        <DivUsuario>
+            <Title><p><BsCreditCard2Back/> Payment</p></Title>
         <MiniContainer> 
-             <p><BsCreditCard2Back/> Payment Method</p>
+             <p>Method</p>
              <p>{order?.payment_method}</p>
         </MiniContainer>
         <MiniContainer>
-      
-        <p><GrStatusGood/> Status</p>
+        <p>Status</p>
         {order?.payment_status==='rejected' && <p><FcHighPriority/> {order?.payment_status}</p>}
        {order?.payment_status==='approved' && <p><FcOk/> {order?.payment_status}</p>}
-       </MiniContainer> 
+        </MiniContainer>
+      
+       </DivUsuario> 
           
             
             
@@ -80,28 +87,29 @@ const Container = styled.div`
 width:60% ;
 position: fixed ;
 right:20%;
-top:5%;
+top:10%;
 font-size:0.9rem;
 transform : translate ( -50 %,-50 % ) ;
 display: flex ;
-background-color : #ffffff ;
+background-color : #DBDBDB ;
 box-shadow : 0px 0px 18px 0px rgba ( 0 , 0 , 0 , 0.75 ) ;
 flex-direction : column ;
 align-items: center;
 color:#202020;
+justify-content: center;
 `;
 const DivMain = styled.div`
+padding-top:2rem;
 display:flex;
 flex-direction: column;
-
-background-color:#ffffff;
 width:80%;
-height:fit-content;
-min-height:80%;
+
+min-height:70vh;
 `
 const MiniContainer= styled.div`
 display:flex;
 justify-content:space-between;
+
 `
 const CloseBtn = styled.button`
 display: flex ;
@@ -119,5 +127,17 @@ align-self:flex-end;
 const DivUsuario= styled.div`
 display: flex;
 flex-direction:column; 
+margin: 1rem 0 1rem 0;
+background-color:#FFFFFF;
+height:fit-content;
+`
+const Title= styled.div`
+width: 100%;
+color:white;
+background-color:#7F3ED3;
+height:2rem;
+display: flex;
+align-items:center;
+padding-left:0.5rem;
 
 `

@@ -39,7 +39,7 @@ function App() {
   }, [user]);
 
   const { cartItems, amount } = useSelector((state) => state.cart);
-  const {wishedItems, wishedAmount } = useSelector((state) => state.wishList)
+  const { wishedItems, wishedAmount } = useSelector((state) => state.wishList);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -48,7 +48,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("wishList", JSON.stringify(wishedItems));
-    localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount))
+    localStorage.setItem("wishedAmount", JSON.stringify(wishedAmount));
   }, [wishedItems, wishedAmount]);
 
   return (
@@ -57,21 +57,19 @@ function App() {
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/home"} component={Home} />
         <Route exact path={"/videogames/:id"} component={VideogameDetails} />
-        <Route exact path={"/wishlist"} component={ WishList } />
+        <Route exact path={"/wishlist"} component={WishList} />
         <Route exact path={"/cart"} component={CartContainer} />
         <Route exact path={"/payment"} component={Payment} />
         <Route exact path={"/contact"} component={Contact} />
 
-        
         <Route exact path={"/settings"} component={Settings}>
-          {user.status ? <Redirect to="/" /> : null}
+          {user.status ? null : <Redirect to="/" />}
         </Route>
         <Route exact path={"/profile/:idUser"} component={Profile}>
-
-          {user.status ? <Redirect to="/" /> : null}
+          {user.status ? null : <Redirect to="/" />}
         </Route>
         <Route exact path={"/games/:idUser"} component={GamesOwnedById}>
-          {user.status ? <Redirect to="/" /> : null}
+          {user.status ? null : <Redirect to="/" />}
         </Route>
 
         <Route exact path={"/register"} component={Register}>
@@ -94,7 +92,6 @@ function App() {
         <Route exact path={"/adminPanel/user"} component={Users} />
         <Route exact path={"/users/:id"} component={UserDetailsOptions} />
 
-
         {user.admin ? (
           <Switch>
             <Route exact path={"/adminPanel"} component={AdminPanel} />
@@ -107,7 +104,7 @@ function App() {
             />
             <Route exact path={"/adminPanel/user"} component={Users} />
             <Route exact path={"/users/:id"} component={UserDetailsOptions} />
-          </ Switch>
+          </Switch>
         ) : null}
 
         <Route component={Error404} />
