@@ -11,6 +11,7 @@ import { cleanUpActionFriendSlice } from "../../redux/actions/friendActions";
 import "./GamesOwnedById.css";
 import { Animated } from "react-animated-css";
 import { useHistory } from "react-router-dom";
+import Spinner from "../../components/Spinner/index"
 
 function GamesOwnedById() {
   const { idUser } = useParams();
@@ -71,7 +72,7 @@ function GamesOwnedById() {
             </div>
           </Animated>
         ) : (
-          <div>No games found by that name</div>
+          <Spinner />
         )}
       </div>
     </div>

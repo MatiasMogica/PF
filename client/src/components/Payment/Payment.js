@@ -3,11 +3,14 @@ import SuccessPayment from "./SuccessPayment/index";
 import FailurePayment from './FailurePayment/index'
 import axios from "axios"
 import React,{ useState,useEffect} from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 export default function Payment(){
 
     const querystring = window.location.search
     const [order, setOrder] = useState({})
+    const dispatch = useDispatch()
       
         const searchParams=new URLSearchParams(querystring)
         const order_id=searchParams.get('order_id')
@@ -30,7 +33,7 @@ return (
   <>
   {Object.entries(order).length ?
      
-      (order.payment_status==='approved'?<SuccessPayment/>:<FailurePayment/>):null}
+      (order.payment_status==='approved'? <SuccessPayment/> /* && dispatch(clearCart()) */ :<FailurePayment/>):null}
   </>
 )
 

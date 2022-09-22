@@ -29,6 +29,7 @@ function UserDetailsOptions() {
     dispatch(getUserDetails(id));
   }
 
+  console.log("UserDetails",userDetails)
   return (
     <div>
       <NavBar></NavBar>

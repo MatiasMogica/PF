@@ -36,4 +36,5 @@ router.post("/friendrequestlist", friendRequestList);
 router.get("/searchForMatches/:usernameInput", searchForMatches);
 //Ver juegos del usuario
 router.post("/gamesDataById", gamesDataById);
+
 module.exports = router;
